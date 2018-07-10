@@ -1,0 +1,26 @@
+.topbox {
+    height: 108px;
+    background: #f2f9ff url(../img/topbox_bg.gif) no-repeat center top;
+    background-position-y: -40px;
+}
+.toptitile{
+    font-size: 36px ;
+    padding: 20px 0px 20px 120px;
+    color: #0F488F;
+    font-family: '微软雅黑','Microsoft Sans Serif', Arial, Helvetica, Verdana;
+}
+
+.dept{
+    font-size: 16px;
+    padding-left: 25px;
+    display: block;
+    text-decoration: none;
+    position: relative;
+}
+
+.approvetitle{
+    font-size:20px;border-bottom-style:solid;border-bottom-width:1px
+}
+.approvetitle>span {
+    font-size:16px;
+}

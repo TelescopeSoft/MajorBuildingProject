@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.TBProjectInfoDao">
+    
+	<sql id="tBProjectInfoColumns">
+		a.pkid AS "pkid",
+		a.prjnum AS "prjnum",
+		a.prjinnernum AS "prjinnernum",
+		a.prjname AS "prjname",
+		a.prjtypenum AS "prjtypenum",
+		a.buildcorpname AS "buildcorpname",
+		a.buildcorpcode AS "buildcorpcode",
+		a.provincenum AS "provincenum",
+		a.citynum AS "citynum",
+		a.countynum AS "countynum",
+		a.prjapprovalnum AS "prjapprovalnum",
+		a.prjapprovallevelnum AS "prjapprovallevelnum",
+		a.buldplannum AS "buldplannum",
+		a.projectplannum AS "projectplannum",
+		a.allinvest AS "allinvest",
+		a.allarea AS "allarea",
+		a.prjsize AS "prjsize",
+		a.prjpropertynum AS "prjpropertynum",
+		a.prjfunctionnum AS "prjfunctionnum",
+		a.bdate AS "bdate",
+		a.edate AS "edate",
+		a.createdate AS "createdate",
+		a.updateflag AS "updateflag",
+		a.sbdqbm AS "sbdqbm",
+		a.datastate AS "datastate",
+		a.cjrqsj AS "cjrqsj",
+		a.xgrqsj AS "xgrqsj",
+		a.scrqsj AS "scrqsj",
+		a.returnresult AS "returnresult",
+		a.jd AS "jd",
+		a.wd AS "wd",
+		a.issgbz AS "issgbz",
+		a.updateuser AS "updateuser",
+		a.MajorFlag AS "majorFlag"
+	</sql>
+	
+	<sql id="tBProjectInfoJoins">
+	</sql>
+    
+	<select id="get" resultType="ProjectInfo">
+		SELECT 
+			<include refid="tBProjectInfoColumns"/>
+		FROM tbprojectinfo a
+		<include refid="tBProjectInfoJoins"/>
+		WHERE a.PKID = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProjectInfo">
+		SELECT 
+			<include refid="tBProjectInfoColumns"/>
+		FROM tbprojectinfo a
+		<include refid="tBProjectInfoJoins"/>
+		<where>
+			UpdateFlag != 'D' AND CountyNum = '320211'
+			<if test="prjname != null and prjname != ''">
+				AND a.PrjName like 
+					<if test="dbName == 'oracle'">'%'||#{prjname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjname}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjname}, '%')</if>
+			</if>
+			<if test="prjnum != null and prjnum != ''">
+				AND a.PrjNum like 
+					<if test="dbName == 'oracle'">'%'||#{prjnum}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjnum}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjnum}, '%')</if>
+			</if>
+			<if test="buildcorpname != null and buildcorpname != ''">
+				AND a.BuildCorpName like 
+					<if test="dbName == 'oracle'">'%'||#{buildcorpname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{buildcorpname}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{buildcorpname}, '%')</if>
+			</if>
+			<if test="prjapprovalnum != null and prjapprovalnum != ''">
+				AND a.PrjApprovalNum like 
+					<if test="dbName == 'oracle'">'%'||#{prjapprovalnum}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjapprovalnum}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjapprovalnum}, '%')</if>
+			</if>
+			<if test="majorFlag != null and majorFlag != ''">
+				AND a.MajorFlag = #{majorFlag}	 
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ProjectInfo">
+		SELECT 
+			<include refid="tBProjectInfoColumns"/>
+		FROM tbprojectinfo a
+		<include refid="tBProjectInfoJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbprojectinfo(
+			pkid,
+			prjnum,
+			prjinnernum,
+			prjname,
+			prjtypenum,
+			buildcorpname,
+			buildcorpcode,
+			provincenum,
+			citynum,
+			countynum,
+			prjapprovalnum,
+			prjapprovallevelnum,
+			buldplannum,
+			projectplannum,
+			allinvest,
+			allarea,
+			prjsize,
+			prjpropertynum,
+			prjfunctionnum,
+			bdate,
+			edate,
+			createdate,
+			updateflag,
+			sbdqbm,
+			datastate,
+			cjrqsj,
+			xgrqsj,
+			scrqsj,
+			returnresult,
+			jd,
+			wd,
+			issgbz,
+			updateuser
+		) VALUES (
+			#{pkid},
+			#{prjnum},
+			#{prjinnernum},
+			#{prjname},
+			#{prjtypenum},
+			#{buildcorpname},
+			#{buildcorpcode},
+			#{provincenum},
+			#{citynum},
+			#{countynum},
+			#{prjapprovalnum},
+			#{prjapprovallevelnum},
+			#{buldplannum},
+			#{projectplannum},
+			#{allinvest},
+			#{allarea},
+			#{prjsize},
+			#{prjpropertynum},
+			#{prjfunctionnum},
+			#{bdate},
+			#{edate},
+			#{createdate},
+			#{updateflag},
+			#{sbdqbm},
+			#{datastate},
+			#{cjrqsj},
+			#{xgrqsj},
+			#{scrqsj},
+			#{returnresult},
+			#{jd},
+			#{wd},
+			#{issgbz},
+			#{updateuser}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE tbprojectinfo SET 	
+			pkid = #{pkid},
+			prjnum = #{prjnum},
+			prjinnernum = #{prjinnernum},
+			prjname = #{prjname},
+			prjtypenum = #{prjtypenum},
+			buildcorpname = #{buildcorpname},
+			buildcorpcode = #{buildcorpcode},
+			provincenum = #{provincenum},
+			citynum = #{citynum},
+			countynum = #{countynum},
+			prjapprovalnum = #{prjapprovalnum},
+			prjapprovallevelnum = #{prjapprovallevelnum},
+			buldplannum = #{buldplannum},
+			projectplannum = #{projectplannum},
+			allinvest = #{allinvest},
+			allarea = #{allarea},
+			prjsize = #{prjsize},
+			prjpropertynum = #{prjpropertynum},
+			prjfunctionnum = #{prjfunctionnum},
+			bdate = #{bdate},
+			edate = #{edate},
+			createdate = #{createdate},
+			updateflag = #{updateflag},
+			sbdqbm = #{sbdqbm},
+			datastate = #{datastate},
+			cjrqsj = #{cjrqsj},
+			xgrqsj = #{xgrqsj},
+			scrqsj = #{scrqsj},
+			returnresult = #{returnresult},
+			jd = #{jd},
+			wd = #{wd},
+			issgbz = #{issgbz},
+			updateuser = #{updateuser}
+		WHERE pkid = #{pkid}
+	</update>
+	
+	<update id="updateMajorFlag">
+		UPDATE tbprojectinfo SET 	
+			MajorFlag = #{majorFlag},
+			xgrqsj = #{xgrqsj},
+			updateuser = #{updateuser}
+		WHERE pkid = #{pkid}
+	</update>
+	
+	<update id="delete">
+		UPDATE tbprojectinfo SET UpdateFlag = 'D'
+		WHERE pkid = #{pkid}
+	</update>
+	
+</mapper>
