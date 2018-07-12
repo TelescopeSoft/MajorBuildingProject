@@ -4,14 +4,19 @@
 package com.qlmsoft.mbp.modules.project.entity;
 
 import org.hibernate.validator.constraints.Length;
+
+import java.math.BigDecimal;
 import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.NotNull;
 
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
 /**
  * 项目表Entity
+ * 
  * @author huangzhengyu
  * @version 2018-07-10
  */
@@ -32,14 +37,14 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 	private String prjapprovallevelnum; // prjapprovallevelnum
 	private String buldplannum; // buldplannum
 	private String projectplannum; // projectplannum
-	private String allinvest; // allinvest
-	private String allarea; // allarea
+	private BigDecimal allinvest; // allinvest
+	private BigDecimal allarea; // allarea
 	private String prjsize; // prjsize
 	private String prjpropertynum; // prjpropertynum
 	private String prjfunctionnum; // prjfunctionnum
 	private Date bdate; // bdate
 	private Date edate; // edate
-	private Date createdate; // createdate
+	private Date createDate; // createdate
 	private String updateflag; // updateflag
 	private String sbdqbm; // sbdqbm
 	private String datastate; // datastate
@@ -47,8 +52,8 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 	private Date xgrqsj; // xgrqsj
 	private Date scrqsj; // scrqsj
 	private String returnresult; // returnresult
-	private String jd; // jd
-	private String wd; // wd
+	private BigDecimal jd; // jd
+	private BigDecimal wd; // wd
 	private String issgbz; // issgbz
 	private String updateuser; // updateuser
 
@@ -62,7 +67,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		super(id);
 	}
 
-	@Length(min = 1, max = 50, message = "pkid长度必须介于 1 和 50 之间")
 	public String getPkid() {
 		return pkid;
 	}
@@ -71,7 +75,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.pkid = pkid;
 	}
 
-	@Length(min = 1, max = 20, message = "prjnum长度必须介于 1 和 20 之间")
 	public String getPrjnum() {
 		return prjnum;
 	}
@@ -80,7 +83,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjnum = prjnum;
 	}
 
-	@Length(min = 1, max = 50, message = "prjinnernum长度必须介于 1 和 50 之间")
 	public String getPrjinnernum() {
 		return prjinnernum;
 	}
@@ -89,7 +91,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjinnernum = prjinnernum;
 	}
 
-	@Length(min = 1, max = 300, message = "prjname长度必须介于 1 和 300 之间")
 	public String getPrjname() {
 		return prjname;
 	}
@@ -98,7 +99,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjname = prjname;
 	}
 
-	@Length(min = 1, max = 2, message = "prjtypenum长度必须介于 1 和 2 之间")
 	public String getPrjtypenum() {
 		return prjtypenum;
 	}
@@ -107,7 +107,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjtypenum = prjtypenum;
 	}
 
-	@Length(min = 1, max = 200, message = "buildcorpname长度必须介于 1 和 200 之间")
 	public String getBuildcorpname() {
 		return buildcorpname;
 	}
@@ -116,7 +115,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.buildcorpname = buildcorpname;
 	}
 
-	@Length(min = 1, max = 18, message = "buildcorpcode长度必须介于 1 和 18 之间")
 	public String getBuildcorpcode() {
 		return buildcorpcode;
 	}
@@ -149,7 +147,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.countynum = countynum;
 	}
 
-	@Length(min = 0, max = 200, message = "prjapprovalnum长度必须介于 0 和 200 之间")
 	public String getPrjapprovalnum() {
 		return prjapprovalnum;
 	}
@@ -158,7 +155,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjapprovalnum = prjapprovalnum;
 	}
 
-	@Length(min = 0, max = 3, message = "prjapprovallevelnum长度必须介于 0 和 3 之间")
 	public String getPrjapprovallevelnum() {
 		return prjapprovallevelnum;
 	}
@@ -167,7 +163,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjapprovallevelnum = prjapprovallevelnum;
 	}
 
-	@Length(min = 0, max = 100, message = "buldplannum长度必须介于 0 和 100 之间")
 	public String getBuldplannum() {
 		return buldplannum;
 	}
@@ -176,7 +171,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.buldplannum = buldplannum;
 	}
 
-	@Length(min = 0, max = 100, message = "projectplannum长度必须介于 0 和 100 之间")
 	public String getProjectplannum() {
 		return projectplannum;
 	}
@@ -185,23 +179,22 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.projectplannum = projectplannum;
 	}
 
-	public String getAllinvest() {
+	public BigDecimal getAllinvest() {
 		return allinvest;
 	}
 
-	public void setAllinvest(String allinvest) {
+	public void setAllinvest(BigDecimal allinvest) {
 		this.allinvest = allinvest;
 	}
 
-	public String getAllarea() {
+	public BigDecimal getAllarea() {
 		return allarea;
 	}
 
-	public void setAllarea(String allarea) {
+	public void setAllarea(BigDecimal allarea) {
 		this.allarea = allarea;
 	}
 
-	@Length(min = 0, max = 500, message = "prjsize长度必须介于 0 和 500 之间")
 	public String getPrjsize() {
 		return prjsize;
 	}
@@ -210,7 +203,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjsize = prjsize;
 	}
 
-	@Length(min = 1, max = 3, message = "prjpropertynum长度必须介于 1 和 3 之间")
 	public String getPrjpropertynum() {
 		return prjpropertynum;
 	}
@@ -219,7 +211,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.prjpropertynum = prjpropertynum;
 	}
 
-	@Length(min = 1, max = 3, message = "prjfunctionnum长度必须介于 1 和 3 之间")
 	public String getPrjfunctionnum() {
 		return prjfunctionnum;
 	}
@@ -246,26 +237,24 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.edate = edate;
 	}
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@NotNull(message = "createdate不能为空")
-	public Date getCreatedate() {
-		return createdate;
-	}
-
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
-	}
-
-	@Length(min = 1, max = 1, message = "updateflag长度必须介于 1 和 1 之间")
 	public String getUpdateflag() {
 		return updateflag;
+	}
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message = "createdate不能为空")
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	public void setUpdateflag(String updateflag) {
 		this.updateflag = updateflag;
 	}
 
-	@Length(min = 1, max = 6, message = "sbdqbm长度必须介于 1 和 6 之间")
 	public String getSbdqbm() {
 		return sbdqbm;
 	}
@@ -309,7 +298,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.scrqsj = scrqsj;
 	}
 
-	@Length(min = 0, max = -1, message = "returnresult长度必须介于 0 和 -1 之间")
 	public String getReturnresult() {
 		return returnresult;
 	}
@@ -318,19 +306,19 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.returnresult = returnresult;
 	}
 
-	public String getJd() {
+	public BigDecimal getJd() {
 		return jd;
 	}
 
-	public void setJd(String jd) {
+	public void setJd(BigDecimal jd) {
 		this.jd = jd;
 	}
 
-	public String getWd() {
+	public BigDecimal getWd() {
 		return wd;
 	}
 
-	public void setWd(String wd) {
+	public void setWd(BigDecimal wd) {
 		this.wd = wd;
 	}
 
@@ -342,7 +330,6 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 		this.issgbz = issgbz;
 	}
 
-	@Length(min = 0, max = 50, message = "updateuser长度必须介于 0 和 50 之间")
 	public String getUpdateuser() {
 		return updateuser;
 	}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.PubApproveGuideDao">
+    
+	<sql id="pubApproveGuideColumns">
+		a.id AS "id",
+		a.office_id AS "office.id",
+		a.approve_item_label AS "approveItemLabel",
+		a.approve_item_code AS "approveItemCode",
+		a.approve_guide_url AS "approveGuideUrl",
+		a.approve_app_url AS "approveAppUrl",
+		o2.name AS "office.name"
+	</sql>
+	
+	<sql id="pubApproveGuideJoins">
+		LEFT JOIN sys_office o2 ON o2.id = a.office_id
+	</sql>
+    
+	<select id="get" resultType="PubApproveGuide">
+		SELECT 
+			<include refid="pubApproveGuideColumns"/>
+		FROM pub_approve_guide a
+		<include refid="pubApproveGuideJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="PubApproveGuide">
+		SELECT 
+			<include refid="pubApproveGuideColumns"/>
+		FROM pub_approve_guide a
+		<include refid="pubApproveGuideJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="PubApproveGuide">
+		SELECT 
+			<include refid="pubApproveGuideColumns"/>
+		FROM pub_approve_guide a
+		<include refid="pubApproveGuideJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_approve_guide(
+			office_id,
+			approve_item_label,
+			approve_item_code,
+			approve_guide_url,
+			approve_app_url
+		) VALUES (
+			#{office.id},
+			#{approveItemLabel},
+			#{approveItemCode},
+			#{approveGuideUrl},
+			#{approveAppUrl}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_approve_guide SET 	
+			office_id = #{office.id},
+			approve_item_label = #{approveItemLabel},
+			approve_item_code = #{approveItemCode},
+			approve_guide_url = #{approveGuideUrl},
+			approve_app_url = #{approveAppUrl}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM pub_approve_guide
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -24,7 +24,7 @@
 		a.prjfunctionnum AS "prjfunctionnum",
 		a.bdate AS "bdate",
 		a.edate AS "edate",
-		a.createdate AS "createdate",
+		a.CreateDate AS "createDate",
 		a.updateflag AS "updateflag",
 		a.sbdqbm AS "sbdqbm",
 		a.datastate AS "datastate",
@@ -100,7 +100,34 @@
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
 		<where>
-			
+			UpdateFlag != 'D' AND CountyNum = '320211'
+			<if test="prjname != null and prjname != ''">
+				AND a.PrjName like 
+					<if test="dbName == 'oracle'">'%'||#{prjname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjname}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjname}, '%')</if>
+			</if>
+			<if test="prjnum != null and prjnum != ''">
+				AND a.PrjNum like 
+					<if test="dbName == 'oracle'">'%'||#{prjnum}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjnum}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjnum}, '%')</if>
+			</if>
+			<if test="buildcorpname != null and buildcorpname != ''">
+				AND a.BuildCorpName like 
+					<if test="dbName == 'oracle'">'%'||#{buildcorpname}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{buildcorpname}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{buildcorpname}, '%')</if>
+			</if>
+			<if test="prjapprovalnum != null and prjapprovalnum != ''">
+				AND a.PrjApprovalNum like 
+					<if test="dbName == 'oracle'">'%'||#{prjapprovalnum}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjapprovalnum}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjapprovalnum}, '%')</if>
+			</if>
+			<if test="majorFlag != null and majorFlag != ''">
+				AND a.MajorFlag = #{majorFlag}	 
+			</if>
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -168,7 +195,7 @@
 			#{prjfunctionnum},
 			#{bdate},
 			#{edate},
-			#{createdate},
+			#{createDate},
 			#{updateflag},
 			#{sbdqbm},
 			#{datastate},
@@ -184,8 +211,7 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE tbprojectinfo SET 	
-			pkid = #{pkid},
+		UPDATE tbprojectinfo SET 
 			prjnum = #{prjnum},
 			prjinnernum = #{prjinnernum},
 			prjname = #{prjname},
@@ -206,14 +232,8 @@
 			prjfunctionnum = #{prjfunctionnum},
 			bdate = #{bdate},
 			edate = #{edate},
-			createdate = #{createdate},
-			updateflag = #{updateflag},
-			sbdqbm = #{sbdqbm},
+			createdate = #{createDate},
 			datastate = #{datastate},
-			cjrqsj = #{cjrqsj},
-			xgrqsj = #{xgrqsj},
-			scrqsj = #{scrqsj},
-			returnresult = #{returnresult},
 			jd = #{jd},
 			wd = #{wd},
 			issgbz = #{issgbz},

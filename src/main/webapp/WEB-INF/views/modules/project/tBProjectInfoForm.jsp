@@ -32,6 +32,12 @@
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="projectInfo" action="${ctx}/project/projectInfo/save" method="post" class="form-horizontal">
 		<form:hidden path="pkid"/>
+		<form:hidden path="updateflag"/>
+		<form:hidden path="sbdqbm"/>
+		<form:hidden path="datastate"/>
+		<form:hidden path="issgbz"/>
+		<form:hidden path="prjapprovallevelnum"/>
+		
 		<sys:message content="${message}"/>		
 		 
 		<div class="control-group">
@@ -167,8 +173,8 @@
 		<div class="control-group">
 			<label class="control-label">记录登记时间：</label>
 			<div class="controls">
-				<input name="createdate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
-					value="<fmt:formatDate value="${projectInfo.createdate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+				<input name="createDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
+					value="<fmt:formatDate value="${projectInfo.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>

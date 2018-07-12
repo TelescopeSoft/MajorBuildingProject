@@ -36,6 +36,7 @@ public class TBProjectInfoService extends CrudService<TBProjectInfoDao, ProjectI
 	
 	@Transactional(readOnly = false)
 	public void save(ProjectInfo projectInfo) {
+		projectInfo.setId(projectInfo.getPkid());
 		super.save(projectInfo);
 	}
 	

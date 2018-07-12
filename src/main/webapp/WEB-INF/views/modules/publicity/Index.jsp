@@ -102,17 +102,17 @@
                         </div>
 
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" action="${pageContext.request.contextPath}/publicity/index" method="post">
                             <div class="box-body">
                                 <div class="row form-group">
                                     <div class="col-xs-3">
-                                        <input type="text" class="form-control" placeholder="项目名称">
+                                        <input name="prjname" type="text" class="form-control" placeholder="项目名称">
                                     </div>
                                     <div class="col-xs-4">
-                                        <input type="text" class="form-control" placeholder="项目编码">
+                                        <input name="prjnum"  type="text" class="form-control" placeholder="项目编码">
                                     </div>
                                     <div class="col-xs-4">
-                                        <input type="text" class="form-control" placeholder="建设单位">
+                                        <input name="buildcorpname"  type="text" class="form-control" placeholder="建设单位">
                                     </div>
                                     <div class="col-xs-1">
                                         <button type="submit" class="btn btn-primary">查询</button>
@@ -127,7 +127,6 @@
                             <table id="projectList" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>项目名称</th>
                                     <th>立项文号</th>
                                     <th>项目编码</th>
@@ -142,6 +141,7 @@
                                     <!--<th>项目地址</th>-->
                                 </tr>
                                 </thead>
+                                <!-- 
                                 <tbody>
                                 <tr>
                                     <td>1</td>
@@ -149,14 +149,6 @@
                                     <td>滨湖发改备[2018]27号</td>
                                     <td><a href="ProjectDetail.html">3202111806150102</a></td>
                                     <td>无锡信捷电气股份有限公司</td>
-                                    <!--<td>0</td>
-                                    <td>0</td>
-                                    <td>1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>-->
-                                    <!--<td>无锡市经济开发区北区刘塘路与丁香路交叉口西北侧</td>-->
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -164,17 +156,8 @@
                                     <td> 锡滨发改许[2017]9号</td>
                                     <td><a href="ProjectDetail.html">3202111706060101</a></td>
                                     <td>无锡山水慧谷城镇建设发展有限公司</td>
-                                    <!--<td>2</td>
-                                    <td>0</td>
-                                    <td>2</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>0</td>-->
-                                    <!--<td>无锡市滨湖区工业安置区陆藕路41号</td>-->
-                                </tr>
-
-                                </tbody>
+                                </tr> 
+                                </tbody>-->
 
                             </table>
                         </div>
@@ -224,13 +207,31 @@
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script>
     $(function () {
+    	
         $('#projectList').DataTable({
             'paging'      : true,
             'lengthChange': false,
             'searching'   : false,
             'ordering'    : true,
             'info'        : true,
-            'autoWidth'   : false,
+            'autoWidth'   : true,
+            "ajax": "${pageContext.request.contextPath}/publicity/projects?prjname=${projectinfo.prjname}&prjnum=${projectinfo.prjnum}&buildcorpname=${projectinfo.buildcorpname}",
+	        "columns": [
+	            { "data": "prjname" },
+	            { "data": "prjapprovalnum" },
+	            { "data": "prjnum" },
+	            { "data": "buildcorpname" }
+	        ],
+	        "columnDefs": [{
+	            "render": function(data, type, row) {
+	            	if(value != null){
+	                    return '<a href='+value+'>'+value+'</a>';
+	                 }else{
+	                        return "";
+	                 }
+	            },
+	            "targets": 0
+	        }]
             'language': {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",
