@@ -36,10 +36,15 @@
 		a.wd AS "wd",
 		a.issgbz AS "issgbz",
 		a.updateuser AS "updateuser",
-		a.MajorFlag AS "majorFlag"
+		a.MajorFlag AS "majorFlag",
+		i.programme_address AS "address",
+		( SELECT TOP 1 prj_code
+		FROM dbo.pub_approve_result b
+		WHERE b.prj_num = a.PrjNum ) AS prjCode
 	</sql>
 	
 	<sql id="tBProjectInfoJoins">
+		INNER JOIN dbo.TBProjectAdditionalInfo i ON i.prjnum = a.PrjNum
 	</sql>
     
 	<select id="get" resultType="ProjectInfo">

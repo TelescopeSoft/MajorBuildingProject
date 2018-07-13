@@ -22,6 +22,7 @@ import com.qlmsoft.mbp.common.web.BaseController;
 import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
 import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
 import com.qlmsoft.mbp.modules.project.entity.PubApproveGuide;
+import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
 import com.qlmsoft.mbp.modules.project.service.PubApproveGuideService;
 import com.qlmsoft.mbp.modules.project.service.PubApproveResultService;
 import com.qlmsoft.mbp.modules.project.service.TBProjectInfoService;
@@ -78,16 +79,19 @@ public class HomeController extends BaseController {
 	@RequestMapping(value = "projectdetailbasic")
 	public String detailBasic(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
-		String id = request.getParameter("pkid");
-		model.addAttribute("approve", "approve");
-		return "modules/publicity/ProjectDetailApprove";
+		String pkid = request.getParameter("pkid");
+		ProjectInfo projectinfo = tBProjectInfoService.get(pkid);
+		model.addAttribute("projectinfo", projectinfo);
+		return "modules/publicity/ProjectDetailBasic";
 	}
 	
 	@RequestMapping(value = "projectdetailapprove")
 	public String detailApprove(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
-		String id = request.getParameter("pkid");
-		model.addAttribute("approve", "approve");
+		String pkid = request.getParameter("pkid");
+		List<PubApproveResult> list = pubApproveResultService
+				.findListByPkid(pkid);
+		model.addAttribute("list", list);
 		return "modules/publicity/ProjectDetailApprove";
 	}
 

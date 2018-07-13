@@ -3,15 +3,12 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
-import org.hibernate.validator.constraints.Length;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
 /**
@@ -56,6 +53,11 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 	private BigDecimal wd; // wd
 	private String issgbz; // issgbz
 	private String updateuser; // updateuser
+
+	private String address;
+
+	// 关联的项目代码-发改审批项目代码
+	private String prjCode;
 
 	private String majorFlag; // majorFlag
 
@@ -344,6 +346,22 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 
 	public void setMajorFlag(String majorFlag) {
 		this.majorFlag = majorFlag;
+	}
+
+	public String getPrjCode() {
+		return prjCode;
+	}
+
+	public void setPrjCode(String prjCode) {
+		this.prjCode = prjCode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

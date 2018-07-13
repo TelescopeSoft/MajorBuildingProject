@@ -83,6 +83,21 @@
 		</choose>
 	</select>
 	
+	<select id="findListByPkid" resultType="PubApproveResult">
+		SELECT 
+			<include refid="pubApproveResultColumns"/>
+		FROM pub_approve_result a
+		<include refid="pubApproveResultJoins"/>
+		<where>
+			a.del_flag = '0'
+			AND prj_code = ( SELECT TOP 1 a.prj_code FROM dbo.pub_approve_result a
+				LEFT JOIN dbo.TBProjectInfo p ON a.prj_num = p.PrjNum
+				WHERE p.PKID = #{pkid})
+		</where>
+		ORDER BY a.approve_date DESC
+		 
+	</select>
+	
 	<select id="findAllList" resultType="PubApproveResult">
 		SELECT 
 			<include refid="pubApproveResultColumns"/>

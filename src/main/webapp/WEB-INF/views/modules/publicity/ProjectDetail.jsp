@@ -55,7 +55,7 @@
             </div>
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="Index.html">您正在访问：首页 &gt;&gt;重大项目 &gt;&gt;${projectinfo.prjname} </a></li>
+                    <li class="active"><a href="${ctx}/publicity/index">您正在访问：首页 &gt;&gt;重大项目 &gt;&gt;${projectinfo.prjname} </a></li>
                     </ul>
                 </div>
 
@@ -86,68 +86,7 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="basic">
-                                    <div class="box box-info">
-                                        <!-- /.box-header -->
-                                        <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td  class="bg-info">项目代码</td>
-                                                    <td>2017-320211-79-01-503424</td>
-                                                    <td class="bg-info">项目名称</td>
-                                                    <td >方泉苑六期一批安置房</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">行政审批编号</td>
-                                                    <td>20170763</td>
-                                                    <td class="bg-info">立项文号</td>
-                                                    <td >锡滨发改许[2017]9号</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">住建项目编号</td>
-                                                    <td>3202111706060101</td>
-                                                    <td class="bg-info">项目分类</td>
-                                                    <td >房屋建筑工程</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">项目（法人）单位</td>
-                                                    <td>无锡山水慧谷城镇建设发展有限公司</td>
-                                                    <td class="bg-info">项目（法人）单位组织机构代码</td>
-                                                    <td >91320211679801268Q</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">立项级别</td>
-                                                    <td>地级市</td>
-                                                    <td class="bg-info">项目地址</td>
-                                                    <td >滨湖区缘溪道与兴隆路交叉口西北侧</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">经度</td>
-                                                    <td>120.26906</td>
-                                                    <td class="bg-info">纬度</td>
-                                                    <td >31.43400</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">建设用地规划许可证编号</td>
-                                                    <td></td>
-                                                    <td class="bg-info">建设工程规划许可证编号</td>
-                                                    <td ></td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">拟开工时间（年）</td>
-                                                    <td></td>
-                                                    <td class="bg-info">拟建成时间（年）</td>
-                                                    <td ></td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">建设规模及内容</td>
-                                                    <td></td>
-                                                    <td class="bg-info">总投资（万元）</td>
-                                                    <td ></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-
+             
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="approve">
@@ -628,10 +567,10 @@
 	//准备tabs数据
 	var tabsData = [{
 	    "id" : "basic",
-	    "url" : "pages/test-paper.jsp"
+	    "url" : "${ctx}/publicity/projectdetailbasic?pkid=${projectinfo.pkid}"
 	},{
 	    "id" : "approve",
-	    "url" : "${ctx}/publicity/projectdetailapprove"
+	    "url" : "${ctx}/publicity/projectdetailapprove?pkid=${projectinfo.pkid}"
 	}];
 	
 	function tabsHandler(event) {
@@ -657,6 +596,8 @@
     	        url : this.url
     	    },tabsHandler);
     	});
+    	
+    	showTabs(tabsData[0].id,tabsData[0].url);
     })
 </script>
 </body>

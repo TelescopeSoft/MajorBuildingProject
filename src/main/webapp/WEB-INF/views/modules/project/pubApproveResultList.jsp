@@ -40,6 +40,7 @@
 			<tr>
 				<th>项目代码</th>
 				<th>项目名称</th>
+				<th>工程项目编号</th>
 				<th>审批事项</th>
 				<th>审批部门</th>
 				<th>审批结果</th>
@@ -53,6 +54,7 @@
 			<tr>
 				<td>${pubApproveResult.prjCode}</td>
 				<td>${pubApproveResult.prjName}</td>
+				<td>${pubApproveResult.prjNum}</td>
 				<td>${pubApproveResult.approveItemLabel}</td>
 				<td>${pubApproveResult.approveDept}</td>
 				<td>${pubApproveResult.approveResult}</td>

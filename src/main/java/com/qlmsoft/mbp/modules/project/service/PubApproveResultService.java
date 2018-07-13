@@ -34,6 +34,10 @@ public class PubApproveResultService extends CrudService<PubApproveResultDao, Pu
 		return super.findPage(page, pubApproveResult);
 	}
 	
+	public List<PubApproveResult> findListByPkid(String pkid) {
+		return this.dao.findListByPkid(pkid);
+	}
+	
 	@Transactional(readOnly = false)
 	public void save(PubApproveResult pubApproveResult) {
 		super.save(pubApproveResult);

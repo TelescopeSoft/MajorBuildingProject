@@ -3,6 +3,8 @@
  */
 package com.qlmsoft.mbp.modules.project.dao;
 
+import java.util.List;
+
 import com.qlmsoft.mbp.common.persistence.CrudDao;
 import com.qlmsoft.mbp.common.persistence.annotation.MyBatisDao;
 import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
@@ -14,5 +16,8 @@ import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
  */
 @MyBatisDao
 public interface PubApproveResultDao extends CrudDao<PubApproveResult> {
+	
+	//根据工程项目的pkid查询批准结果信息
+	List<PubApproveResult> findListByPkid(String pkid);
 	
 }

@@ -28,7 +28,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/project/projectInfo/">项目表列表</a></li>
-		<li class="active"><a href="${ctx}/project/projectInfo/form?id=${projectInfo.pkid}">项目表<shiro:hasPermission name="project:projectInfo:edit">${not empty projectInfo.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="project:projectInfo:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${ctx}/project/projectInfo/form?id=${projectInfo.pkid}">项目表<shiro:hasPermission name="project:projectInfo:edit">${not empty projectInfo.pkid?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="project:projectInfo:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="projectInfo" action="${ctx}/project/projectInfo/save" method="post" class="form-horizontal">
 		<form:hidden path="pkid"/>
