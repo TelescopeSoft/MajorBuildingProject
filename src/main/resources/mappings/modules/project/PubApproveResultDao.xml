@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.PubApproveResultDao">
+    
+	<sql id="pubApproveResultColumns">
+		a.id AS "id",
+		a.prj_code AS "prjCode",
+		a.prj_name AS "prjName",
+		a.prj_num AS "prjNum",
+		a.approve_dept AS "approveDept",
+		a.approve_item_label AS "approveItemLabel",
+		a.approve_item_code AS "approveItemCode",
+		a.approve_subitem_label AS "approveSubitemLabel",
+		a.approve_subitem_code AS "approveSubitemCode",
+		a.approve_result AS "approveResult",
+		a.approve_num AS "approveNum",
+		a.approve_date AS "approveDate",
+		a.create_by AS "createBy",
+		a.update_by AS "updateBy",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.display_flag AS "displayFlag",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="pubApproveResultJoins">
+	</sql>
+    
+	<select id="get" resultType="PubApproveResult">
+		SELECT 
+			<include refid="pubApproveResultColumns"/>
+		FROM pub_approve_result a
+		<include refid="pubApproveResultJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="PubApproveResult">
+		SELECT 
+			<include refid="pubApproveResultColumns"/>
+		FROM pub_approve_result a
+		<include refid="pubApproveResultJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="prjCode != null and prjCode != ''">
+				AND a.prj_code like 
+					<if test="dbName == 'oracle'">'%'||#{prjCode}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjCode}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjCode}, '%')</if>
+			</if>
+			<if test="prjName != null and prjName != ''">
+				AND a.prj_name like 
+					<if test="dbName == 'oracle'">'%'||#{prjName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjName}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{prjName}, '%')</if>
+			</if>
+			<if test="approveItemLabel != null and approveItemLabel != ''">
+				AND a.approve_item_label like 
+					<if test="dbName == 'oracle'">'%'||#{approveItemLabel}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{approveItemLabel}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{approveItemLabel}, '%')</if>
+			</if>
+			<if test="approveDept != null and approveDept != ''">
+				AND a.approve_dept like 
+					<if test="dbName == 'oracle'">'%'||#{approveDept}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{approveDept}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{approveDept}, '%')</if>
+			</if>
+
+			<if test="startDate != null and startDate != ''">
+				AND convert(VARCHAR(10), a.approve_date, 120) &gt;= convert(VARCHAR(10), #{startDate}, 120)
+			</if>
+			<if test="endDate != null and endDate != ''">
+				AND convert(VARCHAR(10), a.approve_date, 120) &lt;= convert(VARCHAR(10), #{endDate}, 120)
+			</if>	
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="PubApproveResult">
+		SELECT 
+			<include refid="pubApproveResultColumns"/>
+		FROM pub_approve_result a
+		<include refid="pubApproveResultJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.approve_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_approve_result(
+			prj_code,
+			prj_name,
+			prj_num,
+			approve_dept,
+			approve_dept_code,
+			approve_item_label,
+			approve_item_code,
+			approve_subitem_label,
+			approve_subitem_code,
+			approve_result,
+			approve_num,
+			approve_date,
+			create_by,
+			update_by,
+			create_date,
+			update_date,
+			display_flag,
+			del_flag
+		) VALUES (
+			#{prjCode},
+			#{prjName},
+			#{prjNum},
+			#{approveDept},
+			#{approveDeptCode},
+			#{approveItemLabel},
+			#{approveItemCode},
+			#{approveSubitemLabel},
+			#{approveSubitemCode},
+			#{approveResult},
+			#{approveNum},
+			#{approveDate},
+			#{createBy.name},
+			#{updateBy.name},
+			#{createDate},
+			#{updateDate},
+			#{displayFlag},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_approve_result SET 	
+			prj_code = #{prjCode},
+			prj_name = #{prjName},
+			prj_num = #{prjNum},
+			approve_dept= #{approveDept},
+			approve_dept_code = #{approveDeptCode},
+			approve_item_label = #{approveItemLabel},
+			approve_item_code = #{approveItemCode},
+			approve_subitem_label = #{approveSubitemLabel},
+			approve_subitem_code = #{approveSubitemCode},
+			approve_result = #{approveResult},
+			approve_num = #{approveNum},
+			approve_date = #{approveDate},
+			update_by = #{updateBy.name},
+			update_date = #{updateDate},
+			display_flag = #{displayFlag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_approve_result SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -15,10 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qlmsoft.mbp.common.config.Constant;
+import com.qlmsoft.mbp.common.config.PulicityMenuInstance;
 import com.qlmsoft.mbp.common.mapper.JsonMapper;
+import com.qlmsoft.mbp.common.persistence.Page;
 import com.qlmsoft.mbp.common.web.BaseController;
 import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
 import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
+import com.qlmsoft.mbp.modules.project.entity.PubApproveGuide;
+import com.qlmsoft.mbp.modules.project.service.PubApproveGuideService;
+import com.qlmsoft.mbp.modules.project.service.PubApproveResultService;
 import com.qlmsoft.mbp.modules.project.service.TBProjectInfoService;
 
 /**
@@ -34,10 +39,16 @@ public class HomeController extends BaseController {
 	@Autowired
 	private TBProjectInfoService tBProjectInfoService;
 
+	@Autowired
+	private PubApproveGuideService pubApproveGuideService;
+	
+	@Autowired
+	private PubApproveResultService pubApproveResultService;
+
 	@RequestMapping(value = "index")
 	public String list(ProjectInfo projectInfo, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
-
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("index"));
 		model.addAttribute("projectinfo", projectInfo);
 		return "modules/publicity/Index";
 	}
@@ -47,11 +58,50 @@ public class HomeController extends BaseController {
 	public String projects(ProjectInfo projectInfo, HttpServletRequest request,
 			HttpServletResponse response) {
 
-//		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
+		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
 		List<ProjectInfo> list = tBProjectInfoService.findList(projectInfo);
 		DataTableBean<ProjectInfo> result = new DataTableBean<ProjectInfo>();
 		result.setData(list);
 		return JsonMapper.getInstance().toJson(result);
+	}
+	
+	@RequestMapping(value = "projectdetail")
+	public String projectdetail(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		String id = request.getParameter("pkid");
+		ProjectInfo projectInfo = tBProjectInfoService.get(id);
+		model.addAttribute("projectinfo", projectInfo);
+		//model.addAttribute("menuList", PulicityMenuInstance.getMenus("index"));
+		return "modules/publicity/ProjectDetail";
+	}
+	
+	@RequestMapping(value = "projectdetailbasic")
+	public String detailBasic(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		String id = request.getParameter("pkid");
+		model.addAttribute("approve", "approve");
+		return "modules/publicity/ProjectDetailApprove";
+	}
+	
+	@RequestMapping(value = "projectdetailapprove")
+	public String detailApprove(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		String id = request.getParameter("pkid");
+		model.addAttribute("approve", "approve");
+		return "modules/publicity/ProjectDetailApprove";
+	}
+
+	@RequestMapping(value = "approveguide")
+	public String approveguide(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		PubApproveGuide pubApproveGuide = new PubApproveGuide();
+		Page<PubApproveGuide> page = pubApproveGuideService.findPage(
+				new Page<PubApproveGuide>(request, response), pubApproveGuide);
+
+		model.addAttribute("page", page);
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("approveguide"));
+
+		return "modules/publicity/Guide";
 	}
 
 }

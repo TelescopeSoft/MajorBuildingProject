@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<%@ include file="/WEB-INF/views/include/pubtaglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +43,8 @@
   <header class=" topbox">
       <div class="toptitile">滨湖区重大建设项目信息公开平台</div>
   </header>
+	<%@ include file="/WEB-INF/views/modules/publicity/menu.jsp"%>
+  <!-- 
     <div class="main-header">
     <nav class="navbar navbar-static-top">
         <div class="container">
@@ -52,12 +54,11 @@
                     <i class="fa fa-bars"></i>
                 </button>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
+ 
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="Index.html">重大项目</a></li>
-                    <li><a href="Guide.html">批准服务</a></li>
+                    <li class="active"><a href="${ctx}/publicity/index">重大项目</a></li>
+                    <li><a href="${ctx}/publicity/approveguide">批准服务</a></li>
                     <li><a href="ApproveResult.html">批准结果</a></li>
                     <li><a href="Tender.html">招标投标</a></li>
                     <li><a href="LandExpropriation.html">土地征收</a></li>
@@ -73,14 +74,10 @@
                     </li>
                     <li><a href="Complete.html">竣工信息</a></li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-            <!-- Navbar Right Menu -->
-
-        </div>
-        <!-- /.container-fluid -->
+            </div> 
+        </div> 
     </nav>
-    </div>
+    </div> -->
   <!-- Full Width Column -->
   <div class="content-wrapper">
     <div class="container">
@@ -223,15 +220,15 @@
 	            { "data": "buildcorpname" }
 	        ],
 	        "columnDefs": [{
-	            "render": function(data, type, row) {
-	            	if(value != null){
-	                    return '<a href='+value+'>'+value+'</a>';
+	            "render": function(data, type, row, meta ) {
+	            	if(data != null){
+	                    return '<a href="${ctx}/publicity/projectdetail?pkid='+row.pkid+'">' + data + '</a>';
 	                 }else{
 	                        return "";
 	                 }
 	            },
 	            "targets": 0
-	        }]
+	        }],
             'language': {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",
