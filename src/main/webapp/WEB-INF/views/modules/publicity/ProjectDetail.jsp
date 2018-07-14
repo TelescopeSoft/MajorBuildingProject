@@ -201,42 +201,7 @@
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="contract">
-                                    <div class="box-header">
-                                        <div class="approvetitle">合同列表</div>
-                                    </div>
-
-                                    <div class="box-body">
-                                        <table class="table table-bordered ">
-                                            <tr class="bg-info">
-                                                <td>合同备案编号</td>
-                                                <td>合同项目名称</td>
-                                                <td>合同类别</td>
-                                                <td>发包单位名称</td>
-                                                <td>承包单位名称</td>
-                                                <td>合同金额（万元）</td>
-                                                <td>合同签订日期</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>3202111706060101-HZ-001</td>
-                                                <td>方泉苑六期一批安置房（A地块）项目施工</td>
-                                                <td>施工总承包</td>
-                                                <td>无锡山水慧谷城镇建设发展有限公司</td>
-                                                <td>展有限公司	无锡市亨利富建设发展有限公司</td>
-                                                <td>19879.3070</td>
-                                                <td>2018-04-13</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3202111706060101-HE-001</td>
-                                                <td>方泉苑六期一批安置房（A地块）项目监理</td>
-                                                <td>监理</td>
-                                                <td>无锡山水慧谷城镇建设发展有限公司</td>
-                                                <td>无锡太湖明珠建设咨询有限公司</td>
-                                                <td>180.0000</td>
-                                                <td>2018-04-27</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                   
                                 </div>
                                 <div class="tab-pane" id="safty">
                                     <div class="box-header">
@@ -571,6 +536,9 @@
 	},{
 	    "id" : "approve",
 	    "url" : "${ctx}/publicity/projectdetailapprove?pkid=${projectinfo.pkid}"
+	},{
+	    "id" : "contract",
+	    "url" : "${ctx}/publicity/projectdetailcontract?pkid=${projectinfo.pkid}"
 	}];
 	
 	function tabsHandler(event) {

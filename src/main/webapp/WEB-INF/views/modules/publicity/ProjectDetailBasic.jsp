@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td class="bg-info">住建项目编号</td>
-				<td>${projectinfo.prjapprovalnum}</td>
+				<td>${projectinfo.prjnum}</td>
 				<td class="bg-info">项目分类</td>
 				<td><c:choose>
 						<c:when test="${projectinfo.prjtypenum == '01'}">房屋建筑工程 </c:when>

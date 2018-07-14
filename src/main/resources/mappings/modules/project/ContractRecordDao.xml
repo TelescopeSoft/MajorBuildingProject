@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ContractRecordDao">
+    
+	<sql id="contractRecordColumns">
+		a.pkid AS "pkid",
+		a.recordname AS "recordname",
+		a.recordnum AS "recordnum",
+		a.recordinnernum AS "recordinnernum",
+		a.prjnum AS "prjnum",
+		a.contractnum AS "contractnum",
+		a.contracttypenum AS "contracttypenum",
+		a.contractmoney AS "contractmoney",
+		a.prjsize AS "prjsize",
+		a.contractdate AS "contractdate",
+		a.propietorcorpname AS "propietorcorpname",
+		a.propietorcorpcode AS "propietorcorpcode",
+		a.contractorcorpname AS "contractorcorpname",
+		a.contractorcorpcode AS "contractorcorpcode",
+		a.unioncorpname AS "unioncorpname",
+		a.unioncorpcode AS "unioncorpcode",
+		a.createdate AS "createdate",
+		a.updateflag AS "updateflag",
+		a.prjhead AS "prjhead",
+		a.prjheadphone AS "prjheadphone",
+		a.idcard AS "idcard",
+		a.sbdqbm AS "sbdqbm",
+		a.datastate AS "datastate",
+		a.cjrqsj AS "cjrqsj",
+		a.xgrqsj AS "xgrqsj",
+		a.scrqsj AS "scrqsj",
+		a.returnresult AS "returnresult",
+		a.updateuser AS "updateuser",
+		a.tag AS "tag",
+		c.CodeInfo AS contracttypeLabel
+	</sql>
+	
+	<sql id="contractRecordJoins">
+	</sql>
+    
+	<select id="get" resultType="ContractRecord">
+		SELECT 
+			<include refid="contractRecordColumns"/>
+		FROM tbcontractrecordmanage a
+		<include refid="contractRecordJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ContractRecord">
+		SELECT 
+			<include refid="contractRecordColumns"/>
+		FROM tbcontractrecordmanage a
+		<include refid="contractRecordJoins"/>
+		<where>
+			<if test="prjnum != null and prjnum != ''">
+				AND a.prjnum = #{prjnum}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findListByProjectPkid" resultType="ContractRecord">
+		SELECT <include refid="contractRecordColumns"/>
+		FROM tbcontractrecordmanage a
+		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+		LEFT JOIN MajorProjectLib.dbo.tbContractTypeDic c ON c.Code = a.ContractTypeNum
+		<where>
+			b.pkid = #{pkid}
+		</where>
+		ORDER BY a.ContractDate DESC
+	</select>
+	
+	<select id="findAllList" resultType="ContractRecord">
+		SELECT 
+			<include refid="contractRecordColumns"/>
+		FROM tbcontractrecordmanage a
+		<include refid="contractRecordJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbcontractrecordmanage(
+			pkid,
+			recordname,
+			recordnum,
+			recordinnernum,
+			prjnum,
+			contractnum,
+			contracttypenum,
+			contractmoney,
+			prjsize,
+			contractdate,
+			propietorcorpname,
+			propietorcorpcode,
+			contractorcorpname,
+			contractorcorpcode,
+			unioncorpname,
+			unioncorpcode,
+			createdate,
+			updateflag,
+			prjhead,
+			prjheadphone,
+			idcard,
+			sbdqbm,
+			datastate,
+			cjrqsj,
+			xgrqsj,
+			scrqsj,
+			returnresult,
+			updateuser,
+			tag
+		) VALUES (
+			#{pkid},
+			#{recordname},
+			#{recordnum},
+			#{recordinnernum},
+			#{prjnum},
+			#{contractnum},
+			#{contracttypenum},
+			#{contractmoney},
+			#{prjsize},
+			#{contractdate},
+			#{propietorcorpname},
+			#{propietorcorpcode},
+			#{contractorcorpname},
+			#{contractorcorpcode},
+			#{unioncorpname},
+			#{unioncorpcode},
+			#{createdate},
+			#{updateflag},
+			#{prjhead},
+			#{prjheadphone},
+			#{idcard},
+			#{sbdqbm},
+			#{datastate},
+			#{cjrqsj},
+			#{xgrqsj},
+			#{scrqsj},
+			#{returnresult},
+			#{updateuser},
+			#{tag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE tbcontractrecordmanage SET 	
+			pkid = #{pkid},
+			recordname = #{recordname},
+			recordnum = #{recordnum},
+			recordinnernum = #{recordinnernum},
+			prjnum = #{prjnum},
+			contractnum = #{contractnum},
+			contracttypenum = #{contracttypenum},
+			contractmoney = #{contractmoney},
+			prjsize = #{prjsize},
+			contractdate = #{contractdate},
+			propietorcorpname = #{propietorcorpname},
+			propietorcorpcode = #{propietorcorpcode},
+			contractorcorpname = #{contractorcorpname},
+			contractorcorpcode = #{contractorcorpcode},
+			unioncorpname = #{unioncorpname},
+			unioncorpcode = #{unioncorpcode},
+			createdate = #{createdate},
+			updateflag = #{updateflag},
+			prjhead = #{prjhead},
+			prjheadphone = #{prjheadphone},
+			idcard = #{idcard},
+			sbdqbm = #{sbdqbm},
+			datastate = #{datastate},
+			cjrqsj = #{cjrqsj},
+			xgrqsj = #{xgrqsj},
+			scrqsj = #{scrqsj},
+			returnresult = #{returnresult},
+			updateuser = #{updateuser},
+			tag = #{tag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM tbcontractrecordmanage
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
