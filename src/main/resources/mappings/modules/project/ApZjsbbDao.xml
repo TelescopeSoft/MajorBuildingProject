@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApZjsbbDao">
+    
+	<sql id="apZjsbbColumns">
+		a.uuid AS "uuid",
+		a.xmmc AS "xmmc",
+		a.prjnum AS "prjnum",
+		a.prjname AS "prjname",
+		a.gcdz AS "gcdz",
+		a.zjjgmc AS "zjjgmc",
+		a.zjcorpcode AS "zjcorpcode",
+		a.prjsize AS "prjsize",
+		a.econcorpname AS "econcorpname",
+		a.econcorpcode AS "econcorpcode",
+		a.prjapprovalnum AS "prjapprovalnum",
+		a.buldplannum AS "buldplannum",
+		a.projectplannum AS "projectplannum",
+		a.citynum AS "citynum",
+		a.countynum AS "countynum",
+		a.prjtypenum AS "prjtypenum",
+		a.prjfunctionnum AS "prjfunctionnum",
+		a.sbr AS "sbr",
+		a.sbryddh AS "sbryddh",
+		a.createdate AS "createdate",
+		a.sfzps AS "sfzps",
+		a.updateflag AS "updateflag",
+		a.fetchdate AS "fetchdate",
+		a.updatetime AS "updatetime",
+		a.updateuser AS "updateuser",
+		a.updatedate AS "updatedate",
+		a.status AS "status",
+		a.jsxz AS "jsxz",
+		a.tzlx AS "tzlx",
+		c.CodeInfo AS "jsxzLabel"
+	</sql>
+	
+	<sql id="apZjsbbJoins">
+		LEFT JOIN dbo.tbPrjPropertyDic c on a.jsxz = c.Code
+	</sql>
+    
+	<select id="get" resultType="ApZjsbb">
+		SELECT 
+			<include refid="apZjsbbColumns"/>
+		FROM ap_zjsbb a
+		<include refid="apZjsbbJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ApZjsbb">
+		SELECT 
+			<include refid="apZjsbbColumns"/>
+		FROM ap_zjsbb a
+		<include refid="apZjsbbJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findListByProjectPkid" resultType="ApZjsbb">
+		SELECT
+		<include refid="apZjsbbColumns" />,c.Code
+		FROM Ap_zjsbb a
+			INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+		<include refid="apZjsbbJoins"/>	
+		<where>
+			b.pkid = #{pkid}
+		</where>
+		ORDER BY a.updateDate DESC
+	</select>
+	
+	<select id="findAllList" resultType="ApZjsbb">
+		SELECT 
+			<include refid="apZjsbbColumns"/>
+		FROM ap_zjsbb a
+		<include refid="apZjsbbJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ap_zjsbb(
+			uuid,
+			xmmc,
+			prjnum,
+			prjname,
+			gcdz,
+			zjjgmc,
+			zjcorpcode,
+			prjsize,
+			econcorpname,
+			econcorpcode,
+			prjapprovalnum,
+			buldplannum,
+			projectplannum,
+			citynum,
+			countynum,
+			prjtypenum,
+			prjfunctionnum,
+			sbr,
+			sbryddh,
+			createdate,
+			sfzps,
+			updateflag,
+			fetchdate,
+			updatetime,
+			updateuser,
+			updatedate,
+			status,
+			jsxz,
+			tzlx
+		) VALUES (
+			#{uuid},
+			#{xmmc},
+			#{prjnum},
+			#{prjname},
+			#{gcdz},
+			#{zjjgmc},
+			#{zjcorpcode},
+			#{prjsize},
+			#{econcorpname},
+			#{econcorpcode},
+			#{prjapprovalnum},
+			#{buldplannum},
+			#{projectplannum},
+			#{citynum},
+			#{countynum},
+			#{prjtypenum},
+			#{prjfunctionnum},
+			#{sbr},
+			#{sbryddh},
+			#{createdate},
+			#{sfzps},
+			#{updateflag},
+			#{fetchdate},
+			#{updatetime},
+			#{updateuser},
+			#{updatedate},
+			#{status},
+			#{jsxz},
+			#{tzlx}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ap_zjsbb SET 	
+			uuid = #{uuid},
+			xmmc = #{xmmc},
+			prjnum = #{prjnum},
+			prjname = #{prjname},
+			gcdz = #{gcdz},
+			zjjgmc = #{zjjgmc},
+			zjcorpcode = #{zjcorpcode},
+			prjsize = #{prjsize},
+			econcorpname = #{econcorpname},
+			econcorpcode = #{econcorpcode},
+			prjapprovalnum = #{prjapprovalnum},
+			buldplannum = #{buldplannum},
+			projectplannum = #{projectplannum},
+			citynum = #{citynum},
+			countynum = #{countynum},
+			prjtypenum = #{prjtypenum},
+			prjfunctionnum = #{prjfunctionnum},
+			sbr = #{sbr},
+			sbryddh = #{sbryddh},
+			createdate = #{createdate},
+			sfzps = #{sfzps},
+			updateflag = #{updateflag},
+			fetchdate = #{fetchdate},
+			updatetime = #{updatetime},
+			updateuser = #{updateuser},
+			updatedate = #{updatedate},
+			status = #{status},
+			jsxz = #{jsxz},
+			tzlx = #{tzlx}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM ap_zjsbb
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

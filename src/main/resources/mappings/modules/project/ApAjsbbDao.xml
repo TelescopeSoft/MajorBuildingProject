@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApAjsbbDao">
+    
+	<sql id="apAjsbbColumns">
+		a.uuid AS "uuid",
+		a.xmmc AS "xmmc",
+		a.prjnum AS "prjnum",
+		a.prjname AS "prjname",
+		a.ajjgmc AS "ajjgmc",
+		a.ajcorpcode AS "ajcorpcode",
+		a.prjsize AS "prjsize",
+		a.econcorpname AS "econcorpname",
+		a.econcorpcode AS "econcorpcode",
+		a.prjapprovalnum AS "prjapprovalnum",
+		a.buldplannum AS "buldplannum",
+		a.projectplannum AS "projectplannum",
+		a.citynum AS "citynum",
+		a.countynum AS "countynum",
+		a.prjtypenum AS "prjtypenum",
+		a.sprjtypenum AS "sprjtypenum",
+		a.prjfunctionnum AS "prjfunctionnum",
+		a.sbr AS "sbr",
+		a.sbryddh AS "sbryddh",
+		a.createdate AS "createdate",
+		a.sfzps AS "sfzps",
+		a.sfbz AS "sfbz",
+		a.jdz AS "jdz",
+		a.wdz AS "wdz",
+		a.mj AS "mj",
+		a.zj AS "zj",
+		a.jgcc AS "jgcc",
+		a.sbmb AS "sbmb",
+		a.sfjk AS "sfjk",
+		a.sgxkz AS "sgxkz",
+		a.updateflag AS "updateflag",
+		a.fetchdate AS "fetchdate",
+		a.updatetime AS "updatetime",
+		a.updateuser AS "updateuser",
+		a.updatedate AS "updatedate",
+		a.status AS "status"
+	</sql>
+	
+	<sql id="apAjsbbJoins">
+	</sql>
+    
+	<select id="get" resultType="ApAjsbb">
+		SELECT 
+			<include refid="apAjsbbColumns"/>
+		FROM ap_ajsbb a
+		<include refid="apAjsbbJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ApAjsbb">
+		SELECT 
+			<include refid="apAjsbbColumns"/>
+		FROM ap_ajsbb a
+		<include refid="apAjsbbJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findListByProjectPkid" resultType="ApAjsbb">
+		SELECT <include refid="apAjsbbColumns"/>
+		FROM Ap_ajsbb a
+		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+		<where>
+			b.pkid = #{pkid}
+		</where>
+		ORDER BY a.updateDate DESC
+	</select>
+	
+	<select id="findAllList" resultType="ApAjsbb">
+		SELECT 
+			<include refid="apAjsbbColumns"/>
+		FROM ap_ajsbb a
+		<include refid="apAjsbbJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ap_ajsbb(
+			uuid,
+			xmmc,
+			prjnum,
+			prjname,
+			ajjgmc,
+			ajcorpcode,
+			prjsize,
+			econcorpname,
+			econcorpcode,
+			prjapprovalnum,
+			buldplannum,
+			projectplannum,
+			citynum,
+			countynum,
+			prjtypenum,
+			sprjtypenum,
+			prjfunctionnum,
+			sbr,
+			sbryddh,
+			createdate,
+			sfzps,
+			sfbz,
+			jdz,
+			wdz,
+			mj,
+			zj,
+			jgcc,
+			sbmb,
+			sfjk,
+			sgxkz,
+			updateflag,
+			fetchdate,
+			updatetime,
+			updateuser,
+			updatedate,
+			status
+		) VALUES (
+			#{uuid},
+			#{xmmc},
+			#{prjnum},
+			#{prjname},
+			#{ajjgmc},
+			#{ajcorpcode},
+			#{prjsize},
+			#{econcorpname},
+			#{econcorpcode},
+			#{prjapprovalnum},
+			#{buldplannum},
+			#{projectplannum},
+			#{citynum},
+			#{countynum},
+			#{prjtypenum},
+			#{sprjtypenum},
+			#{prjfunctionnum},
+			#{sbr},
+			#{sbryddh},
+			#{createdate},
+			#{sfzps},
+			#{sfbz},
+			#{jdz},
+			#{wdz},
+			#{mj},
+			#{zj},
+			#{jgcc},
+			#{sbmb},
+			#{sfjk},
+			#{sgxkz},
+			#{updateflag},
+			#{fetchdate},
+			#{updatetime},
+			#{updateuser},
+			#{updatedate},
+			#{status}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ap_ajsbb SET 	
+			uuid = #{uuid},
+			xmmc = #{xmmc},
+			prjnum = #{prjnum},
+			prjname = #{prjname},
+			ajjgmc = #{ajjgmc},
+			ajcorpcode = #{ajcorpcode},
+			prjsize = #{prjsize},
+			econcorpname = #{econcorpname},
+			econcorpcode = #{econcorpcode},
+			prjapprovalnum = #{prjapprovalnum},
+			buldplannum = #{buldplannum},
+			projectplannum = #{projectplannum},
+			citynum = #{citynum},
+			countynum = #{countynum},
+			prjtypenum = #{prjtypenum},
+			sprjtypenum = #{sprjtypenum},
+			prjfunctionnum = #{prjfunctionnum},
+			sbr = #{sbr},
+			sbryddh = #{sbryddh},
+			createdate = #{createdate},
+			sfzps = #{sfzps},
+			sfbz = #{sfbz},
+			jdz = #{jdz},
+			wdz = #{wdz},
+			mj = #{mj},
+			zj = #{zj},
+			jgcc = #{jgcc},
+			sbmb = #{sbmb},
+			sfjk = #{sfjk},
+			sgxkz = #{sgxkz},
+			updateflag = #{updateflag},
+			fetchdate = #{fetchdate},
+			updatetime = #{updatetime},
+			updateuser = #{updateuser},
+			updatedate = #{updatedate},
+			status = #{status}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM ap_ajsbb
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

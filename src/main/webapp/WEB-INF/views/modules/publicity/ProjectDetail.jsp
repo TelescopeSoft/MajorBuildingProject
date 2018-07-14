@@ -204,72 +204,8 @@
                                    
                                 </div>
                                 <div class="tab-pane" id="safty">
-                                    <div class="box-header">
-                                        <div class="approvetitle">安全监督</div>
-                                    </div>
-
-                                    <div class="box-body">
-                                        <table class="table table-bordered ">
-                                            <tr class="bg-info">
-                                                <th>项目名称</th>
-                                                <th>项目编号</th>
-                                                <th>立项批准文号</th>
-                                                <th>报监工程名称</th>
-                                                <th>安全监督机构名称</th>
-                                                <th>建设单位名称</th>
-                                                <th>报监日期</th>
-                                                <th>申办人</th>
-                                                <th>投资类型</th>
-                                                <th>建设性质</th>
-                                            </tr>
-                                            <tr>
-                                                <td>方泉苑六期一批安置房</td>
-                                                <td>3202111706060101</td>
-                                                <td>锡滨发改许[2017]9号</td>
-                                                <td>方泉苑六期一批安置房(A地块）项目施工	</td>
-                                                <td>无锡市滨湖区建筑工程安全监督站</td>
-                                                <td>无锡山水慧谷城镇建设发展有限公司</td>
-                                                <td>2018-06-29</td>
-                                                <td>陆伟峰</td>
-                                                <td>政府投资</td>
-                                                <td>新建</td>
-                                            </tr>
-                                        </table>
-                                    </div>
                                 </div>
                                 <div class="tab-pane" id="quality">
-                                    <div class="box-header">
-                                        <div class="approvetitle">质量监督</div>
-                                    </div>
-
-                                    <div class="box-body">
-                                        <table class="table table-bordered ">
-                                            <tr class="bg-info">
-                                                <th>项目名称</th>
-                                                <th>项目编号</th>
-                                                <th>立项批准文号</th>
-                                                <th>报监工程名称</th>
-                                                <th>质量监督机构名称</th>
-                                                <th>建设单位名称</th>
-                                                <th>报监日期</th>
-                                                <th>申办人</th>
-                                                <th>投资类型</th>
-                                                <th>建设性质</th>
-                                            </tr>
-                                            <tr>
-                                                <td>方泉苑六期一批安置房</td>
-                                                <td>3202111706060101</td>
-                                                <td>锡滨发改许[2017]9号</td>
-                                                <td>方泉苑六期一批安置房(A地块）项目施工	</td>
-                                                <td>无锡市滨湖区建设工程质量监督站</td>
-                                                <td>无锡山水慧谷城镇建设发展有限公司</td>
-                                                <td>2018-06-29</td>
-                                                <td>陆伟峰</td>
-                                                <td>政府投资</td>
-                                                <td>新建</td>
-                                            </tr>
-                                        </table>
-                                    </div>
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="construction">
@@ -539,7 +475,19 @@
 	},{
 	    "id" : "contract",
 	    "url" : "${ctx}/publicity/projectdetailcontract?pkid=${projectinfo.pkid}"
-	}];
+	},{
+	    "id" : "safty",
+	    "url" : "${ctx}/publicity/projectdetailsafty?pkid=${projectinfo.pkid}"
+	},{
+	    "id" : "quality",
+	    "url" : "${ctx}/publicity/projectdetailquality?pkid=${projectinfo.pkid}"
+	},{
+	    "id" : "construction",
+	    "url" : "${ctx}/publicity/projectdetailconstruction?pkid=${projectinfo.pkid}"
+	},{
+	    "id" : "finish",
+	    "url" : "${ctx}/publicity/projectdetailfinish?pkid=${projectinfo.pkid}"
+	} ];
 	
 	function tabsHandler(event) {
 	    var data = event.data;
