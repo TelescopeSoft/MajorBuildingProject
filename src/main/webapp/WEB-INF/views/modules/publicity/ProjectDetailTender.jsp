@@ -1,0 +1,116 @@
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/WEB-INF/views/include/pubtaglib.jsp"%>
+<div class="box box-info">
+	<!-- /.box-header -->
+	<div class="box-header">
+		<div class="approvetitle">资格预审公告</div>
+	</div>
+	<div class="box-body">
+		<table class="table table-bordered">
+			<tr>
+				<td class="bg-info" width="10%">公告名称</td>
+				<td width="70%"><a
+					href="http://xzfw.wuxi.gov.cn/doc/2018/03/19/1770459.shtml"
+					target="_blank">
+						[WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理 </a></td>
+				<td class="bg-info" width="10%">时间</td>
+				<td width="10%">2018-03-19</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="box-header">
+		<div class="approvetitle">招标公告</div>
+	</div>
+
+	<div class="box-body">
+		<table class="table table-bordered">
+			<tr>
+				<td class="bg-info" width="10%">公告名称</td>
+				<td width="70%"><a
+					href="http://xzfw.wuxi.gov.cn/doc/2018/03/09/1761653.shtml"
+					target="_blank">
+						[WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理 </a></td>
+				<td class="bg-info" width="10%">时间</td>
+				<td width="10%">2018-03-09</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="box-header">
+		<div class="approvetitle">中标候选人公示</div>
+	</div>
+
+	<div class="box-body">
+		<table class="table table-bordered">
+			<tr>
+				<td class="bg-info" width="10%">公告名称</td>
+				<td width="70%"><a
+					href="http://xzfw.wuxi.gov.cn/doc/2018/04/15/1808826.shtml"
+					target="_blank">
+						[WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理 </a></td>
+				<td class="bg-info" width="10%">时间</td>
+				<td width="10%">2018-04-15</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="box-header">
+		<div class="approvetitle">中标结果</div>
+	</div>
+	<c:forEach items="${tenderList}" var="item" varStatus="status">
+		<div class="box-body">
+			<div>${ status.index + 1}、标段名称 : ${item.tendername}</div>
+			<table class="table table-bordered">
+				<tr>
+					<td class="bg-info">中标通知书编号</td>
+					<td>${item.tendernum}</td>
+					<td class="bg-info">中标通知书内部编号</td>
+					<td>${item.tenderinnernum}</td>
+				</tr>
+				<tr>
+					<td class="bg-info">招标类型</td>
+					<td>${item.tenderclassnumlabel}</td>
+					<td class="bg-info">招标方式</td>
+					<td>${item.tendertypenumlabel}</td>
+				</tr>
+				<tr>
+					<td class="bg-info">中标日期</td>
+					<td><fmt:formatDate value="${item.tenderresultdate}"
+							pattern="yyyy-MM-dd" /></td>
+					<td class="bg-info">中标金额</td>
+					<td>${item.tendermoney}</td>
+				</tr>
+				<tr>
+					<td class="bg-info">建设规模</td>
+					<td>${item.prjsize}</td>
+					<td class="bg-info">面积（平方米）</td>
+					<td>${item.area}</td>
+				</tr>
+				<tr>
+					<td class="bg-info" width="15%">招标代理单位名称</td>
+					<td width="35%">${item.agencycorpname}</td>
+					<td class="bg-info" width="15%">招标代理单位组织机构代码 （社会信用代码）</td>
+					<td width="35%">${item.agencycorpcode}</td>
+				</tr>
+				<tr>
+					<td class="bg-info">中标单位名称</td>
+					<td>${item.tendercorpname}</td>
+					<td class="bg-info">中标单位组织机构代码 （社会信用代码）</td>
+					<td>${item.tendercorpcode}</td>
+				</tr>
+				<tr>
+					<td class="bg-info">项目经理/总监理工程师姓名</td>
+					<td>${item.constructorname}</td>
+					<td class="bg-info">项目经理/总监理工程师电话</td>
+					<td>${item.constructorphone}</td>
+				</tr>
+			</table>
+		</div>
+	</c:forEach>
+
+
+
+</div>
+
+

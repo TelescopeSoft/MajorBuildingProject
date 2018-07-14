@@ -82,7 +82,7 @@
                                 <li><a href="#quality" data-toggle="tab">质量监督</a></li>
                                 <li><a href="#construction" data-toggle="tab">施工信息</a></li>
                                 <!--<li><a href="#safetysupervision" data-toggle="tab">质量安全监督</a></li>-->
-                                <li><a href="#complete" data-toggle="tab">竣工</a></li>
+                                <li><a href="#finish" data-toggle="tab">竣工信息</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="basic">
@@ -94,110 +94,7 @@
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="tender">
-                                    <div class="box box-info">
-                                        <!-- /.box-header -->
-                                        <div class="box-header">
-                                            <div class="approvetitle">资格预审公告</div>
-                                        </div>
-                                        <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td  class="bg-info" width="10%">公告名称</td>
-                                                    <td width="70%"><a href="http://xzfw.wuxi.gov.cn/doc/2018/03/19/1770459.shtml" target="_blank">
-                                                        [WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理
-                                                    </a></td>
-                                                    <td class="bg-info" width="10%">时间</td>
-                                                    <td width="10%">2018-03-19</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="box-header">
-                                            <div class="approvetitle">招标公告</div>
-                                        </div>
-
-                                        <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td  class="bg-info" width="10%">公告名称</td>
-                                                    <td width="70%"><a href="http://xzfw.wuxi.gov.cn/doc/2018/03/09/1761653.shtml" target="_blank">
-                                                        [WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理
-                                                    </a></td>
-                                                    <td class="bg-info" width="10%">时间</td>
-                                                    <td width="10%">2018-03-09</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="box-header">
-                                            <div class="approvetitle">中标候选人公示</div>
-                                        </div>
-
-                                        <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td  class="bg-info" width="10%">公告名称</td>
-                                                    <td width="70%"><a href="http://xzfw.wuxi.gov.cn/doc/2018/04/15/1808826.shtml" target="_blank">
-                                                        [WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理
-                                                    </a></td>
-                                                    <td class="bg-info" width="10%">时间</td>
-                                                    <td width="10%">2018-04-15 </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="box-header">
-                                            <div class="approvetitle">中标结果</div>
-                                        </div>
-                                        <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td  class="bg-info">项目编号</td>
-                                                    <td>3202111706060101</td>
-                                                    <td class="bg-info">标段名称</td>
-                                                    <td  >方泉苑六期一批安置房（A地块）项目施工</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">中标通知书编号</td>
-                                                    <td>3202111706060101-BD-001</td>
-                                                    <td class="bg-info">中标通知书内部编号</td>
-                                                    <td >WXBH201802001-W01</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">招标类型</td>
-                                                    <td>施工</td>
-                                                    <td class="bg-info">招标方式</td>
-                                                    <td >公开招标</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">中标日期</td>
-                                                    <td>2018-04-09</td>
-                                                    <td class="bg-info">中标金额</td>
-                                                    <td >19879.3070</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info" width="15%">招标代理单位名称</td>
-                                                    <td width="35%">江苏省建友工程项目管理咨询有限公司</td>
-                                                    <td class="bg-info" width="15%">招标代理单位组织机构代码
-                                                        （社会信用代码）</td>
-                                                    <td width="35%">75050049-3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">中标单位名称</td>
-                                                    <td>无锡市亨利富建设发展有限公司</td>
-                                                    <td class="bg-info">中标单位组织机构代码
-                                                        （社会信用代码）</td>
-                                                    <td >73956029-2</td>
-                                                </tr>
-                                                <tr>
-                                                    <td  class="bg-info">项目经理/总监理工程师姓名</td>
-                                                    <td>冯铭伟</td>
-                                                    <td class="bg-info">项目经理/总监理工程师电话</td>
-                                                    <td >13861779988</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="contract">
@@ -358,58 +255,8 @@
                                 </div>
                                 <!-- /.tab-pane -->
 
-                                <div class="tab-pane" id="complete">
-                                    <div class="box-header">
-                                        <div class="approvetitle">竣工备案信息</div>
-                                    </div>
-                                    <div class="box-body">
-                                        <table class="table table-bordered">
-                                            <tr>
-                                                <td  class="bg-info" width="15%">竣工备案编号</td>
-                                                <td width="35%">3202111706060101-JX-001</td>
-                                                <td class="bg-info" width="15%">备案项目名称</td>
-                                                <td width="35%" >	方泉苑五期棚户区改造（E块E1-E11号房及E块地下室）</td>
-                                            </tr>
-                                            <tr>
-                                                <td  class="bg-info" width="15%">施工许可证编号</td>
-                                                <td width="35%">320211020140026</td>
-                                                <td class="bg-info" width="15%">质量检测机构名称</td>
-                                                <td width="35%" >无锡市滨湖区建设工程安全监督站</td>
-                                            </tr>
-                                            <tr>
-                                                <td  class="bg-info" width="15%">实际造价（万元）</td>
-                                                <td width="35%">7094.0000</td>
-                                                <td class="bg-info" width="15%">实际面积（平方米）</td>
-                                                <td width="35%" >48532.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td  class="bg-info" width="15%">实际开工日期</td>
-                                                <td width="35%">2011-01-01</td>
-                                                <td class="bg-info" width="15%">实际竣工验收日期</td>
-                                                <td width="35%" >2011-10-31</td>
-                                            </tr>
-                                            <tr>
-                                                <td  class="bg-info" width="15%">结构体系</td>
-                                                <td width="35%"  >框架结构</td>
-                                                <td class="bg-info" width="15%">实际建设规模</td>
-                                                <td width="35%" ></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td  class="bg-info" width="15%">竣工决算审计单位</td>
-                                                <td width="35%" ></td>
-                                                <td class="bg-info" width="15%">财务决算金额</td>
-                                                <td width="35%" ></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td  class="bg-info" width="15%">审计结论</td>
-                                                <td width="35%" colspan="3"></td>
-
-
-                                            </tr>
-                                            </table>
-                                        </div>
+                                <div class="tab-pane" id="finish">
+                                    
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -472,6 +319,9 @@
 	},{
 	    "id" : "approve",
 	    "url" : "${ctx}/publicity/projectdetailapprove?pkid=${projectinfo.pkid}"
+	},{
+	    "id" : "tender",
+	    "url" : "${ctx}/publicity/projectdetailtender?pkid=${projectinfo.pkid}"
 	},{
 	    "id" : "contract",
 	    "url" : "${ctx}/publicity/projectdetailcontract?pkid=${projectinfo.pkid}"

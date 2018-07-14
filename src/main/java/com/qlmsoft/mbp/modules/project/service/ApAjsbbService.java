@@ -10,9 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.qlmsoft.mbp.common.persistence.Page;
 import com.qlmsoft.mbp.common.service.CrudService;
-import com.qlmsoft.mbp.modules.project.entity.ApAjsbb;
-import com.qlmsoft.mbp.modules.project.entity.ContractRecord;
 import com.qlmsoft.mbp.modules.project.dao.ApAjsbbDao;
+import com.qlmsoft.mbp.modules.project.entity.ApAjsbb;
 
 /**
  * 安监申报Service

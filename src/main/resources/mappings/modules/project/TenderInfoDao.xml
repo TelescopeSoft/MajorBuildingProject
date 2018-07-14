@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.TenderInfoDao">
+    
+	<sql id="tenderInfoColumns">
+		a.pkid AS "pkid",
+		a.tendername AS "tendername",
+		a.tendernum AS "tendernum",
+		a.tenderinnernum AS "tenderinnernum",
+		a.prjnum AS "prjnum",
+		a.tenderclassnum AS "tenderclassnum",
+		a.tendertypenum AS "tendertypenum",
+		a.tenderresultdate AS "tenderresultdate",
+		a.tendermoney AS "tendermoney",
+		a.prjsize AS "prjsize",
+		a.area AS "area",
+		a.agencycorpname AS "agencycorpname",
+		a.agencycorpcode AS "agencycorpcode",
+		a.tendercorpname AS "tendercorpname",
+		a.tendercorpcode AS "tendercorpcode",
+		a.constructorname AS "constructorname",
+		a.constructorphone AS "constructorphone",
+		a.idcardtypenum AS "idcardtypenum",
+		a.constructoridcard AS "constructoridcard",
+		a.shypbf AS "shypbf",
+		a.createdate AS "createdate",
+		a.updateflag AS "updateflag",
+		a.sbdqbm AS "sbdqbm",
+		a.datastate AS "datastate",
+		a.cjrqsj AS "cjrqsj",
+		a.xgrqsj AS "xgrqsj",
+		a.scrqsj AS "scrqsj",
+		a.returnresult AS "returnresult",
+		a.updateuser AS "updateuser",
+		c.CodeInfo AS "tenderclassnumlabel",
+		d.CodeInfo AS "tendertypenumlabel"
+	</sql>
+	
+	<sql id="tenderInfoJoins">
+		LEFT JOIN dbo.tbTenderClassDic c ON a.TenderClassNum = c.Code
+		LEFT JOIN dbo.tbTenderTypeDic d ON a.TenderTypeNum = d.Code
+	</sql>
+    
+	<select id="get" resultType="TenderInfo">
+		SELECT 
+			<include refid="tenderInfoColumns"/>
+		FROM tbtenderinfo a
+		<include refid="tenderInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="TenderInfo">
+		SELECT 
+			<include refid="tenderInfoColumns"/>
+		FROM tbtenderinfo a
+		<include refid="tenderInfoJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findListByProjectPkid" resultType="TenderInfo">
+		SELECT <include refid="tenderInfoColumns"/>
+		FROM dbo.tbtenderinfo a
+		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+		<include refid="tenderInfoJoins"/>
+		<where>
+			b.pkid = #{pkid}
+		</where>
+		ORDER BY a.CreateDate DESC
+	</select>
+	
+	<select id="findAllList" resultType="TenderInfo">
+		SELECT 
+			<include refid="tenderInfoColumns"/>
+		FROM tbtenderinfo a
+		<include refid="tenderInfoJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbtenderinfo(
+			pkid,
+			tendername,
+			tendernum,
+			tenderinnernum,
+			prjnum,
+			tenderclassnum,
+			tendertypenum,
+			tenderresultdate,
+			tendermoney,
+			prjsize,
+			area,
+			agencycorpname,
+			agencycorpcode,
+			tendercorpname,
+			tendercorpcode,
+			constructorname,
+			constructorphone,
+			idcardtypenum,
+			constructoridcard,
+			shypbf,
+			createdate,
+			updateflag,
+			sbdqbm,
+			datastate,
+			cjrqsj,
+			xgrqsj,
+			scrqsj,
+			returnresult,
+			updateuser
+		) VALUES (
+			#{pkid},
+			#{tendername},
+			#{tendernum},
+			#{tenderinnernum},
+			#{prjnum},
+			#{tenderclassnum},
+			#{tendertypenum},
+			#{tenderresultdate},
+			#{tendermoney},
+			#{prjsize},
+			#{area},
+			#{agencycorpname},
+			#{agencycorpcode},
+			#{tendercorpname},
+			#{tendercorpcode},
+			#{constructorname},
+			#{constructorphone},
+			#{idcardtypenum},
+			#{constructoridcard},
+			#{shypbf},
+			#{createdate},
+			#{updateflag},
+			#{sbdqbm},
+			#{datastate},
+			#{cjrqsj},
+			#{xgrqsj},
+			#{scrqsj},
+			#{returnresult},
+			#{updateuser}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE tbtenderinfo SET 	
+			pkid = #{pkid},
+			tendername = #{tendername},
+			tendernum = #{tendernum},
+			tenderinnernum = #{tenderinnernum},
+			prjnum = #{prjnum},
+			tenderclassnum = #{tenderclassnum},
+			tendertypenum = #{tendertypenum},
+			tenderresultdate = #{tenderresultdate},
+			tendermoney = #{tendermoney},
+			prjsize = #{prjsize},
+			area = #{area},
+			agencycorpname = #{agencycorpname},
+			agencycorpcode = #{agencycorpcode},
+			tendercorpname = #{tendercorpname},
+			tendercorpcode = #{tendercorpcode},
+			constructorname = #{constructorname},
+			constructorphone = #{constructorphone},
+			idcardtypenum = #{idcardtypenum},
+			constructoridcard = #{constructoridcard},
+			shypbf = #{shypbf},
+			createdate = #{createdate},
+			updateflag = #{updateflag},
+			sbdqbm = #{sbdqbm},
+			datastate = #{datastate},
+			cjrqsj = #{cjrqsj},
+			xgrqsj = #{xgrqsj},
+			scrqsj = #{scrqsj},
+			returnresult = #{returnresult},
+			updateuser = #{updateuser}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM tbtenderinfo
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

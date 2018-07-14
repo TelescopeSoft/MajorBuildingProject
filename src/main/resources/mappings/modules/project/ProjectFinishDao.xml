@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ProjectFinishDao">
+    
+	<sql id="projectFinishColumns">
+		a.pkid AS "pkid",
+		a.prjfinishname AS "prjfinishname",
+		a.prjfinishnum AS "prjfinishnum",
+		a.prjfinishinnernum AS "prjfinishinnernum",
+		a.prjnum AS "prjnum",
+		a.builderlicencenum AS "builderlicencenum",
+		a.qccorpname AS "qccorpname",
+		a.qccorpcode AS "qccorpcode",
+		a.factcost AS "factcost",
+		a.factarea AS "factarea",
+		a.factsize AS "factsize",
+		a.prjstructuretypenum AS "prjstructuretypenum",
+		a.bdate AS "bdate",
+		a.edate AS "edate",
+		a.mark AS "mark",
+		a.createdate AS "createdate",
+		a.updateflag AS "updateflag",
+		a.sbdqbm AS "sbdqbm",
+		a.datastate AS "datastate",
+		a.cjrqsj AS "cjrqsj",
+		a.xgrqsj AS "xgrqsj",
+		a.scrqsj AS "scrqsj",
+		a.returnresult AS "returnresult",
+		a.updateuser AS "updateuser",
+		a.tag AS "tag",
+		c.CodeInfo AS "prjstructuretypenumLabel"
+	</sql>
+	
+	<sql id="projectFinishJoins">
+		LEFT JOIN dbo.tbPrjStructureTypeDic c ON a.PrjStructureTypeNum = c.Code
+	</sql>
+    
+	<select id="get" resultType="ProjectFinish">
+		SELECT 
+			<include refid="projectFinishColumns"/>
+		FROM tbprojectfinishmanage a
+		<include refid="projectFinishJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProjectFinish">
+		SELECT 
+			<include refid="projectFinishColumns"/>
+		FROM tbprojectfinishmanage a
+		<include refid="projectFinishJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findListByProjectPkid" resultType="ProjectFinish">
+		SELECT <include refid="projectFinishColumns"/>
+		FROM dbo.TBProjectFinishManage a
+		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+		<include refid="projectFinishJoins"/>
+		<where>
+			b.pkid = #{pkid}
+		</where>
+		ORDER BY a.createDate DESC
+	</select>
+	
+	<select id="findAllList" resultType="ProjectFinish">
+		SELECT 
+			<include refid="projectFinishColumns"/>
+		FROM tbprojectfinishmanage a
+		<include refid="projectFinishJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbprojectfinishmanage(
+			pkid,
+			prjfinishname,
+			prjfinishnum,
+			prjfinishinnernum,
+			prjnum,
+			builderlicencenum,
+			qccorpname,
+			qccorpcode,
+			factcost,
+			factarea,
+			factsize,
+			prjstructuretypenum,
+			bdate,
+			edate,
+			mark,
+			createdate,
+			updateflag,
+			sbdqbm,
+			datastate,
+			cjrqsj,
+			xgrqsj,
+			scrqsj,
+			returnresult,
+			updateuser,
+			tag
+		) VALUES (
+			#{pkid},
+			#{prjfinishname},
+			#{prjfinishnum},
+			#{prjfinishinnernum},
+			#{prjnum},
+			#{builderlicencenum},
+			#{qccorpname},
+			#{qccorpcode},
+			#{factcost},
+			#{factarea},
+			#{factsize},
+			#{prjstructuretypenum},
+			#{bdate},
+			#{edate},
+			#{mark},
+			#{createdate},
+			#{updateflag},
+			#{sbdqbm},
+			#{datastate},
+			#{cjrqsj},
+			#{xgrqsj},
+			#{scrqsj},
+			#{returnresult},
+			#{updateuser},
+			#{tag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE tbprojectfinishmanage SET 	
+			pkid = #{pkid},
+			prjfinishname = #{prjfinishname},
+			prjfinishnum = #{prjfinishnum},
+			prjfinishinnernum = #{prjfinishinnernum},
+			prjnum = #{prjnum},
+			builderlicencenum = #{builderlicencenum},
+			qccorpname = #{qccorpname},
+			qccorpcode = #{qccorpcode},
+			factcost = #{factcost},
+			factarea = #{factarea},
+			factsize = #{factsize},
+			prjstructuretypenum = #{prjstructuretypenum},
+			bdate = #{bdate},
+			edate = #{edate},
+			mark = #{mark},
+			createdate = #{createdate},
+			updateflag = #{updateflag},
+			sbdqbm = #{sbdqbm},
+			datastate = #{datastate},
+			cjrqsj = #{cjrqsj},
+			xgrqsj = #{xgrqsj},
+			scrqsj = #{scrqsj},
+			returnresult = #{returnresult},
+			updateuser = #{updateuser},
+			tag = #{tag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM tbprojectfinishmanage
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
