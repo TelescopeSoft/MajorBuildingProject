@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApZjsbbDwryDao">
+    
+	<sql id="apZjsbbDwryColumns">
+		a.uuid AS "uuid",
+		a.idcard AS "idcard",
+		a.dwlx AS "dwlx",
+		a.corpcode AS "corpcode",
+		a.corpname AS "corpname",
+		a.zzzs AS "zzzs",
+		a.zzlxdj AS "zzlxdj",
+		a.zzyxq AS "zzyxq",
+		a.dwdz AS "dwdz",
+		a.fddbr AS "fddbr",
+		a.fddbrsfz AS "fddbrsfz",
+		a.dwlxdh AS "dwlxdh",
+		a.xm AS "xm",
+		a.gw AS "gw",
+		a.lxdh AS "lxdh",
+		a.zgzh AS "zgzh",
+		a.zgdj AS "zgdj",
+		a.zy AS "zy",
+		a.jhjcsj AS "jhjcsj",
+		a.jhccsj AS "jhccsj",
+		a.lhtsx AS "lhtsx",
+		a.zyzgzsh AS "zyzgzsh",
+		a.zyzgdj AS "zyzgdj"
+	</sql>
+	
+	<sql id="apZjsbbDwryJoins">
+	</sql>
+    
+	<select id="get" resultType="ApZjsbbDwry">
+		SELECT 
+			<include refid="apZjsbbDwryColumns"/>
+		FROM ap_zjsbb_dwry a
+		<include refid="apZjsbbDwryJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ApZjsbbDwry">
+		SELECT 
+			<include refid="apZjsbbDwryColumns"/>
+		FROM ap_zjsbb_dwry a
+		<include refid="apZjsbbDwryJoins"/>
+		<where>
+			<if test="uuid != null and uuid != ''">
+				AND a.uuid = #{uuid}	 
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+ 
+	<select id="findAllList" resultType="ApZjsbbDwry">
+		SELECT 
+			<include refid="apZjsbbDwryColumns"/>
+		FROM ap_zjsbb_dwry a
+		<include refid="apZjsbbDwryJoins"/>
+		<where>
+			<if test="uuid != null and uuid != ''">
+				AND a.uuid = #{uuid}	 
+			</if>
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ap_zjsbb_dwry(
+			uuid,
+			idcard,
+			dwlx,
+			corpcode,
+			corpname,
+			zzzs,
+			zzlxdj,
+			zzyxq,
+			dwdz,
+			fddbr,
+			fddbrsfz,
+			dwlxdh,
+			xm,
+			gw,
+			lxdh,
+			zgzh,
+			zgdj,
+			zy,
+			jhjcsj,
+			jhccsj,
+			lhtsx,
+			zyzgzsh,
+			zyzgdj
+		) VALUES (
+			#{uuid},
+			#{idcard},
+			#{dwlx},
+			#{corpcode},
+			#{corpname},
+			#{zzzs},
+			#{zzlxdj},
+			#{zzyxq},
+			#{dwdz},
+			#{fddbr},
+			#{fddbrsfz},
+			#{dwlxdh},
+			#{xm},
+			#{gw},
+			#{lxdh},
+			#{zgzh},
+			#{zgdj},
+			#{zy},
+			#{jhjcsj},
+			#{jhccsj},
+			#{lhtsx},
+			#{zyzgzsh},
+			#{zyzgdj}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ap_zjsbb_dwry SET 	
+			uuid = #{uuid},
+			idcard = #{idcard},
+			dwlx = #{dwlx},
+			corpcode = #{corpcode},
+			corpname = #{corpname},
+			zzzs = #{zzzs},
+			zzlxdj = #{zzlxdj},
+			zzyxq = #{zzyxq},
+			dwdz = #{dwdz},
+			fddbr = #{fddbr},
+			fddbrsfz = #{fddbrsfz},
+			dwlxdh = #{dwlxdh},
+			xm = #{xm},
+			gw = #{gw},
+			lxdh = #{lxdh},
+			zgzh = #{zgzh},
+			zgdj = #{zgdj},
+			zy = #{zy},
+			jhjcsj = #{jhjcsj},
+			jhccsj = #{jhccsj},
+			lhtsx = #{lhtsx},
+			zyzgzsh = #{zyzgzsh},
+			zyzgdj = #{zyzgdj}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM ap_zjsbb_dwry
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
