@@ -48,12 +48,19 @@ public class ApproveResultController extends BaseController {
 	@ResponseBody
 	public String list(PubApproveResult approveResult,
 			HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("---- approve result list------" + approveResult.toString());
+		logger.debug("---- approve result list------"
+				+ approveResult.toString());
+		approveResult.setDisplayFlag("0");
 		List<PubApproveResult> approves = pubApproveResultService
 				.findList(approveResult);
 		DataTableBean<PubApproveResult> result = new DataTableBean<PubApproveResult>();
-		result.setData(approves);
-		return JsonMapper.getInstance().toJson(result);
+
+		if (approves != null && !approves.isEmpty()) {
+			result.setData(approves);
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
 	}
 
 }

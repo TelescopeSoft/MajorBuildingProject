@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.PubAdminPenaltyDao">
+    
+	<sql id="pubAdminPenaltyColumns">
+		a.id AS "id",
+		a.admin_relative_person AS "adminRelativePerson",
+		a.letter_of_decision AS "letterOfDecision",
+		a.name AS "name",
+		a.punishment_decision_date AS "punishmentDecisionDate",
+		a.punish_dept_label AS "punishDeptLabel",
+		a.punish_category AS "punishCategory",
+		a.punish_reason AS "punishReason",
+		a.punish_basis AS "punishBasis",
+		a.admin_relative_person_code AS "adminRelativePersonCode",
+		a.legal_representative AS "legalRepresentative",
+		a.punish_result AS "punishResult",
+		a.county AS "county",
+		a.public_deadline AS "publicDeadline",
+		a.create_by AS "createBy.id",
+		a.update_by AS "updateBy.id",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.display_flag AS "displayFlag",
+		a.del_flag AS "delFlag",
+		a.prj_num AS "prjNum"
+	</sql>
+	
+	<sql id="pubAdminPenaltyJoins">
+	</sql>
+    
+	<select id="get" resultType="PubAdminPenalty">
+		SELECT 
+			<include refid="pubAdminPenaltyColumns"/>
+		FROM pub_admin_penalty a
+		<include refid="pubAdminPenaltyJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="PubAdminPenalty">
+		SELECT 
+			<include refid="pubAdminPenaltyColumns"/>
+		FROM pub_admin_penalty a
+		<include refid="pubAdminPenaltyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="displayFlag != null and displayFlag != ''">
+				AND a.display_flag = #{displayFlag} 	 
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="PubAdminPenalty">
+		SELECT 
+			<include refid="pubAdminPenaltyColumns"/>
+		FROM pub_admin_penalty a
+		<include refid="pubAdminPenaltyJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_admin_penalty(
+			admin_relative_person,
+			letter_of_decision,
+			name,
+			punishment_decision_date,
+			punish_dept_label,
+			punish_category,
+			punish_reason,
+			punish_basis,
+			admin_relative_person_code,
+			legal_representative,
+			punish_result,
+			county,
+			public_deadline,
+			create_by,
+			update_by,
+			create_date,
+			update_date,
+			display_flag,
+			del_flag,
+			prj_num
+		) VALUES (
+			#{adminRelativePerson},
+			#{letterOfDecision},
+			#{name},
+			#{punishmentDecisionDate},
+			#{punishDeptLabel},
+			#{punishCategory},
+			#{punishReason},
+			#{punishBasis},
+			#{adminRelativePersonCode},
+			#{legalRepresentative},
+			#{punishResult},
+			#{county},
+			#{publicDeadline},
+			#{createBy.id},
+			#{updateBy.id},
+			#{createDate},
+			#{updateDate},
+			#{displayFlag},
+			#{delFlag},
+			#{prjNum}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_admin_penalty SET 	
+			admin_relative_person = #{adminRelativePerson},
+			letter_of_decision = #{letterOfDecision},
+			name = #{name},
+			punishment_decision_date = #{punishmentDecisionDate},
+			punish_dept_label = #{punishDeptLabel},
+			punish_category = #{punishCategory},
+			punish_reason = #{punishReason},
+			punish_basis = #{punishBasis},
+			admin_relative_person_code = #{adminRelativePersonCode},
+			legal_representative = #{legalRepresentative},
+			punish_result = #{punishResult},
+			county = #{county},
+			public_deadline = #{publicDeadline},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			display_flag = #{displayFlag},
+			prj_num = #{prjNum}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_admin_penalty SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

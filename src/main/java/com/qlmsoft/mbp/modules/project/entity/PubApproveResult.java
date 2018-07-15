@@ -33,7 +33,7 @@ public class PubApproveResult extends DataEntity<PubApproveResult> {
 	private String approveNum; // 批复文号
 	private Date approveDate; // 审批日期
 
-	private String displayFlag = "0"; // 显示标识
+	private String displayFlag; // 显示标识
 	
 	private Date startDate;
 	private Date endDate;

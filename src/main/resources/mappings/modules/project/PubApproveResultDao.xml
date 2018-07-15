@@ -71,7 +71,10 @@
 			</if>
 			<if test="endDate != null and endDate != ''">
 				AND convert(VARCHAR(10), a.approve_date, 120) &lt;= convert(VARCHAR(10), #{endDate}, 120)
-			</if>	
+			</if>
+			<if test="displayFlag != null and displayFlag != ''">
+				AND a.display_flag = #{displayFlag} 	 
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

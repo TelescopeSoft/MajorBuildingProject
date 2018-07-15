@@ -46,6 +46,7 @@
 				<th>审批结果</th>
 				<th>批复文号</th>
 				<th>审批日期</th>
+				<th>记录显示状态</th>
 				<shiro:hasPermission name="project:pubApproveResult:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -60,6 +61,13 @@
 				<td>${pubApproveResult.approveResult}</td>
 				<td>${pubApproveResult.approveNum}</td>
 				<td><fmt:formatDate value="${pubApproveResult.updateDate}" pattern="yyyy-MM-dd"/></td>
+				<td><c:choose>
+							<c:when test="${pubApproveResult.displayFlag eq '0'}">
+						显示</c:when>
+							<c:otherwise>
+						不显示
+						</c:otherwise>
+						</c:choose></td>
 				<shiro:hasPermission name="project:pubApproveResult:edit"><td>
     				<a href="${ctx}/project/pubApproveResult/form?id=${pubApproveResult.id}">修改</a>
 					<a href="${ctx}/project/pubApproveResult/delete?id=${pubApproveResult.id}" onclick="return confirmx('确认要删除该批准结果吗？', this.href)">删除</a>

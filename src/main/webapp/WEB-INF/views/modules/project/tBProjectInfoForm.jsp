@@ -157,25 +157,25 @@
 		<div class="control-group">
 			<label class="control-label">实际开工日期：</label>
 			<div class="controls">
-				<input name="bdate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${projectInfo.bdate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input name="bdate" type="text" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${projectInfo.bdate}" pattern="yyyy-MM-dd"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">实际竣工日期：</label>
 			<div class="controls">
-				<input name="edate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${projectInfo.edate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input name="edate" type="text" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${projectInfo.edate}" pattern="yyyy-MM-dd"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">记录登记时间：</label>
 			<div class="controls">
-				<input name="createDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate required"
-					value="<fmt:formatDate value="${projectInfo.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input name="createDate" type="text" maxlength="20" class="input-medium Wdate required"
+					value="<fmt:formatDate value="${projectInfo.createDate}" pattern="yyyy-MM-dd"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
