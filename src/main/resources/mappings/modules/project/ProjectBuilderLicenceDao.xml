@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ProjectBuilderLicenceDao">
+    
+	<sql id="projectBuilderLicenceColumns">
+		a.pkid AS "pkid",
+		a.builderlicencename AS "builderlicencename",
+		a.builderlicencenum AS "builderlicencenum",
+		a.builderlicenceinnernum AS "builderlicenceinnernum",
+		a.recordinnernum AS "recordinnernum",
+		a.prjnum AS "prjnum",
+		a.buldplannum AS "buldplannum",
+		a.projectplannum AS "projectplannum",
+		a.censornum AS "censornum",
+		a.contractmoney AS "contractmoney",
+		a.area AS "area",
+		a.prjsize AS "prjsize",
+		a.issuecertdate AS "issuecertdate",
+		a.econcorpname AS "econcorpname",
+		a.econcorpcode AS "econcorpcode",
+		a.designcorpname AS "designcorpname",
+		a.designcorpcode AS "designcorpcode",
+		a.conscorpname AS "conscorpname",
+		a.conscorpcode AS "conscorpcode",
+		a.safetycerid AS "safetycerid",
+		a.supercorpname AS "supercorpname",
+		a.supercorpcode AS "supercorpcode",
+		a.constructorname AS "constructorname",
+		a.cidcardtypenum AS "cidcardtypenum",
+		a.constructoridcard AS "constructoridcard",
+		a.constructorphone AS "constructorphone",
+		a.supervisionname AS "supervisionname",
+		a.sidcardtypenum AS "sidcardtypenum",
+		a.supervisionidcard AS "supervisionidcard",
+		a.supervisionphone AS "supervisionphone",
+		a.createdate AS "createdate",
+		a.updateflag AS "updateflag",
+		a.sbdqbm AS "sbdqbm",
+		a.datastate AS "datastate",
+		a.cjrqsj AS "cjrqsj",
+		a.xgrqsj AS "xgrqsj",
+		a.scrqsj AS "scrqsj",
+		a.returnresult AS "returnresult",
+		a.updateuser AS "updateuser",
+		a.xzsp_sgxk AS "xzspSgxk"
+	</sql>
+	
+	<sql id="projectBuilderLicenceJoins">
+		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+	</sql>
+    
+	<select id="get" resultType="ProjectBuilderLicence">
+		SELECT 
+			<include refid="projectBuilderLicenceColumns"/>
+		FROM tbbuilderlicencemanage a
+		<include refid="projectBuilderLicenceJoins"/>
+		WHERE a.pkid = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProjectBuilderLicence">
+		SELECT 
+			<include refid="projectBuilderLicenceColumns"/>
+		FROM tbbuilderlicencemanage a
+		<include refid="projectBuilderLicenceJoins"/>
+		<where>
+			b.CountyNum = '320211'  
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.CreateDate DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findListByProjectPkid" resultType="ProjectFinish">
+		SELECT <include refid="projectBuilderLicenceColumns"/>
+		FROM dbo.TBProjectFinishManage a
+		<include refid="projectBuilderLicenceJoins"/>
+		<where>
+			b.pkid = #{pkid}
+		</where>
+		ORDER BY a.CreateDate DESC
+	</select>
+	
+	<select id="findAllList" resultType="ProjectBuilderLicence">
+		SELECT 
+			<include refid="projectBuilderLicenceColumns"/>
+		FROM tbbuilderlicencemanage a
+		<include refid="projectBuilderLicenceJoins"/>
+		<where>
+			b.CountyNum = '320211'  
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.CreateDate DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbbuilderlicencemanage(
+			pkid,
+			builderlicencename,
+			builderlicencenum,
+			builderlicenceinnernum,
+			recordinnernum,
+			prjnum,
+			buldplannum,
+			projectplannum,
+			censornum,
+			contractmoney,
+			area,
+			prjsize,
+			issuecertdate,
+			econcorpname,
+			econcorpcode,
+			designcorpname,
+			designcorpcode,
+			conscorpname,
+			conscorpcode,
+			safetycerid,
+			supercorpname,
+			supercorpcode,
+			constructorname,
+			cidcardtypenum,
+			constructoridcard,
+			constructorphone,
+			supervisionname,
+			sidcardtypenum,
+			supervisionidcard,
+			supervisionphone,
+			createdate,
+			updateflag,
+			sbdqbm,
+			datastate,
+			cjrqsj,
+			xgrqsj,
+			scrqsj,
+			returnresult,
+			updateuser,
+			xzsp_sgxk
+		) VALUES (
+			#{pkid},
+			#{builderlicencename},
+			#{builderlicencenum},
+			#{builderlicenceinnernum},
+			#{recordinnernum},
+			#{prjnum},
+			#{buldplannum},
+			#{projectplannum},
+			#{censornum},
+			#{contractmoney},
+			#{area},
+			#{prjsize},
+			#{issuecertdate},
+			#{econcorpname},
+			#{econcorpcode},
+			#{designcorpname},
+			#{designcorpcode},
+			#{conscorpname},
+			#{conscorpcode},
+			#{safetycerid},
+			#{supercorpname},
+			#{supercorpcode},
+			#{constructorname},
+			#{cidcardtypenum},
+			#{constructoridcard},
+			#{constructorphone},
+			#{supervisionname},
+			#{sidcardtypenum},
+			#{supervisionidcard},
+			#{supervisionphone},
+			#{createdate},
+			#{updateflag},
+			#{sbdqbm},
+			#{datastate},
+			#{cjrqsj},
+			#{xgrqsj},
+			#{scrqsj},
+			#{returnresult},
+			#{updateuser},
+			#{xzspSgxk}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE tbbuilderlicencemanage SET 	
+			pkid = #{pkid},
+			builderlicencename = #{builderlicencename},
+			builderlicencenum = #{builderlicencenum},
+			builderlicenceinnernum = #{builderlicenceinnernum},
+			recordinnernum = #{recordinnernum},
+			prjnum = #{prjnum},
+			buldplannum = #{buldplannum},
+			projectplannum = #{projectplannum},
+			censornum = #{censornum},
+			contractmoney = #{contractmoney},
+			area = #{area},
+			prjsize = #{prjsize},
+			issuecertdate = #{issuecertdate},
+			econcorpname = #{econcorpname},
+			econcorpcode = #{econcorpcode},
+			designcorpname = #{designcorpname},
+			designcorpcode = #{designcorpcode},
+			conscorpname = #{conscorpname},
+			conscorpcode = #{conscorpcode},
+			safetycerid = #{safetycerid},
+			supercorpname = #{supercorpname},
+			supercorpcode = #{supercorpcode},
+			constructorname = #{constructorname},
+			cidcardtypenum = #{cidcardtypenum},
+			constructoridcard = #{constructoridcard},
+			constructorphone = #{constructorphone},
+			supervisionname = #{supervisionname},
+			sidcardtypenum = #{sidcardtypenum},
+			supervisionidcard = #{supervisionidcard},
+			supervisionphone = #{supervisionphone},
+			createdate = #{createdate},
+			updateflag = #{updateflag},
+			sbdqbm = #{sbdqbm},
+			datastate = #{datastate},
+			cjrqsj = #{cjrqsj},
+			xgrqsj = #{xgrqsj},
+			scrqsj = #{scrqsj},
+			returnresult = #{returnresult},
+			updateuser = #{updateuser},
+			xzsp_sgxk = #{xzspSgxk}
+		WHERE pkid = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM tbbuilderlicencemanage
+		WHERE pkid = #{id}
+	</update>
+	
+</mapper>

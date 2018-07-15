@@ -42,7 +42,7 @@ public class HomeController extends BaseController {
 
 	@Autowired
 	private PubApproveGuideService pubApproveGuideService;
-	
+
 	@Autowired
 	private PubApproveResultService pubApproveResultService;
 
@@ -65,17 +65,18 @@ public class HomeController extends BaseController {
 		result.setData(list);
 		return JsonMapper.getInstance().toJson(result);
 	}
-	
+
 	@RequestMapping(value = "projectdetail")
 	public String projectdetail(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		String id = request.getParameter("pkid");
 		ProjectInfo projectInfo = tBProjectInfoService.get(id);
 		model.addAttribute("projectinfo", projectInfo);
-		//model.addAttribute("menuList", PulicityMenuInstance.getMenus("index"));
+		// model.addAttribute("menuList",
+		// PulicityMenuInstance.getMenus("index"));
 		return "modules/publicity/ProjectDetail";
 	}
-	
+
 	@RequestMapping(value = "projectdetailbasic")
 	public String detailBasic(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
@@ -84,7 +85,7 @@ public class HomeController extends BaseController {
 		model.addAttribute("projectinfo", projectinfo);
 		return "modules/publicity/ProjectDetailBasic";
 	}
-	
+
 	@RequestMapping(value = "projectdetailapprove")
 	public String detailApprove(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
@@ -103,9 +104,29 @@ public class HomeController extends BaseController {
 				new Page<PubApproveGuide>(request, response), pubApproveGuide);
 
 		model.addAttribute("page", page);
-		model.addAttribute("menuList", PulicityMenuInstance.getMenus("approveguide"));
+		model.addAttribute("menuList",
+				PulicityMenuInstance.getMenus("approveguide"));
 
 		return "modules/publicity/Guide";
+	}
+
+	@RequestMapping(value = "landexpropriation")
+	public String landexpropriation(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+
+		model.addAttribute("menuList",
+				PulicityMenuInstance.getMenus("landexpropriation"));
+
+		return "modules/publicity/LandExpropriation";
+	}
+
+	@RequestMapping(value = "tender")
+	public String tender(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("tender"));
+
+		return "modules/publicity/Tender";
 	}
 
 }
