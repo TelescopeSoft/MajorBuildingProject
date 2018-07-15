@@ -12,8 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qlmsoft.mbp.common.config.PulicityMenuInstance;
+import com.qlmsoft.mbp.common.mapper.JsonMapper;
 import com.qlmsoft.mbp.common.web.BaseController;
+import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
+import com.qlmsoft.mbp.modules.project.entity.ApAjsbb;
 import com.qlmsoft.mbp.modules.project.entity.ApZjsbb;
 import com.qlmsoft.mbp.modules.project.service.ApZjsbbService;
 
@@ -36,6 +41,30 @@ public class PubZjsbRecordController extends BaseController {
 		List<ApZjsbb> list = zjsbbService.findListByProjectPkid(pkid);
 		model.addAttribute("list", list);
 		return "modules/publicity/ProjectDetailQuality";
+	}
+	
+	@RequestMapping("/publicity/quality")
+	public String list(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		model.addAttribute("menuList",
+				PulicityMenuInstance.getMenus("quality"));
+
+		return "modules/publicity/Quality";
+	}
+
+	@RequestMapping("/publicity/quality/list")
+	@ResponseBody
+	public String list(HttpServletRequest request, HttpServletResponse response) {
+		ApZjsbb display = new ApZjsbb();
+		List<ApZjsbb> list = zjsbbService.findList(display);
+		DataTableBean<ApZjsbb> result = new DataTableBean<ApZjsbb>();
+		if (list != null && !list.isEmpty()) {
+			result.setData(list);
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
+
 	}
 
 }

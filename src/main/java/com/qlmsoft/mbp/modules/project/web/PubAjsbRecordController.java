@@ -12,8 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qlmsoft.mbp.common.config.PulicityMenuInstance;
+import com.qlmsoft.mbp.common.mapper.JsonMapper;
 import com.qlmsoft.mbp.common.web.BaseController;
+import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
 import com.qlmsoft.mbp.modules.project.entity.ApAjsbb;
 import com.qlmsoft.mbp.modules.project.service.ApAjsbbService;
 
@@ -38,4 +42,26 @@ public class PubAjsbRecordController extends BaseController {
 		return "modules/publicity/ProjectDetailSafty";
 	}
 
+	@RequestMapping("/publicity/safty")
+	public String list(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("safty"));
+
+		return "modules/publicity/Safty";
+	}
+
+	@RequestMapping("/publicity/safty/list")
+	@ResponseBody
+	public String list(HttpServletRequest request, HttpServletResponse response) {
+		ApAjsbb display = new ApAjsbb();
+		List<ApAjsbb> list = ajsbbService.findList(display);
+		DataTableBean<ApAjsbb> result = new DataTableBean<ApAjsbb>();
+		if (list != null && !list.isEmpty()) {
+			result.setData(list);
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
+
+	}
 }

@@ -32,6 +32,7 @@
 	</sql>
 	
 	<sql id="projectFinishJoins">
+		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		LEFT JOIN dbo.tbPrjStructureTypeDic c ON a.PrjStructureTypeNum = c.Code
 	</sql>
     
@@ -49,7 +50,7 @@
 		FROM tbprojectfinishmanage a
 		<include refid="projectFinishJoins"/>
 		<where>
-			
+			b.CountyNum = '320211'  
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -63,7 +64,6 @@
 	<select id="findListByProjectPkid" resultType="ProjectFinish">
 		SELECT <include refid="projectFinishColumns"/>
 		FROM dbo.TBProjectFinishManage a
-		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		<include refid="projectFinishJoins"/>
 		<where>
 			b.pkid = #{pkid}
@@ -77,7 +77,7 @@
 		FROM tbprojectfinishmanage a
 		<include refid="projectFinishJoins"/>
 		<where>
-			
+			b.CountyNum = '320211'  
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

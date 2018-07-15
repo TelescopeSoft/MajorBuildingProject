@@ -53,7 +53,7 @@
 		FROM ap_zjsbb a
 		<include refid="apZjsbbJoins"/>
 		<where>
-			
+			CountyNum = '320211'
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

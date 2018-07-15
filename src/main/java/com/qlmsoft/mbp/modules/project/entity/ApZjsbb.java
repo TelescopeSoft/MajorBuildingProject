@@ -47,8 +47,8 @@ public class ApZjsbb extends DataEntity<ApZjsbb> {
 	private Date updatedate; // 申报提交时间
 	private String status; // status
 	private String jsxz; // 建设性质
-	private String jsxzLabel; // 建设性质
-	private String tzlx; // 投资类型
+	private String jsxzLabel = ""; // 建设性质
+	private String tzlx = ""; // 投资类型
 
 	public ApZjsbb() {
 		super();

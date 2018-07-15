@@ -12,8 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.qlmsoft.mbp.common.config.PulicityMenuInstance;
+import com.qlmsoft.mbp.common.mapper.JsonMapper;
 import com.qlmsoft.mbp.common.web.BaseController;
+import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
 import com.qlmsoft.mbp.modules.project.entity.ProjectFinish;
 import com.qlmsoft.mbp.modules.project.service.ProjectFinishService;
 
@@ -36,6 +40,29 @@ public class PubProjectFinishController extends BaseController {
 		List<ProjectFinish> list = finishService.findListByProjectPkid(pkid);
 		model.addAttribute("list", list);
 		return "modules/publicity/ProjectDetailFinish";
+	}
+	
+	@RequestMapping("/publicity/finish")
+	public String list(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("finish"));
+
+		return "modules/publicity/Finish";
+	}
+
+	@RequestMapping("/publicity/finish/list")
+	@ResponseBody
+	public String list(HttpServletRequest request, HttpServletResponse response) {
+		ProjectFinish display = new ProjectFinish();
+		List<ProjectFinish> list = finishService.findList(display);
+		DataTableBean<ProjectFinish> result = new DataTableBean<ProjectFinish>();
+		if (list != null && !list.isEmpty()) {
+			result.setData(list);
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
+
 	}
 
 }
