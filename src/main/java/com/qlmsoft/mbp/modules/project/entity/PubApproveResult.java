@@ -33,8 +33,10 @@ public class PubApproveResult extends DataEntity<PubApproveResult> {
 	private String approveNum; // 批复文号
 	private Date approveDate; // 审批日期
 
+	private String county;
+
 	private String displayFlag; // 显示标识
-	
+
 	private Date startDate;
 	private Date endDate;
 
@@ -175,7 +177,13 @@ public class PubApproveResult extends DataEntity<PubApproveResult> {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
-	
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
 
 }

@@ -8,9 +8,16 @@
 		</div>
 	</div>
 
-	<div class="box-body">
-		<div>项目法人单位： ${item.jsdwName}</div>
+	<div class="box-body"> 
 		<table class="table table-bordered">
+			<tr>
+				<td class="bg-info" width="20%">项目法人单位：</td>
+				<td width="30%" > ${item.jsdwName}</td> 
+				<td class="bg-info" width="20%">${item.jsdwRyList.get(0).gw}：</td>
+				<td width="30%" > ${item.jsdwRyList.get(0).xm}</td> 
+			</tr>
+		</table>
+		<!-- <table class="table table-bordered">
 			<tr class="bg-info">
 				<td>岗位</td>
 				<td>姓名</td>
@@ -25,16 +32,15 @@
 					<td>${subItem.lxdh}</td>
 				</tr>
 			</c:forEach>
-		</table>
-
+		</table>  -->
 		<c:forEach items="${item.dwList}" var="dwItem">
 			<div>${dwItem.dwlx}：${dwItem.dwName}</div>
 			<table class="table table-bordered">
 				<tr class="bg-info">
 					<td width="10%">岗位</td>
 					<td width="10%">姓名</td>
-					<td width="10%">身份证号码</td>
-					<td width="10%">联系电话</td>
+					<!-- <td width="10%">身份证号码</td>
+					<td width="10%">联系电话</td> -->
 					<td width="10%">资质证书编号</td>
 					<td width="10%">资质类型和等级</td>
 					<td width="10%">资格类型及证号</td>
@@ -43,8 +49,8 @@
 				<tr>
 					<td width="10%">${dwryItem.gw}</td>
 					<td width="10%">${dwryItem.xm}</td>
-					<td width="10%">${dwryItem.idcard}</td>
-					<td width="10%">${dwryItem.lxdh}</td>
+					<!-- <td width="10%">${dwryItem.idcard}</td>
+					<td width="10%">${dwryItem.lxdh}</td> -->
 					<td width="10%">${dwryItem.zzzs}</td>
 					<td width="10%">${dwryItem.zzlxdj}</td>
 					<td width="10%">${dwryItem.zgzh}</td>

@@ -12,20 +12,10 @@
 				<td>${projectinfo.prjname}</td>
 			</tr>
 			<tr>
-				<td class="bg-info">行政审批编号</td>
-				<td>${projectinfo.prjinnernum}</td>
 				<td class="bg-info">立项文号</td>
 				<td>${projectinfo.prjapprovalnum}</td>
-			</tr>
-			<tr>
 				<td class="bg-info">住建项目编号</td>
 				<td>${projectinfo.prjnum}</td>
-				<td class="bg-info">项目分类</td>
-				<td><c:choose>
-						<c:when test="${projectinfo.prjtypenum == '01'}">房屋建筑工程 </c:when>
-						<c:when test="${projectinfo.prjtypenum == '02'}">市政工程</c:when>
-						<c:otherwise>其他 </c:otherwise>
-					</c:choose></td>
 			</tr>
 			<tr>
 				<td class="bg-info">项目（法人）单位</td>
@@ -51,12 +41,12 @@
 				<td class="bg-info">纬度</td>
 				<td>${projectinfo.wd}</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td class="bg-info">建设用地规划许可证编号</td>
 				<td>${projectinfo.buldplannum}</td>
 				<td class="bg-info">建设工程规划许可证编号</td>
 				<td>${projectinfo.projectplannum}</td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td class="bg-info">拟开工时间（年）</td>
 				<td><fmt:formatDate value="${projectinfo.bdate}" pattern="yyyy-MM-dd"/></td>

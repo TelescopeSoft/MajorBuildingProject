@@ -34,6 +34,16 @@
 		WHERE a.id = #{id}
 	</select>
 	
+	<select id="getByCondition" resultType="PubApproveResult">
+		SELECT 
+			<include refid="pubApproveResultColumns"/>
+		FROM pub_approve_result a
+		<include refid="pubApproveResultJoins"/>
+		WHERE a.prj_code = #{prjCode} AND a.prj_name = #{prjName} 
+			AND a.approve_dept = #{approveDept} AND a.approve_num = #{approveNum}
+		    AND convert(VARCHAR(10), a.approve_date, 120) = convert(VARCHAR(10), #{approveDate}, 120)
+	</select>
+	
 	<select id="findList" resultType="PubApproveResult">
 		SELECT 
 			<include refid="pubApproveResultColumns"/>

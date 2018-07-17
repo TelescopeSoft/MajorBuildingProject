@@ -20,4 +20,7 @@ public interface PubApproveResultDao extends CrudDao<PubApproveResult> {
 	//根据工程项目的pkid查询批准结果信息
 	List<PubApproveResult> findListByPkid(String pkid);
 	
+	//根据
+	PubApproveResult getByCondition(PubApproveResult entity);
+	
 }
