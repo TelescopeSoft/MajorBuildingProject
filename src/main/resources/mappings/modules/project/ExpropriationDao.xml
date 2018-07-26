@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ExpropriationDao">
+    
+	<sql id="expropriationColumns">
+		a.id AS "id",
+		a.prj_code AS "prjCode",
+		a.prj_name AS "prjName",
+		a.county_num AS "countyNum",
+		a.approve_dept AS "approveDept",
+		a.address AS "address",
+		a.town AS "town",
+		a.village AS "village",
+		a.approve_num AS "approveNum",
+		a.approve_date AS "approveDate",
+		a.lcid AS "lcid",
+		a.create_by AS "createBy.id",
+		a.update_by AS "updateBy.id",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.display_flag AS "displayFlag",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="expropriationJoins">
+	</sql>
+    
+	<select id="get" resultType="Expropriation">
+		SELECT 
+			<include refid="expropriationColumns"/>
+		FROM pub_expropriation a
+		<include refid="expropriationJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="getByCondition" resultType="Expropriation">
+		SELECT
+		<include refid="expropriationColumns"/>
+		FROM pub_expropriation a
+		<include refid="expropriationJoins"/>
+		WHERE a.lcid = #{lcid} AND a.town = #{town} AND a.village = #{village}
+	</select>
+	
+	<select id="findList" resultType="Expropriation">
+		SELECT
+			<include refid="expropriationColumns"/>
+		FROM pub_expropriation a
+		<include refid="expropriationJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="prjName != null and prjName != ''">
+				AND a.prj_name LIKE
+					<if test="dbName == 'oracle'">'%'||#{prjName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{prjName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{prjName},'%')</if>
+			</if>
+			<if test="town != null and town != ''">
+				AND a.town = #{town}
+			</if>
+			<if test="village != null and village != ''">
+				AND a.village = #{village}
+			</if>
+			<if test="approveNum != null and approveNum != ''">
+				AND a.approve_num LIKE
+					<if test="dbName == 'oracle'">'%'||#{approveNum}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{approveNum}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{approveNum},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Expropriation">
+		SELECT 
+			<include refid="expropriationColumns"/>
+		FROM pub_expropriation a
+		<include refid="expropriationJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_expropriation(
+			prj_code,
+			prj_name,
+			county_num,
+			approve_dept,
+			address,
+			town,
+			village,
+			approve_num,
+			approve_date,
+			lcid,
+			create_by,
+			update_by,
+			create_date,
+			update_date,
+			display_flag,
+			del_flag
+		) VALUES (
+			#{prjCode},
+			#{prjName},
+			#{countyNum},
+			#{approveDept},
+			#{address},
+			#{town},
+			#{village},
+			#{approveNum},
+			#{approveDate},
+			#{lcid},
+			#{createBy.id},
+			#{updateBy.id},
+			#{createDate},
+			#{updateDate},
+			#{displayFlag},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_expropriation SET 	
+			prj_code = #{prjCode},
+			prj_name = #{prjName},
+			county_num = #{countyNum},
+			approve_dept = #{approveDept},
+			address = #{address},
+			town = #{town},
+			village = #{village},
+			approve_num = #{approveNum},
+			approve_date = #{approveDate},
+			lcid = #{lcid},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			display_flag = #{displayFlag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_expropriation SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -28,7 +28,20 @@ public class PulicityMenuInstance {
 		list.add(tender);
 
 		PulicityMenu land = new PulicityMenu("土地征收", "landexpropriation",
-				"landexpropriation", false);
+				"landexpropriation", true);
+		PulicityMenu landinfo = new PulicityMenu("征地信息", "expropriationinfo",
+				"expropriationinfo", false);
+		PulicityMenu expropriationnotice = new PulicityMenu("征地告知书", "expropriationnotice",
+				"expropriationnotice", false);
+		PulicityMenu landannouncement = new PulicityMenu("征收土地公告", "landannouncement",
+				"landannouncement", false);
+		PulicityMenu compensationplan = new PulicityMenu("安置补偿方案公告", "compensationplan",
+				"compensationplan", false);
+
+		land.getChilds().add(landinfo);
+		land.getChilds().add(expropriationnotice);
+		land.getChilds().add(landannouncement);
+		land.getChilds().add(compensationplan);
 		list.add(land);
 
 		PulicityMenu designchange = new PulicityMenu("重大设计变更", "designchange",

@@ -142,7 +142,23 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
+	<select id="getCrawlerProjectList" resultType="ProjectInfo">
+		SELECT
+        PrjNum ,PrjName ,PrjApprovalNum ,CreateDate
+		FROM tbprojectinfo a
+		<where>
+			a.UpdateFlag != 'D' AND a.CountyNum = '320211'
+			AND PrjNum NOT IN (
+			SELECT prj_num
+			FROM pub_approve_result
+			WHERE prj_num IS NOT NULL
+			GROUP BY prj_num
+			)
+		</where>
+        ORDER BY a.CreateDate DESC
+	</select>
+
 	<insert id="insert">
 		INSERT INTO tbprojectinfo(
 			pkid,

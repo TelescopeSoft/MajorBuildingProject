@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ExpropriationDetailInfoDao">
+    
+	<sql id="expropriationDetailInfoColumns">
+		a.id AS "id",
+		a.lcid AS "lcid",
+		a.info_type AS "infoType",
+		a.content AS "content",
+		a.title AS "title",
+		a.public_unit AS "publicUnit",
+		a.public_date AS "publicDate",
+		a.file_name AS "fileName",
+		a.file_preffix AS "filePreffix",
+		a.sort AS "sort",
+		a.file_url AS "fileUrl",
+		a.file_path AS "filePath",
+		a.create_by AS "createBy.id",
+		a.update_by AS "updateBy.id",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.display_flag AS "displayFlag",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="expropriationDetailInfoJoins">
+		LEFT JOIN pub_expropriation_detail b ON b.lcid = a.lcid
+	</sql>
+    
+	<select id="get" resultType="ExpropriationDetailInfo">
+		SELECT 
+			<include refid="expropriationDetailInfoColumns"/>
+		FROM pub_expropriation_detail_info a
+		<include refid="expropriationDetailInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ExpropriationDetailInfo">
+		SELECT 
+			<include refid="expropriationDetailInfoColumns"/>
+		FROM pub_expropriation_detail_info a
+		<include refid="expropriationDetailInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="lcid != null and lcid != ''">
+				AND a.lcid = #{lcid}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date ASC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ExpropriationDetailInfo">
+		SELECT 
+			<include refid="expropriationDetailInfoColumns"/>
+		FROM pub_expropriation_detail_info a
+		<include refid="expropriationDetailInfoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.create_date ASC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_expropriation_detail_info(
+			lcid,
+			info_type,
+			sort,
+			content,
+			title,
+			public_unit,
+			public_date,
+			file_name,
+			file_preffix,
+			file_url,
+			file_path,
+			create_by,
+			update_by,
+			create_date,
+			update_date,
+			display_flag,
+			del_flag
+		) VALUES (
+			#{lcid},
+			#{infoType},
+			#{sort},
+			#{content},
+			#{title},
+			#{publicUnit},
+			#{publicDate},
+			#{fileName},
+			#{filePreffix},
+			#{fileUrl},
+			#{filePath},
+			#{createBy.id},
+			#{updateBy.id},
+			#{createDate},
+			#{updateDate},
+			#{displayFlag},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_expropriation_detail_info SET 	
+			lcid = #{lcid},
+			info_type = #{infoType},
+			sort = #{sort},
+			content = #{content},
+			title = #{title},
+			public_unit = #{publicUnit},
+			public_date = #{publicDate},
+			file_name = #{fileName},
+			file_preffix = #{filePreffix},
+			file_url = #{fileUrl},
+			file_path = #{filePath},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			display_flag = #{displayFlag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_expropriation_detail_info SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		<choose>
+			<when test="id !=null and id != ''">
+				WHERE id = #{id}
+			</when>
+			<otherwise>
+				WHERE lcid = #{lcid}
+			</otherwise>
+		</choose>
+	</update>
+	
+</mapper>

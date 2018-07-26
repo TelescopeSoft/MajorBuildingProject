@@ -5,19 +5,14 @@ package com.qlmsoft.mbp.modules.project.dao;
 
 import com.qlmsoft.mbp.common.persistence.CrudDao;
 import com.qlmsoft.mbp.common.persistence.annotation.MyBatisDao;
-import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
-
-import java.util.List;
+import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetailInfo;
 
 /**
- * 项目表DAO接口
+ * 征地信息DAO接口
  * @author huangzhengyu
- * @version 2018-07-10
+ * @version 2018-07-24
  */
 @MyBatisDao
-public interface TBProjectInfoDao extends CrudDao<ProjectInfo> {
-	void updateMajorFlag(ProjectInfo info);
-
-	List<ProjectInfo> getCrawlerProjectList();
-
+public interface ExpropriationDetailInfoDao extends CrudDao<ExpropriationDetailInfo> {
+	
 }

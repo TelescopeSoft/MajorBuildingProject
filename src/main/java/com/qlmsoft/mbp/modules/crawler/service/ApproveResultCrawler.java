@@ -1,14 +1,15 @@
 package com.qlmsoft.mbp.modules.crawler.service;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.qlmsoft.mbp.common.utils.DateUtils;
+import com.qlmsoft.mbp.common.utils.StringUtils;
+import com.qlmsoft.mbp.modules.project.bean.PubApproveResultTable;
+import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
+import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
+import com.qlmsoft.mbp.modules.project.service.PubApproveResultService;
 import org.apache.http.Consts;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -25,15 +26,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.qlmsoft.mbp.common.utils.DateUtils;
-import com.qlmsoft.mbp.modules.project.bean.PubApproveResultTable;
-import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
-import com.qlmsoft.mbp.modules.project.service.PubApproveResultService;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ApproveResultCrawler {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    public static Pattern APPROVE_NUM_PATTERN = Pattern
+            .compile("(?<type>.*?)[\\[|【](?<year>\\d{4})[\\]|】](?<num>\\d{2})");
 
 	public static final String APPROVE_RESULT_QUERY_URL = "http://218.94.123.37/tzxmspweb/portalopenPublicInformation.do?method=queryExamineAll";
 
@@ -45,7 +51,7 @@ public class ApproveResultCrawler {
 	@Autowired
 	PubApproveResultService approveResultService;
 
-	public CloseableHttpClient closeHttpClient = HttpClients.createDefault();
+	public CloseableHttpClient closeHttpClient = null ; // HttpClients.createDefault();
 
 	public void synchAll() {
 
@@ -53,19 +59,23 @@ public class ApproveResultCrawler {
 
 	/**
 	 * 按项目名 抓取第一页
-	 * 
-	 * @param prjName
+	 * @param prj
 	 * @throws IOException
 	 */
-	public void synchByPrjName(String prjName) throws IOException {
+	public boolean synchByPrjName(ProjectInfo prj) throws IOException {
 
+        RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build();
+        CloseableHttpClient closeHttpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
+
+        boolean result = true;
 		CloseableHttpResponse httpResponse = null;
 		HttpPost httpPost = new HttpPost(APPROVE_RESULT_QUERY_URL);
 
 		// 设置Post参数
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("apply_project_name", prjName));
+		params.add(new BasicNameValuePair("apply_project_name", prj.getPrjname()));
 		httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
+
 
 		try {
 
@@ -79,11 +89,16 @@ public class ApproveResultCrawler {
 			 * html = StreamUtils.InputStreamTOString(is);
 			 */
 			if (html != null) {
-				PubApproveResultTable result = getApproveResultTable(prjName,
+				PubApproveResultTable approveResult = getApproveResultTable(prj.getPrjname(),
 						html);
-				for (PubApproveResult i : result.getList()) {
-					approveResultService.checkDuplicatedAndSave(i);
-				}
+                if(approveResult != null && approveResult.getList() != null  && !approveResult.getList().isEmpty()){
+                    result = true;
+                    for (PubApproveResult i : approveResult.getList()) {
+                        i.setPrjNum(prj.getPrjnum());
+                        approveResultService.checkDuplicatedAndSave(i);
+                    }
+                }
+
 			}
 
 			// } catch (UnsupportedEncodingException e) {
@@ -93,6 +108,7 @@ public class ApproveResultCrawler {
 			// e.printStackTrace();
 			// throw e;
 		} catch (IOException e) {
+            result =false;
 			e.printStackTrace();
 			throw e;
 		} finally {
@@ -105,6 +121,7 @@ public class ApproveResultCrawler {
 			}
 
 		}
+		return result;
 
 	}
 
@@ -266,8 +283,7 @@ public class ApproveResultCrawler {
 				if (tds.size() == 7) {
 					String codeAndNameStr = tds.get(0).attr("title").trim();
 					int pos = codeAndNameStr.indexOf("]") + 1;
-					String code = codeAndNameStr.substring(
-							codeAndNameStr.indexOf("]"), pos + 24);// 24位项目代码
+					String code = codeAndNameStr.substring(pos, pos + 24);// 24位项目代码
 					String name = codeAndNameStr.substring(pos + 24);
 
 					r.setPrjCode(code);
@@ -286,6 +302,14 @@ public class ApproveResultCrawler {
 
 					// 批复文号
 					r.setApproveNum(tds.get(5).attr("title"));
+                    if(!StringUtils.isEmpty(r.getApproveNum())){
+                        Matcher matcher = APPROVE_NUM_PATTERN.matcher(r.getApproveNum());
+                        while (matcher.find()) {
+                            r.setApproveNumType(matcher.group("type"));
+                            r.setApproveNumYear(matcher.group("year"));
+                            r.setApproveNumNum(matcher.group("num"));
+                        }
+                    }
 
 					// 审批时间
 					r.setApproveDate(DateUtils.parseDate(tds.get(6).html(),

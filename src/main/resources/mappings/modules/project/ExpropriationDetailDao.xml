@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ExpropriationDetailDao">
+    
+	<sql id="expropriationDetailColumns">
+		a.id AS "id",
+		a.prj_code AS "prjCode",
+		a.prj_name AS "prjName",
+		a.approve_num AS "approveNum",
+		a.approve_date AS "approveDate",
+		a.address AS "address",
+		a.county_num AS "countyNum",
+		a.lcid AS "lcid",
+		a.create_by AS "createBy.id",
+		a.update_by AS "updateBy.id",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.display_flag AS "displayFlag",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="expropriationDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="ExpropriationDetail">
+		SELECT 
+			<include refid="expropriationDetailColumns"/>
+		FROM pub_expropriation_detail a
+		<include refid="expropriationDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="getByCondition" resultType="ExpropriationDetail">
+		SELECT
+		<include refid="expropriationDetailColumns"/>
+		FROM pub_expropriation_detail a
+		<include refid="expropriationDetailJoins"/>
+		<where>
+			1 = 1
+			<if test="lcid != null and lcid != ''">
+				AND a.lcid = #{lcid}
+			</if>
+			<if test="address != null and address != ''">
+				AND a.address = #{address}
+			</if>
+			<if test="prjName != null and prjName != ''">
+				AND a.prj_name = #{prjName}
+			</if>
+			<if test="approveNum != null and approveNum != ''">
+				AND a.approve_num = #{approveNum}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findList" resultType="ExpropriationDetail">
+		SELECT 
+			<include refid="expropriationDetailColumns"/>
+		FROM pub_expropriation_detail a
+		<include refid="expropriationDetailJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ExpropriationDetail">
+		SELECT 
+			<include refid="expropriationDetailColumns"/>
+		FROM pub_expropriation_detail a
+		<include refid="expropriationDetailJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_expropriation_detail(
+			prj_code,
+			prj_name,
+			approve_num,
+			approve_date,
+			address,
+			county_num,
+			lcid,
+			create_by,
+			update_by,
+			create_date,
+			update_date,
+			display_flag,
+			del_flag
+		) VALUES (
+			#{prjCode},
+			#{prjName},
+			#{approveNum},
+			#{approveDate},
+			#{address},
+			#{countyNum},
+			#{lcid},
+			#{createBy.id},
+			#{updateBy.id},
+			#{createDate},
+			#{updateDate},
+			#{displayFlag},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_expropriation_detail SET 	
+			prj_code = #{prjCode},
+			prj_name = #{prjName},
+			approve_num = #{approveNum},
+			approve_date = #{approveDate},
+			address = #{address},
+			county_num = #{countyNum},
+			lcid = #{lcid},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			display_flag = #{displayFlag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_expropriation_detail SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

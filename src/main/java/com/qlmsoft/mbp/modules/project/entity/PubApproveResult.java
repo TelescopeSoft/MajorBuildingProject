@@ -33,6 +33,11 @@ public class PubApproveResult extends DataEntity<PubApproveResult> {
 	private String approveNum; // 批复文号
 	private Date approveDate; // 审批日期
 
+
+	private String approveNumType; //批复文号类型
+	private String approveNumYear; //批复文号年份
+	private String approveNumNum; //批复文号编号
+
 	private String county;
 
 	private String displayFlag; // 显示标识
@@ -186,4 +191,27 @@ public class PubApproveResult extends DataEntity<PubApproveResult> {
 		this.county = county;
 	}
 
+	public String getApproveNumType() {
+		return approveNumType;
+	}
+
+	public void setApproveNumType(String approveNumType) {
+		this.approveNumType = approveNumType;
+	}
+
+	public String getApproveNumYear() {
+		return approveNumYear;
+	}
+
+	public void setApproveNumYear(String approveNumYear) {
+		this.approveNumYear = approveNumYear;
+	}
+
+	public String getApproveNumNum() {
+		return approveNumNum;
+	}
+
+	public void setApproveNumNum(String approveNumNum) {
+		this.approveNumNum = approveNumNum;
+	}
 }
