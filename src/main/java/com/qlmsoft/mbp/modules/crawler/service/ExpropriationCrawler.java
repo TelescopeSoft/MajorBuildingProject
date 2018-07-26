@@ -133,7 +133,7 @@ public class ExpropriationCrawler {
     }
 
 
-    public ExpropriationDetail getDetail(String lcid)  {
+        public ExpropriationDetail getDetail(String lcid)  {
         RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build();
         CloseableHttpClient closeHttpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
 
@@ -228,6 +228,7 @@ public class ExpropriationCrawler {
 
                 String viewJs = tds.get(3).selectFirst("a").attr("onclick");
                 // TODO: 2018/7/25 添加文件链接
+                info.setFileUrl(viewJs);
                 //info.setFileUrl(RegUtils.abstractStringByPattern(viewJs, RegUtils.EXPROPRIATION_INFO_VIEW_PATTERN));
                 info.setPublicUnit(tds.get(4).html());
                 try{

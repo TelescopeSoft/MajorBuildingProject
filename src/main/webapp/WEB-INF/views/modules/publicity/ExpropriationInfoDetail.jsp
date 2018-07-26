@@ -97,19 +97,19 @@
                         <div class="box-body">
                         <table class="table">
                             <tr class="bg-info">
-                                    <td>序号</td>
-                                    <td>信息内容</td>
-                                    <td>标题</td>
-                                    <td>操作</td>
-                                    <td>发布单位</td>
-                                    <td>发布日期</td>
+                                    <td width="5%">序号</td>
+                                    <td width="15%">信息内容</td>
+                                    <td width="40%">标题</td>
+                                    <td width="5%">操作</td>
+                                    <td width="25%">发布单位</td>
+                                    <td width="10%">发布日期</td>
                                 </tr>
                                 <c:forEach items="${detail.beforeApproveList}" var="item" varStatus="status">
                                     <tr>
                                         <td>${item.sort}</td>
                                         <td>${item.content}</td>
                                         <td>${item.title}</td>
-                                        <td>查看</td>
+                                        <td><a href="#" onclick="${item.fileUrl}">查看</a></td>
                                         <td>${item.publicUnit}</td>
                                         <td><fmt:formatDate value="${item.publicDate}"
                                                 pattern="yyyy-MM-dd" /></td>
@@ -123,19 +123,19 @@
                         <div class="box-body">
                             <table class="table">
                             <tr class="bg-info">
-                                    <td>序号</td>
-                                    <td>信息内容</td>
-                                    <td>标题</td>
-                                    <td>操作</td>
-                                    <td>发布单位</td>
-                                    <td>发布日期</td>
+                                    <td width="5%">序号</td>
+                                    <td width="15%">信息内容</td>
+                                    <td width="40%">标题</td>
+                                    <td width="5%">操作</td>
+                                    <td width="25%">发布单位</td>
+                                    <td width="10%">发布日期</td>
                              </tr>
                                 <c:forEach items="${detail.inApproveList}" var="item" varStatus="status">
                                     <tr>
                                         <td>${item.sort}</td>
                                         <td>${item.content}</td>
                                         <td>${item.title}</td>
-                                        <td>查看</td>
+                                         <td><a d="myReplyFile" href="#" onclick="${item.fileUrl}">查看</a></td>
                                         <td>${item.publicUnit}</td>
                                         <td><fmt:formatDate value="${item.publicDate}"
                                                 pattern="yyyy-MM-dd" /></td>
@@ -149,19 +149,19 @@
                         <div class="box-body">
                             <table class="table">
                             <tr class="bg-info">
-                                    <td>序号</td>
-                                    <td>信息内容</td>
-                                    <td>标题</td>
-                                    <td>操作</td>
-                                    <td>发布单位</td>
-                                    <td>发布日期</td>
+                                    <td width="5%">序号</td>
+                                    <td width="15%">信息内容</td>
+                                    <td width="40%">标题</td>
+                                    <td width="5%">操作</td>
+                                    <td width="25%">发布单位</td>
+                                    <td width="10%">发布日期</td>
                              </tr>
                                 <c:forEach items="${detail.afterApproveList}" var="item" varStatus="status">
                                     <tr>
                                         <td>${item.sort}</td>
                                         <td>${item.content}</td>
                                         <td>${item.title}</td>
-                                        <td>查看</td>
+                                         <td><a href="#" onclick="${item.fileUrl}">查看</a></td>
                                         <td>${item.publicUnit}</td>
                                         <td><fmt:formatDate value="${item.publicDate}"
                                                 pattern="yyyy-MM-dd" /></td>
@@ -198,7 +198,8 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
-	<script src="${ctxStatic}/bower_components/jquery/dist/jquery.min.js"></script>
+	<!--<script src="${ctxStatic}/bower_components/jquery/dist/jquery.min.js"></script>-->
+	<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script
 		src="${ctxStatic}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -208,13 +209,9 @@
 		src="${ctxStatic}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script src="${ctxStatic}/bower_components/fastclick/lib/fastclick.js"></script>
+	<script src="${ctxStatic}/dist/js/expropriationDetailInfo.js"></script>
 
- 
 	<script>
-    $(function () {
-
-
-    })
-</script>
+    </script>
 </body>
 </html>
