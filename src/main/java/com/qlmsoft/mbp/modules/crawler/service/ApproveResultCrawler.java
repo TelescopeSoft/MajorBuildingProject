@@ -141,6 +141,8 @@ public class ApproveResultCrawler {
 		List<PubApproveResult> list = new ArrayList<PubApproveResult>();
 		Document doc = Jsoup.parse(html);
 
+		logger.info("======" + html);
+
 		try {
 
 			// 获取分页信息
