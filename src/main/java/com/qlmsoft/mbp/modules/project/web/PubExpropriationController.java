@@ -10,6 +10,7 @@ import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
 import com.qlmsoft.mbp.modules.project.entity.ApAjsbb;
 import com.qlmsoft.mbp.modules.project.entity.Expropriation;
 import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetail;
+import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetailInfo;
 import com.qlmsoft.mbp.modules.project.service.ApAjsbbService;
 import com.qlmsoft.mbp.modules.project.service.ExpropriationDetailService;
 import com.qlmsoft.mbp.modules.project.service.ExpropriationService;
@@ -70,6 +71,71 @@ public class PubExpropriationController extends BaseController {
 		} else {
 			return "{\"data\":[]}";
 		}
-
 	}
+
+	//征地告知书
+	@RequestMapping("/publicity/expropriationnotice")
+	public String expropriationnotice(HttpServletRequest request,
+					   HttpServletResponse response, Model model) {
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("expropriationnotice"));
+
+		return "modules/publicity/ExpropriationNotice";
+	}
+
+	@RequestMapping("/publicity/expropriationnotice/list")
+	@ResponseBody
+	public String noticeList(HttpServletRequest request, HttpServletResponse response) {
+		List<ExpropriationDetailInfo> list = detailService.getNotice();
+		DataTableBean<ExpropriationDetailInfo> result = new DataTableBean<ExpropriationDetailInfo>();
+		if (list != null && !list.isEmpty()) {
+			result.setData(list);
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
+	}
+
+	//征收土地公告
+	@RequestMapping("/publicity/landannouncement")
+	public String landannouncement(HttpServletRequest request,
+									  HttpServletResponse response, Model model) {
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("landannouncement"));
+
+		return "modules/publicity/LandAnnouncement";
+	}
+
+	@RequestMapping("/publicity/landannouncement/list")
+	@ResponseBody
+	public String landannouncementList(HttpServletRequest request, HttpServletResponse response) {
+		List<ExpropriationDetailInfo> list = detailService.getAnnouncement();
+		DataTableBean<ExpropriationDetailInfo> result = new DataTableBean<ExpropriationDetailInfo>();
+		if (list != null && !list.isEmpty()) {
+			result.setData(list);
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
+	}
+	//安置补偿方案公告
+	@RequestMapping("/publicity/compensationplan")
+	public String compensationplan(HttpServletRequest request,
+								   HttpServletResponse response, Model model) {
+		model.addAttribute("menuList", PulicityMenuInstance.getMenus("landannouncement"));
+
+		return "modules/publicity/CompensationPlan";
+	}
+
+	@RequestMapping("/publicity/compensationplan/list")
+	@ResponseBody
+	public String compensationplanList(HttpServletRequest request, HttpServletResponse response) {
+		List<ExpropriationDetailInfo> list = detailService.getCompensationplan();
+		DataTableBean<ExpropriationDetailInfo> result = new DataTableBean<ExpropriationDetailInfo>();
+		if (list != null && !list.isEmpty()) {
+			result.setData(list);
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
+	}
+
 }

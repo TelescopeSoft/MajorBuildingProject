@@ -5,14 +5,12 @@ package com.qlmsoft.mbp.modules.project.service;
 
 import java.util.List;
 
-import com.qlmsoft.mbp.modules.project.entity.Expropriation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qlmsoft.mbp.common.persistence.Page;
 import com.qlmsoft.mbp.common.service.CrudService;
-import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetail;
 import com.qlmsoft.mbp.modules.project.dao.ExpropriationDetailDao;
 import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetailInfo;
@@ -69,11 +67,18 @@ public class ExpropriationDetailService extends CrudService<ExpropriationDetailD
 		ExpropriationDetail existed = this.dao.getByCondition(expropriationDetail);
 		if (existed == null) {
 			super.save(expropriationDetail);
-			for (ExpropriationDetailInfo expropriationDetailInfo : expropriationDetail.getExpropriationDetailInfoList()){
-				expropriationDetailInfo.setLcid(expropriationDetail.getLcid());
+		}
+
+		//征地信息相关的信息会更新
+		for (ExpropriationDetailInfo expropriationDetailInfo : expropriationDetail.getExpropriationDetailInfoList()){
+			expropriationDetailInfo.setLcid(expropriationDetail.getLcid());
+			ExpropriationDetailInfo existedDetailInfo = expropriationDetailInfoDao.getByCondition(expropriationDetailInfo);
+
+			if(existedDetailInfo == null){
 				expropriationDetailInfo.preInsert();
 				expropriationDetailInfoDao.insert(expropriationDetailInfo);
 			}
+
 		}
 	}
 	
@@ -81,6 +86,36 @@ public class ExpropriationDetailService extends CrudService<ExpropriationDetailD
 	public void delete(ExpropriationDetail expropriationDetail) {
 		super.delete(expropriationDetail);
 		expropriationDetailInfoDao.delete(new ExpropriationDetailInfo(expropriationDetail.getId()));
+	}
+
+	/**
+	 * 获取征地告知书
+	 * @return
+	 */
+	public List<ExpropriationDetailInfo> getNotice() {
+		return getByContent("征地告知书");
+	}
+
+	/**
+	 * 获取征收土地公告
+	 * @return
+	 */
+	public List<ExpropriationDetailInfo> getAnnouncement() {
+		return getByContent("征地公告");
+	}
+
+	/**
+	 * 获取征地告知书
+	 * @return
+	 */
+	public List<ExpropriationDetailInfo> getCompensationplan() {
+		return getByContent("安置补偿方案公告");
+	}
+
+	public List<ExpropriationDetailInfo> getByContent(String content) {
+		ExpropriationDetailInfo display = new ExpropriationDetailInfo();
+		display.setContent(content);
+		return expropriationDetailInfoDao.findList(display);
 	}
 	
 }

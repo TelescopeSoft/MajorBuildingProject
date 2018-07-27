@@ -34,6 +34,28 @@
 		<include refid="expropriationDetailInfoJoins"/>
 		WHERE a.id = #{id}
 	</select>
+
+	<select id="getByCondition" resultType="ExpropriationDetailInfo">
+		SELECT
+		<include refid="expropriationDetailInfoColumns"/>
+		FROM pub_expropriation_detail_info a
+		<include refid="expropriationDetailInfoJoins"/>
+		<where>
+			1 = 1
+			<if test="lcid != null and lcid != ''">
+				AND a.lcid = #{lcid}
+			</if>
+			<if test="infoType != null and infoType != ''">
+				AND a.info_type = #{infoType}
+			</if>
+			<if test="content != null and content != ''">
+				AND a.content = #{content}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title = #{title}
+			</if>
+		</where>
+	</select>
 	
 	<select id="findList" resultType="ExpropriationDetailInfo">
 		SELECT 
@@ -51,13 +73,16 @@
 					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
 			</if>
+			<if test="content != null and content != ''">
+				AND a.content = #{content}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.create_date ASC
+				ORDER BY a.public_date DESC
 			</otherwise>
 		</choose>
 	</select>

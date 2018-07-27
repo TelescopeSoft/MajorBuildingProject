@@ -14,5 +14,7 @@ import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetailInfo;
  */
 @MyBatisDao
 public interface ExpropriationDetailInfoDao extends CrudDao<ExpropriationDetailInfo> {
+
+    public ExpropriationDetailInfo getByCondition(ExpropriationDetailInfo bean);
 	
 }
