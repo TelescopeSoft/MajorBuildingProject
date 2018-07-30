@@ -14,5 +14,7 @@ import com.qlmsoft.mbp.modules.project.entity.PubAdminPenalty;
  */
 @MyBatisDao
 public interface PubAdminPenaltyDao extends CrudDao<PubAdminPenalty> {
+
+    public PubAdminPenalty getByCondition(PubAdminPenalty bean);
 	
 }

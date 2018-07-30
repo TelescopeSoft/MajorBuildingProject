@@ -33,12 +33,21 @@ public class PubAdminPenaltyService extends CrudService<PubAdminPenaltyDao, PubA
 	public Page<PubAdminPenalty> findPage(Page<PubAdminPenalty> page, PubAdminPenalty pubAdminPenalty) {
 		return super.findPage(page, pubAdminPenalty);
 	}
-	
+
+
 	@Transactional(readOnly = false)
 	public void save(PubAdminPenalty pubAdminPenalty) {
 		super.save(pubAdminPenalty);
 	}
-	
+
+	@Transactional(readOnly = false)
+	public void checkDuplicatedAndSave(PubAdminPenalty entity) {
+		PubAdminPenalty existed = this.dao.getByCondition(entity);
+		if (existed == null) {
+			super.save(entity);
+		}
+	}
+
 	@Transactional(readOnly = false)
 	public void delete(PubAdminPenalty pubAdminPenalty) {
 		super.delete(pubAdminPenalty);

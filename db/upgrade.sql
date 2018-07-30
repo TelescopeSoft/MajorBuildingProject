@@ -9,3 +9,6 @@ INSERT [MajorProjectLib].[dbo].[sys_dict] ([id], [value], [label], [type], [desc
  alter table [MajorProjectLib].[dbo].[pub_approve_result] add approve_num_type varchar(64) null;
  alter table [MajorProjectLib].[dbo].[pub_approve_result] add approve_num_year varchar(10) null;
  alter table [MajorProjectLib].[dbo].[pub_approve_result] add approve_num_num varchar(10) null;
+
+ -- 行政处罚字段扩展长度
+ alter table [MajorProjectLib].[dbo].[pub_admin_penalty] alter column punish_result varchar(500) null
