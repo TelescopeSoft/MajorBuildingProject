@@ -54,6 +54,9 @@
 			<if test="title != null and title != ''">
 				AND a.title = #{title}
 			</if>
+			<if test="sort != null and sort != 0">
+				AND a.sort = #{sort}
+			</if>
 		</where>
 	</select>
 	
