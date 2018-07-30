@@ -103,7 +103,7 @@
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.create_date ASC
+				ORDER BY a.public_date ASC
 			</otherwise>
 		</choose>
 	</select>
