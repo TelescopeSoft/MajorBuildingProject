@@ -3,6 +3,7 @@
  */
 package com.qlmsoft.mbp.modules.project.web;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +61,7 @@ public class HomeController extends BaseController {
 			HttpServletResponse response) {
 
 //		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
+		projectInfo.setAllinvest(new BigDecimal(5000));
 		List<ProjectInfo> list = tBProjectInfoService.findList(projectInfo);
 		DataTableBean<ProjectInfo> result = new DataTableBean<ProjectInfo>();
 		result.setData(list);
@@ -118,15 +120,6 @@ public class HomeController extends BaseController {
 				PulicityMenuInstance.getMenus("landexpropriation"));
 
 		return "modules/publicity/LandExpropriation";
-	}
-
-	@RequestMapping(value = "tender")
-	public String tender(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-
-		model.addAttribute("menuList", PulicityMenuInstance.getMenus("tender"));
-
-		return "modules/publicity/Tender";
 	}
 
 }

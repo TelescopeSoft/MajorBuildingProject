@@ -61,7 +61,7 @@
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
 		<where>
-			UpdateFlag != 'D' AND CountyNum = '320211' AND AllInvest >= 5000
+			UpdateFlag != 'D' AND CountyNum = '320211'
 			<if test="prjname != null and prjname != ''">
 				AND a.PrjName like 
 					<if test="dbName == 'oracle'">'%'||#{prjname}||'%'</if>
@@ -88,6 +88,9 @@
 			</if>
 			<if test="majorFlag != null and majorFlag != ''">
 				AND a.MajorFlag = #{majorFlag}
+			</if>
+			<if test="allinvest != null and allinvest != ''">
+				AND a.allinvest >= #{allinvest}
 			</if>
 		</where>
 		<choose>
@@ -132,6 +135,9 @@
 			</if>
 			<if test="majorFlag != null and majorFlag != ''">
 				AND a.MajorFlag = #{majorFlag}
+			</if>
+			<if test="allinvest != null and allinvest != ''">
+				AND a.allinvest >= #{allinvest}
 			</if>
 		</where>		
 		<choose>

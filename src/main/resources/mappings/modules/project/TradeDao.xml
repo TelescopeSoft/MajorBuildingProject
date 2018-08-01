@@ -62,6 +62,12 @@
 			<if test="tenderType != null and tenderType != ''">
 				AND a.tender_type = #{tenderType}
 			</if>
+			<if test="indexid != null and indexid != ''">
+				AND a.indexId LIKE
+				<if test="dbName == 'oracle'">'%'||#{indexid}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{indexid}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{indexid},'%')</if>
+			</if>
 			<if test="title != null and title != ''">
 				AND a.title LIKE 
 					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
@@ -80,7 +86,7 @@
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.update_date DESC
+				ORDER BY a.openTime DESC
 			</otherwise>
 		</choose>
 	</select>
@@ -98,7 +104,7 @@
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.update_date DESC
+				ORDER BY a.openTime DESC
 			</otherwise>
 		</choose>
 	</select>

@@ -44,9 +44,10 @@ public class PulicityMenuInstance {
 		land.getChilds().add(compensationplan);
 		list.add(land);
 
+		/**
 		PulicityMenu designchange = new PulicityMenu("重大设计变更", "designchange",
 				"designchange", false);
-		list.add(designchange);
+		list.add(designchange);*/
 
 		PulicityMenu construction = new PulicityMenu("施工信息", "construction",
 				"construction", false);
@@ -58,14 +59,20 @@ public class PulicityMenuInstance {
 		PulicityMenu quality = new PulicityMenu("质量监督", "quality", "quality",
 				false);
 		PulicityMenu safyty = new PulicityMenu("安全监督", "safty", "safty", false);
-		PulicityMenu adminpenalty = new PulicityMenu("行政处罚", "adminpenalty",
-				"adminpenalty", false);
+
+
+//		PulicityMenu adminpenalty = new PulicityMenu("行政处罚", "adminpenalty",
+//				"adminpenalty", false);
 
 		qualitysafty.getChilds().add(quality);
 		qualitysafty.getChilds().add(safyty);
-		qualitysafty.getChilds().add(adminpenalty);
+//		qualitysafty.getChilds().add(adminpenalty);
 
 		list.add(qualitysafty);
+
+		PulicityMenu adminpenalty = new PulicityMenu("行政处罚", "adminpenalty",
+				"adminpenalty", false);
+		list.add(adminpenalty);
 
 		PulicityMenu finish = new PulicityMenu("竣工信息", "finish", "finish",
 				false);

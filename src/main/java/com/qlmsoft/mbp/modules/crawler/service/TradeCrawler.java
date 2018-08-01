@@ -191,6 +191,17 @@ public class TradeCrawler {
 
                 if (html != null) {
                     Document doc = Jsoup.parse(html);
+
+                    String contentStr = doc.select("div#Zoom").html();
+                    PubTradeContent content = new PubTradeContent();
+                    content.setIndexid(trade.getIndexid());
+                    content.setContent(contentStr);
+                    content.setCreateDate(new Date());
+                    content.setUpdateDate(new Date());
+
+                    contentService.checkDuplicatedAndSave(content);
+
+
                     if(trade.getTitle().contains("资格后审")){
                         trade.setTenderType("招标公告（资格后审）");
                         // do none
@@ -210,14 +221,7 @@ public class TradeCrawler {
                                 logger.info("------tenderinnernum:" + trade.getTenderInnerNum());
                             }
 
-                            String contentStr = doc.select("div#Zoom").html();
-                            PubTradeContent content = new PubTradeContent();
-                            content.setIndexid(trade.getIndexid());
-                            content.setContent(contentStr);
-                            content.setCreateDate(new Date());
-                            content.setUpdateDate(new Date());
 
-                            contentService.checkDuplicatedAndSave(content);
                         }else {
                             trs = doc.select("div#Zoom table tr");
                             //招标公告

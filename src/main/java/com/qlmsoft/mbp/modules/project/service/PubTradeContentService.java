@@ -26,7 +26,13 @@ public class PubTradeContentService extends CrudService<PubTradeContentDao, PubT
 	public PubTradeContent get(String id) {
 		return super.get(id);
 	}
-	
+
+	public PubTradeContent getByIndexId(String indexId) {
+		PubTradeContent entity = new PubTradeContent();
+		entity.setIndexid(indexId);
+		return this.dao.getByCondition(entity);
+	}
+
 	public List<PubTradeContent> findList(PubTradeContent pubTradeContent) {
 		return super.findList(pubTradeContent);
 	}
