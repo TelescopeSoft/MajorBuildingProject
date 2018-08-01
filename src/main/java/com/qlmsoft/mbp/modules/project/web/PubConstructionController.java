@@ -61,12 +61,13 @@ public class PubConstructionController extends BaseController {
 						.findList(apZjsbbDwry);
 				
 				//处理身份证号码
+				/**
 				if(dwryList != null && !dwryList.isEmpty()){
 					for(ApZjsbbDwry ry: dwryList){
 						ry.setIdcard(ry.getIdcard().substring(0, 10) + "******" + ry.getIdcard().substring(16, 18));
 						ry.setLxdh(ry.getLxdh().substring(0, 7) + "******" );
 					}
-				}
+				}*/
 
 				fillConstructInfo(info, dwryList);
 

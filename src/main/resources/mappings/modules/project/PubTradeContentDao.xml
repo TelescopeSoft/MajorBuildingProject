@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.PubTradeContentDao">
+    
+	<sql id="pubTradeContentColumns">
+		a.id AS "id",
+		a.indexid AS "indexid",
+		a.content AS "content",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="pubTradeContentJoins">
+	</sql>
+    
+	<select id="get" resultType="PubTradeContent">
+		SELECT 
+			<include refid="pubTradeContentColumns"/>
+		FROM pub_trade_content a
+		<include refid="pubTradeContentJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="getByCondition" resultType="PubTradeContent">
+		SELECT
+		<include refid="pubTradeContentColumns"/>
+		FROM pub_trade_content a
+		<include refid="pubTradeContentJoins"/>
+		<where>
+			1 = 1
+			<if test="indexid != null and indexid != ''">
+				AND a.indexId = #{indexid}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findList" resultType="PubTradeContent">
+		SELECT 
+			<include refid="pubTradeContentColumns"/>
+		FROM pub_trade_content a
+		<include refid="pubTradeContentJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="PubTradeContent">
+		SELECT 
+			<include refid="pubTradeContentColumns"/>
+		FROM pub_trade_content a
+		<include refid="pubTradeContentJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_trade_content(
+			indexid,
+			content,
+			create_date,
+			update_date,
+			del_flag
+		) VALUES (
+			#{indexid},
+			#{content},
+			#{createDate},
+			#{updateDate},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_trade_content SET 	
+			indexid = #{indexid},
+			content = #{content},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_trade_content SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

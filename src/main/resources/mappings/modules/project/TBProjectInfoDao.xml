@@ -61,7 +61,7 @@
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
 		<where>
-			UpdateFlag != 'D' AND CountyNum = '320211'
+			UpdateFlag != 'D' AND CountyNum = '320211' AND AllInvest >= 5000
 			<if test="prjname != null and prjname != ''">
 				AND a.PrjName like 
 					<if test="dbName == 'oracle'">'%'||#{prjname}||'%'</if>
@@ -87,7 +87,7 @@
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjapprovalnum}, '%')</if>
 			</if>
 			<if test="majorFlag != null and majorFlag != ''">
-				AND a.MajorFlag = #{majorFlag}	 
+				AND a.MajorFlag = #{majorFlag}
 			</if>
 		</where>
 		<choose>
@@ -105,7 +105,7 @@
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
 		<where>
-			UpdateFlag != 'D' AND CountyNum = '320211'
+			UpdateFlag != 'D' AND CountyNum = '320211' AND AllInvest >= 5000
 			<if test="prjname != null and prjname != ''">
 				AND a.PrjName like 
 					<if test="dbName == 'oracle'">'%'||#{prjname}||'%'</if>
@@ -131,7 +131,7 @@
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjapprovalnum}, '%')</if>
 			</if>
 			<if test="majorFlag != null and majorFlag != ''">
-				AND a.MajorFlag = #{majorFlag}	 
+				AND a.MajorFlag = #{majorFlag}
 			</if>
 		</where>		
 		<choose>

@@ -59,7 +59,7 @@ public class HomeController extends BaseController {
 	public String projects(ProjectInfo projectInfo, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
+//		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
 		List<ProjectInfo> list = tBProjectInfoService.findList(projectInfo);
 		DataTableBean<ProjectInfo> result = new DataTableBean<ProjectInfo>();
 		result.setData(list);

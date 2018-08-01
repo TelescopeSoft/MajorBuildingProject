@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.TradeDao">
+    
+	<sql id="tradeColumns">
+		a.id AS "id",
+		a.prj_code AS "prjCode",
+		a.prj_name AS "prjName",
+		a.tender_inner_num AS "tenderInnerNum",
+		a.tender_type AS "tenderType",
+		a.title AS "title",
+		a.writetime AS "writetime",
+		a.opentime AS "opentime",
+		a.indexid AS "indexid",
+		a.url AS "url",
+		a.organization AS "organization",
+		a.create_by AS "createBy.id",
+		a.update_by AS "updateBy.id",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.display_flag AS "displayFlag",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="tradeJoins">
+	</sql>
+    
+	<select id="get" resultType="Trade">
+		SELECT 
+			<include refid="tradeColumns"/>
+		FROM pub_trade a
+		<include refid="tradeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="getByCondition" resultType="Trade">
+		SELECT
+		<include refid="tradeColumns"/>
+		FROM pub_trade a
+		<include refid="tradeJoins"/>
+		<where>
+			1 = 1
+			<if test="indexid != null and indexid != ''">
+				AND a.indexId = #{indexid}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title = #{title}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findList" resultType="Trade">
+		SELECT 
+			<include refid="tradeColumns"/>
+		FROM pub_trade a
+		<include refid="tradeJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="tenderInnerNum != null and tenderInnerNum != ''">
+				AND a.tender_inner_num = #{tenderInnerNum}
+			</if>
+			<if test="tenderType != null and tenderType != ''">
+				AND a.tender_type = #{tenderType}
+			</if>
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+			<if test="writetime != null and writetime != ''">
+				AND a.writetime = #{writetime}
+			</if>
+			<if test="opentime != null and opentime != ''">
+				AND a.opentime = #{opentime}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Trade">
+		SELECT 
+			<include refid="tradeColumns"/>
+		FROM pub_trade a
+		<include refid="tradeJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_trade(
+			prj_code,
+			prj_name,
+			tender_inner_num,
+			tender_type,
+			title,
+			writetime,
+			opentime,
+			indexid,
+			url,
+			organization,
+			create_by,
+			update_by,
+			create_date,
+			update_date,
+			display_flag,
+			del_flag
+		) VALUES (
+			#{prjCode},
+			#{prjName},
+			#{tenderInnerNum},
+			#{tenderType},
+			#{title},
+			#{writetime},
+			#{opentime},
+			#{indexid},
+			#{url},
+			#{organization},
+			#{createBy.id},
+			#{updateBy.id},
+			#{createDate},
+			#{updateDate},
+			#{displayFlag},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_trade SET 	
+			prj_code = #{prjCode},
+			prj_name = #{prjName},
+			tender_inner_num = #{tenderInnerNum},
+			tender_type = #{tenderType},
+			title = #{title},
+			writetime = #{writetime},
+			opentime = #{opentime},
+			indexid = #{indexid},
+			url = #{url},
+			organization = #{organization},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			display_flag = #{displayFlag}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateProjectInfo">
+		UPDATE pub_trade SET
+		prj_code = #{prjCode},
+		prj_name = #{prjName},
+		tender_inner_num = #{tenderInnerNum},
+		tender_type = #{tenderType}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_trade SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
