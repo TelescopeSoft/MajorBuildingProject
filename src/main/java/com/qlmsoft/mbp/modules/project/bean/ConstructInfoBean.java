@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.qlmsoft.mbp.modules.project.entity.ApAjsbbHjssjd;
 import com.qlmsoft.mbp.modules.project.entity.ApZjsbbDwry;
 
 public class ConstructInfoBean implements Serializable {
@@ -19,6 +20,8 @@ public class ConstructInfoBean implements Serializable {
 	private List<ApZjsbbDwry> jsdwRyList = new ArrayList<ApZjsbbDwry>();
 
 	private List<ConstructInfoDwBean> dwList = new ArrayList<ConstructInfoDwBean>();
+
+	private List<ApAjsbbHjssjd> hjList = new ArrayList<ApAjsbbHjssjd>();
 
 	public String getXmmc() {
 		return xmmc;
@@ -68,4 +71,11 @@ public class ConstructInfoBean implements Serializable {
 		this.dwList = dwList;
 	}
 
+	public List<ApAjsbbHjssjd> getHjList() {
+		return hjList;
+	}
+
+	public void setHjList(List<ApAjsbbHjssjd> hjList) {
+		this.hjList = hjList;
+	}
 }

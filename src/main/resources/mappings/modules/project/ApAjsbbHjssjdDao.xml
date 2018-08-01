@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApAjsbbHjssjdDao">
+    
+	<sql id="apAjsbbHjssjdColumns">
+		a.uuid AS "uuid",
+		a.xh AS "xh",
+		a.jdxm AS "jdxm",
+		a.jdqk AS "jdqk"
+	</sql>
+	
+	<sql id="apAjsbbHjssjdJoins">
+	</sql>
+    
+	<select id="get" resultType="ApAjsbbHjssjd">
+		SELECT 
+			<include refid="apAjsbbHjssjdColumns"/>
+		FROM ap_ajsbb_hjssjd a
+		<include refid="apAjsbbHjssjdJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ApAjsbbHjssjd">
+		SELECT 
+			<include refid="apAjsbbHjssjdColumns"/>
+		FROM ap_ajsbb_hjssjd a
+		<include refid="apAjsbbHjssjdJoins"/>
+		<where>
+			a.jdqk != '无'
+			<if test="uuid != null and uuid != ''">
+				AND a.uuid = #{uuid}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ApAjsbbHjssjd">
+		SELECT 
+			<include refid="apAjsbbHjssjdColumns"/>
+		FROM ap_ajsbb_hjssjd a
+		<include refid="apAjsbbHjssjdJoins"/>
+		<where>
+			a.jdqk != '无'
+			<if test="uuid != null and uuid != ''">
+				AND a.uuid = #{uuid}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ap_ajsbb_hjssjd(
+			uuid,
+			xh,
+			jdxm,
+			jdqk
+		) VALUES (
+			#{uuid},
+			#{xh},
+			#{jdxm},
+			#{jdqk}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ap_ajsbb_hjssjd SET 	
+			uuid = #{uuid},
+			xh = #{xh},
+			jdxm = #{jdxm},
+			jdqk = #{jdqk}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM ap_ajsbb_hjssjd
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

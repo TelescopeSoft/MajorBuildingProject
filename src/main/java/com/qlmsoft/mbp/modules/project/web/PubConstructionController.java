@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qlmsoft.mbp.modules.project.entity.ApAjsbbHjssjd;
+import com.qlmsoft.mbp.modules.project.service.ApAjsbbHjssjdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +39,9 @@ public class PubConstructionController extends BaseController {
 
 	@Autowired
 	private ApAjsbbService ajsbService;
+
+	@Autowired
+	private ApAjsbbHjssjdService asbbHjssjdService;
 
 	@Autowired
 	private ApZjsbbDwryService zjsbDwryService;
@@ -70,6 +75,10 @@ public class PubConstructionController extends BaseController {
 				}*/
 
 				fillConstructInfo(info, dwryList);
+
+				ApAjsbbHjssjd apAjsbbHjssjd = new ApAjsbbHjssjd();
+				apAjsbbHjssjd.setUuid(i.getUuid());
+				info.setHjList(asbbHjssjdService.findList(apAjsbbHjssjd ));
 
 				result.add(info);
 
