@@ -3,6 +3,7 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
+import com.qlmsoft.mbp.common.persistence.MyDataEntity;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,9 +15,14 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-31
  */
-public class Trade extends DataEntity<Trade> {
+public class Trade extends MyDataEntity<Trade> {
 	
 	private static final long serialVersionUID = 1L;
+
+	public static final int TYPE_ZIGEYUSHEN = 1;
+	public static final int TYPE_ZHAOBIAOGONGGAO = 2;
+	public static final int TYPE_ZHONGBIAOHOUXUANREN = 3;
+
 	private String prjCode;		// 项目代码
 	private String prjName;		// 项目名称
 	private String tenderInnerNum;		// 内部标号
@@ -126,8 +132,7 @@ public class Trade extends DataEntity<Trade> {
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
-	
-	@Length(min=0, max=1, message="display_flag长度必须介于 0 和 1 之间")
+
 	public String getDisplayFlag() {
 		return displayFlag;
 	}

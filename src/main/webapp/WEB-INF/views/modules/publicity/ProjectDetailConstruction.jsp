@@ -67,14 +67,13 @@
 				<td width="30%">落实事项</td>
 				<td width="70%">落实情况</td>
 			</tr>
+			<c:forEach items="${item.hjList}" var="hjItem">
 			<tr>
-				<td>扬尘检查情况、整改情况</td>
-				<td></td>
+				<td>${hjItem.jdxm}</td>
+				<td>${hjItem.jdqk}</td>
 			</tr>
-			<tr>
-				<td>施工场地出入口车辆冲洗检查情况， 整改情况</td>
-				<td></td>
-			</tr>
+			</c:forEach>
+
 
 		</table>
 	</div>

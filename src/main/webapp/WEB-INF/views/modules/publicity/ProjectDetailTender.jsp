@@ -7,15 +7,17 @@
 	</div>
 	<div class="box-body">
 		<table class="table table-bordered">
+		    <c:forEach items="${zigeyushen}" var="item" varStatus="status">
 			<tr>
 				<td class="bg-info" width="10%">公告名称</td>
 				<td width="70%"><a
-					href="http://xzfw.wuxi.gov.cn/doc/2018/03/19/1770459.shtml"
+					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}&title=${item.title}"
 					target="_blank">
-						[WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理 </a></td>
+						${item.title}</a></td>
 				<td class="bg-info" width="10%">时间</td>
-				<td width="10%">2018-03-19</td>
+				<td width="10%"><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
 			</tr>
+			</c:forEach>
 		</table>
 	</div>
 
@@ -25,15 +27,17 @@
 
 	<div class="box-body">
 		<table class="table table-bordered">
-			<tr>
-				<td class="bg-info" width="10%">公告名称</td>
-				<td width="70%"><a
-					href="http://xzfw.wuxi.gov.cn/doc/2018/03/09/1761653.shtml"
-					target="_blank">
-						[WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理 </a></td>
-				<td class="bg-info" width="10%">时间</td>
-				<td width="10%">2018-03-09</td>
-			</tr>
+	        <c:forEach items="${zhaobiaogonggao}" var="item" varStatus="status">
+    			<tr>
+    				<td class="bg-info" width="10%">公告名称</td>
+    				<td width="70%"><a
+    					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}&title=${item.title}"
+    					target="_blank">
+    						${item.title}</a></td>
+    				<td class="bg-info" width="10%">时间</td>
+    				<td width="10%"><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
+    			</tr>
+    			</c:forEach>
 		</table>
 	</div>
 
@@ -43,15 +47,17 @@
 
 	<div class="box-body">
 		<table class="table table-bordered">
-			<tr>
-				<td class="bg-info" width="10%">公告名称</td>
-				<td width="70%"><a
-					href="http://xzfw.wuxi.gov.cn/doc/2018/04/15/1808826.shtml"
-					target="_blank">
-						[WXBH201802001-W02]方泉苑六期一批安置房项目方泉苑六期一批安置房（A地块）项目监理 </a></td>
-				<td class="bg-info" width="10%">时间</td>
-				<td width="10%">2018-04-15</td>
-			</tr>
+    <c:forEach items="${zhongbiaohouxuanren}" var="item" varStatus="status">
+    			<tr>
+    				<td class="bg-info" width="10%">公告名称</td>
+    				<td width="70%"><a
+    					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}&title=${item.title}"
+    					target="_blank">
+    						${item.title}</a></td>
+    				<td class="bg-info" width="10%">时间</td>
+    				<td width="10%"><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
+    			</tr>
+    			</c:forEach>
 		</table>
 	</div>
 

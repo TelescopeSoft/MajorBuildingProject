@@ -3,6 +3,7 @@
  */
 package com.qlmsoft.mbp.modules.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ import com.qlmsoft.mbp.modules.project.dao.TradeDao;
 @Service
 @Transactional(readOnly = true)
 public class TradeService extends CrudService<TradeDao, Trade> {
+
+
 
 	public Trade get(String id) {
 		return super.get(id);
@@ -56,5 +59,21 @@ public class TradeService extends CrudService<TradeDao, Trade> {
 	public void delete(Trade trade) {
 		super.delete(trade);
 	}
+
+	public List<Trade> findByTypeAndPkid(int tradeType ,String pkid) {
+
+		List<String> typeList = new ArrayList<String>();
+		if(tradeType == Trade.TYPE_ZIGEYUSHEN){
+			typeList.add("资格预审公告（代招标公告）");
+		}else if(Trade.TYPE_ZHAOBIAOGONGGAO == tradeType){
+			typeList.add("招标公告");
+			typeList.add("招标公告（资格后审）");
+		}else if(Trade.TYPE_ZHONGBIAOHOUXUANREN == tradeType){
+			typeList.add("无锡市工程建设项目预中标候选人公示");
+			typeList.add("无锡市工程建设项目中标候选人公示");
+		}
+		return this.dao.findByTypeAndPkid(typeList, pkid);
+	}
+
 	
 }

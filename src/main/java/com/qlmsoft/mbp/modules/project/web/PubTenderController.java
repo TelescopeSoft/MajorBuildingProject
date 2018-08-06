@@ -49,7 +49,18 @@ public class PubTenderController extends BaseController {
 			HttpServletResponse response, Model model) {
 		String pkid = request.getParameter("pkid");
 		List<TenderInfo> tenderList = tenderInfoService.findListByProjectPkid(pkid);
+
+		List<Trade> zigeyushen = tradeService.findByTypeAndPkid(Trade.TYPE_ZIGEYUSHEN,pkid);
+
+		List<Trade> zhaobiaogonggao = tradeService.findByTypeAndPkid(Trade.TYPE_ZHAOBIAOGONGGAO,pkid);
+
+		List<Trade> zhongbiaohouxuanren = tradeService.findByTypeAndPkid(Trade.TYPE_ZHONGBIAOHOUXUANREN,pkid);
+
 		model.addAttribute("tenderList", tenderList);
+		model.addAttribute("zigeyushen", zigeyushen);
+		model.addAttribute("zhaobiaogonggao", zhaobiaogonggao);
+		model.addAttribute("zhongbiaohouxuanren", zhongbiaohouxuanren);
+
 		return "modules/publicity/ProjectDetailTender";
 	}
 

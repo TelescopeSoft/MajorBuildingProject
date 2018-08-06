@@ -60,23 +60,23 @@
 		<div class="control-group">
 			<label class="control-label">标题：</label>
 			<div class="controls">
-				<form:input path="title" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<form:input path="title" htmlEscape="false" maxlength="200" style="width:90%"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">生成日期：</label>
 			<div class="controls">
-				<input name="writetime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${trade.writetime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input name="writetime" type="text" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${trade.writetime}" pattern="yyyy-MM-dd"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">公开日期：</label>
 			<div class="controls">
-				<input name="opentime" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
-					value="<fmt:formatDate value="${trade.opentime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+				<input name="opentime" type="text" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${trade.opentime}" pattern="yyyy-MM-dd"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -89,6 +89,7 @@
 			<label class="control-label">滨湖门户链接：</label>
 			<div class="controls">
 				<form:input path="url" htmlEscape="false" maxlength="200" class="input-xlarge "/>
+				<a href="http://binhu.wuxi.gov.cn/${trade.url}" target="_blank">查看</a>
 			</div>
 		</div>
 		<div class="control-group">
@@ -98,11 +99,14 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">display_flag：</label>
-			<div class="controls">
-				<form:input path="displayFlag" htmlEscape="false" maxlength="1" class="input-xlarge "/>
-			</div>
-		</div>
+        			<label class="control-label">记录显示状态:</label>
+        			<div class="controls">
+        				<form:select path="displayFlag" class="input-xlarge">
+        					<form:option value="" label="请选择"/>
+        					<form:options items="${fns:getDictList('display_flag')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+        				</form:select>
+        			</div>
+        </div>
 		<div class="form-actions">
 			<shiro:hasPermission name="project:trade:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>

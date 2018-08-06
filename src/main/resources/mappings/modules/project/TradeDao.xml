@@ -48,6 +48,22 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="findByTypeAndPkid" resultType="Trade">
+		SELECT
+		<include refid="tradeColumns"/>
+		FROM pub_trade a
+		LEFT JOIN [MajorProjectLib].[dbo].TBProjectInfo i ON a.prj_code = i.PrjNum
+		<where>
+			i.pkid = #{pkid}
+			AND tender_type IN
+			<foreach collection="typeList" item="tenderType" index="index"
+					 open="(" close=")" separator=",">
+				#{tenderType}
+			</foreach>
+		</where>
+		ORDER BY a.openTime DESC
+	</select>
 	
 	<select id="findList" resultType="Trade">
 		SELECT 
@@ -109,7 +125,7 @@
 		</choose>
 	</select>
 	
-	<insert id="insert">
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO pub_trade(
 			prj_code,
 			prj_name,

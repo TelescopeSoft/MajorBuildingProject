@@ -61,11 +61,15 @@ public class HomeController extends BaseController {
 			HttpServletResponse response) {
 
 //		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
-		projectInfo.setAllinvest(new BigDecimal(5000));
+//		projectInfo.setAllinvest(new BigDecimal(5000));
 		List<ProjectInfo> list = tBProjectInfoService.findList(projectInfo);
 		DataTableBean<ProjectInfo> result = new DataTableBean<ProjectInfo>();
 		result.setData(list);
-		return JsonMapper.getInstance().toJson(result);
+		if (list != null && !list.isEmpty()) {
+			return JsonMapper.getInstance().toJson(result);
+		} else {
+			return "{\"data\":[]}";
+		}
 	}
 
 	@RequestMapping(value = "projectdetail")
