@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApplyProjectInfoDao">
+    
+	<sql id="applyProjectInfoColumns">
+		a.project_code AS "projectCode",
+		a.division_code AS "divisionCode",
+		a.project_name AS "projectName",
+		a.project_type AS "projectType",
+		c2.name AS "projectTypeLabel",
+		a.project_nature AS "projectNature",
+		c.name AS "projectNatureLabel",
+		a.start_year AS "startYear",
+		a.end_year AS "endYear",
+		a.total_money AS "totalMoney",
+		a.place_code AS "placeCode",
+		a.place_code_detail AS "placeCodeDetail",
+		a.industry AS "industry",
+		a.scale_content AS "scaleContent",
+		a.apply_date AS "applyDate",
+		a.permit_item_code AS "permitItemCode",
+		a.exchange_time AS "exchangeTime",
+		a.validity_flag AS "validityFlag",
+		a.node_code AS "nodeCode",
+		a.id AS "id",
+		a.foreign_abroad_flag AS "foreignAbroadFlag",
+		a.total_money_explain AS "totalMoneyExplain",
+		a.the_industry AS "theIndustry",
+		a.is_country_security AS "isCountrySecurity",
+		a.security_approval_number AS "securityApprovalNumber",
+		a.investment_mode AS "investmentMode",
+		a.total_money_dollar AS "totalMoneyDollar",
+		a.total_money_dollar_rate AS "totalMoneyDollarRate",
+		a.project_capital_money AS "projectCapitalMoney",
+		a.project_capital_money_dollar AS "projectCapitalMoneyDollar",
+		a.project_capital_money_dollar_rate AS "projectCapitalMoneyDollarRate",
+		a.industrial_policy_type AS "industrialPolicyType",
+		a.industrial_policy AS "industrialPolicy",
+		a.other_investment_apply_info AS "otherInvestmentApplyInfo",
+		a.transaction_both_info AS "transactionBothInfo",
+		a.merger_plan AS "mergerPlan",
+		a.merger_management_mode_scope AS "mergerManagementModeScope",
+		a.get_land_mode AS "getLandMode",
+		a.land_area AS "landArea",
+		a.built_area AS "builtArea",
+		a.is_add_device AS "isAddDevice",
+		a.import_device_number_money AS "importDeviceNumberMoney",
+		a.project_site AS "projectSite",
+		a.china_total_money AS "chinaTotalMoney"
+	</sql>
+	
+	<sql id="applyProjectInfoJoins">
+		LEFT JOIN wxbinghu.dbo.CodeInfo c ON a.PROJECT_NATURE = c.Code
+			AND c.codetype = 'PROJECT_NATURE'
+		LEFT JOIN wxbinghu.dbo.CodeInfo c2 ON a.PROJECT_TYPE = c2.Code
+			AND c2.codetype = 'PROJECT_TYPE'
+	</sql>
+    
+	<select id="get" resultType="ApplyProjectInfo">
+		SELECT 
+			<include refid="applyProjectInfoColumns"/>
+		FROM wxbinghu.dbo.stz_region_apply_project_info a
+		<include refid="applyProjectInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ApplyProjectInfo">
+		SELECT 
+			<include refid="applyProjectInfoColumns"/>
+		FROM wxbinghu.dbo.stz_region_apply_project_info a
+		<include refid="applyProjectInfoJoins"/>
+		<where>
+			
+			<if test="projectCode != null and projectCode != ''">
+				AND a.project_code = #{projectCode}
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND a.project_name = #{projectName}
+			</if>
+			<if test="totalMoney != null and totalMoney != ''">
+				AND cast(a.total_money as decimal) >= #{totalMoney}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY APPLY_DATE DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ApplyProjectInfo">
+		SELECT 
+			<include refid="applyProjectInfoColumns"/>
+		FROM wxbinghu.dbo.stz_region_apply_project_info a
+		<include refid="applyProjectInfoJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY APPLY_DATE DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO wxbinghu.dbo.stz_region_apply_project_info(
+			project_code,
+			division_code,
+			project_name,
+			project_type,
+			project_nature,
+			start_year,
+			end_year,
+			total_money,
+			place_code,
+			place_code_detail,
+			industry,
+			scale_content,
+			apply_date,
+			permit_item_code,
+			exchange_time,
+			validity_flag,
+			node_code,
+			id,
+			foreign_abroad_flag,
+			total_money_explain,
+			the_industry,
+			is_country_security,
+			security_approval_number,
+			investment_mode,
+			total_money_dollar,
+			total_money_dollar_rate,
+			project_capital_money,
+			project_capital_money_dollar,
+			project_capital_money_dollar_rate,
+			industrial_policy_type,
+			industrial_policy,
+			other_investment_apply_info,
+			transaction_both_info,
+			merger_plan,
+			merger_management_mode_scope,
+			get_land_mode,
+			land_area,
+			built_area,
+			is_add_device,
+			import_device_number_money,
+			project_site,
+			china_total_money
+		) VALUES (
+			#{projectCode},
+			#{divisionCode},
+			#{projectName},
+			#{projectType},
+			#{projectNature},
+			#{startYear},
+			#{endYear},
+			#{totalMoney},
+			#{placeCode},
+			#{placeCodeDetail},
+			#{industry},
+			#{scaleContent},
+			#{applyDate},
+			#{permitItemCode},
+			#{exchangeTime},
+			#{validityFlag},
+			#{nodeCode},
+			#{id},
+			#{foreignAbroadFlag},
+			#{totalMoneyExplain},
+			#{theIndustry},
+			#{isCountrySecurity},
+			#{securityApprovalNumber},
+			#{investmentMode},
+			#{totalMoneyDollar},
+			#{totalMoneyDollarRate},
+			#{projectCapitalMoney},
+			#{projectCapitalMoneyDollar},
+			#{projectCapitalMoneyDollarRate},
+			#{industrialPolicyType},
+			#{industrialPolicy},
+			#{otherInvestmentApplyInfo},
+			#{transactionBothInfo},
+			#{mergerPlan},
+			#{mergerManagementModeScope},
+			#{getLandMode},
+			#{landArea},
+			#{builtArea},
+			#{isAddDevice},
+			#{importDeviceNumberMoney},
+			#{projectSite},
+			#{chinaTotalMoney}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE wxbinghu.dbo.stz_region_apply_project_info SET
+			project_code = #{projectCode},
+			division_code = #{divisionCode},
+			project_name = #{projectName},
+			project_type = #{projectType},
+			project_nature = #{projectNature},
+			start_year = #{startYear},
+			end_year = #{endYear},
+			total_money = #{totalMoney},
+			place_code = #{placeCode},
+			place_code_detail = #{placeCodeDetail},
+			industry = #{industry},
+			scale_content = #{scaleContent},
+			apply_date = #{applyDate},
+			permit_item_code = #{permitItemCode},
+			exchange_time = #{exchangeTime},
+			validity_flag = #{validityFlag},
+			node_code = #{nodeCode},
+			foreign_abroad_flag = #{foreignAbroadFlag},
+			total_money_explain = #{totalMoneyExplain},
+			the_industry = #{theIndustry},
+			is_country_security = #{isCountrySecurity},
+			security_approval_number = #{securityApprovalNumber},
+			investment_mode = #{investmentMode},
+			total_money_dollar = #{totalMoneyDollar},
+			total_money_dollar_rate = #{totalMoneyDollarRate},
+			project_capital_money = #{projectCapitalMoney},
+			project_capital_money_dollar = #{projectCapitalMoneyDollar},
+			project_capital_money_dollar_rate = #{projectCapitalMoneyDollarRate},
+			industrial_policy_type = #{industrialPolicyType},
+			industrial_policy = #{industrialPolicy},
+			other_investment_apply_info = #{otherInvestmentApplyInfo},
+			transaction_both_info = #{transactionBothInfo},
+			merger_plan = #{mergerPlan},
+			merger_management_mode_scope = #{mergerManagementModeScope},
+			get_land_mode = #{getLandMode},
+			land_area = #{landArea},
+			built_area = #{builtArea},
+			is_add_device = #{isAddDevice},
+			import_device_number_money = #{importDeviceNumberMoney},
+			project_site = #{projectSite},
+			china_total_money = #{chinaTotalMoney}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM wxbinghu.dbo.stz_region_apply_project_info
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

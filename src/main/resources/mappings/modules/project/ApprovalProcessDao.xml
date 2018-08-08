@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApprovalProcessDao">
+    
+	<sql id="approvalProcessColumns">
+		a.approval_processid AS "approvalProcessid",
+		a.project_code AS "projectCode",
+		a.approval_itemid AS "approvalItemid",
+		a.handle_dept_name AS "handleDeptName",
+		a.handle_state AS "handleState",
+		a.handle_opinion AS "handleOpinion",
+		a.handle_date AS "handleDate",
+		a.exchange_time AS "exchangeTime",
+		a.validity_flag AS "validityFlag",
+		a.node_code AS "nodeCode",
+		a.id AS "id"
+	</sql>
+	
+	<sql id="approvalProcessJoins">
+	</sql>
+    
+	<select id="get" resultType="ApprovalProcess">
+		SELECT 
+			<include refid="approvalProcessColumns"/>
+		FROM wxbinghu.dbo.stz_region_approval_process a
+		<include refid="approvalProcessJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ApprovalProcess">
+		SELECT 
+			<include refid="approvalProcessColumns"/>
+		FROM wxbinghu.dbo.stz_region_approval_process a
+		<include refid="approvalProcessJoins"/>
+		<where>
+			
+			<if test="projectCode != null and projectCode != ''">
+				AND a.project_code = #{projectCode}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ApprovalProcess">
+		SELECT 
+			<include refid="approvalProcessColumns"/>
+		FROM wxbinghu.dbo.stz_region_approval_process a
+		<include refid="approvalProcessJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO wxbinghu.dbo.stz_region_approval_process(
+			approval_processid,
+			project_code,
+			approval_itemid,
+			handle_dept_name,
+			handle_state,
+			handle_opinion,
+			handle_date,
+			exchange_time,
+			validity_flag,
+			node_code,
+			id
+		) VALUES (
+			#{approvalProcessid},
+			#{projectCode},
+			#{approvalItemid},
+			#{handleDeptName},
+			#{handleState},
+			#{handleOpinion},
+			#{handleDate},
+			#{exchangeTime},
+			#{validityFlag},
+			#{nodeCode},
+			#{id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE wxbinghu.dbo.stz_region_approval_process SET 	
+			approval_processid = #{approvalProcessid},
+			project_code = #{projectCode},
+			approval_itemid = #{approvalItemid},
+			handle_dept_name = #{handleDeptName},
+			handle_state = #{handleState},
+			handle_opinion = #{handleOpinion},
+			handle_date = #{handleDate},
+			exchange_time = #{exchangeTime},
+			validity_flag = #{validityFlag},
+			node_code = #{nodeCode}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM wxbinghu.dbo.stz_region_approval_process
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

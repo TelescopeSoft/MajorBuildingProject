@@ -25,7 +25,7 @@
 		<task:scheduled ref="approveResultCrawlerTask" method="execute" cron="0 0 0 * * ?" />
 		<task:scheduled ref="expropriationCrawlerTask" method="execute" cron="0 0 3 * * ?" />
 		<task:scheduled ref="adminPenaltyCrawlerTask" method="execute" cron="0 0 4 * * ?" />
-		<task:scheduled ref="tradeCrawlerTask" method="execute" cron="0 31 21 * * ?" />
+		<task:scheduled ref="tradeCrawlerTask" method="execute" cron="0 35 20 * * ?" />
 	
 	</task:scheduled-tasks>
 
