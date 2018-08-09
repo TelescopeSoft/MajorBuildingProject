@@ -41,13 +41,6 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">项目所属行政区划代码：</label>
-			<div class="controls">
-				<form:input path="divisionCode" htmlEscape="false" maxlength="16" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
 			<label class="control-label">项目名称：</label>
 			<div class="controls">
 				<form:input path="projectName" htmlEscape="false" maxlength="512" class="input-xxlarge required"/>
@@ -68,6 +61,30 @@
 				<span class="help-inline"><font color="red">*</font> ${applyProjectInfo.projectNatureLabel}</span>
 			</div>
 		</div>
+        <div class="control-group">
+			<label class="control-label">核准目录分类：</label>
+			<div class="controls">
+				<form:input path="catalogName" htmlEscape="false" class="input-xlarge required"/>
+			</div>
+		</div>
+		<div class="control-group">
+        	<label class="control-label">项目（法人）单位：</label>
+        	    <div class="controls">
+        		    <form:input path="enterpriseName" htmlEscape="false" class="input-xlarge required"/>
+        		</div>
+        </div>
+        <div class="control-group">
+          	<label class="control-label">项目法人证照类型：</label>
+          	    <div class="controls">
+          		    <form:input path="lerepCertType" htmlEscape="false"  class="input-xlarge required"/>
+          		</div>
+          </div>
+        <div class="control-group">
+             	<label class="control-label">项目法人证照号码：</label>
+             	    <div class="controls">
+             		    <form:input path="lerepCertNo" htmlEscape="false" class="input-xlarge required"/>
+             		</div>
+             </div>
 		<div class="control-group">
 			<label class="control-label">拟开工时间：</label>
 			<div class="controls">
@@ -95,10 +112,9 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">建设地点详情：</label>
+			<label class="control-label">项目详细地址：</label>
 			<div class="controls">
-				<form:input path="placeCodeDetail" htmlEscape="false" maxlength="1024" class="input-xlarge required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<form:input path="addressDetail" htmlEscape="false" maxlength="1024" class="input-xlarge required"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -125,9 +141,39 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">投资项目目录编码：</label>
+			<label class="control-label">用地面积（公顷）：</label>
 			<div class="controls">
-				<form:input path="permitItemCode" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+				<form:input path="ydmj" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+			</div>
+		</div>
+        <div class="control-group">
+			<label class="control-label">新增用地面积（公顷）：</label>
+			<div class="controls">
+				<form:input path="xzydmj" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+			</div>
+		</div>
+        <div class="control-group">
+			<label class="control-label">农用地面积（公顷）：</label>
+			<div class="controls">
+				<form:input path="nydmj" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+			</div>
+		</div>
+        <div class="control-group">
+			<label class="control-label">项目资本金（万元）：</label>
+			<div class="controls">
+				<form:input path="xmzbj" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+			</div>
+		</div>
+       <div class="control-group">
+			<label class="control-label">资金来源：</label>
+			<div class="controls">
+				<form:input path="zjly" htmlEscape="false" maxlength="50" class="input-xlarge "/>
+			</div>
+		</div>
+       <div class="control-group">
+			<label class="control-label">财政资金来源：</label>
+			<div class="controls">
+				<form:input path="czzjly" htmlEscape="false" maxlength="50" class="input-xlarge "/>
 			</div>
 		</div>
 

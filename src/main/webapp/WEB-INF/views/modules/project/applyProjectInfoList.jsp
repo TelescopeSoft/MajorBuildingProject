@@ -47,7 +47,7 @@
 				<th>拟开工时间</th>
 				<th>拟建成时间</th>
 				<th>总投资额（万元）</th>
-				<th>建设地点</th>
+				<th>地点</th>
 				<th>申报时间</th>
 				<shiro:hasPermission name="project:applyProjectInfo:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -71,13 +71,13 @@
 					${applyProjectInfo.totalMoney}
 				</td>
 				<td>
-					${applyProjectInfo.placeCode}
+					${applyProjectInfo.addressDetail}
 				</td>
 				<td>
 					<fmt:formatDate value="${applyProjectInfo.applyDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<shiro:hasPermission name="project:applyProjectInfo:edit"><td>
-    				<a href="${ctx}/project/applyProjectInfo/form?id=${applyProjectInfo.id}">修改</a>
+    				<a href="${ctx}/project/applyProjectInfo/form?id=${applyProjectInfo.id}">详情</a>
 					<!--<a href="${ctx}/project/applyProjectInfo/delete?id=${applyProjectInfo.id}" onclick="return confirmx('确认要删除该发改申报项目基本信息吗？', this.href)">删除</a>-->
 				</td></shiro:hasPermission>
 			</tr>

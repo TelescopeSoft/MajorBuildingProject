@@ -6,58 +6,60 @@
 	<div class="box-body">
 		<table class="table table-bordered">
 			<tr>
-				<td class="bg-info">项目代码</td>
-				<td>${projectinfo.prjCode}</td>
-				<td class="bg-info">项目名称</td>
-				<td>${projectinfo.prjname}</td>
+				<td class="bg-info" width="15%">项目代码</td>
+				<td width="35%">${projectinfo.projectCode}</td>
+				<td class="bg-info" width="15%">项目名称</td>
+				<td width="35%">${projectinfo.projectName}</td>
 			</tr>
 			<tr>
-				<td class="bg-info">立项文号</td>
-				<td>${projectinfo.prjapprovalnum}</td>
-				<td class="bg-info">住建项目编号</td>
-				<td>${projectinfo.prjnum}</td>
+				<td class="bg-info">项目类型</td>
+				<td>${projectinfo.projectTypeLabel}</td>
+				<td class="bg-info">核准目录分类</td>
+				<td>${projectinfo.catalogName}</td>
 			</tr>
 			<tr>
 				<td class="bg-info">项目（法人）单位</td>
-				<td>${projectinfo.buildcorpname}</td>
-				<td class="bg-info">项目（法人）单位组织机构代码</td>
-				<td>${projectinfo.buildcorpcode}</td>
+				<td>${projectinfo.enterpriseName}</td>
+				<td class="bg-info">项目（法人）证照号码/td>
+				<td>${projectinfo.lerepCertNo}</td>
 			</tr>
 			<tr>
-				<td class="bg-info">立项级别</td>
-				<td><c:choose>
-						<c:when test="${projectinfo.prjapprovallevelnum == '001'}">部级 </c:when>
-						<c:when test="${projectinfo.prjapprovallevelnum == '002'}">省级</c:when>
-						<c:when test="${projectinfo.prjapprovallevelnum == '003'}">地市级</c:when>
-						<c:when test="${projectinfo.prjapprovallevelnum == '004'}">区县级</c:when>
-						<c:otherwise>其他 </c:otherwise>
-					</c:choose></td>
-				<td class="bg-info">项目地址</td>
-				<td>${projectinfo.address}</td>
+				<td class="bg-info">建设性质</td>
+				<td>${projectinfo.projectNatureLabel}</td>
+				<td class="bg-info">总投资（万元）</td>
+				<td>${projectinfo.totalMoney}</td>
 			</tr>
 			<tr>
-				<td class="bg-info">经度</td>
-				<td>${projectinfo.jd}</td>
-				<td class="bg-info">纬度</td>
-				<td>${projectinfo.wd}</td>
+				<td class="bg-info">用地面积（公顷）</td>
+				<td>${projectinfo.ydmj}</td>
+				<td class="bg-info">新增用地面积（公顷）</td>
+				<td>${projectinfo.xzydmj}</td>
 			</tr>
-			<!-- <tr>
-				<td class="bg-info">建设用地规划许可证编号</td>
-				<td>${projectinfo.buldplannum}</td>
-				<td class="bg-info">建设工程规划许可证编号</td>
-				<td>${projectinfo.projectplannum}</td>
-			</tr> -->
+            <tr>
+				<td class="bg-info">农用地面积（公顷）</td>
+				<td>${projectinfo.nydmj}</td>
+				<td class="bg-info">项目资本金（万元）</td>
+				<td>${projectinfo.xmzbj}</td>
+			</tr>
+            <tr>
+				<td class="bg-info">资金来源</td>
+				<td>${projectinfo.zjly}</td>
+				<td class="bg-info">财政资金来源</td>
+				<td>${projectinfo.czzjly}</td>
+			</tr>
 			<tr>
 				<td class="bg-info">拟开工时间（年）</td>
-				<td><fmt:formatDate value="${projectinfo.bdate}" pattern="yyyy-MM-dd"/></td>
+				<td>${projectinfo.startYear}</td>
 				<td class="bg-info">拟建成时间（年）</td>
-				<td><fmt:formatDate value="${projectinfo.edate}" pattern="yyyy-MM-dd"/></td>
+				<td>${projectinfo.endYear}</td>
 			</tr>
 			<tr>
+				<td class="bg-info">项目详细地址</td>
+				<td colspan="3">${projectinfo.addressDetail}</td>
+			</tr>
+            <tr>
 				<td class="bg-info">建设规模及内容</td>
-				<td>${projectinfo.prjsize}</td>
-				<td class="bg-info">总投资（万元）</td>
-				<td>${projectinfo.allinvest}</td>
+				<td colspan="3">${projectinfo.scaleContent}</td>
 			</tr>
 		</table>
 	</div>

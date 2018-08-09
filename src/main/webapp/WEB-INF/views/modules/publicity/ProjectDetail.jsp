@@ -55,7 +55,7 @@
             </div>
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="${ctx}/publicity/index">您正在访问：首页 &gt;&gt;重大项目 &gt;&gt;${projectinfo.prjname} </a></li>
+                    <li class="active"><a href="${ctx}/publicity/project">您正在访问：首页 &gt;&gt;重大项目 &gt;&gt;${projectinfo.projectName} </a></li>
                     </ul>
                 </div>
 
@@ -168,28 +168,28 @@
 	//准备tabs数据
 	var tabsData = [{
 	    "id" : "basic",
-	    "url" : "${ctx}/publicity/projectdetailbasic?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/project/detailbasic?pkid=${projectinfo.projectCode}"
 	},{
 	    "id" : "approve",
-	    "url" : "${ctx}/publicity/projectdetailapprove?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/project/detailapprove?pkid=${projectinfo.projectCode}"
 	},{
 	    "id" : "tender",
-	    "url" : "${ctx}/publicity/projectdetailtender?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/projectdetailtender?pkid=${projectinfo.projectCode}"
 	},{
 	    "id" : "contract",
-	    "url" : "${ctx}/publicity/projectdetailcontract?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/projectdetailcontract?pkid=${projectinfo.projectCode}"
 	},{
 	    "id" : "safty",
-	    "url" : "${ctx}/publicity/projectdetailsafty?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/projectdetailsafty?pkid=${projectinfo.projectCode}"
 	},{
 	    "id" : "quality",
-	    "url" : "${ctx}/publicity/projectdetailquality?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/projectdetailquality?pkid=${projectinfo.projectCode}"
 	},{
 	    "id" : "construction",
-	    "url" : "${ctx}/publicity/projectdetailconstruction?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/projectdetailconstruction?pkid=${projectinfo.projectCode}"
 	},{
 	    "id" : "finish",
-	    "url" : "${ctx}/publicity/projectdetailfinish?pkid=${projectinfo.pkid}"
+	    "url" : "${ctx}/publicity/projectdetailfinish?pkid=${projectinfo.projectCode}"
 	} ];
 	
 	function tabsHandler(event) {

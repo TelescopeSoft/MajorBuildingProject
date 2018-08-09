@@ -12,12 +12,17 @@
 		</tr>
 		<c:forEach items="${list}" var="pubApproveResult">
 			<tr>
-				<td>${pubApproveResult.approveItemLabel}</td>
-				<td>${pubApproveResult.approveDept}</td>
-				<td>${pubApproveResult.approveResult}</td>
-				<td><fmt:formatDate value="${pubApproveResult.updateDate}"
+				<td>${pubApproveResult.deptName}</td>
+				<td>${pubApproveResult.itemName}</td>
+				<td><c:choose>
+				    <c:when test="${ pubApproveResult.currentState eq 'A0501'}">通过</c:when>
+				    <c:when test="${ pubApproveResult.currentState eq 'A0502'}">不通过</c:when>
+                    <c:otherwise>其他</c:otherwise>
+                    </c:choose>
+                </td>
+				<td><fmt:formatDate value="${pubApproveResult.dealTime}"
 						pattern="yyyy-MM-dd" /></td>
-				<td>${pubApproveResult.approveNum}</td>
+				<td>${pubApproveResult.approvalNum}</td>
 			</tr>
 		</c:forEach>
 

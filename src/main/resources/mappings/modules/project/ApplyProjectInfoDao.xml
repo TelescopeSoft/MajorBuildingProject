@@ -3,57 +3,42 @@
 <mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApplyProjectInfoDao">
     
 	<sql id="applyProjectInfoColumns">
-		a.project_code AS "projectCode",
-		a.division_code AS "divisionCode",
-		a.project_name AS "projectName",
-		a.project_type AS "projectType",
-		c2.name AS "projectTypeLabel",
-		a.project_nature AS "projectNature",
-		c.name AS "projectNatureLabel",
-		a.start_year AS "startYear",
-		a.end_year AS "endYear",
-		a.total_money AS "totalMoney",
-		a.place_code AS "placeCode",
-		a.place_code_detail AS "placeCodeDetail",
-		a.industry AS "industry",
-		a.scale_content AS "scaleContent",
-		a.apply_date AS "applyDate",
-		a.permit_item_code AS "permitItemCode",
-		a.exchange_time AS "exchangeTime",
-		a.validity_flag AS "validityFlag",
-		a.node_code AS "nodeCode",
-		a.id AS "id",
-		a.foreign_abroad_flag AS "foreignAbroadFlag",
-		a.total_money_explain AS "totalMoneyExplain",
-		a.the_industry AS "theIndustry",
-		a.is_country_security AS "isCountrySecurity",
-		a.security_approval_number AS "securityApprovalNumber",
-		a.investment_mode AS "investmentMode",
-		a.total_money_dollar AS "totalMoneyDollar",
-		a.total_money_dollar_rate AS "totalMoneyDollarRate",
-		a.project_capital_money AS "projectCapitalMoney",
-		a.project_capital_money_dollar AS "projectCapitalMoneyDollar",
-		a.project_capital_money_dollar_rate AS "projectCapitalMoneyDollarRate",
-		a.industrial_policy_type AS "industrialPolicyType",
-		a.industrial_policy AS "industrialPolicy",
-		a.other_investment_apply_info AS "otherInvestmentApplyInfo",
-		a.transaction_both_info AS "transactionBothInfo",
-		a.merger_plan AS "mergerPlan",
-		a.merger_management_mode_scope AS "mergerManagementModeScope",
-		a.get_land_mode AS "getLandMode",
-		a.land_area AS "landArea",
-		a.built_area AS "builtArea",
-		a.is_add_device AS "isAddDevice",
-		a.import_device_number_money AS "importDeviceNumberMoney",
-		a.project_site AS "projectSite",
-		a.china_total_money AS "chinaTotalMoney"
+	a.[ID] AS id
+	,a.[PROJECT_CODE] AS projectCode
+	,a.[PROJECT_NAME] AS projectName
+	,a.[PROJECT_TYPE] AS projectType
+	,a.[PROJECT_NATURE] AS projectNature
+	,ISNULL(a.[START_YEAR],'') AS startYear
+	,ISNULL(a.[END_YEAR],'') AS endYear
+	,a.[TOTAL_MONEY] AS totalMoney
+	,a.[INDUSTRY] AS industry
+	,a.[SCALE_CONTENT] AS scaleContent
+	,a.[APPLY_DATE] AS applyDate
+	,a.[THE_INDUSTRY] AS theIndustry
+	,ISNULL(a.[ADDRESS_DETAIL],'') AS addressDetail
+	,a.[YDMJ] AS ydmj
+	,a.[XZYDMJ] AS xzydmj
+	,a.[NYDMJ] AS nydmj
+	,a.[ZJLY] AS zjly
+	,a.[CZZJLY] AS czzjly
+	,a.[XMZBJ] AS xmzbj
+	,ISNULL(b.ENTERPRISE_NAME,'') AS enterpriseName
+	,ISNULL(b.LEREP_CERTTYPE,'') AS lerepCertType
+	,ISNULL(b.LEREP_CERTNO,'') AS lerepCertNo
+	,c2.name AS "projectTypeLabel"
+    ,c.name AS "projectNatureLabel"
+    ,a.catalog_name AS "catalogName"
 	</sql>
+
+
 	
 	<sql id="applyProjectInfoJoins">
-		LEFT JOIN wxbinghu.dbo.CodeInfo c ON a.PROJECT_NATURE = c.Code
-			AND c.codetype = 'PROJECT_NATURE'
-		LEFT JOIN wxbinghu.dbo.CodeInfo c2 ON a.PROJECT_TYPE = c2.Code
-			AND c2.codetype = 'PROJECT_TYPE'
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_PROJECT_LEREP_INFO b ON a.PROJECT_CODE = b.PROJECT_CODE
+			AND b.VALIDITY_FLAG = 1
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_CODE_INFO c ON a.PROJECT_NATURE = c.Code
+					AND c.code_type = 'PROJECT_NATURE'
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_CODE_INFO c2 ON a.PROJECT_TYPE = c2.Code
+					AND c2.code_type = 'PROJECT_TYPE'
 	</sql>
     
 	<select id="get" resultType="ApplyProjectInfo">
@@ -63,6 +48,14 @@
 		<include refid="applyProjectInfoJoins"/>
 		WHERE a.id = #{id}
 	</select>
+
+	<select id="getByProjectCode" resultType="ApplyProjectInfo">
+		SELECT
+		<include refid="applyProjectInfoColumns"/>
+		FROM wxbinghu.dbo.stz_region_apply_project_info a
+		<include refid="applyProjectInfoJoins"/>
+		WHERE a.PROJECT_CODE = #{projectCode}
+	</select>
 	
 	<select id="findList" resultType="ApplyProjectInfo">
 		SELECT 
@@ -70,15 +63,26 @@
 		FROM wxbinghu.dbo.stz_region_apply_project_info a
 		<include refid="applyProjectInfoJoins"/>
 		<where>
-			
+			a.PROJECT_CODE IN (
+			SELECT PROJECT_CODE
+			FROM wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO
+			WHERE CURRENT_STATE IN (
+			'A0501'
+			,'A0502'
+			,'A0503'
+			)
+			)
 			<if test="projectCode != null and projectCode != ''">
 				AND a.project_code = #{projectCode}
 			</if>
 			<if test="projectName != null and projectName != ''">
-				AND a.project_name = #{projectName}
+				AND a.project_name like
+				<if test="dbName == 'oracle'">'%'||#{projectName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{projectName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{projectName}, '%')</if>
 			</if>
 			<if test="totalMoney != null and totalMoney != ''">
-				AND cast(a.total_money as decimal) >= #{totalMoney}
+				AND a.total_money >= #{totalMoney}
 			</if>
 		</where>
 		<choose>

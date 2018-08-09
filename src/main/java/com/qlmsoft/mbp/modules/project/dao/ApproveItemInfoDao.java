@@ -5,14 +5,14 @@ package com.qlmsoft.mbp.modules.project.dao;
 
 import com.qlmsoft.mbp.common.persistence.CrudDao;
 import com.qlmsoft.mbp.common.persistence.annotation.MyBatisDao;
-import com.qlmsoft.mbp.modules.project.entity.ApplyProjectInfo;
+import com.qlmsoft.mbp.modules.project.entity.ApproveItemInfo;
 
 /**
- * 发改申报项目基本信息DAO接口
+ * 发改批准结果信息DAO接口
  * @author huangzhengyu
- * @version 2018-08-08
+ * @version 2018-08-09
  */
 @MyBatisDao
-public interface ApplyProjectInfoDao extends CrudDao<ApplyProjectInfo> {
-    ApplyProjectInfo getByProjectCode(ApplyProjectInfo projectCode);
+public interface ApproveItemInfoDao extends CrudDao<ApproveItemInfo> {
+	
 }

@@ -25,6 +25,12 @@ public class ApplyProjectInfoService extends CrudService<ApplyProjectInfoDao, Ap
 	public ApplyProjectInfo get(String id) {
 		return super.get(id);
 	}
+
+	public ApplyProjectInfo getByProjectCode(String projectCode) {
+		ApplyProjectInfo entity = new ApplyProjectInfo();
+		entity.setProjectCode(projectCode);
+		return this.dao.getByProjectCode(entity);
+	}
 	
 	public List<ApplyProjectInfo> findList(ApplyProjectInfo applyProjectInfo) {
 		return super.findList(applyProjectInfo);

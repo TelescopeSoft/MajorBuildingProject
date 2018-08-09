@@ -12,7 +12,8 @@ public class PulicityMenuInstance {
 
 		list = new ArrayList<PulicityMenu>();
 
-		PulicityMenu project = new PulicityMenu("项目列表", "index", "index", false);
+//		PulicityMenu project = new PulicityMenu("项目列表", "index", "index", false);
+		PulicityMenu project = new PulicityMenu("项目列表", "project", "project", false);
 		list.add(project);
 
 		PulicityMenu guide = new PulicityMenu("批准服务", "approveguide",

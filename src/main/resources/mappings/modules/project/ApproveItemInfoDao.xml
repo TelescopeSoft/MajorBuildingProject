@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApproveItemInfoDao">
+    
+	<sql id="approveItemInfoColumns">
+		a.approval_itemid AS "approvalItemid",
+		a.project_code AS "projectCode",
+		a.item_code AS "itemCode",
+		a.current_state AS "currentState",
+		a.deal_time AS "dealTime",
+		a.plan_finish_date AS "planFinishDate",
+		a.exchange_time AS "exchangeTime",
+		a.validity_flag AS "validityFlag",
+		a.node_code AS "nodeCode",
+		a.rel_item_flag AS "relItemFlag",
+		a.id AS "id",
+		a.dept_code AS "deptCode",
+		a.division_code AS "divisionCode",
+		a.central_approval_itemid AS "centralApprovalItemid",
+		a.rel_central_item_code AS "relCentralItemCode",
+		a.rel_dept_code AS "relDeptCode"
+	</sql>
+
+	<sql id="approveInfoColumns">
+		a.PROJECT_CODE AS "projectCode",
+		a.PROJECT_NAME AS "projectName",
+		b.approval_num AS "approvalNum",
+		b.CURRENT_STATE AS "currentState",
+		b.DEAL_TIME AS "dealTime",
+		c.ITEM_NAME AS "itemName",
+		c.DEPT_CODE AS "deptCode",
+		d.DEPT_NAME AS "deptName"
+	</sql>
+	
+	<sql id="approveItemInfoJoins">
+	  	LEFT JOIN wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO b ON a.PROJECT_CODE = b.PROJECT_CODE
+			AND b.CURRENT_STATE IN ('A0501','A0502','A0503')
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_BASE_INFO c ON b.ITEM_CODE = c.ITEM_CODE
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_DEPT_INFO d ON d.DEPT_CODE = c.DEPT_CODE
+	</sql>
+    
+	<select id="get" resultType="ApproveItemInfo">
+		SELECT 
+			<include refid="approveItemInfoColumns"/>
+		FROM wxbinghu.dbo.stz_region_approve_item_info a
+		<include refid="approveItemInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ApproveItemInfo">
+		SELECT 
+			<include refid="approveInfoColumns"/>
+		FROM [wxbinghu].[dbo].[STZ_REGION_APPLY_PROJECT_INFO] a
+		<include refid="approveItemInfoJoins"/>
+		<where>
+			c.ITEM_NAME IN ( SELECT approve_item_label
+					FROM [MajorProjectLib].[dbo].[pub_approve_guide]
+			)
+			<if test="projectCode != null and projectCode != ''">
+				AND a.project_code = #{projectCode}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY b.DEAL_TIME DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ApproveItemInfo">
+		SELECT 
+			<include refid="approveItemInfoColumns"/>
+		FROM wxbinghu.dbo.stz_region_approve_item_info a
+		<include refid="approveItemInfoJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO wxbinghu.dbo.stz_region_approve_item_info(
+			approval_itemid,
+			project_code,
+			item_code,
+			current_state,
+			deal_time,
+			plan_finish_date,
+			exchange_time,
+			validity_flag,
+			node_code,
+			rel_item_flag,
+			id,
+			dept_code,
+			division_code,
+			central_approval_itemid,
+			rel_central_item_code,
+			rel_dept_code
+		) VALUES (
+			#{approvalItemid},
+			#{projectCode},
+			#{itemCode},
+			#{currentState},
+			#{dealTime},
+			#{planFinishDate},
+			#{exchangeTime},
+			#{validityFlag},
+			#{nodeCode},
+			#{relItemFlag},
+			#{id},
+			#{deptCode},
+			#{divisionCode},
+			#{centralApprovalItemid},
+			#{relCentralItemCode},
+			#{relDeptCode}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE wxbinghu.dbo.stz_region_approve_item_info SET
+			approval_itemid = #{approvalItemid},
+			project_code = #{projectCode},
+			item_code = #{itemCode},
+			current_state = #{currentState},
+			deal_time = #{dealTime},
+			plan_finish_date = #{planFinishDate},
+			exchange_time = #{exchangeTime},
+			validity_flag = #{validityFlag},
+			node_code = #{nodeCode},
+			rel_item_flag = #{relItemFlag},
+			dept_code = #{deptCode},
+			division_code = #{divisionCode},
+			central_approval_itemid = #{centralApprovalItemid},
+			rel_central_item_code = #{relCentralItemCode},
+			rel_dept_code = #{relDeptCode}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM wxbinghu.dbo.stz_region_approve_item_info
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
