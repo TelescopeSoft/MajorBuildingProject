@@ -12,3 +12,6 @@ INSERT [MajorProjectLib].[dbo].[sys_dict] ([id], [value], [label], [type], [desc
 
  -- 行政处罚字段扩展长度
  alter table [MajorProjectLib].[dbo].[pub_admin_penalty] alter column punish_result varchar(500) null
+ 
+ -- 住建项目增加统一项目代码字段
+  alter table [MajorProjectLib].[dbo].[TBProjectInfo] add PROJECT_CODE varchar(32) null; 

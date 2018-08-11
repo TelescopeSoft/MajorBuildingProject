@@ -22,10 +22,12 @@
 	</sql>
 
 	<sql id="approveInfoColumns">
+		b.id AS "id",
 		a.PROJECT_CODE AS "projectCode",
 		a.PROJECT_NAME AS "projectName",
 		b.approval_num AS "approvalNum",
 		b.CURRENT_STATE AS "currentState",
+		e.name AS "currentStateLabel",
 		b.DEAL_TIME AS "dealTime",
 		c.ITEM_NAME AS "itemName",
 		c.DEPT_CODE AS "deptCode",
@@ -37,13 +39,13 @@
 			AND b.CURRENT_STATE IN ('A0501','A0502','A0503')
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_BASE_INFO c ON b.ITEM_CODE = c.ITEM_CODE
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_DEPT_INFO d ON d.DEPT_CODE = c.DEPT_CODE
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_CODE_INFO e ON e.code = b.CURRENT_STATE AND e.code_type = 'current_state'
 	</sql>
     
 	<select id="get" resultType="ApproveItemInfo">
 		SELECT 
 			<include refid="approveItemInfoColumns"/>
 		FROM wxbinghu.dbo.stz_region_approve_item_info a
-		<include refid="approveItemInfoJoins"/>
 		WHERE a.id = #{id}
 	</select>
 	
@@ -58,6 +60,15 @@
 			)
 			<if test="projectCode != null and projectCode != ''">
 				AND a.project_code = #{projectCode}
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND a.PROJECT_NAME = #{projectName}
+			</if>
+			<if test="itemName != null and itemName != ''">
+				AND c.ITEM_NAME = #{itemName}
+			</if>
+			<if test="deptCode != null and deptCode != ''">
+				AND c.dept_code = #{deptCode}
 			</if>
 		</where>
 		<choose>

@@ -71,7 +71,7 @@
 			INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		<include refid="apZjsbbJoins"/>	
 		<where>
-			b.pkid = #{pkid}
+			b.PROJECT_CODE = #{pkid}
 		</where>
 		ORDER BY a.updateDate DESC
 	</select>

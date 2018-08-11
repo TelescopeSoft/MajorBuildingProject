@@ -61,6 +61,8 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 
 	private String majorFlag; // majorFlag
 
+	private String matchPrj;
+
 	public ProjectInfo() {
 		super();
 	}
@@ -363,5 +365,14 @@ public class ProjectInfo extends DataEntity<ProjectInfo> {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public String getMatchPrj() {
+		return matchPrj;
+	}
+
+	public void setMatchPrj(String matchPrj) {
+		this.matchPrj = matchPrj;
+	}
+
 
 }

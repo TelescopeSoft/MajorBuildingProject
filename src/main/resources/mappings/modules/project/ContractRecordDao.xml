@@ -71,7 +71,7 @@
 		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		LEFT JOIN MajorProjectLib.dbo.tbContractTypeDic c ON c.Code = a.ContractTypeNum
 		<where>
-			b.pkid = #{pkid}
+			b.PROJECT_CODE = #{pkid}
 		</where>
 		ORDER BY a.ContractDate DESC
 	</select>

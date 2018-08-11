@@ -3,6 +3,7 @@ package com.qlmsoft.mbp.modules.crawler.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qlmsoft.mbp.modules.project.entity.ApplyProjectInfo;
 import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,8 @@ public class ApproveResultCrawlerController {
 
 		String prjName = request.getParameter("PrjName");
 		ResultBean result = new ResultBean();
-		ProjectInfo prj = new ProjectInfo();
-		prj.setPrjname(prjName);
+		ApplyProjectInfo prj = new ApplyProjectInfo();
+		prj.setProjectName(prjName);
 		try {
 			crawler.synchByPrjName(prj);
 		} catch (Exception e) {

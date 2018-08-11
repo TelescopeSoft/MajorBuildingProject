@@ -39,7 +39,13 @@
 		<form:hidden path="prjapprovallevelnum"/>
 		
 		<sys:message content="${message}"/>		
-		 
+        <div class="control-group">
+			<label class="control-label">发改项目代码：</label>
+			<div class="controls">
+				<form:input path="prjCode" htmlEscape="false" maxlength="20" class="input-xlarge required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
+			</div>
+		</div>
 		<div class="control-group">
 			<label class="control-label">项目编码：</label>
 			<div class="controls">

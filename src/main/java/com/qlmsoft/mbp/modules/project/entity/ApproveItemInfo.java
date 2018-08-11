@@ -22,6 +22,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	private String projectCode;		// 项目代码
 	private String itemCode;		// 审批事项编码
 	private String currentState;		// 当前办理状态
+	private String currentStateLabel; //当前办理状态Label
 	private Date dealTime;		// 变更为当前状态的时间
 	private Date planFinishDate;		// 按期办结时间
 	private Date exchangeTime;		// exchange_time
@@ -213,5 +214,13 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+
+	public String getCurrentStateLabel() {
+		return currentStateLabel;
+	}
+
+	public void setCurrentStateLabel(String currentStateLabel) {
+		this.currentStateLabel = currentStateLabel;
 	}
 }

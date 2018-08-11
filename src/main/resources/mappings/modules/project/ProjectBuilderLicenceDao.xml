@@ -80,7 +80,7 @@
 		FROM dbo.TBProjectFinishManage a
 		<include refid="projectBuilderLicenceJoins"/>
 		<where>
-			b.pkid = #{pkid}
+			b.PROJECT_CODE = #{pkid}
 		</where>
 		ORDER BY a.CreateDate DESC
 	</select>

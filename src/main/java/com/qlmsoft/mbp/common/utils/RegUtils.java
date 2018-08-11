@@ -13,6 +13,9 @@ public class RegUtils {
     public static Pattern EXPROPRIATION_INFO_VIEW_PATTERN = Pattern
             .compile("(?<=checkReplyFile\\(\\')[^\\'\\)]+");
 
+    public static Pattern APPROVE_NUM_PATTERN = Pattern
+            .compile("(?<type>.*?)[\\[|【|(|（|〔](?<year>\\d{4})[\\]|】|)|）|〕](?<num>\\d{1,4})");
+
     public static String abstractStringByPattern(String input, Pattern pattern) {
         String result = null;
         Matcher matter = pattern.matcher(input);
@@ -39,6 +42,23 @@ public class RegUtils {
         while (matter.find()) {
             result.add(matter.group());
         }
+        return result;
+    }
+
+    public static List<String> abstractApproveNum(String approveNum){
+        Matcher matcher = APPROVE_NUM_PATTERN.matcher(approveNum);
+        String type = null;
+        String year = null;
+        String num = null;
+        while (matcher.find()) {
+            type = matcher.group("type");
+            year = matcher.group("year");
+            num =  matcher.group("num");
+        }
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(type);
+        result.add(year);
+        result.add(num);
         return result;
     }
 

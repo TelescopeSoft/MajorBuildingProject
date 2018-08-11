@@ -17,6 +17,7 @@
 	</sql>
 	
 	<sql id="approvalProcessJoins">
+
 	</sql>
     
 	<select id="get" resultType="ApprovalProcess">

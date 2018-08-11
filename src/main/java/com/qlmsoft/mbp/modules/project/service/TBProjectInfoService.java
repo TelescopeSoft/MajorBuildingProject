@@ -25,6 +25,19 @@ public class TBProjectInfoService extends CrudService<TBProjectInfoDao, ProjectI
 	public ProjectInfo get(String id) {
 		return super.get(id);
 	}
+
+	public ProjectInfo getBaseByName(String name) {
+		return this.dao.getBaseByName(name);
+	}
+
+	public ProjectInfo getBaseByApproveNum(String approveType , String approveNum) {
+		ProjectInfo result = this.dao.getBaseByApproveNum(approveType, approveNum);
+		if(result == null) {
+			//对于有些立项文号为空的，从一号通DG_Programme_Info表里获取
+			result = this.dao.getBaseByApproveNumFromYHT(approveType, approveNum);
+		}
+		return result;
+	}
 	
 	public List<ProjectInfo> findList(ProjectInfo projectInfo) {
 		return super.findList(projectInfo);
@@ -49,5 +62,14 @@ public class TBProjectInfoService extends CrudService<TBProjectInfoDao, ProjectI
 	public void toggleMajor(ProjectInfo projectInfo) {
 		this.dao.updateMajorFlag(projectInfo);
 	}
-	
+
+	@Transactional(readOnly = false)
+	public void updateProjectCode(ProjectInfo projectInfo) {
+		this.dao.updateProjectCode(projectInfo);
+	}
+	@Transactional(readOnly = false)
+	public void updateProjectCodeByPrjNum(ProjectInfo projectInfo) {
+		this.dao.updateProjectCodeByPrjNum(projectInfo);
+	}
+
 }

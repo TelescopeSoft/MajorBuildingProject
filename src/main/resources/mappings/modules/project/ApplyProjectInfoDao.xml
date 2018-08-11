@@ -28,9 +28,8 @@
 	,c2.name AS "projectTypeLabel"
     ,c.name AS "projectNatureLabel"
     ,a.catalog_name AS "catalogName"
+    ,i.PrjNum AS "prjNum"
 	</sql>
-
-
 	
 	<sql id="applyProjectInfoJoins">
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_PROJECT_LEREP_INFO b ON a.PROJECT_CODE = b.PROJECT_CODE
@@ -39,6 +38,7 @@
 					AND c.code_type = 'PROJECT_NATURE'
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_CODE_INFO c2 ON a.PROJECT_TYPE = c2.Code
 					AND c2.code_type = 'PROJECT_TYPE'
+		LEFT JOIN MajorProjectLib.dbo.TBProjectInfo i ON a.PROJECT_CODE = i.PROJECT_CODE
 	</sql>
     
 	<select id="get" resultType="ApplyProjectInfo">
@@ -84,6 +84,9 @@
 			<if test="totalMoney != null and totalMoney != ''">
 				AND a.total_money >= #{totalMoney}
 			</if>
+			<if test="notMatchPrj != null and notMatchPrj != ''">
+				AND i.PrjNum IS NULL
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -93,6 +96,27 @@
 				ORDER BY APPLY_DATE DESC
 			</otherwise>
 		</choose>
+	</select>
+
+	<select id="findNotMatchList" resultType="ApplyProjectInfo">
+		SELECT a.[ID] AS id
+			,a.[PROJECT_CODE] AS projectCode
+			,a.[PROJECT_NAME] AS projectName
+			,a.[PROJECT_TYPE] AS projectType
+			,a.[PROJECT_NATURE] AS projectNature
+		FROM wxbinghu.dbo.stz_region_apply_project_info a
+		LEFT JOIN MajorProjectLib.dbo.TBProjectInfo i on a.PROJECT_CODE = i.PROJECT_CODE
+		<where>
+			a.PROJECT_CODE IN (
+				SELECT PROJECT_CODE
+				FROM wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO
+				WHERE CURRENT_STATE IN ( 'A0501' ,'A0502' ,'A0503')
+			)
+			AND i.PROJECT_CODE IS NULL
+			<if test="totalMoney != null and totalMoney != ''">
+				AND a.total_money >= #{totalMoney}
+			</if>
+		</where>
 	</select>
 	
 	<select id="findAllList" resultType="ApplyProjectInfo">

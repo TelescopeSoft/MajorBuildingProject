@@ -66,7 +66,7 @@
 		FROM dbo.TBProjectFinishManage a
 		<include refid="projectFinishJoins"/>
 		<where>
-			b.pkid = #{pkid}
+			b.PROJECT_CODE = #{pkid}
 		</where>
 		ORDER BY a.createDate DESC
 	</select>

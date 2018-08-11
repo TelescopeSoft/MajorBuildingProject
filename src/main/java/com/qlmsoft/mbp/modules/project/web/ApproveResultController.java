@@ -50,7 +50,7 @@ public class ApproveResultController extends BaseController {
 			HttpServletRequest request, HttpServletResponse response) {
 		logger.debug("---- approve result list------"
 				+ approveResult.toString());
-		approveResult.setDisplayFlag("0");
+//		approveResult.setDisplayFlag("0");
 		List<PubApproveResult> approves = pubApproveResultService
 				.findList(approveResult);
 		DataTableBean<PubApproveResult> result = new DataTableBean<PubApproveResult>();

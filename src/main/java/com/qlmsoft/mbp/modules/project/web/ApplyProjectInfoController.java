@@ -64,9 +64,9 @@ public class ApplyProjectInfoController extends BaseController {
 	@RequiresPermissions("project:applyProjectInfo:edit")
 	@RequestMapping(value = "save")
 	public String save(ApplyProjectInfo applyProjectInfo, Model model, RedirectAttributes redirectAttributes) {
-		if (!beanValidator(model, applyProjectInfo)){
-			return form(applyProjectInfo, model);
-		}
+//		if (!beanValidator(model, applyProjectInfo)){
+//			return form(applyProjectInfo, model);
+//		}
 		applyProjectInfoService.save(applyProjectInfo);
 		addMessage(redirectAttributes, "保存发改申报项目基本信息成功");
 		return "redirect:"+Global.getAdminPath()+"/project/applyProjectInfo/?repage";

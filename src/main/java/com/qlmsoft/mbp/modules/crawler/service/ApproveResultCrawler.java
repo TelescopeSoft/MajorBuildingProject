@@ -3,6 +3,7 @@ package com.qlmsoft.mbp.modules.crawler.service;
 import com.qlmsoft.mbp.common.utils.DateUtils;
 import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.modules.project.bean.PubApproveResultTable;
+import com.qlmsoft.mbp.modules.project.entity.ApplyProjectInfo;
 import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
 import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
 import com.qlmsoft.mbp.modules.project.service.PubApproveResultService;
@@ -38,8 +39,8 @@ public class ApproveResultCrawler {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public static Pattern APPROVE_NUM_PATTERN = Pattern
-            .compile("(?<type>.*?)[\\[|【](?<year>\\d{4})[\\]|】](?<num>\\d{2})");
+	public static Pattern APPROVE_NUM_PATTERN = Pattern
+			.compile("(?<type>.*?)[\\[|【|(|（](?<year>\\d{4})[\\]|】|)|）](?<num>\\d{1,4})");
 
 	public static final String APPROVE_RESULT_QUERY_URL = "http://218.94.123.37/tzxmspweb/portalopenPublicInformation.do?method=queryExamineAll";
 
@@ -62,7 +63,7 @@ public class ApproveResultCrawler {
 	 * @param prj
 	 * @throws IOException
 	 */
-	public boolean synchByPrjName(ProjectInfo prj) throws IOException {
+	public boolean synchByPrjName(ApplyProjectInfo prj) throws IOException {
 
         RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build();
         CloseableHttpClient closeHttpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
@@ -73,7 +74,7 @@ public class ApproveResultCrawler {
 
 		// 设置Post参数
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("apply_project_name", prj.getPrjname()));
+		params.add(new BasicNameValuePair("apply_project_name", prj.getProjectCode()));
 		httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
 
 
@@ -89,12 +90,12 @@ public class ApproveResultCrawler {
 			 * html = StreamUtils.InputStreamTOString(is);
 			 */
 			if (html != null) {
-				PubApproveResultTable approveResult = getApproveResultTable(prj.getPrjname(),
+				PubApproveResultTable approveResult = getApproveResultTable(prj.getProjectCode(),
 						html);
                 if(approveResult != null && approveResult.getList() != null  && !approveResult.getList().isEmpty()){
                     result = true;
                     for (PubApproveResult i : approveResult.getList()) {
-                        i.setPrjNum(prj.getPrjnum());
+                        //i.setPrjNum(prj.getPrjnum());
                         approveResultService.checkDuplicatedAndSave(i);
                     }
                 }
@@ -128,13 +129,13 @@ public class ApproveResultCrawler {
 	/**
 	 * 第一页数据提取
 	 * 
-	 * @param prjName
+	 * @param prjCode
 	 * @param html
 	 * @return
 	 */
-	private PubApproveResultTable getApproveResultTable(String prjName,
+	private PubApproveResultTable getApproveResultTable(String prjCode,
 			String html) {
-		logger.info("===========getApproveResultTable for prjName : " + prjName);
+		logger.info("===========getApproveResultTable for prjCode : " + prjCode);
 
 		PubApproveResultTable result = new PubApproveResultTable();
 
@@ -182,7 +183,7 @@ public class ApproveResultCrawler {
 				for (int i = 2; i <= result.getTotalPage(); i++) {
 
 					List<PubApproveResult> approveInPage = getApproveResultTableByPage(
-							prjName, i, result.getPageSize());
+							prjCode, i, result.getPageSize());
 					if (approveInPage != null && !approveInPage.isEmpty()) {
 						list.addAll(approveInPage);
 					}
@@ -236,7 +237,10 @@ public class ApproveResultCrawler {
 		httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
 
 		try {
-
+			if(closeHttpClient == null){
+				RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build();
+				closeHttpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
+			}
 			httpResponse = closeHttpClient.execute(httpPost);
 			String html = EntityUtils.toString(httpResponse.getEntity(),
 					"UTF-8");

@@ -38,9 +38,17 @@
 		a.updateuser AS "updateuser",
 		a.MajorFlag AS "majorFlag",
 		i.programme_address AS "address",
-		( SELECT TOP 1 prj_code
-		FROM dbo.pub_approve_result b
-		WHERE b.prj_num = a.PrjNum ) AS prjCode
+		a.PROJECT_CODE AS prjCode
+	</sql>
+
+	<sql id="baseColumns">
+		a.pkid AS "pkid",
+		a.prjnum AS "prjnum",
+		a.prjname AS "prjName",
+		a.buildcorpname AS "buildcorpname",
+		a.buildcorpcode AS "buildcorpcode",
+		a.prjapprovalnum AS "prjapprovalnum",
+		a.PROJECT_CODE AS "prjCode"
 	</sql>
 	
 	<sql id="tBProjectInfoJoins">
@@ -53,6 +61,50 @@
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
 		WHERE a.PKID = #{id}
+	</select>
+
+	<select id="getBaseByName" resultType="ProjectInfo">
+		SELECT TOP 1
+		<include refid="baseColumns"/>
+		FROM tbprojectinfo a
+		<where>
+			UpdateFlag != 'D' AND CountyNum = '320211'
+			<if test="prjname != null and prjname != ''">
+				AND a.PrjName like '%'+#{prjname}+'%'
+			</if>
+		</where>
+	</select>
+
+	<select id="getBaseByApproveNum" resultType="ProjectInfo">
+		SELECT TOP 1
+		<include refid="baseColumns"/>
+		FROM tbprojectinfo a
+		<where>
+			UpdateFlag != 'D' AND CountyNum = '320211'
+			<if test="approvenum != null and approvenum != ''">
+				AND MajorProjectLib.dbo.GET_NUMBER2(a.prjapprovalnum) = #{approvenum}
+			</if>
+			<if test="approvetype != null and approvetype != ''">
+				AND ( CHARINDEX(MajorProjectLib.dbo.CHINA_STR(a.prjapprovalnum), #{approvetype}) > 0
+				OR CHARINDEX(#{approvetype},MajorProjectLib.dbo.CHINA_STR(a.prjapprovalnum)) > 0 )
+			</if>
+		</where>
+	</select>
+
+	<select id="getBaseByApproveNumFromYHT" resultType="ProjectInfo">
+		SELECT TOP 1
+		<include refid="baseColumns"/>
+		FROM tbprojectinfo a
+		LEFT JOIN MajorProjectLib.[dbo].[DG_Programme_Info] b on a.PrjNum = b.PrjNum
+		<where>
+			UpdateFlag != 'D' AND CountyNum = '320211'
+			<if test="approvenum != null and approvenum != ''">
+				AND b.fb_year+b.num = #{approvenum}
+			</if>
+			<if test="approvetype != null and approvetype != ''">
+				AND b.lxwh_type like #{approvetype}+'%'
+			</if>
+		</where>
 	</select>
 	
 	<select id="findList" resultType="ProjectInfo">
@@ -91,6 +143,15 @@
 			</if>
 			<if test="allinvest != null and allinvest != ''">
 				AND a.allinvest >= #{allinvest}
+			</if>
+			<if test="matchPrj != null and matchPrj != ''">
+				AND a.PROJECT_CODE IS NULL
+			</if>
+			<if test="prjCode != null and prjCode != ''">
+				AND a.PROJECT_CODE like
+				<if test="dbName == 'oracle'">'%'||#{prjCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{prjCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{prjCode}, '%')</if>
 			</if>
 		</where>
 		<choose>
@@ -133,8 +194,14 @@
 					<if test="dbName == 'mssql'">'%'+#{prjapprovalnum}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjapprovalnum}, '%')</if>
 			</if>
-			<if test="majorFlag != null and majorFlag != ''">
-				AND a.MajorFlag = #{majorFlag}
+			<if test="matchPrj != null and matchPrj != ''">
+				AND a.PROJECT_CODE IS NULL
+			</if>
+			<if test="prjCode != null and prjCode != ''">
+				AND a.PROJECT_CODE like
+				<if test="dbName == 'oracle'">'%'||#{prjCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{prjCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{prjCode}, '%')</if>
 			</if>
 			<if test="allinvest != null and allinvest != ''">
 				AND a.allinvest >= #{allinvest}
@@ -238,7 +305,8 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE tbprojectinfo SET 
+		UPDATE tbprojectinfo SET
+			PROJECT_CODE = #{prjCode},
 			prjnum = #{prjnum},
 			prjinnernum = #{prjinnernum},
 			prjname = #{prjname},
@@ -274,6 +342,21 @@
 			xgrqsj = #{xgrqsj},
 			updateuser = #{updateuser}
 		WHERE pkid = #{pkid}
+	</update>
+
+	<update id="updateProjectCode">
+		UPDATE tbprojectinfo SET
+		PROJECT_CODE = #{prjCode},
+		xgrqsj = #{xgrqsj},
+		updateuser = #{updateuser}
+		WHERE pkid = #{pkid}
+	</update>
+	<update id="updateProjectCodeByPrjNum">
+		UPDATE tbprojectinfo SET
+		PROJECT_CODE = #{prjCode},
+		xgrqsj = #{xgrqsj},
+		updateuser = #{updateuser}
+		WHERE PrjNum = #{prjnum}
 	</update>
 	
 	<update id="delete">

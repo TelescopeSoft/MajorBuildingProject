@@ -22,10 +22,11 @@
 
 	<task:scheduled-tasks>
 	 
-		<task:scheduled ref="approveResultCrawlerTask" method="execute" cron="0 0 0 * * ?" />
+		<task:scheduled ref="approveResultCrawlerTask" method="execute" cron="0 44 22 * * ?" />
 		<task:scheduled ref="expropriationCrawlerTask" method="execute" cron="0 0 3 * * ?" />
 		<task:scheduled ref="adminPenaltyCrawlerTask" method="execute" cron="0 0 4 * * ?" />
 		<task:scheduled ref="tradeCrawlerTask" method="execute" cron="0 35 20 * * ?" />
+		<task:scheduled ref="projectMatchTask" method="execute" cron="0 39 15 * * ?" />
 	
 	</task:scheduled-tasks>
 

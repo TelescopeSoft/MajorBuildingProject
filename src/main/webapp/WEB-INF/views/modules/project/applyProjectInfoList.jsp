@@ -34,6 +34,8 @@
 			<li><label style="width:140px;">总投资额（万元）：</label>
             	<form:input path="totalMoney" htmlEscape="false" maxlength="512" class="input-medium"/>
             </li>
+            <li class="clearfix"></li>
+            <li><span style="margin-left:22px;">未匹配项目：</span> <form:checkbox path="notMatchPrj" value="true"/>  </li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
@@ -49,6 +51,7 @@
 				<th>总投资额（万元）</th>
 				<th>地点</th>
 				<th>申报时间</th>
+				<th>住建项目编码</th>
 				<shiro:hasPermission name="project:applyProjectInfo:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
@@ -76,6 +79,7 @@
 				<td>
 					<fmt:formatDate value="${applyProjectInfo.applyDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
+				<td>${applyProjectInfo.prjNum} </td>
 				<shiro:hasPermission name="project:applyProjectInfo:edit"><td>
     				<a href="${ctx}/project/applyProjectInfo/form?id=${applyProjectInfo.id}">详情</a>
 					<!--<a href="${ctx}/project/applyProjectInfo/delete?id=${applyProjectInfo.id}" onclick="return confirmx('确认要删除该发改申报项目基本信息吗？', this.href)">删除</a>-->

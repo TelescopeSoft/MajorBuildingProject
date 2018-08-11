@@ -79,6 +79,9 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
     private String lerepCertNo;
     private String catalogName;
 
+    private String prjNum;
+    private String notMatchPrj;
+
     public ApplyProjectInfo() {
         super();
     }
@@ -559,5 +562,21 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
 
     public void setCatalogName(String catalogName) {
         this.catalogName = catalogName;
+    }
+
+    public String getPrjNum() {
+        return prjNum;
+    }
+
+    public void setPrjNum(String prjNum) {
+        this.prjNum = prjNum;
+    }
+
+    public String getNotMatchPrj() {
+        return notMatchPrj;
+    }
+
+    public void setNotMatchPrj(String notMatchPrj) {
+        this.notMatchPrj = notMatchPrj;
     }
 }
