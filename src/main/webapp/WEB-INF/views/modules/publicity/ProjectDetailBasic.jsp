@@ -20,7 +20,7 @@
 			<tr>
 				<td class="bg-info">项目（法人）单位</td>
 				<td>${projectinfo.enterpriseName}</td>
-				<td class="bg-info">项目（法人）证照号码/td>
+				<td class="bg-info">项目（法人）证照号码</td>
 				<td>${projectinfo.lerepCertNo}</td>
 			</tr>
 			<tr>

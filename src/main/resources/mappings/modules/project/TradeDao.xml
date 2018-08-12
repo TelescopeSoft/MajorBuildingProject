@@ -53,9 +53,9 @@
 		SELECT
 		<include refid="tradeColumns"/>
 		FROM pub_trade a
-		LEFT JOIN [MajorProjectLib].[dbo].TBProjectInfo i ON a.prj_code = i.PrjNum
+		LEFT JOIN [wxbinghu].[dbo].STZ_REGION_APPLY_PROJECT_INFO i ON a.prj_code = i.PROJECT_CODE
 		<where>
-			i.pkid = #{pkid}
+			i.PROJECT_CODE = #{pkid}
 			AND tender_type IN
 			<foreach collection="typeList" item="tenderType" index="index"
 					 open="(" close=")" separator=",">
