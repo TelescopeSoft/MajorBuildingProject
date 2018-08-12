@@ -84,6 +84,9 @@
 			<if test="totalMoney != null and totalMoney != ''">
 				AND a.total_money >= #{totalMoney}
 			</if>
+			<if test="enterpriseName != null and enterpriseName != ''">
+				AND b.ENTERPRISE_NAME = #{enterpriseName}
+			</if>
 			<if test="notMatchPrj != null and notMatchPrj != ''">
 				AND i.PrjNum IS NULL
 			</if>

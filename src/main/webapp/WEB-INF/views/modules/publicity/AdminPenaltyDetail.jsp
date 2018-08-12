@@ -71,36 +71,84 @@
 				</section>
 
 				<!-- Main content -->
-				<section class="content">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="box">
-								<div class="box-header">
-									<div class="approvetitle">行政处罚公示</div>
-								</div>
-								<div class="box-body">
-									<table id="adminPenaltyTable"
-										class="table table-bordered table-striped">
-										<thead>
-											<tr>
-												<th width="20%">行政相对人名称</th>
-												<th width="15%">决定书文号</th>
-												<th width="40%">处罚名称</th>
-												<th width="10%">处罚决定日期</th>
-												<th width="15%">处罚机关</th>
-											</tr>
-										</thead>
-									</table>
-								</div>
-								<!-- /.box-body -->
-							</div>
-							<!-- /.box -->
-						</div>
-						<!-- /.col -->
-					</div>
-					<!-- /.row -->
-				</section>
-				<!-- /.content -->
+                        <section class="content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="box box-info">
+                                    	<!-- /.box-header -->
+                                    	<div class="box-body">
+                                    		<table class="table table-bordered">
+                                    			<tr>
+                                    				<td class="bg-info" width="30%">行政处罚决定书文号</td>
+                                    				<td width="70%">${bean.letterOfDecision}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">处罚名称	</td>
+                                    				<td width="70%">${bean.name}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">处罚类别1</td>
+                                    				<td width="70%">${bean.punishCategory}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">处罚事由</td>
+                                    				<td width="70%">${bean.punishReason}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">处罚依据</td>
+                                    				<td width="70%">${bean.punishBasis}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">行政相对人名称</td>
+                                    				<td width="70%">${bean.adminRelativePerson}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">行政相对人代码_1 (统一社会信用代码)	</td>
+                                    				<td width="70%">${bean.adminRelativePersonCode}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">法定代表人姓名</td>
+                                    				<td width="70%">${bean.legalRepresentative}</td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">处罚结果</td>
+                                    				<td width="70%">${bean.punishResult}</td>
+                                    			</tr>
+                                                <tr>
+                                     				<td class="bg-info" width="30%">处罚决定日期</td>
+                                     				<td width="70%"><fmt:formatDate value="${bean.punishmentDecisionDate}" pattern="yyyy-MM-dd"/></td>
+                                     			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">处罚机关</td>
+                                    				<td width="70%">${bean.punishDeptLabel}</td>
+                                    			</tr>
+                                                <!--<tr>
+                                    				<td class="bg-info" width="30%">地方编码</td>
+                                    				<td width="70%"></td>
+                                    			</tr>
+                                                <tr>
+                                    				<td class="bg-info" width="30%">数据更新时间戳</td>
+                                    				<td width="70%"></td>
+                                    			</tr>-->
+                                                <tr>
+                                    				<td class="bg-info" width="30%">公示截止期</td>
+                                    				<td width="70%"><fmt:formatDate value="${bean.publicDeadline}" pattern="yyyy-MM-dd"/></td>
+                                    			</tr>
+                                    		</table>
+                                    	</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-primary" onclick="history.go(-1)">返回</button>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+
+
+                            </div>
+                            <!-- /.row -->
+
+                        </section>
+                        <!-- /.content -->
 
 			</div>
 			<!-- /.container -->
@@ -162,33 +210,6 @@
 	            { "data": function(obj){ var day = moment(obj.punishmentDecisionDate);return day.format("YYYY-MM-DD")} },
 	            { "data": "punishDeptLabel" } 
 	        ],
-            "columnDefs": [{
-             	            "render": function(data, type, row, meta ) {
-             	            	if(data != null){
-             	                    return '<a href="${ctx}/publicity/adminpenalty/detail?id='+row.id+'">' + data + '</a>';
-             	                 }else{
-             	                        return "";
-             	                 }
-             	            },
-             	            "targets": 0
-             },{
-                            "render": function(data, type, row, meta ) {
-                            if(data != null){
-                                return '<a href="${ctx}/publicity/adminpenalty/detail?id='+row.id+'">' + data + '</a>';
-                            }else{
-                                return "";
-                            }
-                          },
-                            "targets": 1
-               },{
-                           "render": function(data, type, row, meta ) {
-                            if(data != null){
-                                return '<a href="${ctx}/publicity/adminpenalty/detail?id='+row.id+'">' + data + '</a>';
-                            }else{
-                                return "";
-                            }
-                           },"targets": 2
-                }],
             'language': {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",

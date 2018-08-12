@@ -39,6 +39,9 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	private String approvalNum;
 	private String itemName;
 	private String deptName;
+
+	private Date startDate;
+	private Date endDate;
 	
 	public ApproveItemInfo() {
 		super();
@@ -222,5 +225,21 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 
 	public void setCurrentStateLabel(String currentStateLabel) {
 		this.currentStateLabel = currentStateLabel;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }

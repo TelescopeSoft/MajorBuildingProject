@@ -25,7 +25,7 @@
 		b.id AS "id",
 		a.PROJECT_CODE AS "projectCode",
 		a.PROJECT_NAME AS "projectName",
-		b.approval_num AS "approvalNum",
+		ISNULL(b.approval_num,'') AS "approvalNum",
 		b.CURRENT_STATE AS "currentState",
 		e.name AS "currentStateLabel",
 		b.DEAL_TIME AS "dealTime",
@@ -59,16 +59,34 @@
 					FROM [MajorProjectLib].[dbo].[pub_approve_guide]
 			)
 			<if test="projectCode != null and projectCode != ''">
-				AND a.project_code = #{projectCode}
+				AND a.project_code like
+				<if test="dbName == 'oracle'">'%'||#{projectCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{projectCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{projectCode}, '%')</if>
 			</if>
 			<if test="projectName != null and projectName != ''">
-				AND a.PROJECT_NAME = #{projectName}
+				AND a.PROJECT_NAME like
+				<if test="dbName == 'oracle'">'%'||#{projectName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{projectName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{projectName}, '%')</if>
 			</if>
 			<if test="itemName != null and itemName != ''">
-				AND c.ITEM_NAME = #{itemName}
+				AND c.ITEM_NAME like
+				<if test="dbName == 'oracle'">'%'||#{itemName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{itemName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{itemName}, '%')</if>
 			</if>
 			<if test="deptCode != null and deptCode != ''">
-				AND c.dept_code = #{deptCode}
+				AND c.dept_code like
+				<if test="dbName == 'oracle'">'%'||#{deptCode}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{deptCode}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{deptCode}, '%')</if>
+			</if>
+			<if test="startDate != null and startDate != ''">
+				AND convert(VARCHAR(10), b.deal_time, 120) &gt;= convert(VARCHAR(10), #{startDate}, 120)
+			</if>
+			<if test="endDate != null and endDate != ''">
+				AND convert(VARCHAR(10), b.deal_time, 120) &lt;= convert(VARCHAR(10), #{endDate}, 120)
 			</if>
 		</where>
 		<choose>

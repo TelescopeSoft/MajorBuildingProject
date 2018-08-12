@@ -60,4 +60,16 @@ public class AdminPenaltyController extends BaseController {
 
 	}
 
+	@RequestMapping("detail")
+	public String detail(HttpServletRequest request,
+					   HttpServletResponse response, Model model) {
+		String id = request.getParameter("id");
+
+		PubAdminPenalty bean = adminPenaltyService.get(id);
+		model.addAttribute("menuList",
+				PulicityMenuInstance.getMenus("adminpenalty"));
+		model.addAttribute("bean", bean);
+		return "modules/publicity/AdminPenaltyDetail";
+	}
+
 }

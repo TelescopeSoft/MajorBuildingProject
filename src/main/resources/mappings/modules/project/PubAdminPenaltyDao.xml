@@ -8,7 +8,7 @@
 		a.letter_of_decision AS "letterOfDecision",
 		a.name AS "name",
 		a.punishment_decision_date AS "punishmentDecisionDate",
-		a.punish_dept_label AS "punishDeptLabel",
+		ISNULL(a.punish_dept_label,'') AS "punishDeptLabel",
 		a.punish_category AS "punishCategory",
 		a.punish_reason AS "punishReason",
 		a.punish_basis AS "punishBasis",

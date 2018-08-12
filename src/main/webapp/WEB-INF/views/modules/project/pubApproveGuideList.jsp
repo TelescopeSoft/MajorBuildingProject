@@ -48,7 +48,7 @@
 				<td width="10%">${pubApproveGuide.approveItemLabel}</td>
 				<td width="10%">${pubApproveGuide.approveItemCode}</td>
 				<td width="20%" style="word-wrap: break-word;"><a href="${pubApproveGuide.approveGuideUrl}" target="_blank">${pubApproveGuide.approveGuideUrl}</a></td>
-				<td width="20%" style="word-wrap: break-word;"><a href="${pubApproveGuide.approveAppUrl}" target="_blank">${pubApproveGuide.approveAppUrl}</a></td>
+				<td width="20%" style="word-wrap: break-word;">请在浏览器中访问：${pubApproveGuide.approveAppUrl}</td>
 				<shiro:hasPermission name="project:pubApproveGuide:edit"><td>
     				<a href="${ctx}/project/pubApproveGuide/form?id=${pubApproveGuide.id}">修改</a>
 					<a href="${ctx}/project/pubApproveGuide/delete?id=${pubApproveGuide.id}" onclick="return confirmx('确认要删除该办事指南吗？', this.href)">删除</a>
