@@ -25,6 +25,10 @@ public class TenderInfoService extends CrudService<TenderInfoDao, TenderInfo> {
 	public TenderInfo get(String id) {
 		return super.get(id);
 	}
+
+	public String getByTenderInnerNum(String tenderInnerNum) {
+		return this.dao.getByTenderInnerNum(tenderInnerNum);
+	}
 	
 	public List<TenderInfo> findList(TenderInfo tenderInfo) {
 		return super.findList(tenderInfo);

@@ -12,13 +12,18 @@ import java.util.List;
 
 /**
  * 招标投标DAO接口
+ *
  * @author huangzhengyu
  * @version 2018-07-31
  */
 @MyBatisDao
 public interface TradeDao extends CrudDao<Trade> {
     Trade getByCondition(Trade entity);
+
     void updateProjectInfo(Trade entity);
 
     List<Trade> findByTypeAndPkid(@Param("typeList") List<String> typeList, @Param("pkid") String pkid);
+
+    List<Trade> findListWithNoPrjCode();
+
 }

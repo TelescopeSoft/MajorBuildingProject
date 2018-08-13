@@ -48,7 +48,7 @@ public class ApproveResultCrawlerTask {
 
             } catch (Exception e) {
                 logger.error(e.getMessage());
-                logger.error("crawler " + i.getProjectName()+ "[fail]");
+                logger.error("crawler " + i.getProjectName()+ "[fail] and msg:" + e.getMessage());
             }
         }
 

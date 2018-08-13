@@ -11,10 +11,15 @@ import com.qlmsoft.mbp.modules.project.entity.TenderInfo;
 
 /**
  * 招标投标DAO接口
+ *
  * @author huangzhengyu
  * @version 2018-07-14
  */
 @MyBatisDao
 public interface TenderInfoDao extends CrudDao<TenderInfo> {
-	List<TenderInfo> findListByProjectPkid(String pkid);
+
+    List<TenderInfo> findListByProjectPkid(String pkid);
+
+    String getByTenderInnerNum(String tenderInnerNum);
+
 }

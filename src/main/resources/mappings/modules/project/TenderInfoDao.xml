@@ -76,6 +76,13 @@
 		</where>
 		ORDER BY a.CreateDate DESC
 	</select>
+
+	<select id="getByTenderInnerNum" resultType="String">
+		SELECT TOP 1 b.PROJECT_CODE
+		FROM MajorProjectLib.dbo.TBTenderInfo a
+		INNER JOIN MajorProjectLib.dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+		WHERE UPPER(a.TenderInnerNum) = UPPER(#{tenderInnerNum})
+	</select>
 	
 	<select id="findAllList" resultType="TenderInfo">
 		SELECT 

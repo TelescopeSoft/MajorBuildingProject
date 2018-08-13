@@ -16,6 +16,7 @@ import com.qlmsoft.mbp.modules.project.dao.TradeDao;
 
 /**
  * 招标投标Service
+ *
  * @author huangzhengyu
  * @version 2018-07-31
  */
@@ -23,57 +24,60 @@ import com.qlmsoft.mbp.modules.project.dao.TradeDao;
 @Transactional(readOnly = true)
 public class TradeService extends CrudService<TradeDao, Trade> {
 
+    public Trade get(String id) {
+        return super.get(id);
+    }
+
+    public List<Trade> findList(Trade trade) {
+        return super.findList(trade);
+    }
+
+    public List<Trade> findListWithNoPrjCode() {
+        return this.dao.findListWithNoPrjCode();
+    }
+
+    public Page<Trade> findPage(Page<Trade> page, Trade trade) {
+        return super.findPage(page, trade);
+    }
+
+    @Transactional(readOnly = false)
+    public void save(Trade trade) {
+        super.save(trade);
+    }
+
+    @Transactional(readOnly = false)
+    public void checkDuplicatedAndSave(Trade entity) {
+        Trade existed = this.dao.getByCondition(entity);
+        if (existed == null) {
+            super.save(entity);
+        }
+    }
+
+    @Transactional(readOnly = false)
+    public void updateProjectInfo(Trade trade) {
+        dao.updateProjectInfo(trade);
+    }
 
 
-	public Trade get(String id) {
-		return super.get(id);
-	}
-	
-	public List<Trade> findList(Trade trade) {
-		return super.findList(trade);
-	}
-	
-	public Page<Trade> findPage(Page<Trade> page, Trade trade) {
-		return super.findPage(page, trade);
-	}
-	
-	@Transactional(readOnly = false)
-	public void save(Trade trade) {
-		super.save(trade);
-	}
+    @Transactional(readOnly = false)
+    public void delete(Trade trade) {
+        super.delete(trade);
+    }
 
-	@Transactional(readOnly = false)
-	public void checkDuplicatedAndSave(Trade entity) {
-		Trade existed = this.dao.getByCondition(entity);
-		if (existed == null) {
-			super.save(entity);
-		}
-	}
-	@Transactional(readOnly = false)
-	public void updateProjectInfo(Trade trade) {
-		dao.updateProjectInfo(trade);
-	}
+    public List<Trade> findByTypeAndPkid(int tradeType, String pkid) {
 
-	
-	@Transactional(readOnly = false)
-	public void delete(Trade trade) {
-		super.delete(trade);
-	}
+        List<String> typeList = new ArrayList<String>();
+        if (tradeType == Trade.TYPE_ZIGEYUSHEN) {
+            typeList.add("资格预审公告（代招标公告）");
+        } else if (Trade.TYPE_ZHAOBIAOGONGGAO == tradeType) {
+            typeList.add("招标公告");
+            typeList.add("招标公告（资格后审）");
+        } else if (Trade.TYPE_ZHONGBIAOHOUXUANREN == tradeType) {
+            typeList.add("无锡市工程建设项目预中标候选人公示");
+            typeList.add("无锡市工程建设项目中标候选人公示");
+        }
+        return this.dao.findByTypeAndPkid(typeList, pkid);
+    }
 
-	public List<Trade> findByTypeAndPkid(int tradeType ,String pkid) {
 
-		List<String> typeList = new ArrayList<String>();
-		if(tradeType == Trade.TYPE_ZIGEYUSHEN){
-			typeList.add("资格预审公告（代招标公告）");
-		}else if(Trade.TYPE_ZHAOBIAOGONGGAO == tradeType){
-			typeList.add("招标公告");
-			typeList.add("招标公告（资格后审）");
-		}else if(Trade.TYPE_ZHONGBIAOHOUXUANREN == tradeType){
-			typeList.add("无锡市工程建设项目预中标候选人公示");
-			typeList.add("无锡市工程建设项目中标候选人公示");
-		}
-		return this.dao.findByTypeAndPkid(typeList, pkid);
-	}
-
-	
 }

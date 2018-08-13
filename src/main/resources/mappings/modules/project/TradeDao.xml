@@ -106,7 +106,25 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
+	<select id="findListWithNoPrjCode" resultType="Trade">
+		SELECT
+		<include refid="tradeColumns"/>
+		FROM MajorProjectLib.dbo.pub_trade a
+		<include refid="tradeJoins"/>
+		<where>
+			prj_code IS NULL
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.openTime DESC
+			</otherwise>
+		</choose>
+	</select>
+
 	<select id="findAllList" resultType="Trade">
 		SELECT 
 			<include refid="tradeColumns"/>
