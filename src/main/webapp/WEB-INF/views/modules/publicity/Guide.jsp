@@ -88,7 +88,8 @@
 													<td>${pubApproveGuide.approveItemLabel}</td>
 													<td><a href="${pubApproveGuide.approveGuideUrl}"
 														target="_blank">办事指南</a></td>
-													<td>请在浏览器中访问：${pubApproveGuide.approveAppUrl}</td>
+													<td><a href="${pubApproveGuide.approveAppUrl}" target="_blank">办理</a></td>
+													<!--<td>请在浏览器中访问：${pubApproveGuide.approveAppUrl}</td>-->
 
 												</tr>
 											</c:forEach>

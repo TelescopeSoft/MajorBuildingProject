@@ -36,8 +36,8 @@ public class ApproveResultCrawlerTask {
 //        List<ProjectInfo> list = this.projectDao.getCrawlerProjectList();
         ApplyProjectInfo fgPrj = new ApplyProjectInfo();
         fgPrj.setTotalMoney(new BigDecimal(5000));
-//        List<ApplyProjectInfo> list = fgProjectService.findNotMatchedList(fgPrj);
-        List<ApplyProjectInfo> list = fgProjectService.findList(fgPrj);
+        List<ApplyProjectInfo> list = fgProjectService.findNotMatchedList(fgPrj);
+//        List<ApplyProjectInfo> list = fgProjectService.findList(fgPrj);
         for(ApplyProjectInfo i : list  ){
             try {
                 boolean r = crawler.synchByPrjName(i);
