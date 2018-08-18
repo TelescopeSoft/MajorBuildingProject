@@ -18,6 +18,12 @@
 				<td width="10%"><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
 			</tr>
 			</c:forEach>
+            <c:if test="${empty zigeyushen}">
+            <tr>
+                <td>无法匹配到相关数据，请到&nbsp;&nbsp;<a href="http://xzfw.wuxi.gov.cn/ztzl/wxsggzyjyzx/index.shtml" target="_blank">无锡市公共资源交易中心</a>&nbsp;&nbsp;查询</td>
+            </tr>
+            </c:if>
+
 		</table>
 	</div>
 
@@ -38,6 +44,11 @@
     				<td width="10%"><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
     			</tr>
     			</c:forEach>
+            <c:if test="${empty zhaobiaogonggao}">
+            <tr>
+                <td>无法匹配到相关数据，请到&nbsp;&nbsp;<a href="http://xzfw.wuxi.gov.cn/ztzl/wxsggzyjyzx/index.shtml" target="_blank">无锡市公共资源交易中心</a>&nbsp;&nbsp;查询</td>
+            </tr>
+            </c:if>
 		</table>
 	</div>
 
@@ -58,6 +69,11 @@
     				<td width="10%"><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
     			</tr>
     			</c:forEach>
+            <c:if test="${empty zhongbiaohouxuanren}">
+            <tr>
+                <td>无法匹配到相关数据，请到&nbsp;&nbsp;<a href="http://xzfw.wuxi.gov.cn/ztzl/wxsggzyjyzx/index.shtml" target="_blank">无锡市公共资源交易中心</a>&nbsp;&nbsp;查询</td>
+            </tr>
+            </c:if>
 		</table>
 	</div>
 

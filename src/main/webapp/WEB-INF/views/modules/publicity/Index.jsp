@@ -173,17 +173,9 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <div class="container">
-      <div class="pull-right hidden-xs">
-        <b>版本</b> 1.0.0
-      </div>
-        <div class="row">
-            <div class="text-center"></div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-  </footer>
+              <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
+  			<!-- /.container -->
+  		</footer>
 </div>
 <!-- ./wrapper -->
 

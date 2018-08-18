@@ -28,12 +28,14 @@
 		a.returnresult AS "returnresult",
 		a.updateuser AS "updateuser",
 		a.tag AS "tag",
-		c.CodeInfo AS "prjstructuretypenumLabel"
+		c.CodeInfo AS "prjstructuretypenumLabel",
+		p.PROJECT_CODE AS "projectCode"
 	</sql>
 	
 	<sql id="projectFinishJoins">
 		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		LEFT JOIN dbo.tbPrjStructureTypeDic c ON a.PrjStructureTypeNum = c.Code
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPLY_PROJECT_INFO p ON p.PROJECT_CODE = b.PROJECT_CODE
 	</sql>
     
 	<select id="get" resultType="ProjectFinish">
@@ -50,7 +52,10 @@
 		FROM tbprojectfinishmanage a
 		<include refid="projectFinishJoins"/>
 		<where>
-			b.CountyNum = '320211'  
+			b.CountyNum = '320211'
+			<if test="totalMoney != null and totalMoney != ''">
+				AND p.total_money >= #{totalMoney}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

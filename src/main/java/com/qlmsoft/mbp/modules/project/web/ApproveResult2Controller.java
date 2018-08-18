@@ -46,8 +46,8 @@ public class ApproveResult2Controller extends BaseController {
 	@ResponseBody
 	public String list(ApproveItemInfo approveResult,
 			HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("---- approve result list------"
-				+ approveResult.toString());
+//		logger.info("---- approve result list------"
+//				+ approveResult.toString());
 //		approveResult.setDisplayFlag("0");
 		List<ApproveItemInfo> approves = approveItemInfoService
 				.findList(approveResult);

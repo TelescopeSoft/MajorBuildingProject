@@ -3,11 +3,14 @@
  */
 package com.qlmsoft.mbp.modules.project.web;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qlmsoft.mbp.modules.project.entity.PubConfig;
+import com.qlmsoft.mbp.modules.project.service.PubConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +36,9 @@ public class PubAjsbRecordController extends BaseController {
 	@Autowired
 	private ApAjsbbService ajsbbService;
 
+	@Autowired
+	private PubConfigService configService;
+
 	@RequestMapping(value = "/publicity/projectdetailsafty")
 	public String detailApprove(HttpServletRequest request,
 			HttpServletResponse response, Model model) {
@@ -53,7 +59,12 @@ public class PubAjsbRecordController extends BaseController {
 	@RequestMapping("/publicity/safty/list")
 	@ResponseBody
 	public String list(HttpServletRequest request, HttpServletResponse response) {
+
 		ApAjsbb display = new ApAjsbb();
+
+		PubConfig config = configService.getByKey("total_money");
+		display.setTotalMoney(new BigDecimal(config.getCvalue()));
+
 		List<ApAjsbb> list = ajsbbService.findList(display);
 		DataTableBean<ApAjsbb> result = new DataTableBean<ApAjsbb>();
 		if (list != null && !list.isEmpty()) {

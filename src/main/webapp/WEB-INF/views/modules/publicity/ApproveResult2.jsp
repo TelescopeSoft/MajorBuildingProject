@@ -93,7 +93,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input name="startDate" value='<fmt:formatDate value="${approveresult.startDate}" pattern="yyyy-MM-dd"/>' class="form-control pull-right" id="datepickerstart"  />
+                                    <input name="startDate" placeholder="审批起日期" value='<fmt:formatDate value="${approveresult.startDate}" pattern="yyyy-MM-dd"/>' class="form-control pull-right" id="datepickerstart"  />
                                 </div>
                             </div>
                             <div class="col-xs-3">
@@ -101,7 +101,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input name="endDate" value='<fmt:formatDate value="${approveresult.endDate}" pattern="yyyy-MM-dd"/>'  class="form-control pull-right" id="datepickerend" />
+                                    <input name="endDate" placeholder="审批止日期" value='<fmt:formatDate value="${approveresult.endDate}" pattern="yyyy-MM-dd"/>'  class="form-control pull-right" id="datepickerend" />
                                 </div>
                             </div>
                             <div class="col-xs-3">
@@ -142,18 +142,10 @@
     <!-- /.container -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="pull-right hidden-xs">
-        <b>版本</b> 1.0.0
-      </div>
-        <div class="row">
-            <div class="text-center"></div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-  </footer>
+        <footer class="main-footer">
+            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
+			<!-- /.container -->
+		</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -188,7 +180,7 @@
         
         $('#approveTable').DataTable({
             'paging'      : true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
             'ordering'    : true,
             'info'        : true,

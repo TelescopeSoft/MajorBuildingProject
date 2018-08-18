@@ -68,13 +68,14 @@
                         <form role="form" action="${pageContext.request.contextPath}/publicity/project" method="post">
                             <div class="box-body">
                                 <div class="row form-group">
-                                    <div class="col-xs-3">
-                                        <input name="projectName" type="text" class="form-control" placeholder="项目名称">
-                                    </div>
+
                                     <div class="col-xs-4">
                                         <input name="projectCode"  type="text" class="form-control" placeholder="项目代码">
                                     </div>
                                     <div class="col-xs-4">
+                                          <input name="projectName" type="text" class="form-control" placeholder="项目名称">
+                                      </div>
+                                    <div class="col-xs-3">
                                         <input name="enterpriseName"  type="text" class="form-control" placeholder="法人单位">
                                     </div>
                                     <div class="col-xs-1">
@@ -90,17 +91,17 @@
                             <table id="projectList" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>项目代码</th>
-                                    <th>项目名称</th>
-                                    <th>项目类型</th>
-                                    <th>建设性质</th>
-                                    <th>项目（法人）单位</th>
-                                    <th>项目法人证照号码</th>
-                                    <th>拟开工时间</th>
-                                    <th>拟建成时间</th>
-                                    <th>总投资额（万元）</th>
-                                    <th>项目详细地址</th>
-                                    <th>申报时间</th>
+                                    <th width="10%">项目代码</th>
+                                    <th width="15%">项目名称</th>
+                                    <th width="5%">项目类型</th>
+                                    <th width="5%">建设性质</th>
+                                    <th width="10%">项目（法人）单位</th>
+                                    <th width="10%">项目法人证照号码</th>
+                                    <th width="5%">拟开工时间</th>
+                                    <th width="5%">拟建成时间</th>
+                                    <th width="5%">总投资额（万元）</th>
+                                    <th width="10%">项目详细地址</th>
+                                    <th width="10%">申报时间</th>
                                 </tr>
                                 </thead>
 
@@ -120,18 +121,10 @@
     <!-- /.container -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="pull-right hidden-xs">
-        <b>版本</b> 1.0.0
-      </div>
-        <div class="row">
-            <div class="text-center"></div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-  </footer>
+        <footer class="main-footer">
+            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
+			<!-- /.container -->
+		</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -157,9 +150,9 @@
     	
         $('#projectList').DataTable({
             'paging'      : true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
-            'ordering'    : true,
+            'ordering'    : false,
             'info'        : true,
             'autoWidth'   : true,
             "ajax": "${pageContext.request.contextPath}/publicity/project/list?projectCode=${projectinfo.projectCode}&projectName=${projectinfo.projectName}&enterpriseName=${projectinfo.enterpriseName}",

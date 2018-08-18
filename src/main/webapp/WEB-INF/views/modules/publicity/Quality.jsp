@@ -83,16 +83,17 @@
 										class="table table-bordered table-striped">
 										<thead>
 											<tr>
-												<th>项目名称</th>
-												<th>项目编号</th>
-												<th>立项批准文号</th>
-												<th>报监工程名称</th>
-												<th>质量监督机构</th>
-												<th>建设单位</th>
-												<th>报监日期</th>
-												<th>申办人</th>
-												<th>建设性质</th>
-												<th>投资类型</th>
+												<th width="10%">项目名称</th>
+												<th width="10%">项目代码</th>
+												<th width="10%">住建编码</th>
+												<th width="10%">立项批准文号</th>
+												<th width="10%">报监工程名称</th>
+												<th width="10%">质量监督机构</th>
+												<th width="10%">建设单位</th>
+												<th width="5%">报监日期</th>
+												<th width="5%">申办人</th>
+												<th width="5%">建设性质</th>
+												<th width="5%">投资类型</th>
 											</tr>
 										</thead>
 									</table>
@@ -111,16 +112,8 @@
 			<!-- /.container -->
 		</div>
 		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="container">
-				<div class="pull-right hidden-xs">
-					<b>版本</b> 1.0.0
-				</div>
-				<div class="row">
-					<div class="text-center"></div>
-				</div>
-
-			</div>
+        <footer class="main-footer">
+            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
 			<!-- /.container -->
 		</footer>
 	</div>
@@ -154,14 +147,15 @@
 
         $('#qualityTable').DataTable({
             'paging'      : true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
             'ordering'    : false,
             'info'        : true,
-            'autoWidth'   : true,
+            'autoWidth'   : false,
             "ajax": '${ctx}/publicity/quality/list',
 	        "columns": [
 	            { "data": "prjname" },
+	            { "data": "projectCode" },
 	            { "data": "prjnum" },
 	            { "data": "prjapprovalnum" },
 	            { "data": "xmmc" },

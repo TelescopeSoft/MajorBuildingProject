@@ -3,11 +3,14 @@
  */
 package com.qlmsoft.mbp.modules.project.web;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qlmsoft.mbp.modules.project.entity.PubConfig;
+import com.qlmsoft.mbp.modules.project.service.PubConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +36,8 @@ public class PubZjsbRecordController extends BaseController {
 
 	@Autowired
 	private ApZjsbbService zjsbbService;
+	@Autowired
+	private PubConfigService configService;
 
 	@RequestMapping(value = "/publicity/projectdetailquality")
 	public String detailApprove(HttpServletRequest request,
@@ -56,6 +61,10 @@ public class PubZjsbRecordController extends BaseController {
 	@ResponseBody
 	public String list(HttpServletRequest request, HttpServletResponse response) {
 		ApZjsbb display = new ApZjsbb();
+
+		PubConfig config = configService.getByKey("total_money");
+		display.setTotalMoney(new BigDecimal(config.getCvalue()));
+
 		List<ApZjsbb> list = zjsbbService.findList(display);
 		DataTableBean<ApZjsbb> result = new DataTableBean<ApZjsbb>();
 		if (list != null && !list.isEmpty()) {

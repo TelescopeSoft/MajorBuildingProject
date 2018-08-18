@@ -42,11 +42,13 @@
 		a.scrqsj AS "scrqsj",
 		a.returnresult AS "returnresult",
 		a.updateuser AS "updateuser",
-		a.xzsp_sgxk AS "xzspSgxk"
+		a.xzsp_sgxk AS "xzspSgxk",
+		p.PROJECT_CODE AS "projectCode"
 	</sql>
 	
 	<sql id="projectBuilderLicenceJoins">
 		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPLY_PROJECT_INFO p ON p.PROJECT_CODE = b.PROJECT_CODE
 	</sql>
     
 	<select id="get" resultType="ProjectBuilderLicence">
@@ -63,7 +65,10 @@
 		FROM tbbuilderlicencemanage a
 		<include refid="projectBuilderLicenceJoins"/>
 		<where>
-			b.CountyNum = '320211'  
+			b.CountyNum = '320211'
+			<if test="totalMoney != null and totalMoney != ''">
+				AND p.total_money >= #{totalMoney}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

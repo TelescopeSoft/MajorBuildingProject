@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.PubConfigDao">
+    
+	<sql id="pubConfigColumns">
+		a.id AS "id",
+		a.ckey AS "ckey",
+		a.cvalue AS "cvalue"
+	</sql>
+	
+	<sql id="pubConfigJoins">
+	</sql>
+    
+	<select id="get" resultType="PubConfig">
+		SELECT 
+			<include refid="pubConfigColumns"/>
+		FROM pub_config a
+		<include refid="pubConfigJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="getByKey" resultType="PubConfig">
+		SELECT
+		<include refid="pubConfigColumns"/>
+		FROM pub_config a
+		<include refid="pubConfigJoins"/>
+		WHERE a.ckey = #{ckey}
+	</select>
+	
+	<select id="findList" resultType="PubConfig">
+		SELECT 
+			<include refid="pubConfigColumns"/>
+		FROM pub_config a
+		<include refid="pubConfigJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="PubConfig">
+		SELECT 
+			<include refid="pubConfigColumns"/>
+		FROM pub_config a
+		<include refid="pubConfigJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_config(
+			ckey,
+			cvalue
+		) VALUES (
+			#{ckey},
+			#{cvalue}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_config SET
+			ckey = #{ckey},
+			cvalue = #{cvalue}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM pub_config
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

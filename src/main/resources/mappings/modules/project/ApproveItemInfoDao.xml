@@ -82,6 +82,12 @@
 				<if test="dbName == 'mssql'">'%'+#{deptCode}+'%'</if>
 				<if test="dbName == 'mysql'">CONCAT('%', #{deptCode}, '%')</if>
 			</if>
+			<if test="deptName != null and deptName != ''">
+				AND d.DEPT_NAME like
+				<if test="dbName == 'oracle'">'%'||#{deptName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{deptName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{deptName}, '%')</if>
+			</if>
 			<if test="startDate != null and startDate != ''">
 				AND convert(VARCHAR(10), b.deal_time, 120) &gt;= convert(VARCHAR(10), #{startDate}, 120)
 			</if>

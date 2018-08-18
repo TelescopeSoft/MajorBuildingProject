@@ -138,10 +138,13 @@ public class AdminPenaltyCrawler {
                 result.setAdminRelativePerson(json.getString("CF_XDR_MC"));
                 result.setAdminRelativePersonCode(json.getString("CF_XDR_SHXYM"));
                 result.setLegalRepresentative(json.getString("CF_FR"));
-                result.setPunishResult(json.getString("CFJC"));
+                //result.setPunishResult(json.getString("CFJC"));
+                //result.setPunishResult(json.getString("CF_JG"));
+
 
                 result.setPunishmentDecisionDate(new Date(json.getLong("CF_JDRQ")));
-                result.setPunishDeptLabel(json.getString("XXTGBM"));
+                //result.setPunishDeptLabel(json.getString("XXTGBM"));
+                result.setPunishDeptLabel(json.getString("CF_XZJG"));
                 result.setDisplayFlag("0");
 
                 result.setPublicDeadline(new Date(json.getLong("CF_GSJZQ")));

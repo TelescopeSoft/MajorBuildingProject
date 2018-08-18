@@ -83,19 +83,19 @@
 										class="table table-bordered table-striped">
 										<thead>
 											<tr>
-												<th width="10%">项目编号</th>
+											    <th width="10%">项目代码</th>
 												<th width="10%">施工许可项目名称</th>
-												<th width="10%">施工许可证编号</th>
-												<th width="10%">合同金额(万元)</th>
-												<th width="10%">面积（平方米）</th>
-												<th width="10%">建设规模</th>
-												<th width="10%">发证日期</th>
+												<th width="5%">施工许可证编号</th>
+												<th width="5%">合同金额(万元)</th>
+												<th width="5%">面积（平方米）</th>
+												<th width="5%">建设规模</th>
+												<th width="5%">发证日期</th>
 												<th width="10%">勘察单位</th>
 												<th width="10%">设计单位</th>
 												<th width="10%">施工单位</th>
 												<th width="10%">监理单位</th>
 												<th width="10%">项目经理</th>
-												<th width="10%">总监理工程</th>
+												<th width="5%">总监理工程师</th>
 											</tr>
 										</thead>
 									</table>
@@ -115,15 +115,7 @@
 		</div>
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">
-			<div class="container">
-				<div class="pull-right hidden-xs">
-					<b>版本</b> 1.0.0
-				</div>
-				<div class="row">
-					<div class="text-center"></div>
-				</div>
-
-			</div>
+            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
 			<!-- /.container -->
 		</footer>
 	</div>
@@ -157,14 +149,14 @@
 
         $('#constructionTable').DataTable({
             'paging'      : true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
             'ordering'    : false,
             'info'        : true,
             'autoWidth'   : false,
             "ajax": '${ctx}/publicity/construction/list',
 	        "columns": [
-	            { "data": "prjnum" },
+	            { "data": function(obj){ return obj.projectCode} },
 	            { "data": "builderlicencename" },
 	            { "data": "builderlicencenum" },
 	            { "data": "contractmoney" },

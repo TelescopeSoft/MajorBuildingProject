@@ -83,14 +83,14 @@
 										class="table table-bordered table-striped">
 										<thead>
 											<tr>
-												<th width="10%">项目编号</th>
+												<th width="10%">项目代码</th>
 												<th width="10%">竣工备案编号</th>
 												<th width="20%">备案项目名称</th>
-												<th width="10%">施工许可证编号</th>
+												<th width="5%">施工许可证编号</th>
 												<th width="10%">质量检测机构</th>
-												<th width="10%">实际造价（万元）</th>
-												<th width="10%">实际面积（平方米）</th>
-												<th width="10%">实际建设规模</th>
+												<th width="5%">实际造价（万元）</th>
+												<th width="5%">实际面积（平方米）</th>
+												<!--<th width="5%">实际建设规模</th>-->
 												<th width="10%">实际开工日期</th>
 												<th width="10%">实际竣工验收日期</th>
 											</tr>
@@ -111,16 +111,8 @@
 			<!-- /.container -->
 		</div>
 		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="container">
-				<div class="pull-right hidden-xs">
-					<b>版本</b> 1.0.0
-				</div>
-				<div class="row">
-					<div class="text-center"></div>
-				</div>
-
-			</div>
+        <footer class="main-footer">
+            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
 			<!-- /.container -->
 		</footer>
 	</div>
@@ -154,21 +146,20 @@
 
         $('#qualityTable').DataTable({
             'paging'      : true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
             'ordering'    : false,
             'info'        : true,
-            'autoWidth'   : true,
+            'autoWidth'   : false,
             "ajax": '${ctx}/publicity/finish/list',
 	        "columns": [
-	            { "data": "prjnum" },
+	            { "data": "projectCode" },
 	            { "data": "prjfinishnum" },
 	            { "data": "prjfinishname" },
 	            { "data": "builderlicencenum" },
 	            { "data": "qccorpname" },
 	            { "data": "factcost" },
 	            { "data": "factarea" },
-	            { "data": "factsize" },
 	            { "data": function(obj){ var day = moment(obj.bdate);return day.format("YYYY-MM-DD")} },
 	            { "data": function(obj){ var day = moment(obj.edate);return day.format("YYYY-MM-DD")} }
 	        ],

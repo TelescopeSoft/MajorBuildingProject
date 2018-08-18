@@ -38,10 +38,13 @@
 		a.updatetime AS "updatetime",
 		a.updateuser AS "updateuser",
 		a.updatedate AS "updatedate",
-		a.status AS "status"
+		a.status AS "status",
+		p.PROJECT_CODE AS "projectCode"
 	</sql>
 	
 	<sql id="apAjsbbJoins">
+		LEFT JOIN dbo.TBProjectInfo b ON a.prjnum = b.PrjNum
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPLY_PROJECT_INFO p ON p.PROJECT_CODE = b.PROJECT_CODE
 	</sql>
     
 	<select id="get" resultType="ApAjsbb">
@@ -58,7 +61,10 @@
 		FROM ap_ajsbb a
 		<include refid="apAjsbbJoins"/>
 		<where>
-			CountyNum = '320211'
+			a.CountyNum = '320211'
+			<if test="totalMoney != null and totalMoney != ''">
+				AND p.total_money >= #{totalMoney}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

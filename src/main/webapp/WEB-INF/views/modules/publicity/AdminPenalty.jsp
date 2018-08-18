@@ -106,16 +106,8 @@
 			<!-- /.container -->
 		</div>
 		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="container">
-				<div class="pull-right hidden-xs">
-					<b>版本</b> 1.0.0
-				</div>
-				<div class="row">
-					<div class="text-center"></div>
-				</div>
-
-			</div>
+        <footer class="main-footer">
+            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
 			<!-- /.container -->
 		</footer>
 	</div>
@@ -149,9 +141,9 @@
 
         $('#adminPenaltyTable').DataTable({
             'paging'      : true,
-            'lengthChange': false,
+            'lengthChange': true,
             'searching'   : false,
-            'ordering'    : true,
+            'ordering'    : false,
             'info'        : true,
             'autoWidth'   : true,
             "ajax": '${ctx}/publicity/adminpenalty/list',

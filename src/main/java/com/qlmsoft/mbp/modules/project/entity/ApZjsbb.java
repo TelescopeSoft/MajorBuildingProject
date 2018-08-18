@@ -3,6 +3,7 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
+import com.qlmsoft.mbp.common.persistence.ProjectDataEntity;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,7 +17,7 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-14
  */
-public class ApZjsbb extends DataEntity<ApZjsbb> {
+public class ApZjsbb extends ProjectDataEntity<ApZjsbb> {
 
 	private static final long serialVersionUID = 1L;
 	private String uuid; // 质监申报表编号

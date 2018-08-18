@@ -32,11 +32,14 @@
 		a.status AS "status",
 		a.jsxz AS "jsxz",
 		a.tzlx AS "tzlx",
-		c.CodeInfo AS "jsxzLabel"
+		c.CodeInfo AS "jsxzLabel",
+		p.PROJECT_CODE AS "projectCode"
 	</sql>
 	
 	<sql id="apZjsbbJoins">
 		LEFT JOIN dbo.tbPrjPropertyDic c on a.jsxz = c.Code
+		LEFT JOIN dbo.TBProjectInfo b ON a.prjnum = b.PrjNum
+		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPLY_PROJECT_INFO p ON p.PROJECT_CODE = b.PROJECT_CODE
 	</sql>
     
 	<select id="get" resultType="ApZjsbb">
@@ -53,7 +56,10 @@
 		FROM ap_zjsbb a
 		<include refid="apZjsbbJoins"/>
 		<where>
-			CountyNum = '320211'
+			a.CountyNum = '320211'
+			<if test="totalMoney != null and totalMoney != ''">
+				AND p.total_money >= #{totalMoney}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

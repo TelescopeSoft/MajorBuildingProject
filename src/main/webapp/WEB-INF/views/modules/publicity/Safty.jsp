@@ -83,18 +83,19 @@
 										class="table table-bordered table-striped">
 										<thead>
 											<tr>
-												<th>项目名称</th>
-												<th>项目编号</th>
-												<th>立项批准文号</th>
-												<th>报监工程名称</th>
-												<th>安全监督机构</th>
-												<th>建设单位</th>
-												<th>报监日期</th>
-												<th>申办人</th>
-												<th>项目面积</th>
-												<th>项目造价</th>
-												<th>结构层次</th>
-												<th>申报目标</th>
+												<th width="10%" >项目名称</th>
+												<th width="10%">项目代码</th>
+												<th width="10%">住建编码</th>
+												<th width="10%">立项批准文号</th>
+												<th width="10%">报监工程名称</th>
+												<th width="10%">安全监督机构</th>
+												<th width="10%">建设单位</th>
+												<th width="10%">报监日期</th>
+												<th width="5%">申办人</th>
+												<th width="5%">项目面积</th>
+												<th width="5%">项目造价</th>
+												<th width="5%">结构层次</th>
+												<!--<th width="5%">申报目标</th>-->
 											</tr>
 										</thead>
 									</table>
@@ -113,16 +114,8 @@
 			<!-- /.container -->
 		</div>
 		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="container">
-				<div class="pull-right hidden-xs">
-					<b>版本</b> 1.0.0
-				</div>
-				<div class="row">
-					<div class="text-center"></div>
-				</div>
-
-			</div>
+        <footer class="main-footer">
+            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
 			<!-- /.container -->
 		</footer>
 	</div>
@@ -158,12 +151,13 @@
             'paging'      : true,
             'lengthChange': false,
             'searching'   : false,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : true,
+            'ordering'    : false,
+            'info'        : false,
+            'autoWidth'   : false,
             "ajax": '${ctx}/publicity/safty/list',
 	        "columns": [
 	            { "data": "prjname" },
+	            { "data": "projectCode" },
 	            { "data": "prjnum" },
 	            { "data": "prjapprovalnum" },
 	            { "data": "xmmc" },
@@ -173,8 +167,7 @@
 	            { "data": "sbr" },
 	            { "data": "mj" },
 	            { "data": "zj" },
-	            { "data": "jgcc" },
-	            { "data": "sbmb" } 
+	            { "data": "jgcc" }
 	        ],
             'language': {
                 "sProcessing": "处理中...",

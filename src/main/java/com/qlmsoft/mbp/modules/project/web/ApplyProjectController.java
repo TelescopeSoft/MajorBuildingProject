@@ -7,12 +7,10 @@ import com.qlmsoft.mbp.common.config.PulicityMenuInstance;
 import com.qlmsoft.mbp.common.mapper.JsonMapper;
 import com.qlmsoft.mbp.common.web.BaseController;
 import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
-import com.qlmsoft.mbp.modules.project.entity.ApplyProjectInfo;
-import com.qlmsoft.mbp.modules.project.entity.ApproveItemInfo;
-import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
-import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
+import com.qlmsoft.mbp.modules.project.entity.*;
 import com.qlmsoft.mbp.modules.project.service.ApplyProjectInfoService;
 import com.qlmsoft.mbp.modules.project.service.ApproveItemInfoService;
+import com.qlmsoft.mbp.modules.project.service.PubConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +38,8 @@ public class ApplyProjectController extends BaseController {
 	@Autowired
 	private ApproveItemInfoService approveService;
 
+	@Autowired
+	PubConfigService configService;
 
 	@RequestMapping(value = "")
 	public String list(ApplyProjectInfo projectInfo, HttpServletRequest request,
@@ -55,7 +55,8 @@ public class ApplyProjectController extends BaseController {
 			HttpServletResponse response) {
 
 //		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
-		projectInfo.setTotalMoney(new BigDecimal(5000));
+		PubConfig config = configService.getByKey("total_money");
+		projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
 		List<ApplyProjectInfo> list = service.findList(projectInfo);
 		DataTableBean<ApplyProjectInfo> result = new DataTableBean<ApplyProjectInfo>();
 		result.setData(list);
