@@ -61,7 +61,11 @@ public class PubProjectFinishController extends BaseController {
 		ProjectFinish display = new ProjectFinish();
 
 		PubConfig config = configService.getByKey("total_money");
-		display.setTotalMoney(new BigDecimal(config.getCvalue()));
+		if(config == null){
+			display.setTotalMoney(new BigDecimal(5000l));
+		}else {
+			display.setTotalMoney(new BigDecimal(config.getCvalue()));
+		}
 
 		List<ProjectFinish> list = finishService.findList(display);
 		DataTableBean<ProjectFinish> result = new DataTableBean<ProjectFinish>();

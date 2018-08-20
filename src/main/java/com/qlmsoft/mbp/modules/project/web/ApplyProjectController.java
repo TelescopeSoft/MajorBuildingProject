@@ -56,7 +56,12 @@ public class ApplyProjectController extends BaseController {
 
 //		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
 		PubConfig config = configService.getByKey("total_money");
-		projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
+		if(config == null){
+			projectInfo.setTotalMoney(new BigDecimal(5000l));
+		}else {
+			projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
+		}
+
 		List<ApplyProjectInfo> list = service.findList(projectInfo);
 		DataTableBean<ApplyProjectInfo> result = new DataTableBean<ApplyProjectInfo>();
 		result.setData(list);

@@ -63,7 +63,11 @@ public class PubAjsbRecordController extends BaseController {
 		ApAjsbb display = new ApAjsbb();
 
 		PubConfig config = configService.getByKey("total_money");
-		display.setTotalMoney(new BigDecimal(config.getCvalue()));
+		if(config == null){
+			display.setTotalMoney(new BigDecimal(5000l));
+		}else {
+			display.setTotalMoney(new BigDecimal(config.getCvalue()));
+		}
 
 		List<ApAjsbb> list = ajsbbService.findList(display);
 		DataTableBean<ApAjsbb> result = new DataTableBean<ApAjsbb>();

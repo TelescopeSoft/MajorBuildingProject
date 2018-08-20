@@ -26,12 +26,12 @@
 		a.PROJECT_CODE AS "projectCode",
 		a.PROJECT_NAME AS "projectName",
 		ISNULL(b.approval_num,'') AS "approvalNum",
-		b.CURRENT_STATE AS "currentState",
-		e.name AS "currentStateLabel",
+		ISNULL(b.CURRENT_STATE,'') AS "currentState",
+		ISNULL(e.name,'') AS "currentStateLabel",
 		b.DEAL_TIME AS "dealTime",
-		c.ITEM_NAME AS "itemName",
+		ISNULL(c.ITEM_NAME,'') AS "itemName",
 		c.DEPT_CODE AS "deptCode",
-		d.DEPT_NAME AS "deptName"
+		ISNULL(d.DEPT_NAME,'') AS "deptName"
 	</sql>
 	
 	<sql id="approveItemInfoJoins">
@@ -55,9 +55,8 @@
 		FROM [wxbinghu].[dbo].[STZ_REGION_APPLY_PROJECT_INFO] a
 		<include refid="approveItemInfoJoins"/>
 		<where>
-			c.ITEM_NAME IN ( SELECT approve_item_label
-					FROM [MajorProjectLib].[dbo].[pub_approve_guide]
-			)
+			1 = 1
+			-- c.ITEM_NAME IN ( SELECT approve_item_label FROM [MajorProjectLib].[dbo].[pub_approve_guide] )
 			<if test="projectCode != null and projectCode != ''">
 				AND a.project_code like
 				<if test="dbName == 'oracle'">'%'||#{projectCode}||'%'</if>

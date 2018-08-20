@@ -47,30 +47,28 @@ public class HomeController extends BaseController {
 	@Autowired
 	private PubApproveResultService pubApproveResultService;
 
-	@RequestMapping(value = "index")
-	public String list(ProjectInfo projectInfo, HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		model.addAttribute("menuList", PulicityMenuInstance.getMenus("index"));
-		model.addAttribute("projectinfo", projectInfo);
-		return "modules/publicity/Index";
-	}
+	//@RequestMapping(value = "index")
+//	public String list(ProjectInfo projectInfo, HttpServletRequest request,
+//			HttpServletResponse response, Model model) {
+//		model.addAttribute("menuList", PulicityMenuInstance.getMenus("index"));
+//		model.addAttribute("projectinfo", projectInfo);
+//		return "modules/publicity/Index";
+//	}
 
-	@RequestMapping(value = "projects")
-	@ResponseBody
-	public String projects(ProjectInfo projectInfo, HttpServletRequest request,
-			HttpServletResponse response) {
-
-//		projectInfo.setMajorFlag(Constant.IS_MAJOR_PROJECT);
-//		projectInfo.setAllinvest(new BigDecimal(5000));
-		List<ProjectInfo> list = tBProjectInfoService.findList(projectInfo);
-		DataTableBean<ProjectInfo> result = new DataTableBean<ProjectInfo>();
-		result.setData(list);
-		if (list != null && !list.isEmpty()) {
-			return JsonMapper.getInstance().toJson(result);
-		} else {
-			return "{\"data\":[]}";
-		}
-	}
+//	@RequestMapping(value = "projects")
+//	@ResponseBody
+//	public String projects(ProjectInfo projectInfo, HttpServletRequest request,
+//			HttpServletResponse response) {
+//
+//		List<ProjectInfo> list = tBProjectInfoService.findList(projectInfo);
+//		DataTableBean<ProjectInfo> result = new DataTableBean<ProjectInfo>();
+//		result.setData(list);
+//		if (list != null && !list.isEmpty()) {
+//			return JsonMapper.getInstance().toJson(result);
+//		} else {
+//			return "{\"data\":[]}";
+//		}
+//	}
 
 	@RequestMapping(value = "projectdetail")
 	public String projectdetail(HttpServletRequest request,

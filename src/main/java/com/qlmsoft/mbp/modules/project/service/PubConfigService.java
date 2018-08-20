@@ -29,7 +29,6 @@ public class PubConfigService extends CrudService<PubConfigDao, PubConfig> {
 	public PubConfig getByKey(String key) {
 		return this.dao.getByKey(key);
 	}
-
 	
 	public List<PubConfig> findList(PubConfig pubConfig) {
 		return super.findList(pubConfig);
