@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.EnvironmentProtectionDao">
+    
+	<sql id="environmentProtectionColumns">
+		a.id AS "id",
+		a.prj_code AS "prjCode",
+		a.close_flag AS "closeFlag",
+		a.wash_flag AS "washFlag",
+		a.create_by AS "createBy.id",
+		a.update_by AS "updateBy.id",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.display_flag AS "displayFlag",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="environmentProtectionJoins">
+	</sql>
+    
+	<select id="get" resultType="EnvironmentProtection">
+		SELECT 
+			<include refid="environmentProtectionColumns"/>
+		FROM pub_environment_protection a
+		<include refid="environmentProtectionJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="getByProCode" resultType="EnvironmentProtection">
+		SELECT
+		<include refid="environmentProtectionColumns"/>
+		FROM pub_environment_protection a
+		<include refid="environmentProtectionJoins"/>
+		WHERE a.prj_code = #{prjCode}
+	</select>
+	
+	<select id="findList" resultType="EnvironmentProtection">
+		SELECT 
+			<include refid="environmentProtectionColumns"/>
+		FROM pub_environment_protection a
+		<include refid="environmentProtectionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="prjCode != null and prjCode != ''">
+				AND a.prj_code = #{prjCode}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="EnvironmentProtection">
+		SELECT 
+			<include refid="environmentProtectionColumns"/>
+		FROM pub_environment_protection a
+		<include refid="environmentProtectionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_environment_protection(
+			prj_code,
+			close_flag,
+			wash_flag,
+			create_by,
+			update_by,
+			create_date,
+			update_date,
+			display_flag,
+			del_flag
+		) VALUES (
+			#{prjCode},
+			#{closeFlag},
+			#{washFlag},
+			#{createBy.id},
+			#{updateBy.id},
+			#{createDate},
+			#{updateDate},
+			#{displayFlag},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_environment_protection SET 	
+			prj_code = #{prjCode},
+			close_flag = #{closeFlag},
+			wash_flag = #{washFlag},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			display_flag = #{displayFlag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE pub_environment_protection SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

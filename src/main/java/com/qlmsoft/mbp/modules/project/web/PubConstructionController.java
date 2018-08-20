@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.qlmsoft.mbp.modules.project.entity.ApAjsbbHjssjd;
-import com.qlmsoft.mbp.modules.project.service.ApAjsbbHjssjdService;
+import com.qlmsoft.mbp.modules.project.entity.EnvironmentProtection;
+import com.qlmsoft.mbp.modules.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,6 @@ import com.qlmsoft.mbp.modules.project.bean.ConstructInfoBean;
 import com.qlmsoft.mbp.modules.project.bean.ConstructInfoDwBean;
 import com.qlmsoft.mbp.modules.project.entity.ApZjsbb;
 import com.qlmsoft.mbp.modules.project.entity.ApZjsbbDwry;
-import com.qlmsoft.mbp.modules.project.service.ApAjsbbService;
-import com.qlmsoft.mbp.modules.project.service.ApZjsbbDwryService;
-import com.qlmsoft.mbp.modules.project.service.ApZjsbbService;
 
 /**
  * 项目施工有关信息Controller
@@ -45,6 +43,9 @@ public class PubConstructionController extends BaseController {
 
 	@Autowired
 	private ApZjsbbDwryService zjsbDwryService;
+
+	@Autowired
+	private EnvironmentProtectionService epService;
 
 	@RequestMapping(value = "/publicity/projectdetailconstruction")
 	public String detailApprove(HttpServletRequest request,
@@ -86,6 +87,10 @@ public class PubConstructionController extends BaseController {
 		}
 
 		model.addAttribute("list", result);
+
+		EnvironmentProtection envProtect = epService.getByPrjCode(pkid);
+		model.addAttribute("envProtect", envProtect);
+
 		return "modules/publicity/ProjectDetailConstruction";
 	}
 

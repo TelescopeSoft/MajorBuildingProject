@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.project.dao.EnvironmentProtectionRectifyDao">
+    
+	<sql id="environmentProtectionRectifyColumns">
+		a.id AS "id",
+		a.environment_protection_id AS "environmentProtectionId",
+		a.prj_code AS "envProtect.prjCode",
+		a.rectify AS "rectify",
+		a.rectify_notice AS "rectifyNotice"
+	</sql>
+	
+	<sql id="environmentProtectionRectifyJoins">
+		LEFT JOIN pub_environment_protection b ON b.prj_code = a.prj_code
+	</sql>
+    
+	<select id="get" resultType="EnvironmentProtectionRectify">
+		SELECT 
+			<include refid="environmentProtectionRectifyColumns"/>
+		FROM pub_environment_protection_rectify a
+		<include refid="environmentProtectionRectifyJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="EnvironmentProtectionRectify">
+		SELECT 
+			<include refid="environmentProtectionRectifyColumns"/>
+		FROM pub_environment_protection_rectify a
+		<include refid="environmentProtectionRectifyJoins"/>
+		<where>
+			
+			<if test="envProtect != null and envProtect.prjCode != null and envProtect.prjCode != ''">
+				AND a.prj_code = #{envProtect.prjCode}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="EnvironmentProtectionRectify">
+		SELECT 
+			<include refid="environmentProtectionRectifyColumns"/>
+		FROM pub_environment_protection_rectify a
+		<include refid="environmentProtectionRectifyJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_environment_protection_rectify(
+			environment_protection_id,
+			prj_code,
+			rectify,
+			rectify_notice
+		) VALUES (
+			#{environmentProtectionId},
+			#{envProtect.prjCode},
+			#{rectify},
+			#{rectifyNotice}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_environment_protection_rectify SET 	
+			environment_protection_id = #{environmentProtectionId},
+			prj_code = #{envProtect.prjCode},
+			rectify = #{rectify},
+			rectify_notice = #{rectifyNotice}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM pub_environment_protection_rectify
+		<choose>
+			<when test="id !=null and id != ''">
+				WHERE id = #{id}
+			</when>
+			<otherwise>
+				WHERE prj_code = #{envProtect.prjCode}
+			</otherwise>
+		</choose>
+	</update>
+	
+</mapper>

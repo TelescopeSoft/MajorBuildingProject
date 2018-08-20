@@ -78,4 +78,32 @@
 		</table>
 	</div>
 </c:forEach>
+
+<div class="box-header">
+		<div class="approvetitle">
+			施工期环境保护措施
+		</div>
+	</div>
+
+	<div class="box-body">
+		<table class="table table-bordered">
+			<tr>
+				<td class="bg-info" width="20%">设置施工现场封闭围挡：</td>
+				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '是')}</td>
+				<td class="bg-info" width="20%">设置冲洗设施、道路硬化等扬尘措施：</td>
+				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '是')}</td>
+			</tr>
+			<c:forEach items="${envProtect.environmentProtectionRectifyList}" var="u">
+
+            <tr>
+				<td class="bg-info" width="25%">整改措施：</td>
+				<td width="25%" > ${u.rectify}</td>
+				<td class="bg-info" width="25%">整改通知书：</td>
+				<td width="25%" > ${u.rectifyNotice}</td>
+			</tr>
+
+            </c:forEach>
+		</table>
+	</div>
+</div>
 </div>

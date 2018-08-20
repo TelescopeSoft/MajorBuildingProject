@@ -15,3 +15,7 @@ INSERT [MajorProjectLib].[dbo].[sys_dict] ([id], [value], [label], [type], [desc
  
  -- 住建项目增加统一项目代码字段
   alter table [MajorProjectLib].[dbo].[TBProjectInfo] add PROJECT_CODE varchar(32) null; 
+  
+-- 新增施工期环境保护
+INSERT [MajorProjectLib].[dbo].[sys_dict] ([id], [value], [label], [type], [description], [sort], [parent_id], [create_by], [create_date], [update_by], [update_date], [remarks], [del_flag]) VALUES (N'10101', N'0', N'是', N'environment_close', N'显示标记', CAST(10 AS Decimal(10, 0)), N'0', N'1', CAST(0x0000A1CB0083D600 AS DateTime), N'1', CAST(0x0000A1CB0083D600 AS DateTime), NULL, N'0')
+INSERT [MajorProjectLib].[dbo].[sys_dict] ([id], [value], [label], [type], [description], [sort], [parent_id], [create_by], [create_date], [update_by], [update_date], [remarks], [del_flag]) VALUES (N'10103', N'1', N'否', N'environment_close', N'显示标记', CAST(10 AS Decimal(10, 0)), N'0', N'1', CAST(0x0000A1CB0083D600 AS DateTime), N'1', CAST(0x0000A1CB0083D600 AS DateTime), NULL, N'0')
