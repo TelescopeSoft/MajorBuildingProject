@@ -15,5 +15,5 @@ import org.apache.ibatis.annotations.Param;
  */
 @MyBatisDao
 public interface EnvironmentProtectionDao extends CrudDao<EnvironmentProtection> {
-    EnvironmentProtection getByProCode(@Param("prjCode") String prjCode);
+    EnvironmentProtection getByPrjCode(@Param("prjCode") String prjCode);
 }

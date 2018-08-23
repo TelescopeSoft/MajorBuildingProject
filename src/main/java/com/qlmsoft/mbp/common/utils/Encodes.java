@@ -23,7 +23,8 @@ import org.apache.commons.lang3.StringEscapeUtils;
  */
 public class Encodes {
 
-	private static final String DEFAULT_URL_ENCODING = "UTF-8";
+	public static final String DEFAULT_URL_ENCODING = "UTF-8";
+	public static final String ENCODING_GBK = "GBK";
 	private static final char[] BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
 
 	/**
@@ -82,6 +83,17 @@ public class Encodes {
 	public static String decodeBase64String(String input) {
 		try {
 			return new String(Base64.decodeBase64(input.getBytes()), DEFAULT_URL_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
+	}
+
+	/**
+	 * Base64解码.
+	 */
+	public static String decodeBase64String(String input , String type) {
+		try {
+			return new String(Base64.decodeBase64(input.getBytes()), type);
 		} catch (UnsupportedEncodingException e) {
 			return "";
 		}

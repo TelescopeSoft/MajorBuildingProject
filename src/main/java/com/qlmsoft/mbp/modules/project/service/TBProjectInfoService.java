@@ -5,6 +5,7 @@ package com.qlmsoft.mbp.modules.project.service;
 
 import java.util.List;
 
+import com.qlmsoft.mbp.modules.project.entity.Expropriation;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,4 +73,11 @@ public class TBProjectInfoService extends CrudService<TBProjectInfoDao, ProjectI
 		this.dao.updateProjectCodeByPrjNum(projectInfo);
 	}
 
+	@Transactional(readOnly = false)
+	public void checkDuplicatedAndSave(ProjectInfo projectInfo) {
+		ProjectInfo existed = this.dao.getByCondition(projectInfo);
+		if (existed == null) {
+			super.save(projectInfo);
+		}
+	}
 }

@@ -89,19 +89,26 @@
 		<table class="table table-bordered">
 			<tr>
 				<td class="bg-info" width="20%">设置施工现场封闭围挡：</td>
-				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '是')}</td>
+				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '已设置')}</td>
 				<td class="bg-info" width="20%">设置冲洗设施、道路硬化等扬尘措施：</td>
-				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '是')}</td>
+				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '已设置')}</td>
 			</tr>
-			<c:forEach items="${envProtect.environmentProtectionRectifyList}" var="u">
 
+			<c:if test="${empty envProtect.environmentProtectionRectifyList}">
             <tr>
 				<td class="bg-info" width="25%">整改措施：</td>
+				<td width="25%" >无</td>
+				<td class="bg-info" width="25%">检查整改情况 ：</td>
+				<td width="25%" >无</td>
+			</tr>
+			</c:if>
+			<c:forEach items="${envProtect.environmentProtectionRectifyList}" var="u" varStatus="status">
+            <tr>
+				<td class="bg-info" width="25%">整改措施 ${status.index+1}：</td>
 				<td width="25%" > ${u.rectify}</td>
-				<td class="bg-info" width="25%">整改通知书：</td>
+				<td class="bg-info" width="25%">检查整改情况 ${status.index+1}：</td>
 				<td width="25%" > ${u.rectifyNotice}</td>
 			</tr>
-
             </c:forEach>
 		</table>
 	</div>

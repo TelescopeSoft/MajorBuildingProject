@@ -2,14 +2,11 @@ package com.qlmsoft.mbp.modules.crawler.service;
 
 import com.alibaba.fastjson.JSON;
 import com.qlmsoft.mbp.common.utils.DateUtils;
-import com.qlmsoft.mbp.common.utils.RegUtils;
-import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.modules.project.bean.ExpropriationBean;
 import com.qlmsoft.mbp.modules.project.bean.ExpropriationData;
 import com.qlmsoft.mbp.modules.project.entity.Expropriation;
 import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetail;
 import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetailInfo;
-import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
 import com.qlmsoft.mbp.modules.project.service.ExpropriationDetailService;
 import com.qlmsoft.mbp.modules.project.service.ExpropriationService;
 import org.apache.http.Consts;
@@ -39,7 +36,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
 
 /**
  * Created by aaronhuang on 2018/7/24.

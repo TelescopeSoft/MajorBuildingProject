@@ -82,6 +82,8 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
     private String prjNum;
     private String notMatchPrj;
 
+    private String majorFlag;
+
     public ApplyProjectInfo() {
         super();
     }
@@ -578,5 +580,13 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
 
     public void setNotMatchPrj(String notMatchPrj) {
         this.notMatchPrj = notMatchPrj;
+    }
+
+    public String getMajorFlag() {
+        return majorFlag;
+    }
+
+    public void setMajorFlag(String majorFlag) {
+        this.majorFlag = majorFlag;
     }
 }

@@ -139,6 +139,8 @@
 <script src="${ctxStatic}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="${ctxStatic}/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- placeholder -->
+<script src="${ctxStatic}/bower_components/jquery.placeholder.js"></script>
 <!-- AdminLTE App -->
 <script src="${ctxStatic}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -222,6 +224,8 @@
                 }
             }
         });
+
+        $('input, textarea').placeholder();
 
     })
 </script>

@@ -148,6 +148,8 @@
 		src="${ctxStatic}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script src="${ctxStatic}/bower_components/fastclick/lib/fastclick.js"></script>
+	<!-- placeholder -->
+    <script src="${ctxStatic}/bower_components/jquery.placeholder.js"></script>
 	<!-- AdminLTE App -->
 	<script src="${ctxStatic}/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
@@ -176,7 +178,7 @@
 	        "columnDefs": [{
             	            "render": function(data, type, row, meta ) {
             	            	if(data != null){
-            	                    return '<a href="${ctx}/publicity/tenderdetail?indexId='+row.indexid +'&title=' + row.title + '">'+row.title + '</a>';
+            	                    return '<a href="${ctx}/publicity/tenderdetail?indexId='+row.indexid +'&title=' + encodeURI(row.title) + '">'+row.title + '</a>';
             	                 }else{
             	                        return "";
             	                 }
@@ -208,6 +210,7 @@
                 }
             }
         });
+         $('input, textarea').placeholder();
     })
 </script>
 </body>

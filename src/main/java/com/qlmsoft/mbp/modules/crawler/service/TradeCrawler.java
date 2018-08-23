@@ -1,16 +1,12 @@
 package com.qlmsoft.mbp.modules.crawler.service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.qlmsoft.mbp.common.utils.DateUtils;
 import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.modules.project.bean.TradeInfoBean;
 import com.qlmsoft.mbp.modules.project.bean.TradeTableBean;
-import com.qlmsoft.mbp.modules.project.entity.PubAdminPenalty;
 import com.qlmsoft.mbp.modules.project.entity.PubTradeContent;
 import com.qlmsoft.mbp.modules.project.entity.Trade;
-import com.qlmsoft.mbp.modules.project.service.PubAdminPenaltyService;
 import com.qlmsoft.mbp.modules.project.service.PubTradeContentService;
 import com.qlmsoft.mbp.modules.project.service.TradeService;
 import org.apache.http.Consts;
@@ -38,7 +34,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**

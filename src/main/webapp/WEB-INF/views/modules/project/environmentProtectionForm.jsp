@@ -67,9 +67,11 @@
 		<div class="control-group">
 			<label class="control-label">发改项目代码：</label>
 			<div class="controls">
-			    <form:select path="prjCode" class="input-xxlarge">
+			    <form:input path="prjCode" htmlEscape="false" maxlength="500" class="input-xlarge"/>&nbsp;&nbsp;
+			    ${project.projectName}
+			    <!--<form:select path="prjCode" class="input-xxlarge">
                 <form:options items="${projectList}" itemLabel="projectName" itemValue="projectCode" htmlEscape="false"/>
-                </form:select>
+                </form:select>-->
 			</div>
 		</div>
 		<div class="control-group">
@@ -92,7 +94,7 @@
 							<tr>
 								<th class="hide"></th>
 								<th>整改情况</th>
-								<th>整改通知</th>
+								<th>检查整改情况</th>
 								<shiro:hasPermission name="project:environmentProtection:edit"><th width="10">&nbsp;</th></shiro:hasPermission>
 							</tr>
 						</thead>

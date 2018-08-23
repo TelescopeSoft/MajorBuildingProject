@@ -163,7 +163,7 @@
 	            { "data": "xmmc" },
 	            { "data": "ajjgmc" },
 	            { "data": "econcorpname" },
-	            { "data": function(obj){ var day = moment(obj.updatedate);return day.format("YYYY-MM-DD")} },
+	            { "data": function(obj){ var day = moment(obj.updateDate);return day.format("YYYY-MM-DD")} },
 	            { "data": "sbr" },
 	            { "data": "mj" },
 	            { "data": "zj" },

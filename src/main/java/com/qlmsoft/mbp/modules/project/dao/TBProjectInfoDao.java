@@ -31,4 +31,6 @@ public interface TBProjectInfoDao extends CrudDao<ProjectInfo> {
 
 	ProjectInfo getBaseByApproveNumFromYHT(@Param("approvetype") String approvetype,@Param("approvenum") String approvenum);
 
+	ProjectInfo getByCondition(ProjectInfo info);
+
 }

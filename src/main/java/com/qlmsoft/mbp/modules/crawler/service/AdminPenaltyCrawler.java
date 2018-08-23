@@ -3,15 +3,7 @@ package com.qlmsoft.mbp.modules.crawler.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.qlmsoft.mbp.common.utils.DateUtils;
-import com.qlmsoft.mbp.modules.project.bean.ExpropriationBean;
-import com.qlmsoft.mbp.modules.project.bean.ExpropriationData;
-import com.qlmsoft.mbp.modules.project.entity.Expropriation;
-import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetail;
-import com.qlmsoft.mbp.modules.project.entity.ExpropriationDetailInfo;
 import com.qlmsoft.mbp.modules.project.entity.PubAdminPenalty;
-import com.qlmsoft.mbp.modules.project.service.ExpropriationDetailService;
-import com.qlmsoft.mbp.modules.project.service.ExpropriationService;
 import com.qlmsoft.mbp.modules.project.service.PubAdminPenaltyService;
 import org.apache.http.Consts;
 import org.apache.http.NameValuePair;
@@ -19,25 +11,21 @@ import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by aaronhuang on 2018/7/24.

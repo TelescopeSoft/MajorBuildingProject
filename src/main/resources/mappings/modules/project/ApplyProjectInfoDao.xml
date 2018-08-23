@@ -28,7 +28,8 @@
 	,c2.name AS "projectTypeLabel"
     ,c.name AS "projectNatureLabel"
     ,a.catalog_name AS "catalogName"
-    ,i.PrjNum AS "prjNum"
+    ,i.PrjNum AS "prjNum",
+    p.major_flag AS "majorFlag"
 	</sql>
 	
 	<sql id="applyProjectInfoJoins">
@@ -39,6 +40,7 @@
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_CODE_INFO c2 ON a.PROJECT_TYPE = c2.Code
 					AND c2.code_type = 'PROJECT_TYPE'
 		LEFT JOIN MajorProjectLib.dbo.TBProjectInfo i ON a.PROJECT_CODE = i.PROJECT_CODE
+		LEFT JOIN MajorProjectLib.dbo.pub_project p ON a.PROJECT_CODE = p.prj_code
 	</sql>
     
 	<select id="get" resultType="ApplyProjectInfo">
@@ -280,5 +282,28 @@
 		DELETE FROM wxbinghu.dbo.stz_region_apply_project_info
 		WHERE id = #{id}
 	</update>
+
+	<insert id="insertMajorFlag">
+		INSERT INTO [MajorProjectLib].[dbo].[pub_project](
+		prj_code,
+		major_flag
+		) VALUES (
+		#{projectCode},
+		#{majorFlag}
+		)
+	</insert>
+
+	<update id="updateMajorFlag">
+		UPDATE [MajorProjectLib].[dbo].[pub_project] SET
+		major_flag = #{majorFlag}
+		WHERE prj_code = #{projectCode}
+	</update>
+
+	<select id="getMajorFlag" resultType="ApplyProjectInfo">
+		SELECT prj_code AS "projectCode",
+		major_flag AS "majorFlag"
+		FROM [MajorProjectLib].[dbo].[pub_project]  a
+		WHERE a.prj_code = #{projectCode}
+	</select>
 	
 </mapper>

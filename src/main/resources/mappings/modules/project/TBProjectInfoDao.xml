@@ -232,6 +232,21 @@
         ORDER BY a.CreateDate DESC
 	</select>
 
+	<select id="getByCondition" resultType="ProjectInfo">
+		SELECT TOP 1
+		<include refid="baseColumns"/>
+		FROM tbprojectinfo a
+		<where>
+			UpdateFlag != 'D' AND CountyNum = '320211'
+			<if test="prjnum != null and prjnum != ''">
+				AND a.PrjNum = #{prjnum}
+			</if>
+			<if test="pkid != null and pkid != ''">
+				AND a.PKID = #{pkid}
+			</if>
+		</where>
+	</select>
+
 	<insert id="insert">
 		INSERT INTO tbprojectinfo(
 			pkid,

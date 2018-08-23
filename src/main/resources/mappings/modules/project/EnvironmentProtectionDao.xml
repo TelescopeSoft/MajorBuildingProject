@@ -26,7 +26,7 @@
 		WHERE a.id = #{id}
 	</select>
 
-	<select id="getByProCode" resultType="EnvironmentProtection">
+	<select id="getByPrjCode" resultType="EnvironmentProtection">
 		SELECT
 		<include refid="environmentProtectionColumns"/>
 		FROM pub_environment_protection a
@@ -35,14 +35,29 @@
 	</select>
 	
 	<select id="findList" resultType="EnvironmentProtection">
-		SELECT 
+		SELECT  b.PROJECT_CODE AS "projectCode",
+				b.PROJECT_NAME AS "projectName",
 			<include refid="environmentProtectionColumns"/>
-		FROM pub_environment_protection a
-		<include refid="environmentProtectionJoins"/>
+		FROM wxbinghu.dbo.stz_region_apply_project_info b
+		LEFT JOIN MajorProjectLib.dbo.pub_environment_protection a ON b.PROJECT_CODE = a.prj_code
 		<where>
-			a.del_flag = #{DEL_FLAG_NORMAL}
-			<if test="prjCode != null and prjCode != ''">
-				AND a.prj_code = #{prjCode}
+			b.PROJECT_CODE IN (
+			SELECT PROJECT_CODE
+			FROM wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO
+			WHERE CURRENT_STATE IN (
+			'A0501'
+			,'A0502'
+			,'A0503'
+			)
+			)
+			<if test="projectCode != null and projectCode != ''">
+				AND b.PROJECT_CODE = #{projectCode}
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND b.PROJECT_NAME = #{projectName}
+			</if>
+			<if test="totalMoney != null and totalMoney != ''">
+				AND b.total_money >= #{totalMoney}
 			</if>
 		</where>
 		<choose>
@@ -50,7 +65,7 @@
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.update_date DESC
+				ORDER BY b.APPLY_DATE DESC
 			</otherwise>
 		</choose>
 	</select>

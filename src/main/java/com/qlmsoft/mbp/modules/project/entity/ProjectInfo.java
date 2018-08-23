@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.qlmsoft.mbp.common.persistence.DataEntity;
@@ -17,33 +20,61 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-10
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProjectInfo extends DataEntity<ProjectInfo> {
 
 	private static final long serialVersionUID = 1L;
+	@XmlElement(name = "PKID")
 	private String pkid; // pkid
+	@XmlElement(name = "PrjNum")
 	private String prjnum; // prjnum
+	@XmlElement(name = "PrjInnerNum")
 	private String prjinnernum; // prjinnernum
+	@XmlElement(name = "PrjName")
 	private String prjname; // prjname
+	@XmlElement(name = "PrjTypeNum")
 	private String prjtypenum; // prjtypenum
+	@XmlElement(name = "BuildCorpName")
 	private String buildcorpname; // buildcorpname
+	@XmlElement(name = "BuildCorpCode")
 	private String buildcorpcode; // buildcorpcode
+	@XmlElement(name = "ProvinceNum")
 	private String provincenum; // provincenum
+	@XmlElement(name = "CityNum")
 	private String citynum; // citynum
+	@XmlElement(name = "CountyNum")
 	private String countynum; // countynum
+	@XmlElement(name = "PrjApprovalNum")
 	private String prjapprovalnum; // prjapprovalnum
+	@XmlElement(name = "PrjApprovalLevelNum")
 	private String prjapprovallevelnum; // prjapprovallevelnum
+	@XmlElement(name = "BuldPlanNum")
 	private String buldplannum; // buldplannum
+	@XmlElement(name = "ProjectPlanNum")
 	private String projectplannum; // projectplannum
+	@XmlElement(name = "AllInvest")
 	private BigDecimal allinvest; // allinvest
+	@XmlElement(name = "AllArea")
 	private BigDecimal allarea; // allarea
+	@XmlElement(name = "PrjSize")
 	private String prjsize; // prjsize
+	@XmlElement(name = "PrjPropertyNum")
 	private String prjpropertynum; // prjpropertynum
+	@XmlElement(name = "PrjFunctionNum")
 	private String prjfunctionnum; // prjfunctionnum
+
+	@XmlElement(name = "BDate")
 	private Date bdate; // bdate
+	@XmlElement(name = "EDate")
 	private Date edate; // edate
+
+	@XmlElement(name = "CREATEDATE")
 	private Date createDate; // createdate
+	@XmlElement(name = "UpdateFlag")
 	private String updateflag; // updateflag
+	@XmlElement(name = "sbdqbm")
 	private String sbdqbm; // sbdqbm
+	@XmlElement(name = "sbdqbm")
 	private String datastate; // datastate
 	private Date cjrqsj; // cjrqsj
 	private Date xgrqsj; // xgrqsj

@@ -66,6 +66,16 @@ public class ApplyProjectInfoService extends CrudService<ApplyProjectInfoDao, Ap
 		}
 
 	}
+
+	@Transactional(readOnly = false)
+	public void toggleMajor(ApplyProjectInfo projectInfo) {
+		ApplyProjectInfo exist = this.dao.getMajorFlag(projectInfo.getProjectCode());
+		if(exist == null){
+			this.dao.insertMajorFlag(projectInfo);
+		}else {
+			this.dao.updateMajorFlag(projectInfo);
+		}
+	}
 	
 	@Transactional(readOnly = false)
 	public void delete(ApplyProjectInfo applyProjectInfo) {

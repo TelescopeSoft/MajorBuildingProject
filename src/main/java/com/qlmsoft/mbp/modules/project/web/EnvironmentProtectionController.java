@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.qlmsoft.mbp.modules.project.entity.ApplyProjectInfo;
-import com.qlmsoft.mbp.modules.project.entity.PubConfig;
 import com.qlmsoft.mbp.modules.project.service.ApplyProjectInfoService;
 import com.qlmsoft.mbp.modules.project.service.PubConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,9 +25,6 @@ import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.modules.project.entity.EnvironmentProtection;
 import com.qlmsoft.mbp.modules.project.service.EnvironmentProtectionService;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 /**
  * 施工期环境保护措施Controller
  * @author huang.zhengyu
@@ -46,13 +42,22 @@ public class EnvironmentProtectionController extends BaseController {
 	private ApplyProjectInfoService service;
 	
 	@ModelAttribute
-	public EnvironmentProtection get(@RequestParam(required=false) String id) {
+	public EnvironmentProtection get(@RequestParam(required=false) String prjCode) {
+		logger.info("--------get-------" + prjCode);
 		EnvironmentProtection entity = null;
-		if (StringUtils.isNotBlank(id)){
-			entity = environmentProtectionService.get(id);
+		if (StringUtils.isNotBlank(prjCode)){
+			entity = environmentProtectionService.getByPrjCode(prjCode);
 		}
-		if (entity == null){
+		if(entity == null){
+			logger.info("--------null-------" + prjCode);
 			entity = new EnvironmentProtection();
+			entity.setPrjCode(prjCode);
+			entity.setProjectCode(prjCode);
+		}else  if (StringUtils.isNotBlank(entity.getId())){
+			logger.info("--------null-------" + prjCode);
+//			entity = new EnvironmentProtection();
+			entity.setPrjCode(prjCode);
+			entity.setProjectCode(prjCode);
 		}
 		return entity;
 	}
@@ -60,7 +65,7 @@ public class EnvironmentProtectionController extends BaseController {
 	@RequiresPermissions("project:environmentProtection:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(EnvironmentProtection environmentProtection, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<EnvironmentProtection> page = environmentProtectionService.findPage(new Page<EnvironmentProtection>(request, response), environmentProtection); 
+		Page<EnvironmentProtection> page = environmentProtectionService.findPage(new Page<EnvironmentProtection>(request, response), environmentProtection);
 		model.addAttribute("page", page);
 		return "modules/project/environmentProtectionList";
 	}
@@ -68,6 +73,11 @@ public class EnvironmentProtectionController extends BaseController {
 	@RequiresPermissions("project:environmentProtection:view")
 	@RequestMapping(value = "form")
 	public String form(EnvironmentProtection environmentProtection, Model model) {
+
+//		String prjCode = request.getParameter("prjCode");
+//		logger.info("prjCode in request: " + prjCode);
+
+		logger.info("prjCode in bean: " + environmentProtection.getPrjCode());
 
 		if(environmentProtection.getCloseFlag() == null){
 			environmentProtection.setCloseFlag(0);
@@ -77,17 +87,20 @@ public class EnvironmentProtectionController extends BaseController {
 		}
 		model.addAttribute("environmentProtection", environmentProtection);
 
-		PubConfig config = configService.getByKey("total_money");
-		ApplyProjectInfo projectInfo = new ApplyProjectInfo();
-		if(config == null){
-			projectInfo.setTotalMoney(new BigDecimal(5000l));
-		}else {
-			projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
-		}
+//		PubConfig config = configService.getByKey("total_money");
+//		ApplyProjectInfo projectInfo = new ApplyProjectInfo();
+//		if(config == null){
+//			projectInfo.setTotalMoney(new BigDecimal(5000l));
+//		}else {
+//			projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
+//		}
+//
+//		List<ApplyProjectInfo> list = service.findList(projectInfo);
+		ApplyProjectInfo project = service.getByProjectCode(environmentProtection.getPrjCode());
 
-		List<ApplyProjectInfo> list = service.findList(projectInfo);
 
-		model.addAttribute("projectList", list);
+//		model.addAttribute("projectList", list);
+		model.addAttribute("project", project);
 
 		return "modules/project/environmentProtectionForm";
 	}

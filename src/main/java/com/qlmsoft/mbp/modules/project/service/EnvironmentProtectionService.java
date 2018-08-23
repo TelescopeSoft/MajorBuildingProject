@@ -36,8 +36,12 @@ public class EnvironmentProtectionService extends CrudService<EnvironmentProtect
 	}
 
 	public EnvironmentProtection getByPrjCode(String prjCode) {
-		EnvironmentProtection environmentProtection = this.dao.getByProCode(prjCode);
-		environmentProtection.setEnvironmentProtectionRectifyList(environmentProtectionRectifyDao.findList(new EnvironmentProtectionRectify(environmentProtection)));
+		EnvironmentProtection environmentProtection = this.dao.getByPrjCode(prjCode);
+		if(environmentProtection != null){
+			environmentProtection.setEnvironmentProtectionRectifyList(environmentProtectionRectifyDao.findList(new EnvironmentProtectionRectify(environmentProtection)));
+		}else {
+			environmentProtection = new EnvironmentProtection();
+		}
 		return environmentProtection;
 	}
 	

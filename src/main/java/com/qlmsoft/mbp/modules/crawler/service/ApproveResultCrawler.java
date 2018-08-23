@@ -4,7 +4,6 @@ import com.qlmsoft.mbp.common.utils.DateUtils;
 import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.modules.project.bean.PubApproveResultTable;
 import com.qlmsoft.mbp.modules.project.entity.ApplyProjectInfo;
-import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
 import com.qlmsoft.mbp.modules.project.entity.PubApproveResult;
 import com.qlmsoft.mbp.modules.project.service.PubApproveResultService;
 import org.apache.http.Consts;

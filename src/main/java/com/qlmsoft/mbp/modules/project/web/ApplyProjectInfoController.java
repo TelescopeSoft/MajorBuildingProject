@@ -6,6 +6,8 @@ package com.qlmsoft.mbp.modules.project.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
+import com.qlmsoft.mbp.modules.sys.utils.UserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import com.qlmsoft.mbp.common.web.BaseController;
 import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.modules.project.entity.ApplyProjectInfo;
 import com.qlmsoft.mbp.modules.project.service.ApplyProjectInfoService;
+
+import java.util.Calendar;
 
 /**
  * 发改申报项目基本信息Controller
@@ -77,6 +81,22 @@ public class ApplyProjectInfoController extends BaseController {
 	public String delete(ApplyProjectInfo applyProjectInfo, RedirectAttributes redirectAttributes) {
 		applyProjectInfoService.delete(applyProjectInfo);
 		addMessage(redirectAttributes, "删除发改申报项目基本信息成功");
+		return "redirect:"+Global.getAdminPath()+"/project/applyProjectInfo/?repage";
+	}
+
+	@RequiresPermissions("project:applyProjectInfo:edit")
+	@RequestMapping(value = "toggleMajor")
+	public String toggleMajor(ApplyProjectInfo applyProjectInfo, RedirectAttributes redirectAttributes) {
+		logger.debug(applyProjectInfo.toString());
+
+
+		applyProjectInfoService.toggleMajor(applyProjectInfo);
+		if("Y".equals(applyProjectInfo.getMajorFlag())){
+			addMessage(redirectAttributes, "设置成功");
+		}else {
+			addMessage(redirectAttributes, "取消成功");
+		}
+
 		return "redirect:"+Global.getAdminPath()+"/project/applyProjectInfo/?repage";
 	}
 

@@ -1,38 +1,15 @@
 package com.qlmsoft.mbp.modules.crawler.service;
 
-import com.alibaba.fastjson.JSON;
-import com.qlmsoft.mbp.common.utils.DateUtils;
 import com.qlmsoft.mbp.common.utils.RegUtils;
 import com.qlmsoft.mbp.common.utils.StringUtils;
-import com.qlmsoft.mbp.modules.project.bean.TradeInfoBean;
-import com.qlmsoft.mbp.modules.project.bean.TradeTableBean;
 import com.qlmsoft.mbp.modules.project.entity.*;
 import com.qlmsoft.mbp.modules.project.service.*;
-import org.apache.http.Consts;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

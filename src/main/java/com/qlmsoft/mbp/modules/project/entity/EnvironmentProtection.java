@@ -22,7 +22,11 @@ public class EnvironmentProtection extends DataEntity<EnvironmentProtection> {
 	private Integer washFlag;		// 设置冲洗设施、道路硬化等扬尘措施
 	private String displayFlag;		// display_flag
 	private List<EnvironmentProtectionRectify> environmentProtectionRectifyList = Lists.newArrayList();		// 子表列表
-	
+
+	private String projectCode;
+	private String projectName;
+	private String totalMoney;
+
 	public EnvironmentProtection() {
 		super();
 	}
@@ -64,7 +68,31 @@ public class EnvironmentProtection extends DataEntity<EnvironmentProtection> {
 	public void setDisplayFlag(String displayFlag) {
 		this.displayFlag = displayFlag;
 	}
-	
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(String totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+
 	public List<EnvironmentProtectionRectify> getEnvironmentProtectionRectifyList() {
 		return environmentProtectionRectifyList;
 	}
