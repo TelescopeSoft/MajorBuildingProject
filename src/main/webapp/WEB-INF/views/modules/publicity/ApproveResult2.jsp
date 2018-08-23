@@ -187,8 +187,19 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false,
-            "ajax": '${ctx}/publicity/approveresult2/list?projectCode=${approveresult.projectCode}&projectName=${approveresult.projectName}&itemName=${approveresult.itemName}&deptName=${approveresult.deptName}&startDate=<fmt:formatDate value="${approveresult.startDate}" pattern="yyyy-MM-dd"/>&endDate=<fmt:formatDate value="${approveresult.endDate}" pattern="yyyy-MM-dd"/>',
-	        "columns": [
+            "ajax"     : {
+                            "url": "${ctx}/publicity/approveresult2/list",
+                            "data": {
+                                    "projectCode": "${approveresult.projectCode}",
+                                    "projectName": "${approveresult.projectName}",
+                                    "itemName":"${approveresult.itemName}",
+                                    "deptName":"${approveresult.deptName}",
+                                    "startDate":'<fmt:formatDate value="${approveresult.startDate}" pattern="yyyy-MM-dd"/>',
+                                    "endDate":'<fmt:formatDate value="${approveresult.endDate}" pattern="yyyy-MM-dd"/>'
+
+                                }
+                        },
+            "columns": [
 	            { "data": "projectCode" },
 	            { "data": "projectName" },
 	            { "data": "itemName" },

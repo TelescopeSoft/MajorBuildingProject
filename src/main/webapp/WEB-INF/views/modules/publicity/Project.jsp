@@ -157,8 +157,15 @@
             'ordering'    : false,
             'info'        : true,
             'autoWidth'   : true,
-            "ajax": "${pageContext.request.contextPath}/publicity/project/list?projectCode=${projectinfo.projectCode}&projectName=${projectinfo.projectName}&enterpriseName=${projectinfo.enterpriseName}",
-	        "columns": [
+            "ajax"     : {
+                "url": "${pageContext.request.contextPath}/publicity/project/list",
+                "data": {
+                        "projectCode": "${projectinfo.projectCode}",
+                        "projectName": "${projectinfo.projectName}",
+                        "enterpriseName": "${projectinfo.enterpriseName}"
+                    }
+            },
+           "columns": [
 	            { "data": "projectCode" },
 	            { "data": "projectName" },
 	            { "data": "projectTypeLabel" },
