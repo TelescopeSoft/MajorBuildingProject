@@ -90,10 +90,11 @@ public class PubTenderController extends BaseController {
 	public String tenderDetail(HttpServletRequest request,
 								HttpServletResponse response, Model model) {
 		String indexId = request.getParameter("indexId");
-		String title = request.getParameter("title");
+		//String title = request.getParameter("title");
+		Trade trade = tradeService.getByIndexId(indexId);
 		PubTradeContent tradeContent = tradeContentService.getByIndexId(indexId);
 		model.addAttribute("menuList", PulicityMenuInstance.getMenus("tender"));
-		model.addAttribute("title", title);
+		model.addAttribute("title", trade.getTitle());
 		model.addAttribute("tradeContent", tradeContent);
 		return "modules/publicity/TenderDetail";
 	}

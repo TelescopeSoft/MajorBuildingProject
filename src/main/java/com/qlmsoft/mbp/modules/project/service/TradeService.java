@@ -28,6 +28,12 @@ public class TradeService extends CrudService<TradeDao, Trade> {
         return super.get(id);
     }
 
+    public Trade getByIndexId(String indexId) {
+        Trade condition = new Trade();
+        condition.setIndexid(indexId);
+        return this.dao.getByCondition(condition);
+    }
+
     public List<Trade> findList(Trade trade) {
         return super.findList(trade);
     }

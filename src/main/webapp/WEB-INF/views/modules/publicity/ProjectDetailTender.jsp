@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/views/include/pubtaglib.jsp"%>
 <div class="box box-info">
 	<!-- /.box-header -->
@@ -11,7 +11,7 @@
 			<tr>
 				<td class="bg-info" width="10%">公告名称</td>
 				<td width="70%"><a
-					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}&title=${item.title}"
+					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}"
 					target="_blank">
 						${item.title}</a></td>
 				<td class="bg-info" width="10%">时间</td>
@@ -37,7 +37,7 @@
     			<tr>
     				<td class="bg-info" width="10%">公告名称</td>
     				<td width="70%"><a
-    					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}&title=${item.title}"
+    					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}"
     					target="_blank">
     						${item.title}</a></td>
     				<td class="bg-info" width="10%">时间</td>
@@ -62,7 +62,7 @@
     			<tr>
     				<td class="bg-info" width="10%">公告名称</td>
     				<td width="70%"><a
-    					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}&title=${item.title}"
+    					href="${ctx}/publicity/tenderdetail?indexId=${item.indexid}"
     					target="_blank">
     						${item.title}</a></td>
     				<td class="bg-info" width="10%">时间</td>

@@ -169,8 +169,8 @@
             	            "targets": 6
             	        }],
 	        'fnDrawCallback':function () {
-                    let api = this.api();
-                    let startIndex = api.context[0]._iDisplayStart;
+                    var api = this.api();
+                    var startIndex = api.context[0]._iDisplayStart;
                     api.column(0).nodes().each(function(cell, i) {
                         cell.innerHTML = startIndex + i + 1;
                     });
