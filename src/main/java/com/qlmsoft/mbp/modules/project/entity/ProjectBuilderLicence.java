@@ -4,10 +4,16 @@
 package com.qlmsoft.mbp.modules.project.entity;
 
 import com.qlmsoft.mbp.common.persistence.ProjectDataEntity;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter2;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
@@ -16,41 +22,107 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-15
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProjectBuilderLicence extends ProjectDataEntity<ProjectBuilderLicence> {
 	
 	private static final long serialVersionUID = 1L;
+	@XmlElement(name = "PKID")
 	private String pkid;		// pkid
+
+	@XmlElement(name = "BuilderLicenceName")
 	private String builderlicencename;		// 施工许可项目名称
+
+	@XmlElement(name = "BuilderLicenceNum")
 	private String builderlicencenum;		// 施工许可证编号
+
+	@XmlElement(name = "BuilderLicenceInnerNum")
 	private String builderlicenceinnernum;		// 施工许可证内部编号
+
+
 	private String recordinnernum;		// 合同备案编码
+
+	@XmlElement(name = "PrjNum")
 	private String prjnum;		// 项目编号
+
+	@XmlElement(name = "BuldPlanNum")
 	private String buldplannum;		// 建设用地规划许可证编号
+
+	@XmlElement(name = "ProjectPlanNum")
 	private String projectplannum;		// 建设工程规划许可证编号
+
+	@XmlElement(name = "CensorNum")
 	private String censornum;		// 施工图审查合格书编号
+
+	@XmlElement(name = "ContractMoney")
 	private String contractmoney;		// 合同金额(万元)
+
+	@XmlElement(name = "Area")
 	private String area;		// 面积（平方米）
+
+	@XmlElement(name = "PrjSize")
 	private String prjsize;		// 建设规模
+
+	@XmlElement(name = "IssueCertDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date issuecertdate;		// 发证日期
+
+	@XmlElement(name = "EconCorpName")
 	private String econcorpname;		// 勘察单位名称
+
+	@XmlElement(name = "EconCorpCode")
 	private String econcorpcode;		// 勘察单位组织机构代码（社会信用代码
+
+	@XmlElement(name = "DesignCorpName")
 	private String designcorpname;		// 设计单位名称
+
+	@XmlElement(name = "DesignCorpCode")
 	private String designcorpcode;		// 设计单位组织机构代码（社会信用代码）
+
+	@XmlElement(name = "ConsCorpName")
 	private String conscorpname;		// 施工单位名称
+
+
 	private String conscorpcode;		// 施工单位组织机构代码（社会信用代码
+
+	@XmlElement(name = "SafetyCerID")
 	private String safetycerid;		// 施工单位安全生产许可证编号
+
+	@XmlElement(name = "SuperCorpName")
 	private String supercorpname;		// 监理单位名称
+
+	@XmlElement(name = "SuperCorpCode")
 	private String supercorpcode;		// 监理单位组织机构代码（社会信用代码）
+
+	@XmlElement(name = "ConstructorName")
 	private String constructorname;		// 项目经理姓名
+
+	@XmlElement(name = "CIDCardTypeNum")
 	private String cidcardtypenum;		// 项目经理证件类型
+
+	@XmlElement(name = "ConstructorIDCard")
 	private String constructoridcard;		// 项目经理证件号码
+
+	@XmlElement(name = "ConstructorPhone")
 	private String constructorphone;		// 项目经理电话号码
+
+	@XmlElement(name = "SupervisionName")
 	private String supervisionname;		// 总监理工程师姓名
+
+	@XmlElement(name = "SIDCardTypeNum")
 	private String sidcardtypenum;		// 总监理工程师证件类型
+
+	@XmlElement(name = "SupervisionIDCard")
 	private String supervisionidcard;		// 总监理工程师证件号码
+
+	@XmlElement(name = "SupervisionPhone")
 	private String supervisionphone;		// 总监理工程师电话
+
+	@XmlElement(name = "CreateDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter2.class)
 	private Date createdate;		// 记录登记时间
+	@XmlElement(name = "UpdateFlag")
 	private String updateflag;		// 数据更新标识
+
 	private String sbdqbm;		// 上报地区编码
 	private String datastate;		// datastate
 	private Date cjrqsj;		// cjrqsj

@@ -47,5 +47,11 @@ public class ProjectFinishService extends CrudService<ProjectFinishDao, ProjectF
 	public void delete(ProjectFinish projectFinish) {
 		super.delete(projectFinish);
 	}
-	
+
+    public void checkDuplicatedAndSave(ProjectFinish bean) {
+		ProjectFinish existed = this.dao.getByCondition(bean);
+		if (existed == null) {
+			super.save(bean);
+		}
+    }
 }

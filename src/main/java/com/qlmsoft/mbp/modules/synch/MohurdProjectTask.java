@@ -1,6 +1,5 @@
 package com.qlmsoft.mbp.modules.synch;
 
-import com.qlmsoft.mbp.modules.crawler.service.AdminPenaltyCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,18 @@ public class MohurdProjectTask {
     @Autowired
     private MohurdProjectDataSynch syncher;
 
+    @Autowired
+    private TenderInfoSynch tenderSynch;
+
+    @Autowired
+    private ContractRecordSynch contractRecordSynch;
+
+    @Autowired
+    private BuildLicenseSynch buildLicenseSynch;
+
+    @Autowired
+    private ProjectFinishSynch projectFinishSynch;
+
     public void execute() {
         logger.info("MohurdProjectTask.execute start");
         long start = System.currentTimeMillis();
@@ -21,7 +32,13 @@ public class MohurdProjectTask {
 
             syncher.synchProjectInfo();
 
+            tenderSynch.synchTable(MohurdConstant.TENDER);
+            contractRecordSynch.synchTable(MohurdConstant.CONTRACT_RECORD);
+            buildLicenseSynch.synchTable(MohurdConstant.BUILD_LICENSE);
+            projectFinishSynch.synchTable(MohurdConstant.PROJECT_FINISH);
+
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error(e.getMessage());
 
         }

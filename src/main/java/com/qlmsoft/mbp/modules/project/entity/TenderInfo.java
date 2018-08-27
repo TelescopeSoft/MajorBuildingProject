@@ -6,7 +6,13 @@ package com.qlmsoft.mbp.modules.project.entity;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter2;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,34 +24,74 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-14
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TenderInfo extends DataEntity<TenderInfo> {
 
 	private static final long serialVersionUID = 1L;
+	@XmlElement(name = "PKID")
 	private String pkid; // pkid
+	@XmlElement(name = "TenderName")
 	private String tendername; // 标段名称
+	@XmlElement(name = "TenderNum")
 	private String tendernum; // 中标通知书编号
+	@XmlElement(name = "TenderInnerNum")
 	private String tenderinnernum; // 中标通知书内部编号
+	@XmlElement(name = "PrjNum")
 	private String prjnum; // 项目编号
+	@XmlElement(name = "TenderClassNum")
 	private String tenderclassnum; // 招标类型
+
 	private String tenderclassnumlabel; // 招标类型文本
+	@XmlElement(name = "TenderTypeNum")
 	private String tendertypenum; // 招标方式
 	private String tendertypenumlabel; // 招标方式文本
+	@XmlElement(name = "TenderResultDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date tenderresultdate; // 中标日期
+
+	@XmlElement(name = "TenderMoney")
 	private Double tendermoney; // 中标金额
+
+	@XmlElement(name = "PrjSize")
 	private String prjsize; // 建设规模
+
+	@XmlElement(name = "Area")
 	private Double area; // 面积（平方米）
+
+	@XmlElement(name = "AgencyCorpName")
 	private String agencycorpname; // 招标代理单位名称
+	@XmlElement(name = "AgencyCorpCode")
 	private String agencycorpcode; // 招标代理单位组织机构代码（社会信用代码）
+	@XmlElement(name = "TenderCorpName")
 	private String tendercorpname; // 中标单位名称
+	@XmlElement(name = "TenderCorpCode")
 	private String tendercorpcode; // 中标单位组织机构代码（社会信用代码）
+
+	@XmlElement(name = "ConstructorName")
 	private String constructorname; // 项目经理/总监理工程师姓名
+
+	@XmlElement(name = "ConstructorPhone")
 	private String constructorphone; // 项目经理/总监理工程师电话
+
+	@XmlElement(name = "IDCardTypeNum")
 	private String idcardtypenum; // 项目经理/总监理工程师证件类型
+
+	@XmlElement(name = "ConstructorIDCard")
 	private String constructoridcard; // 项目经理/总监理工程师证件号码
+
+	@XmlElement(name = "shypbf")
 	private String shypbf; // 三合一评标法
+
+	@XmlElement(name = "CreateDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter2.class)
 	private Date createdate; // 记录登记时间
+
+	@XmlElement(name = "UpdateFlag")
 	private String updateflag; // 数据更新标识
+
+	@XmlElement(name = "sbdqbm")
 	private String sbdqbm; // 上报地区编码
+
 	private String datastate; // datastate
 	private Date cjrqsj; // cjrqsj
 	private Date xgrqsj; // xgrqsj

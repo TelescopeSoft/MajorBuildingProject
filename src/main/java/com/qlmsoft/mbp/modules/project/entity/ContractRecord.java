@@ -3,10 +3,15 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
@@ -16,31 +21,77 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-14
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContractRecord extends DataEntity<ContractRecord> {
 
 	private static final long serialVersionUID = 1L;
+
+	@XmlElement(name = "PKID")
 	private String pkid; // pkid
+
+	@XmlElement(name = "RecordName")
 	private String recordname; // 合同项目名称
+
+	@XmlElement(name = "RecordNum")
 	private String recordnum; // 合同备案编号
+
+	@XmlElement(name = "RecordInnerNum")
 	private String recordinnernum; // 合同备案内部编号
+
+	@XmlElement(name = "PrjNum")
 	private String prjnum; // 项目编号
+
+	@XmlElement(name = "ContractNum")
 	private String contractnum; // 合同编号
+
+	@XmlElement(name = "ContractTypeNum")
 	private String contracttypenum; // 合同类别
 	private String contracttypeLabel; // 合同类别文本
+
+	@XmlElement(name = "ContractMoney")
 	private String contractmoney; // 合同金额(万元)
+
+	@XmlElement(name = "PrjSize")
 	private String prjsize; // 建设规模
+
+	@XmlElement(name = "ContractDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date contractdate; // 合同签订日期
+
+	@XmlElement(name = "PropietorCorpName")
 	private String propietorcorpname; // 发包单位名称
+
+	@XmlElement(name = "PropietorCorpCode")
 	private String propietorcorpcode; // 发包单位名称组织机构代码
+
+	@XmlElement(name = "ContractorCorpName")
 	private String contractorcorpname; // 承包单位名称
+
+	@XmlElement(name = "ContractorCorpCode")
 	private String contractorcorpcode; // 承包单位名称组织机构代码
+
+	@XmlElement(name = "UnionCorpName")
 	private String unioncorpname; // 联合体承包单位名称
+
+	@XmlElement(name = "UnionCorpCode")
 	private String unioncorpcode; // 联合体承包单位名称组织机构代码
+
+	@XmlElement(name = "CreateDate")
 	private Date createdate; // 记录登记日期
+
+	@XmlElement(name = "UpdateFlag")
 	private String updateflag; // 更新标识
+
+	@XmlElement(name = "PrjHead")
 	private String prjhead; // 项目负责人
+
+	@XmlElement(name = "PrjHeadPhone")
 	private String prjheadphone; // 项目负责人联系电话
+
+	@XmlElement(name = "IDCard")
 	private String idcard; // 项目负责人证件号码
+
+	@XmlElement(name = "sbdqbm")
 	private String sbdqbm; // sbdqbm
 	private String datastate; // datastate
 	private Date cjrqsj; // cjrqsj

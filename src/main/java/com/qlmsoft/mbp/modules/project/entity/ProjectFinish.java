@@ -1,15 +1,18 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
+
 package com.qlmsoft.mbp.modules.project.entity;
 
-import com.qlmsoft.mbp.common.persistence.ProjectDataEntity;
-import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.qlmsoft.mbp.common.persistence.ProjectDataEntity;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter2;
+import org.hibernate.validator.constraints.Length;
 
-import com.qlmsoft.mbp.common.persistence.DataEntity;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Date;
 
 /**
  * 竣工备案Entity
@@ -17,26 +20,65 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-14
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProjectFinish extends ProjectDataEntity<ProjectFinish> {
 
 	private static final long serialVersionUID = 1L;
+
+	@XmlElement(name = "PKID")
 	private String pkid; // pkid
+
+	@XmlElement(name = "PrjFinishName")
 	private String prjfinishname; // 备案项目名称
+
+	@XmlElement(name = "PrjFinishNum")
 	private String prjfinishnum; // 竣工备案编号
+
+	@XmlElement(name = "PrjFinishInnerNum")
 	private String prjfinishinnernum; // 竣工备案内部编号
+
+	@XmlElement(name = "PrjNum")
 	private String prjnum; // 项目编号
+
+	@XmlElement(name = "BuilderLicenceNum")
 	private String builderlicencenum; // 施工许可证编号
+
+	@XmlElement(name = "QCCorpName")
 	private String qccorpname; // 质量检测机构名称
+
+	@XmlElement(name = "QCCorpCode")
 	private String qccorpcode; // 质量检测机构组织机构代码（社会信用代码）
+
+	@XmlElement(name = "FactCost")
 	private Double factcost; // 实际造价（万元）
+
+	@XmlElement(name = "FactArea")
 	private Double factarea; // 实际面积（平方米）
+
+	@XmlElement(name = "FactSize")
 	private String factsize; // 实际建设规模
+
+	@XmlElement(name = "PrjStructureTypeNum")
 	private String prjstructuretypenum; // 结构体系
+
 	private String prjstructuretypenumLabel; // 结构体系文字
+
+	@XmlElement(name = "BDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date bdate; // 实际开工日期
+
+	@XmlElement(name = "EDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date edate; // 实际竣工验收日期
+
+	@XmlElement(name = "Mark")
 	private String mark; // 备注
+
+	@XmlElement(name = "CreateDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter2.class)
 	private Date createdate; // 记录登记时间
+
+	@XmlElement(name = "UpdateFlag")
 	private String updateflag; // 数据更新标识
 	private String sbdqbm; // 上报地区编码
 	private String datastate; // datastate

@@ -22,4 +22,6 @@ public interface TenderInfoDao extends CrudDao<TenderInfo> {
 
     String getByTenderInnerNum(String tenderInnerNum);
 
+    TenderInfo getByCondition(TenderInfo tenderInfo);
+
 }

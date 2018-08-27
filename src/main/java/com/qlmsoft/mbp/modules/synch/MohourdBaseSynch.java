@@ -2,9 +2,6 @@ package com.qlmsoft.mbp.modules.synch;
 
 import com.qlmsoft.mbp.common.config.Global;
 import com.qlmsoft.mbp.common.utils.*;
-import com.qlmsoft.mbp.modules.project.bean.DataTableProjectInfo;
-import com.qlmsoft.mbp.modules.project.entity.ProjectInfo;
-import com.qlmsoft.mbp.modules.project.service.TBProjectInfoService;
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -16,33 +13,31 @@ import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.transport.http.HTTPConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
 
+public abstract class MohourdBaseSynch {
 
-@Service
-public class MohurdProjectDataSynch {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    public static final String YYYY_MM_DD = "yyyy-MM-dd";
-
-    public static final String MOHURD_SERVICE = "http://218.90.162.110:8889/WxjzgcjczyPage/DataExchange.asmx";
-    public static final String NAMESPACE = "http://218.90.162.110:8889/WxjzgcjczyPage/";
-    public static final String NAMESPACE_TAG = "wxj";
-    public static final String METHOD = "ReadTBDataForCounty";
-
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public static final String USER = Global.getConfig("zj.interface.user");
     public static final String PASSWORD = Global.getConfig("zj.interface.pass");
 
+    protected String tableName = null;
 
-    @Autowired
-    TBProjectInfoService service;
+    public String getTableName() {
+        return tableName;
+    }
 
-    public boolean synchProjectInfo() {
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public boolean synchTable(String tableName ) {
+
+        logger.info("synchTable : " + tableName);
+        this.setTableName(tableName);
 
         String endDate = DateUtils.getDate();
 
@@ -52,32 +47,33 @@ public class MohurdProjectDataSynch {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) - 5);
-            startDate = DateUtils.formatDate(calendar.getTime(), DATE_FORMAT);
+            startDate = DateUtils.formatDate(calendar.getTime(), MohurdConstant.DATE_FORMAT);
         }
+        return synchTable(startDate, endDate);
 
-        return synchProjectInfo(startDate, endDate);
     }
 
-    public boolean synchProjectInfo(String startDate, String endDate) {
+    private boolean synchTable(String startDate, String endDate) {
+        logger.info("synchTable : " + startDate + " to  " + endDate);
         boolean success = true;
         ServiceClient sender = null;
         try {
             sender = new ServiceClient();
 
-            EndpointReference endpointReference = new EndpointReference(MOHURD_SERVICE);
+            EndpointReference endpointReference = new EndpointReference(MohurdConstant.MOHURD_SERVICE);
             Options options = new Options();
-            options.setAction(NAMESPACE + METHOD);
+            options.setAction(MohurdConstant.NAMESPACE + MohurdConstant.METHOD);
             options.setTo(endpointReference);
             options.setProperty(HTTPConstants.CHUNKED, "false");
             sender.setOptions(options);
             OMFactory fac = OMAbstractFactory.getOMFactory();
 
-            OMNamespace omNs = fac.createOMNamespace(NAMESPACE, NAMESPACE_TAG);
-            OMElement method = fac.createOMElement(METHOD, omNs);
+            OMNamespace omNs = fac.createOMNamespace(MohurdConstant.NAMESPACE, MohurdConstant.NAMESPACE_TAG);
+            OMElement method = fac.createOMElement(MohurdConstant.METHOD, omNs);
             // 对应参数的节点
             String[] params = new String[]{"tableName", "user", "password", "beginDate", "endDate"};
             // 参数值
-            String[] paramValues = new String[]{"tbprojectinfo", USER, PASSWORD, startDate, endDate};
+            String[] paramValues = new String[]{tableName , USER, PASSWORD, startDate, endDate};
             for (int i = 0; i < params.length; i++) {
                 OMElement inner = fac.createOMElement(params[i], omNs);
                 inner.setText(paramValues[i]);
@@ -87,24 +83,15 @@ public class MohurdProjectDataSynch {
             OMElement result = sender.sendReceive(method);
 
             String decodeStr = XmlDecodeUtil.xmlStrToObject(result.getFirstElement().getText(), Encodes.ENCODING_GBK);
-            DataTableProjectInfo dataTable = (DataTableProjectInfo) XmlBuilder.xmlStrToObject(DataTableProjectInfo.class, decodeStr);
-            if(dataTable != null && dataTable.getRows() != null){
-                for(ProjectInfo pi : dataTable.getRows()){
-                    try{
-                        service.checkDuplicatedAndSave(pi);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        logger.error(e.getMessage());
-                    }
 
-                }
-            }
+            resolveResponse(decodeStr);
+
 
         } catch (AxisFault axisFault) {
             axisFault.printStackTrace();
             logger.error(axisFault.getMessage());
             success = false;
-        } catch(Exception e){
+        }catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
             success = false;
@@ -113,5 +100,7 @@ public class MohurdProjectDataSynch {
         return success;
 
     }
+
+    protected abstract void resolveResponse(String decodeStr);
 
 }

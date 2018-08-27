@@ -3,15 +3,14 @@
  */
 package com.qlmsoft.mbp.modules.project.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.qlmsoft.mbp.common.persistence.Page;
 import com.qlmsoft.mbp.common.service.CrudService;
 import com.qlmsoft.mbp.modules.project.dao.TenderInfoDao;
 import com.qlmsoft.mbp.modules.project.entity.TenderInfo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 招标投标Service
@@ -51,5 +50,12 @@ public class TenderInfoService extends CrudService<TenderInfoDao, TenderInfo> {
 	public void delete(TenderInfo tenderInfo) {
 		super.delete(tenderInfo);
 	}
-	
+
+	@Transactional(readOnly = false)
+	public void checkDuplicatedAndSave(TenderInfo bean) {
+		TenderInfo existed = this.dao.getByCondition(bean);
+		if (existed == null) {
+			super.save(bean);
+		}
+	}
 }

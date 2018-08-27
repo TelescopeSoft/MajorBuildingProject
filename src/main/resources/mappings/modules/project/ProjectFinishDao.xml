@@ -45,6 +45,22 @@
 		<include refid="projectFinishJoins"/>
 		WHERE a.id = #{id}
 	</select>
+
+	<select id="getByCondition" resultType="ProjectFinish">
+		SELECT
+		<include refid="projectFinishColumns"/>
+		FROM tbprojectfinishmanage a
+		<include refid="projectFinishJoins"/>
+		<where>
+			1 = 1
+			<if test="prjnum != null and prjnum != ''">
+				AND a.PrjNum = #{prjnum}
+			</if>
+			<if test="prjfinishnum != null and prjfinishnum != ''">
+				AND a.PrjFinishNum = #{prjfinishnum}
+			</if>
+		</where>
+	</select>
 	
 	<select id="findList" resultType="ProjectFinish">
 		SELECT 

@@ -45,6 +45,22 @@
 		<include refid="contractRecordJoins"/>
 		WHERE a.id = #{id}
 	</select>
+
+	<select id="getByCondition" resultType="ContractRecord">
+		SELECT TOP 1
+		<include refid="contractRecordColumns"/>
+		FROM tbcontractrecordmanage a
+		LEFT JOIN MajorProjectLib.dbo.tbContractTypeDic c ON c.Code = a.ContractTypeNum
+		<where>
+			1=1
+			<if test="prjnum != null and prjnum != ''">
+				AND a.PrjNum = #{prjnum}
+			</if>
+			<if test="recordnum != null and recordnum != ''">
+				AND a.RecordNum = #{recordnum}
+			</if>
+		</where>
+	</select>
 	
 	<select id="findList" resultType="ContractRecord">
 		SELECT 

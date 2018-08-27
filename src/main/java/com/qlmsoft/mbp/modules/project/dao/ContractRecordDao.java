@@ -17,4 +17,7 @@ import com.qlmsoft.mbp.modules.project.entity.ContractRecord;
 @MyBatisDao
 public interface ContractRecordDao extends CrudDao<ContractRecord> {
 	List<ContractRecord> findListByProjectPkid(String pkid);
+
+	ContractRecord getByCondition(ContractRecord bean);
+
 }

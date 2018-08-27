@@ -17,4 +17,6 @@ import com.qlmsoft.mbp.modules.project.entity.ProjectBuilderLicence;
 @MyBatisDao
 public interface ProjectBuilderLicenceDao extends CrudDao<ProjectBuilderLicence> {
 	List<ProjectBuilderLicence> findListByProjectPkid(String pkid);
+
+    ProjectBuilderLicence getByCondition(ProjectBuilderLicence bean);
 }

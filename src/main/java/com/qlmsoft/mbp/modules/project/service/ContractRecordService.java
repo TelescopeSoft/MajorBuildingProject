@@ -3,15 +3,14 @@
  */
 package com.qlmsoft.mbp.modules.project.service;
 
-import java.util.List;
-
+import com.qlmsoft.mbp.common.persistence.Page;
+import com.qlmsoft.mbp.common.service.CrudService;
+import com.qlmsoft.mbp.modules.project.dao.ContractRecordDao;
+import com.qlmsoft.mbp.modules.project.entity.ContractRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.qlmsoft.mbp.common.persistence.Page;
-import com.qlmsoft.mbp.common.service.CrudService;
-import com.qlmsoft.mbp.modules.project.entity.ContractRecord;
-import com.qlmsoft.mbp.modules.project.dao.ContractRecordDao;
+import java.util.List;
 
 /**
  * 合同备案Service
@@ -47,5 +46,12 @@ public class ContractRecordService extends CrudService<ContractRecordDao, Contra
 	public void delete(ContractRecord contractRecord) {
 		super.delete(contractRecord);
 	}
-	
+
+	@Transactional(readOnly = false)
+	public void checkDuplicatedAndSave(ContractRecord bean) {
+		ContractRecord existed = this.dao.getByCondition(bean);
+		if (existed == null) {
+			super.save(bean);
+		}
+	}
 }
