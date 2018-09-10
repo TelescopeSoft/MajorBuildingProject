@@ -1,13 +1,16 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
+
 package com.qlmsoft.mbp.modules.project.entity;
 
 import com.qlmsoft.mbp.common.persistence.ProjectDataEntity;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
@@ -17,35 +20,89 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-14
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ApZjsbb extends ProjectDataEntity<ApZjsbb> {
 
 	private static final long serialVersionUID = 1L;
+
+	@XmlElement(name = "uuid")
 	private String uuid; // 质监申报表编号
+
+	@XmlElement(name = "xmmc")
 	private String xmmc; // 质监项目名称
+
+	@XmlElement(name = "PrjNum")
 	private String prjnum; // 项目编号
+
+	@XmlElement(name = "PrjName")
 	private String prjname; // 立项项目名称
+
+	@XmlElement(name = "gcdz")
 	private String gcdz; // 工程地址
+	@XmlElement(name = "Zjjgmc")
 	private String zjjgmc; // 质量监督机构名称
+
+	@XmlElement(name = "ZjCorpCode")
 	private String zjcorpcode; // 质量监督机构组织机构代码
+	@XmlElement(name = "PrjSize")
 	private String prjsize; // 建设规模
+	@XmlElement(name = "EconCorpName")
 	private String econcorpname; // 建设单位名称
+
+	@XmlElement(name = "EconCorpCode")
 	private String econcorpcode; // 建设单位组织机构代码
+
+	@XmlElement(name = "PrjApprovalNum")
 	private String prjapprovalnum; // 立项批准文号
+
+	@XmlElement(name = "BuldPlanNum")
 	private String buldplannum; // 建设用地规划许可证号
+
+	@XmlElement(name = "ProjectPlanNum")
 	private String projectplannum; // 建设工程规划许可证号
+
+	@XmlElement(name = "CityNum")
 	private String citynum; // 所在市州
+
+	@XmlElement(name = "CountyNum")
 	private String countynum; // 所在县区
+
+	@XmlElement(name = "PrjTypeNum")
 	private String prjtypenum; // 项目分类
+
+	@XmlElement(name = "PrjFunctionNum")
 	private String prjfunctionnum; // 工程用途
+
+	@XmlElement(name = "sbr")
 	private String sbr; // 申办人
+
+	@XmlElement(name = "sbryddh")
 	private String sbryddh; // 申办人移动电话
+
+	@XmlElement(name = "CreateDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date createdate; // 记录登记日期
 	private String sfzps; // 是否是装配式
+
+	@XmlElement(name = "UpdateFlag")
 	private String updateflag; // updateflag
+
+	@XmlElement(name = "FetchDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date fetchdate; // fetchdate
+
+	@XmlElement(name = "UpdateTime")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date updatetime; // updatetime
+
+	@XmlElement(name = "UpdateUser")
 	private String updateuser; // updateuser
+
+	@XmlElement(name = "updateDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date updatedate; // 申报提交时间
+
+	@XmlElement(name = "Status")
 	private String status; // status
 	private String jsxz; // 建设性质
 	private String jsxzLabel = ""; // 建设性质

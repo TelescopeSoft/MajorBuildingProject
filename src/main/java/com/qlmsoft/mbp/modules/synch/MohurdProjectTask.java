@@ -25,6 +25,13 @@ public class MohurdProjectTask {
     @Autowired
     private ProjectFinishSynch projectFinishSynch;
 
+    @Autowired
+    private ApAjsbbSynch ajSynch;
+
+    @Autowired
+    private ApZjsbbSynch zjSynch;
+
+
     public void execute() {
         logger.info("MohurdProjectTask.execute start");
         long start = System.currentTimeMillis();
@@ -36,6 +43,9 @@ public class MohurdProjectTask {
             contractRecordSynch.synchTable(MohurdConstant.CONTRACT_RECORD);
             buildLicenseSynch.synchTable(MohurdConstant.BUILD_LICENSE);
             projectFinishSynch.synchTable(MohurdConstant.PROJECT_FINISH);
+
+            ajSynch.synchTable(MohurdConstant.APAJSBB);
+            zjSynch.synchTable(MohurdConstant.APZJSBB);
 
         } catch (Exception e) {
             e.printStackTrace();

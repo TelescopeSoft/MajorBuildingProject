@@ -20,4 +20,7 @@ public class MohurdConstant {
     public static final String BUILD_LICENSE  = "TBBuilderLicenceManage";
     public static final String PROJECT_FINISH  = "TBProjectFinishManage";
 
+    public static final String APAJSBB  = "Ap_ajsbb";
+    public static final String APZJSBB  = "Ap_zjsbb";
+
 }

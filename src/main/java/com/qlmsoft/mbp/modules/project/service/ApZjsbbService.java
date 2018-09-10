@@ -5,6 +5,10 @@ package com.qlmsoft.mbp.modules.project.service;
 
 import java.util.List;
 
+import com.qlmsoft.mbp.modules.project.bean.mohourd.ApZjsbbBean;
+import com.qlmsoft.mbp.modules.project.dao.ApZjsbbDwryDao;
+import com.qlmsoft.mbp.modules.project.entity.ApZjsbbDwry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,9 @@ import com.qlmsoft.mbp.modules.project.entity.ApZjsbb;
 @Service
 @Transactional(readOnly = true)
 public class ApZjsbbService extends CrudService<ApZjsbbDao, ApZjsbb> {
+
+	@Autowired
+	private ApZjsbbDwryDao dwryDao;
 
 	public ApZjsbb get(String id) {
 		return super.get(id);
@@ -47,5 +54,23 @@ public class ApZjsbbService extends CrudService<ApZjsbbDao, ApZjsbb> {
 	public void delete(ApZjsbb apZjsbb) {
 		super.delete(apZjsbb);
 	}
-	
+
+    public void checkDuplicatedAndSave(ApZjsbbBean bean) {
+		ApZjsbb ajsbb = bean.getAjsbb();
+
+		ApZjsbb existed = this.dao.getByCondition(ajsbb);
+		if (existed == null) {
+			super.save(ajsbb);
+		}
+		List<ApZjsbbDwry> dwryList = bean.getDwryList();
+
+		if(dwryList != null){
+			for(ApZjsbbDwry item: dwryList){
+				ApZjsbbDwry ex = this.dwryDao.getByCondition(item);
+				if(ex == null){
+					this.dwryDao.insert(item);
+				}
+			}
+		}
+    }
 }

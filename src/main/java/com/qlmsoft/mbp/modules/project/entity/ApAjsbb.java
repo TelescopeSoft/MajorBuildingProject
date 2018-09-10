@@ -1,13 +1,16 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package com.qlmsoft.mbp.modules.project.entity;
 
 import com.qlmsoft.mbp.common.persistence.ProjectDataEntity;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter;
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter2;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
@@ -16,30 +19,77 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @author huangzhengyu
  * @version 2018-07-14
  */
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ApAjsbb extends ProjectDataEntity<ApAjsbb> {
 	
 	private static final long serialVersionUID = 1L;
+
+	@XmlElement(name = "uuid")
 	private String uuid;		// 安监申报表编号
+
+	@XmlElement(name = "xmmc")
 	private String xmmc;		// 安监项目名称
+
+	@XmlElement(name = "PrjNum")
 	private String prjnum;		// 项目编号
+
+	@XmlElement(name = "PrjName")
 	private String prjname;		// 立项项目名称
+
+	@XmlElement(name = "Ajjgmc")
 	private String ajjgmc;		// 安监申报表编号	c5dd7ed0-1a98-4443-8c63-7a25964be842	安监项目名称	江阴市人民法院霞客人民法庭审判业务用房（装修装饰工程） 项目编号	3202811507200102	立项项目名称	江阴市人民法院霞客人民法庭审判业务用房 安全监督机构名称
+
+	@XmlElement(name = "AjCorpCode")
 	private String ajcorpcode;		// AJ320281-1
+
+	@XmlElement(name = "PrjSize")
 	private String prjsize;		// 建设规模
+
+	@XmlElement(name = "EconCorpName")
 	private String econcorpname;		// 建设单位名称
+
+	@XmlElement(name = "EconCorpCode")
 	private String econcorpcode;		// 建设单位组织机构代码
+
+	@XmlElement(name = "PrjApprovalNum")
 	private String prjapprovalnum;		// 立项批准文号
+
+	@XmlElement(name = "BuldPlanNum")
 	private String buldplannum;		// 建设用地规划许可证号
+
+	@XmlElement(name = "ProjectPlanNum")
 	private String projectplannum;		// 建设工程规划许可证号
+
+	@XmlElement(name = "CityNum")
 	private String citynum;		// 所在市州
+
+	@XmlElement(name = "CountyNum")
 	private String countynum;		// 所在县区
+
+	@XmlElement(name = "PrjTypeNum")
 	private String prjtypenum;		// 项目分类
+
+	@XmlElement(name = "sPrjTypeNum")
 	private String sprjtypenum;		// 项目分类小类
+
+	@XmlElement(name = "PrjFunctionNum")
 	private String prjfunctionnum;		// 工程用途
+
+	@XmlElement(name = "sbr")
 	private String sbr;		// 申办人
+
+	@XmlElement(name = "sbryddh")
 	private String sbryddh;		// 申办人移动电话
+
+	@XmlElement(name = "CreateDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date createdate;		// 记录登记日期
+
+	@XmlElement(name = "sfzps")
 	private String sfzps;		// 是否是装配式
+
+	@XmlElement(name = "sfbz")
 	private String sfbz;		// 是否是保障房
 	private Double jdz;		// 坐标经度
 	private Double wdz;		// 坐标纬度
@@ -49,11 +99,26 @@ public class ApAjsbb extends ProjectDataEntity<ApAjsbb> {
 	private String sbmb;		// 申报目标
 	private String sfjk;		// 是否符合安装远程监控条件
 	private String sgxkz;		// 施工许可证号
+
+	@XmlElement(name = "UpdateFlag")
 	private String updateflag;		// 数据更新标识
+
+	@XmlElement(name = "FetchDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date fetchdate;		// fetchdate
+
+	@XmlElement(name = "UpdateTime")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date updatetime;		// updatetime
+
+	@XmlElement(name = "UpdateUser")
 	private String updateuser;		// updateuser
+
+	@XmlElement(name = "updateDate")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date updatedate;		// 申报提交时间
+
+	@XmlElement(name = "Status")
 	private String status;		// status
 	
 	public ApAjsbb() {

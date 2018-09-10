@@ -9,8 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.qlmsoft.mbp.modules.project.entity.ApAjsbbHjssjd;
-import com.qlmsoft.mbp.modules.project.entity.EnvironmentProtection;
+import com.qlmsoft.mbp.modules.project.entity.*;
 import com.qlmsoft.mbp.modules.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.qlmsoft.mbp.common.web.BaseController;
 import com.qlmsoft.mbp.modules.project.bean.ConstructInfoBean;
 import com.qlmsoft.mbp.modules.project.bean.ConstructInfoDwBean;
-import com.qlmsoft.mbp.modules.project.entity.ApZjsbb;
-import com.qlmsoft.mbp.modules.project.entity.ApZjsbbDwry;
 
 /**
  * 项目施工有关信息Controller
@@ -89,6 +86,12 @@ public class PubConstructionController extends BaseController {
 		model.addAttribute("list", result);
 
 		EnvironmentProtection envProtect = epService.getByPrjCode(pkid);
+		if(envProtect.getEnvironmentProtectionRectifyList() != null){
+			for(EnvironmentProtectionRectify item : envProtect.getEnvironmentProtectionRectifyList()){
+				item.setRectify(item.getRectify().replaceAll("\r\n", "<br>"));
+			}
+		}
+
 		model.addAttribute("envProtect", envProtect);
 
 		return "modules/publicity/ProjectDetailConstruction";

@@ -89,9 +89,24 @@
 		<table class="table table-bordered">
 			<tr>
 				<td class="bg-info" width="20%">设置施工现场封闭围挡：</td>
-				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '已设置')}</td>
-				<td class="bg-info" width="20%">设置冲洗设施、道路硬化等扬尘措施：</td>
-				<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '已设置')}</td>
+                <c:choose>
+			        <c:when test="${not empty envProtect.closeFlag and envProtect.closeFlag==1}">
+			        <td width="30%" style="background-color:#ffeb3b"> ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '已设置')}</td>
+			        </c:when>
+			    	<c:otherwise>
+			    	<td width="30%" > ${fns:getDictLabel(envProtect.closeFlag, 'environment_close', '已设置')}</td>
+			    	</c:otherwise>
+			    </c:choose>
+                <td class="bg-info" width="20%">设置冲洗设施、道路硬化等扬尘措施：</td>
+                <c:choose>
+			        <c:when test="${not empty envProtect.washFlag  and envProtect.washFlag==1}">
+                    <td width="30%" style="background-color:#ffeb3b"> ${fns:getDictLabel(envProtect.washFlag, 'environment_close', '已设置')}</td>
+			        </c:when>
+			    	<c:otherwise>
+			    	<td width="30%" > ${fns:getDictLabel(envProtect.washFlag, 'environment_close', '已设置')}</td>
+			    	</c:otherwise>
+			    </c:choose>
+
 			</tr>
 
 			<c:if test="${empty envProtect.environmentProtectionRectifyList}">
@@ -105,9 +120,9 @@
 			<c:forEach items="${envProtect.environmentProtectionRectifyList}" var="u" varStatus="status">
             <tr>
 				<td class="bg-info" width="25%">整改措施 ${status.index+1}：</td>
-				<td width="25%" > ${u.rectify}</td>
+				<td width="25%" > <c:out value="${u.rectify}" escapeXml="false"/></td>
 				<td class="bg-info" width="25%">检查整改情况 ${status.index+1}：</td>
-				<td width="25%" > ${u.rectifyNotice}</td>
+				<td width="25%" > <c:out value="${u.rectifyNotice}" escapeXml="false"/></td>
 			</tr>
             </c:forEach>
 		</table>

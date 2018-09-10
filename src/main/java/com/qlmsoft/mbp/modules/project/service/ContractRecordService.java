@@ -49,6 +49,7 @@ public class ContractRecordService extends CrudService<ContractRecordDao, Contra
 
 	@Transactional(readOnly = false)
 	public void checkDuplicatedAndSave(ContractRecord bean) {
+		logger.info("-----" + bean.getPrjnum() + "," + bean.getRecordnum());
 		ContractRecord existed = this.dao.getByCondition(bean);
 		if (existed == null) {
 			super.save(bean);

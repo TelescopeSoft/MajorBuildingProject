@@ -1,26 +1,40 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
+
 package com.qlmsoft.mbp.modules.project.entity;
 
+import com.qlmsoft.mbp.common.utils.JaxbDateAdapter;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
  * 质量报监单位人员Entity
  * @author huangzhengyu
  * @version 2018-07-15
  */
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ApZjsbbDwry extends DataEntity<ApZjsbbDwry> {
 	
 	private static final long serialVersionUID = 1L;
+
+	@XmlElement(name = "uuid")
 	private String uuid;		// 质监申报表编号
+
+	@XmlElement(name = "idCard")
 	private String idcard;		// 身份证号码
 	private String dwlx;		// 单位类别
+
+	@XmlElement(name = "CorpCode")
 	private String corpcode;		// 单位组织机构代码
+
+	@XmlElement(name = "CorpName")
 	private String corpname;		// 单位名称
 	private String zzzs;		// 资质证书编号
 	private String zzlxdj;		// 资质类型和等级
@@ -35,7 +49,13 @@ public class ApZjsbbDwry extends DataEntity<ApZjsbbDwry> {
 	private String zgzh;		// 资格类型及证号
 	private String zgdj;		// 资格等级
 	private String zy;		// 专业
+
+	@XmlElement(name = "jhjcsj")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date jhjcsj;		// 计划进场时间
+
+	@XmlElement(name = "jhccsj")
+	@XmlJavaTypeAdapter(JaxbDateAdapter.class)
 	private Date jhccsj;		// 计划出场时间
 	private String lhtsx;		// 联合体属性
 	private String zyzgzsh;		// 执业资格证书号

@@ -22,10 +22,16 @@ public class PulicityMenuInstance {
 
 //		PulicityMenu approveResult = new PulicityMenu("批准结果", "approveresult",
 //				"approveresult", false);
+		PulicityMenu approve = new PulicityMenu("批准结果", "approve",
+				"approve", true);
 		PulicityMenu approveResult = new PulicityMenu("批准结果", "approveresult2",
 				"approveresult2", false);
+		PulicityMenu designchange = new PulicityMenu("重大设计变更", "designchange",
+				"designchange", false);
 
-		list.add(approveResult);
+		list.add(approve);
+		approve.getChilds().add(approveResult);
+		approve.getChilds().add(designchange);
 
 		PulicityMenu tender = new PulicityMenu("招标投标", "tender", "tender",
 				false);

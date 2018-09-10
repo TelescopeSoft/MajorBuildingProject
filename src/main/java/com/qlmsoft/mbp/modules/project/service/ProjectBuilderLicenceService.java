@@ -57,7 +57,7 @@ public class ProjectBuilderLicenceService extends
 	@Transactional(readOnly = false)
 	public void checkDuplicatedAndSave(ProjectBuilderLicence bean) {
 
-		logger.info("checkDuplicatedAndSave : " + bean.getPkid() + "," + bean.getPrjnum() + "," + bean.getBuilderlicencenum());
+		//logger.info("checkDuplicatedAndSave : " + bean.getPkid() + "," + bean.getPrjnum() + "," + bean.getBuilderlicencenum());
 		ProjectBuilderLicence existed = this.dao.getByCondition(bean);
 		if (existed == null) {
 			super.save(bean);

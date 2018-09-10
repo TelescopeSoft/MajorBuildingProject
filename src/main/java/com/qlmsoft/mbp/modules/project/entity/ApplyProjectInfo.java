@@ -3,10 +3,13 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
+import com.qlmsoft.mbp.common.utils.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -83,6 +86,9 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
     private String notMatchPrj;
 
     private String majorFlag;
+
+    private String applyDateStart;
+    private String applyDateEnd;
 
     public ApplyProjectInfo() {
         super();
@@ -588,5 +594,32 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
 
     public void setMajorFlag(String majorFlag) {
         this.majorFlag = majorFlag;
+    }
+
+    public String getApplyDateStart() {
+        return applyDateStart;
+    }
+
+    public void setApplyDateStart(String applyDateStart) {
+        this.applyDateStart = applyDateStart;
+    }
+
+    public String getApplyDateEnd() {
+        return applyDateEnd;
+    }
+
+    public void setApplyDateEnd(String applyDateEnd) {
+        this.applyDateEnd = applyDateEnd;
+    }
+
+    public List<String> getProjectTypeList() {
+        List<String> result = new ArrayList<String>();
+        if(StringUtils.isNotEmpty(this.getProjectType())){
+            String[] types = this.getProjectType().split(",");
+            for(String t : types){
+                result.add(t);
+            }
+        }
+        return result;
     }
 }

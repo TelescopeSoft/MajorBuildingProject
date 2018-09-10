@@ -16,5 +16,8 @@ import com.qlmsoft.mbp.modules.project.entity.ApAjsbb;
  */
 @MyBatisDao
 public interface ApAjsbbDao extends CrudDao<ApAjsbb> {
+
 	List<ApAjsbb> findListByProjectPkid(String pkid);
+
+    ApAjsbb getByCondition(ApAjsbb ajsbb);
 }

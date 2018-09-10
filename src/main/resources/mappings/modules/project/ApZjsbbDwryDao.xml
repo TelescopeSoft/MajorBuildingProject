@@ -38,6 +38,28 @@
 		<include refid="apZjsbbDwryJoins"/>
 		WHERE a.id = #{id}
 	</select>
+
+	<select id="getByCondition" resultType="ApZjsbbDwry">
+		SELECT TOP 1
+		<include refid="apZjsbbDwryColumns"/>
+		FROM ap_zjsbb_dwry a
+		<include refid="apZjsbbDwryJoins"/>
+		<where>
+			1 = 1
+			<if test="uuid != null and uuid != ''">
+				AND a.uuid = #{uuid}
+			</if>
+			<if test="dwlx != null and dwlx != ''">
+				AND a.dwlx = #{dwlx}
+			</if>
+			<if test="gw != null and gw != ''">
+				AND a.gw = #{gw}
+			</if>
+			<if test="idcard != null and idcard != ''">
+				AND a.idCard = #{idcard}
+			</if>
+		</where>
+	</select>
 	
 	<select id="findList" resultType="ApZjsbbDwry">
 		SELECT 

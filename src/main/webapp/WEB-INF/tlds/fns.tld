@@ -251,5 +251,13 @@
     <example>${fns:toJson(object)}</example>  
   </function>
 
+  <function>
+    <description>获取字典对象列表</description>
+    <name>getCodeInfoList</name>
+    <function-class>com.qlmsoft.mbp.modules.sys.utils.CodeInfoUtils</function-class>
+    <function-signature>java.util.List getCodeInfoList(java.lang.String)</function-signature>
+    <example>${fns:getCodeInfoList(type)}</example>
+  </function>
+
     
 </taglib>

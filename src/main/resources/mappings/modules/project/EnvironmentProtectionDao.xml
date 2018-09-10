@@ -54,7 +54,10 @@
 				AND b.PROJECT_CODE = #{projectCode}
 			</if>
 			<if test="projectName != null and projectName != ''">
-				AND b.PROJECT_NAME = #{projectName}
+				AND b.PROJECT_NAME like
+				<if test="dbName == 'oracle'">'%'||#{projectName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{projectName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{projectName}, '%')</if>
 			</if>
 			<if test="totalMoney != null and totalMoney != ''">
 				AND b.total_money >= #{totalMoney}

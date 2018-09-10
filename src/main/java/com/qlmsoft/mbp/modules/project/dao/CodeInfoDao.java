@@ -5,15 +5,14 @@ package com.qlmsoft.mbp.modules.project.dao;
 
 import com.qlmsoft.mbp.common.persistence.CrudDao;
 import com.qlmsoft.mbp.common.persistence.annotation.MyBatisDao;
-import com.qlmsoft.mbp.modules.project.entity.ApZjsbbDwry;
+import com.qlmsoft.mbp.modules.project.entity.CodeInfo;
 
 /**
- * 质量报监单位人员DAO接口
- * @author huangzhengyu
- * @version 2018-07-15
+ * 项目代码表DAO接口
+ * @author huang.zhengyu
+ * @version 2018-08-29
  */
 @MyBatisDao
-public interface ApZjsbbDwryDao extends CrudDao<ApZjsbbDwry> {
-
-    ApZjsbbDwry getByCondition(ApZjsbbDwry item);
+public interface CodeInfoDao extends CrudDao<CodeInfo> {
+	
 }

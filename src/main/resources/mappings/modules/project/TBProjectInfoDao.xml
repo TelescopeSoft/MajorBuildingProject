@@ -237,7 +237,6 @@
 		<include refid="baseColumns"/>
 		FROM tbprojectinfo a
 		<where>
-			UpdateFlag != 'D' AND CountyNum = '320211'
 			<if test="prjnum != null and prjnum != ''">
 				AND a.PrjNum = #{prjnum}
 			</if>

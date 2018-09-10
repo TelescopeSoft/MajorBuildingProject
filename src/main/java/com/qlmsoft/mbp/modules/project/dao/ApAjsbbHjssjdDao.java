@@ -14,5 +14,6 @@ import com.qlmsoft.mbp.modules.project.entity.ApAjsbbHjssjd;
  */
 @MyBatisDao
 public interface ApAjsbbHjssjdDao extends CrudDao<ApAjsbbHjssjd> {
-	
+
+    ApAjsbbHjssjd getByCondition(ApAjsbbHjssjd item);
 }

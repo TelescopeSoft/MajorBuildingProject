@@ -35,7 +35,30 @@
             	<form:input path="totalMoney" htmlEscape="false" maxlength="512" class="input-medium"/>
             </li>
             <li class="clearfix"></li>
+
+			<li>
+			<label>项目类型</label>
+                <form:select path="projectType" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getCodeInfoList('project_type')}" itemLabel="name" itemValue="code" htmlEscape="false"/>
+				</form:select>
+			</li>
+			<li>
+			<label>建设性质</label>
+                <form:select path="projectNature" class="input-medium">
+					<form:option value="" label=""/>
+					<form:options items="${fns:getCodeInfoList('project_nature')}" itemLabel="name" itemValue="code" htmlEscape="false"/>
+				</form:select>
+			</li>
             <li><span style="margin-left:22px;">未匹配项目：</span> <form:checkbox path="notMatchPrj" value="true"/>  </li>
+
+			<li class="clearfix"></li>
+            <li><label>申报起时间：</label>
+				<form:input path="applyDateStart" htmlEscape="false" maxlength="32" class="input-medium" />
+			</li>
+            <li><label>申报止时间：</label>
+				<form:input path="applyDateEnd" htmlEscape="false" maxlength="32" class="input-medium" />
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>

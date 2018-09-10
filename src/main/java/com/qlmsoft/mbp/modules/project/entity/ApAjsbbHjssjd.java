@@ -1,20 +1,24 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
+
 package com.qlmsoft.mbp.modules.project.entity;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.qlmsoft.mbp.common.persistence.DataEntity;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
 /**
  * 安监申报环境交底Entity
  * @author huangzhengyu
  * @version 2018-08-01
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ApAjsbbHjssjd extends DataEntity<ApAjsbbHjssjd> {
 	
 	private static final long serialVersionUID = 1L;
+
 	private String uuid;		// uuid
 	private String xh;		// xh
 	private String jdxm;		// jdxm

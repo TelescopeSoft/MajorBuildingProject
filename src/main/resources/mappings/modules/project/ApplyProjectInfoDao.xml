@@ -73,7 +73,7 @@
 			,'A0502'
 			,'A0503'
 			)
-			)
+			) AND (p.major_flag IS NULL OR p.major_flag = 'Y')
 			<if test="projectCode != null and projectCode != ''">
 				AND a.project_code = #{projectCode}
 			</if>
@@ -91,6 +91,22 @@
 			</if>
 			<if test="notMatchPrj != null and notMatchPrj != ''">
 				AND i.PrjNum IS NULL
+			</if>
+			<if test="applyDateStart != null and applyDateStart != ''">
+				AND convert(VARCHAR(10), a.APPLY_DATE, 120) &gt;= convert(VARCHAR(10), #{applyDateStart}, 120)
+			</if>
+			<if test="applyDateEnd != null and applyDateEnd != ''">
+				AND convert(VARCHAR(10), a.APPLY_DATE, 120) &lt;= convert(VARCHAR(10), #{applyDateEnd}, 120)
+			</if>
+			<if test="projectNature != null and projectNature != ''">
+				AND a.PROJECT_NATURE = #{projectNature}
+			</if>
+			<if test="projectType != null and projectType != ''">
+				AND a.PROJECT_TYPE in
+				<foreach collection="projectTypeList" item="pt" index="index"
+						 open="(" close=")" separator=",">
+					#{pt}
+				</foreach>
 			</if>
 		</where>
 		<choose>

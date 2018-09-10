@@ -49,7 +49,23 @@
 		<include refid="apZjsbbJoins"/>
 		WHERE a.id = #{id}
 	</select>
-	
+
+	<select id="getByCondition" resultType="ApZjsbb">
+		SELECT TOP 1
+		<include refid="apZjsbbColumns"/>
+		FROM ap_zjsbb a
+		<include refid="apZjsbbJoins"/>
+		<where>
+			1 = 1
+			<if test="prjnum != null and prjnum != ''">
+				AND a.PrjNum = #{prjnum}
+			</if>
+			<if test="uuid != null and uuid != ''">
+				AND a.uuid = #{uuid}
+			</if>
+		</where>
+	</select>
+
 	<select id="findList" resultType="ApZjsbb">
 		SELECT 
 			<include refid="apZjsbbColumns"/>

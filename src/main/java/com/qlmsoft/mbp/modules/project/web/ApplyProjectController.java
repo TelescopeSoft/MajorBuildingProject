@@ -5,6 +5,7 @@ package com.qlmsoft.mbp.modules.project.web;
 
 import com.qlmsoft.mbp.common.config.PulicityMenuInstance;
 import com.qlmsoft.mbp.common.mapper.JsonMapper;
+import com.qlmsoft.mbp.common.utils.DateUtils;
 import com.qlmsoft.mbp.common.web.BaseController;
 import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
 import com.qlmsoft.mbp.modules.project.entity.*;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,6 +63,12 @@ public class ApplyProjectController extends BaseController {
 		}else {
 			projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
 		}
+
+
+		projectInfo.setApplyDateStart("2017-08-01");
+		projectInfo.setApplyDateEnd(DateUtils.formatDate(new Date(),"yyyy-MM-dd"));
+		//projectInfo.setProjectNature("0");
+		projectInfo.setProjectType("A00001,A00002");
 
 		List<ApplyProjectInfo> list = service.findList(projectInfo);
 		DataTableBean<ApplyProjectInfo> result = new DataTableBean<ApplyProjectInfo>();

@@ -19,6 +19,25 @@
 		<include refid="apAjsbbHjssjdJoins"/>
 		WHERE a.id = #{id}
 	</select>
+
+	<select id="getByCondition" resultType="ApAjsbbHjssjd">
+		SELECT
+		<include refid="apAjsbbHjssjdColumns"/>
+		FROM ap_ajsbb_hjssjd a
+		<include refid="apAjsbbHjssjdJoins"/>
+		<where>
+			1 = 1
+			<if test="jdxm != null and jdxm != ''">
+				AND a.jdxm = #{jdxm}
+			</if>
+			<if test="uuid != null and uuid != ''">
+				AND a.uuid = #{uuid}
+			</if>
+			<if test="xh != null and xh != ''">
+				AND a.xh = #{xh}
+			</if>
+		</where>
+	</select>
 	
 	<select id="findList" resultType="ApAjsbbHjssjd">
 		SELECT 
