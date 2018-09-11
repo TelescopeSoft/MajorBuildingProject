@@ -32,7 +32,7 @@
 
 	<select id="getByCondition" resultType="ExpropriationDetail">
 		SELECT
-		<include refid="expropriationDetailColumns"/>
+		TOP 1 <include refid="expropriationDetailColumns"/>
 		FROM pub_expropriation_detail a
 		<include refid="expropriationDetailJoins"/>
 		<where>
