@@ -55,7 +55,7 @@ public class ApplyProjectInfoService extends CrudService<ApplyProjectInfoDao, Ap
 	
 	@Transactional(readOnly = false)
 	public void save(ApplyProjectInfo applyProjectInfo) {
-		//super.save(applyProjectInfo);
+//		super.save(applyProjectInfo);
 		if(StringUtils.isNotEmpty(applyProjectInfo.getPrjNum())){
 			ProjectInfo pi = new ProjectInfo();
 			pi.setPrjCode(applyProjectInfo.getProjectCode());
@@ -64,6 +64,8 @@ public class ApplyProjectInfoService extends CrudService<ApplyProjectInfoDao, Ap
 			pi.setXgrqsj(new Date());
 			zjPrjService.updateProjectCodeByPrjNum(pi);
 		}
+
+		toggleMajor(applyProjectInfo);
 
 	}
 

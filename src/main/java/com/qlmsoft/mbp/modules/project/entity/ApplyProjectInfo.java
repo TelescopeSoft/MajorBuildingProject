@@ -40,6 +40,7 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
     private String placeCodeDetail;        // 建设地点详情
     private String industry;        // 国标行业
     private String scaleContent;        // 建设规模及内容
+    private String scaleContentPub;     //公示的建设规模及内容
     private Date applyDate;        // 申报时间
     private String permitItemCode;        // 投资项目目录编码
     private Date exchangeTime;        // exchange_time
@@ -610,6 +611,14 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
 
     public void setApplyDateEnd(String applyDateEnd) {
         this.applyDateEnd = applyDateEnd;
+    }
+
+    public String getScaleContentPub() {
+        return scaleContentPub;
+    }
+
+    public void setScaleContentPub(String scaleContentPub) {
+        this.scaleContentPub = scaleContentPub;
     }
 
     public List<String> getProjectTypeList() {

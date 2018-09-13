@@ -56,7 +56,7 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<ol class="breadcrumb">
-						<li><a href="${ctxStatic}/publicity/index"><i class="fa fa-dashboard"></i>首页</a></li>
+						<li><a href="${ctxStatic}/publicity/project"><i class="fa fa-dashboard"></i>首页</a></li>
 						<li class="active">土地征收</li>
 					</ol>
 				</section>

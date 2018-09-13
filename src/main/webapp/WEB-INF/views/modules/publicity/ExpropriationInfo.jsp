@@ -64,7 +64,7 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<ol class="breadcrumb">
-						<li><a href="${ctx}/publicity/index"><i
+						<li><a href="${ctx}/publicity/project"><i
 								class="fa fa-dashboard"></i>首页</a></li>
 						<li class="active">征地信息</li>
 					</ol>

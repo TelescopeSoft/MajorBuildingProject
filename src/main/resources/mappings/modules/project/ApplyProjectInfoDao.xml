@@ -30,6 +30,7 @@
     ,a.catalog_name AS "catalogName"
     ,i.PrjNum AS "prjNum",
     p.major_flag AS "majorFlag"
+    ,p.SCALE_CONTENT AS "scaleContentPub"
 	</sql>
 	
 	<sql id="applyProjectInfoJoins">
@@ -250,48 +251,8 @@
 	
 	<update id="update">
 		UPDATE wxbinghu.dbo.stz_region_apply_project_info SET
-			project_code = #{projectCode},
-			division_code = #{divisionCode},
-			project_name = #{projectName},
-			project_type = #{projectType},
-			project_nature = #{projectNature},
-			start_year = #{startYear},
-			end_year = #{endYear},
-			total_money = #{totalMoney},
-			place_code = #{placeCode},
-			place_code_detail = #{placeCodeDetail},
-			industry = #{industry},
-			scale_content = #{scaleContent},
-			apply_date = #{applyDate},
-			permit_item_code = #{permitItemCode},
-			exchange_time = #{exchangeTime},
-			validity_flag = #{validityFlag},
-			node_code = #{nodeCode},
-			foreign_abroad_flag = #{foreignAbroadFlag},
-			total_money_explain = #{totalMoneyExplain},
-			the_industry = #{theIndustry},
-			is_country_security = #{isCountrySecurity},
-			security_approval_number = #{securityApprovalNumber},
-			investment_mode = #{investmentMode},
-			total_money_dollar = #{totalMoneyDollar},
-			total_money_dollar_rate = #{totalMoneyDollarRate},
-			project_capital_money = #{projectCapitalMoney},
-			project_capital_money_dollar = #{projectCapitalMoneyDollar},
-			project_capital_money_dollar_rate = #{projectCapitalMoneyDollarRate},
-			industrial_policy_type = #{industrialPolicyType},
-			industrial_policy = #{industrialPolicy},
-			other_investment_apply_info = #{otherInvestmentApplyInfo},
-			transaction_both_info = #{transactionBothInfo},
-			merger_plan = #{mergerPlan},
-			merger_management_mode_scope = #{mergerManagementModeScope},
-			get_land_mode = #{getLandMode},
-			land_area = #{landArea},
-			built_area = #{builtArea},
-			is_add_device = #{isAddDevice},
-			import_device_number_money = #{importDeviceNumberMoney},
-			project_site = #{projectSite},
-			china_total_money = #{chinaTotalMoney}
-		WHERE id = #{id}
+			scale_content = #{scaleContent}
+		WHERE PROJECT_CODE = #{projectCode}
 	</update>
 	
 	<update id="delete">
@@ -302,24 +263,29 @@
 	<insert id="insertMajorFlag">
 		INSERT INTO [MajorProjectLib].[dbo].[pub_project](
 		prj_code,
-		major_flag
+		major_flag,
+		SCALE_CONTENT
 		) VALUES (
 		#{projectCode},
-		#{majorFlag}
+		#{majorFlag},
+		#{scaleContentPub}
 		)
 	</insert>
 
 	<update id="updateMajorFlag">
 		UPDATE [MajorProjectLib].[dbo].[pub_project] SET
-		major_flag = #{majorFlag}
+		major_flag = #{majorFlag},SCALE_CONTENT=#{scaleContentPub}
 		WHERE prj_code = #{projectCode}
 	</update>
 
 	<select id="getMajorFlag" resultType="ApplyProjectInfo">
 		SELECT prj_code AS "projectCode",
-		major_flag AS "majorFlag"
+		major_flag AS "majorFlag",
+		SCALE_CONTENT AS "scaleContentPub"
 		FROM [MajorProjectLib].[dbo].[pub_project]  a
-		WHERE a.prj_code = #{projectCode}
+		<where>
+			a.prj_code = #{projectCode}
+		</where>
 	</select>
 	
 </mapper>

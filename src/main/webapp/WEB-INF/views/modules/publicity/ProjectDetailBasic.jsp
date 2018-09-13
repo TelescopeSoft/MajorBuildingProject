@@ -32,20 +32,8 @@
 			<tr>
 				<td class="bg-info">用地面积（公顷）</td>
 				<td>${projectinfo.ydmj}</td>
-				<td class="bg-info">新增用地面积（公顷）</td>
-				<td>${projectinfo.xzydmj}</td>
-			</tr>
-            <tr>
-				<td class="bg-info">农用地面积（公顷）</td>
-				<td>${projectinfo.nydmj}</td>
-				<td class="bg-info">项目资本金（万元）</td>
-				<td>${projectinfo.xmzbj}</td>
-			</tr>
-            <tr>
 				<td class="bg-info">资金来源</td>
-				<td>${projectinfo.zjly}</td>
-				<td class="bg-info">财政资金来源</td>
-				<td>${projectinfo.czzjly}</td>
+                <td>${projectinfo.zjly}</td>
 			</tr>
 			<tr>
 				<td class="bg-info">拟开工时间（年）</td>
@@ -59,7 +47,14 @@
 			</tr>
             <tr>
 				<td class="bg-info">建设规模及内容</td>
-				<td colspan="3">${projectinfo.scaleContent}</td>
+				<td colspan="3">
+				<c:if test="${empty projectinfo.scaleContentPub }" >
+				    ${projectinfo.scaleContent}
+				</c:if>
+				<c:if test="${not empty projectinfo.scaleContentPub }" >
+                	 ${projectinfo.scaleContentPub}
+                </c:if>
+				</td>
 			</tr>
 		</table>
 	</div>

@@ -56,7 +56,7 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<ol class="breadcrumb">
-						<li><a href="${ctx}/publicity/index"><i class="fa fa-dashboard"></i>首页</a></li>
+						<li><a href="${ctx}/publicity/project"><i class="fa fa-dashboard"></i>首页</a></li>
 						<li class="active">批准服务</li>
 					</ol>
 				</section>
@@ -121,6 +121,8 @@
 
 	<!-- jQuery 3 -->
 	<script src="${ctxStatic}/bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+    <script src="${ctxStatic}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
 //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格

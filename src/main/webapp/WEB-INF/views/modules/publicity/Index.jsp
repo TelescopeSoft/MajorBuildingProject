@@ -57,7 +57,7 @@
  
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="${ctx}/publicity/index">重大项目</a></li>
+                    <li class="active"><a href="${ctx}/publicity/project">重大项目</a></li>
                     <li><a href="${ctx}/publicity/approveguide">批准服务</a></li>
                     <li><a href="ApproveResult.html">批准结果</a></li>
                     <li><a href="Tender.html">招标投标</a></li>
@@ -84,7 +84,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <ol class="breadcrumb">
-          <li><a href="${ctx}/publicity/index"><i class="fa fa-dashboard"></i>首页</a></li>
+          <li><a href="${ctx}/publicity/project"><i class="fa fa-dashboard"></i>首页</a></li>
           <li class="active">重大项目</li>
         </ol>
       </section>

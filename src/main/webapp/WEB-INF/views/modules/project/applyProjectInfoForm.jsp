@@ -45,14 +45,14 @@
 			<label class="control-label">项目名称：</label>
 			<div class="controls">
 				<form:input path="projectName" htmlEscape="false" maxlength="512" class="input-xxlarge"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<span class="help-inline"> </span>
 			</div>
 		</div>
         <div class="control-group">
 			<label class="control-label">住建项目编码：</label>
 			<div class="controls">
 				<form:input path="prjNum" htmlEscape="false" maxlength="32" class="input-xlarge"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<span class="help-inline"></span>
 			</div>
 		</div>
 
@@ -60,14 +60,14 @@
 			<label class="control-label">项目类型：</label>
 			<div class="controls">
 				<form:input path="projectType" htmlEscape="false" maxlength="6" class="input-xlarge"/>
-				<span class="help-inline"><font color="red">*</font> ${applyProjectInfo.projectTypeLabel}</span>
+				<span class="help-inline"> ${applyProjectInfo.projectTypeLabel}</span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">建设性质：</label>
 			<div class="controls">
 				<form:input path="projectNature" htmlEscape="false" maxlength="2" class="input-xlarge"/>
-				<span class="help-inline"><font color="red">*</font> ${applyProjectInfo.projectNatureLabel}</span>
+				<span class="help-inline"> ${applyProjectInfo.projectNatureLabel}</span>
 			</div>
 		</div>
         <div class="control-group">
@@ -110,14 +110,14 @@
 			<label class="control-label">总投资额（万元）：</label>
 			<div class="controls">
 				<form:input path="totalMoney" htmlEscape="false" maxlength="16" class="input-xlarge"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<span class="help-inline"></span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">建设地点：</label>
 			<div class="controls">
 				<form:input path="placeCode" htmlEscape="false" maxlength="16" class="input-xlarge"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<span class="help-inline"> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -130,23 +130,30 @@
 			<label class="control-label">国标行业：</label>
 			<div class="controls">
 				<form:input path="industry" htmlEscape="false" maxlength="6" class="input-xlarge "/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<span class="help-inline"> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">建设规模及内容：</label>
 			<div class="controls">
 				<form:textarea  path="scaleContent" htmlEscape="false" maxlength="4000" class="input-xxlarge" rows="5" cols="80" />
-				<span class="help-inline"><font color="red">*</font> </span>
+				<span class="help-inline"></span>
 			</div>
 		</div>
+		<div class="control-group">
+        			<label class="control-label">公示的建设规模及内容：</label>
+        			<div class="controls">
+        				<form:textarea  path="scaleContentPub" htmlEscape="false" maxlength="4000" class="input-xxlarge" rows="5" cols="80" />
+        				<span class="help-inline"><font color="red">*</font> </span>
+        			</div>
+        		</div>
 		<div class="control-group">
 			<label class="control-label">申报时间：</label>
 			<div class="controls">
 				<input name="applyDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
 					value="<fmt:formatDate value="${applyProjectInfo.applyDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"
 					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<span class="help-inline"></span>
 			</div>
 		</div>
 		<div class="control-group">
