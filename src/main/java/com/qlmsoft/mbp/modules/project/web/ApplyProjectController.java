@@ -11,6 +11,7 @@ import com.qlmsoft.mbp.modules.project.bean.DataTableBean;
 import com.qlmsoft.mbp.modules.project.entity.*;
 import com.qlmsoft.mbp.modules.project.service.ApplyProjectInfoService;
 import com.qlmsoft.mbp.modules.project.service.ApproveItemInfoService;
+import com.qlmsoft.mbp.modules.project.service.PubApproveResultService;
 import com.qlmsoft.mbp.modules.project.service.PubConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +44,9 @@ public class ApplyProjectController extends BaseController {
 
 	@Autowired
 	PubConfigService configService;
+
+	@Autowired
+	private PubApproveResultService pubApproveResultService;
 
 	@RequestMapping(value = "")
 	public String list(ApplyProjectInfo projectInfo, HttpServletRequest request,
@@ -107,13 +112,52 @@ public class ApplyProjectController extends BaseController {
 		ApproveItemInfo approveItem = new ApproveItemInfo();
 		approveItem.setProjectCode(pkid);
 		List<ApproveItemInfo> list = approveService.findList(approveItem);
-		if(list != null) {
+		if(list == null){
+			list = new ArrayList<ApproveItemInfo>();
+		}else {
 			logger.info("list.size() :" + list.size());
 		}
+
+		PubApproveResult pubApproveResult = new PubApproveResult();
+		pubApproveResult.setPrjCode(pkid);
+		List<PubApproveResult> crawledApproves = pubApproveResultService.findList(pubApproveResult);
+
+		if(crawledApproves != null){
+			logger.info("crawledApproves.size() :" + crawledApproves.size());
+			for(PubApproveResult item : crawledApproves ){
+				if(!isApproveResultExists(item, list)){
+					list.add(transferToApproveItemInfo(item));
+				}
+			}
+		}
+
+
 		model.addAttribute("list", list);
 		return "modules/publicity/ProjectDetailApprove";
 	}
 
+	private ApproveItemInfo transferToApproveItemInfo(PubApproveResult item) {
+		ApproveItemInfo result = new ApproveItemInfo();
+		result.setDeptName(item.getApproveDept());
+		result.setItemName(item.getApproveItemLabel());
+		result.setCurrentStateLabel(item.getApproveResult());
+		result.setDealTime(item.getApproveDate());
+		result.setApprovalNum(item.getApproveNum());
+		return result;
+	}
+
+	private boolean isApproveResultExists(PubApproveResult item, List<ApproveItemInfo> list) {
+		boolean result = false;
+		if(list != null){
+			for(ApproveItemInfo i : list){
+				if(i.getDeptName().equals(item.getApproveDept()) && i.getApprovalNum().equals(item.getApproveNum())){
+					result = true;
+					break;
+				}
+			}
+		}
+		return result;
+	}
 
 
 }

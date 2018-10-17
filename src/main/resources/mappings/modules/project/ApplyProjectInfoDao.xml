@@ -134,7 +134,7 @@
 				FROM wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO
 				WHERE CURRENT_STATE IN ( 'A0501' ,'A0502' ,'A0503')
 			)
-			AND i.PROJECT_CODE IS NULL
+			-- AND i.PROJECT_CODE IS NULL
 			<if test="totalMoney != null and totalMoney != ''">
 				AND a.total_money >= #{totalMoney}
 			</if>

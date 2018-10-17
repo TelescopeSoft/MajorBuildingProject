@@ -60,7 +60,7 @@
 				<td>${pubApproveResult.approveDept}</td>
 				<td>${pubApproveResult.approveResult}</td>
 				<td>${pubApproveResult.approveNum}</td>
-				<td><fmt:formatDate value="${pubApproveResult.updateDate}" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${pubApproveResult.approveDate}" pattern="yyyy-MM-dd"/></td>
 				<td><c:choose>
 							<c:when test="${pubApproveResult.displayFlag eq '0'}">
 						显示</c:when>

@@ -14,11 +14,12 @@
 			<tr>
 				<td>${pubApproveResult.deptName}</td>
 				<td>${pubApproveResult.itemName}</td>
-				<td><c:choose>
+				<td>${pubApproveResult.currentStateLabel}
+				<!--<c:choose>
 				    <c:when test="${ pubApproveResult.currentState eq 'A0501'}">通过</c:when>
 				    <c:when test="${ pubApproveResult.currentState eq 'A0502'}">不通过</c:when>
                     <c:otherwise>其他</c:otherwise>
-                    </c:choose>
+                    </c:choose>-->
                 </td>
 				<td><fmt:formatDate value="${pubApproveResult.dealTime}"
 						pattern="yyyy-MM-dd" /></td>
