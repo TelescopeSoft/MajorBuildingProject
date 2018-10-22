@@ -15,7 +15,8 @@
 .skin-blue .main-header .navbar .nav .open > a:hover,
 .skin-blue .main-header .navbar .nav .open > a:focus,
 .skin-blue .main-header .navbar .nav > .active > a {
-  background: rgba(0, 0, 0, 0.1);
+  background: #367FA9;
+  /**background: rgba(0, 0, 0, 0.1);*/
   color: #f6f6f6;
 }
 .skin-blue .main-header .navbar .sidebar-toggle {
@@ -23,7 +24,8 @@
 }
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
   color: #f6f6f6;
-  background: rgba(0, 0, 0, 0.1);
+  background: #367FA9;
+  /**background: rgba(0, 0, 0, 0.1);*/
 }
 .skin-blue .main-header .navbar .sidebar-toggle {
   color: #fff;

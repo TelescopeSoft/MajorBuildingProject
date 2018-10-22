@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="${ctxStatic}/dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="${ctxStatic}/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="${ctxStatic}/dist/css/skins/_all-skins.css">
 
     <link rel="stylesheet" href="${ctxStatic}/dist/css/mbp.css">
 
@@ -130,6 +130,10 @@
 
 <!-- jQuery 3 -->
 <script src="${ctxStatic}/bower_components/jquery/dist/jquery.min.js"></script>
+<!--[if IE 8]>
+<script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.js"></script>
+<![endif]-->
+
 <!-- Bootstrap 3.3.7 -->
 <script src="${ctxStatic}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->

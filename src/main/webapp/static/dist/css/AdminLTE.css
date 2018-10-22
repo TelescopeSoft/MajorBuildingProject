@@ -197,7 +197,7 @@ a:focus {
   margin-bottom: 0;
   margin-left: 230px;
   border: none;
-  min-height: 50px;
+  /**min-height: 50px;*/
   border-radius: 0;
 }
 .layout-top-nav .main-header .navbar {

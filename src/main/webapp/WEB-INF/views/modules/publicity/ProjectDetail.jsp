@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="${ctxStatic}/dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="${ctxStatic}/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="${ctxStatic}/dist/css/skins/_all-skins.css">
 
     <link rel="stylesheet" href="${ctxStatic}/dist/css/mbp.css">
 
@@ -44,7 +44,7 @@
       <div class="toptitile">滨湖区重大建设项目信息公开平台</div>
   </header>
 
-    <div class="main-header">
+    <header class="main-header">
     <nav class="navbar navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -62,7 +62,7 @@
                 </div>
         </div>
     </nav>
-    </div>
+    </hearder>
   <!-- Full Width Column -->
   <div class="content-wrapper">
     <div class="container">
@@ -143,6 +143,9 @@
 
 <!-- jQuery 3 -->
 <script src="${ctxStatic}/bower_components/jquery/dist/jquery.min.js"></script>
+<!--[if IE 8]>
+<script type="text/javascript" src="${ctxStatic}/jquery/jquery-1.9.1.js"></script>
+<![endif]-->
 <!-- Bootstrap 3.3.7 -->
 <script src="${ctxStatic}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
