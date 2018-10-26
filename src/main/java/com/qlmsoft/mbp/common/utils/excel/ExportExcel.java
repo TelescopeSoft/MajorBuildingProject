@@ -286,13 +286,13 @@ public class ExportExcel {
 		style.cloneStyleFrom(styles.get("data"));
 //		style.setWrapText(true);
 		style.setAlignment(CellStyle.ALIGN_CENTER);
-		style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
+//		style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
 		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		Font headerFont = wb.createFont();
 		headerFont.setFontName("Arial");
 		headerFont.setFontHeightInPoints((short) 10);
 		headerFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
-		headerFont.setColor(IndexedColors.WHITE.getIndex());
+		headerFont.setColor(IndexedColors.BLACK.getIndex());
 		style.setFont(headerFont);
 		styles.put("header", style);
 		

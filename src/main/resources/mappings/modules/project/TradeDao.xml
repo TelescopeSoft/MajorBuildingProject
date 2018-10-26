@@ -36,7 +36,7 @@
 	<select id="getByCondition" resultType="Trade">
 		SELECT
 		<include refid="tradeColumns"/>
-		FROM pub_trade a
+		FROM [MajorProjectLib].[dbo].pub_trade a
 		<include refid="tradeJoins"/>
 		<where>
 			1 = 1
