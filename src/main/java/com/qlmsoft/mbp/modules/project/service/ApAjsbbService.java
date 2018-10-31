@@ -62,6 +62,8 @@ public class ApAjsbbService extends CrudService<ApAjsbbDao, ApAjsbb> {
 		ApAjsbb existed = this.dao.getByCondition(ajsbb);
 		if (existed == null) {
 			super.save(ajsbb);
+		}else {
+			this.dao.update(ajsbb);
 		}
 		List<ApAjsbbHjssjd> hjssjdList = bean.getHjssjdList();
 

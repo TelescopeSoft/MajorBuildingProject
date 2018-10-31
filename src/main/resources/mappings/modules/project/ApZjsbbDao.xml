@@ -179,8 +179,7 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE ap_zjsbb SET 	
-			uuid = #{uuid},
+		UPDATE ap_zjsbb SET
 			xmmc = #{xmmc},
 			prjnum = #{prjnum},
 			prjname = #{prjname},
@@ -209,12 +208,12 @@
 			status = #{status},
 			jsxz = #{jsxz},
 			tzlx = #{tzlx}
-		WHERE id = #{id}
+		WHERE uuid = #{uuid}
 	</update>
 	
 	<update id="delete">
 		DELETE FROM ap_zjsbb
-		WHERE id = #{id}
+		WHERE uuid = #{uuid}
 	</update>
 	
 </mapper>

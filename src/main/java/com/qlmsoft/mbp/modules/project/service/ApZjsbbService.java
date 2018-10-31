@@ -60,7 +60,12 @@ public class ApZjsbbService extends CrudService<ApZjsbbDao, ApZjsbb> {
 
 		ApZjsbb existed = this.dao.getByCondition(ajsbb);
 		if (existed == null) {
+			logger.info("new uuid " + ajsbb.getUuid());
 			super.save(ajsbb);
+		} else {
+			logger.info("update uuid " + ajsbb.getUuid());
+			logger.info(ajsbb.toString());
+			super.dao.update(ajsbb);
 		}
 		List<ApZjsbbDwry> dwryList = bean.getDwryList();
 

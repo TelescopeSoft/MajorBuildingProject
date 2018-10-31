@@ -23,7 +23,7 @@
 					<td>${item.contracttypeLabel}</td>
 					<td>${item.propietorcorpname}</td>
 					<td>${item.contractorcorpname}</td>
-					<td>${item.contractmoney}</td>
+					<td>${fn:substring(item.contractmoney, 0, fn:length(item.contractmoney) - 2)}</td>
 					<td><fmt:formatDate value="${item.contractdate}"
 							pattern="yyyy-MM-dd" /></td>
 				</tr>

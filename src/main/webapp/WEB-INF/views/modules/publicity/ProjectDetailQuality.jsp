@@ -27,7 +27,7 @@
 					<td>${item.econcorpname}</td>
 					<td>${item.prjsize}</td>
 					<td>${item.gcdz}</td>
-					<td><fmt:formatDate value="${item.updatedate}"
+					<td><fmt:formatDate value="${item.updateDate}"
 							pattern="yyyy-MM-dd" /></td>
 					<td>${item.sbr}</td>
 					<td>${item.jsxzLabel}</td>

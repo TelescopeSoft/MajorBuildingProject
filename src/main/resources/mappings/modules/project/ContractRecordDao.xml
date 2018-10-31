@@ -43,7 +43,7 @@
 			<include refid="contractRecordColumns"/>
 		FROM tbcontractrecordmanage a
 		<include refid="contractRecordJoins"/>
-		WHERE a.id = #{id}
+		WHERE a.id = #{id} AND a.UpdateFlag != 'D'
 	</select>
 
 	<select id="getByCondition" resultType="ContractRecord">
@@ -52,7 +52,7 @@
 		FROM tbcontractrecordmanage a
 		LEFT JOIN MajorProjectLib.dbo.tbContractTypeDic c ON c.Code = a.ContractTypeNum
 		<where>
-			1=1
+			1=1 AND a.UpdateFlag != 'D'
 			<if test="prjnum != null and prjnum != ''">
 				AND a.PrjNum = #{prjnum}
 			</if>
@@ -68,6 +68,7 @@
 		FROM tbcontractrecordmanage a
 		<include refid="contractRecordJoins"/>
 		<where>
+			a.UpdateFlag != 'D'
 			<if test="prjnum != null and prjnum != ''">
 				AND a.prjnum = #{prjnum}
 			</if>
@@ -87,7 +88,7 @@
 		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		LEFT JOIN MajorProjectLib.dbo.tbContractTypeDic c ON c.Code = a.ContractTypeNum
 		<where>
-			b.PROJECT_CODE = #{pkid}
+			a.UpdateFlag != 'D' AND b.PROJECT_CODE = #{pkid}
 		</where>
 		ORDER BY a.ContractDate DESC
 	</select>
@@ -98,7 +99,7 @@
 		FROM tbcontractrecordmanage a
 		<include refid="contractRecordJoins"/>
 		<where>
-			
+			a.UpdateFlag != 'D'
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

@@ -27,12 +27,12 @@
 					<td>${item.ajjgmc}</td>
 					<td>${item.econcorpname}</td>
 					<td>${item.prjsize}</td>
-					<td><fmt:formatDate value="${item.updatedate}"
-							pattern="yyyy-MM-dd" /></td>
+					<td><fmt:formatDate value="${item.updateDate}"
+                        							pattern="yyyy-MM-dd" /></td>
 					<td>${item.sbr}</td>
 					<!-- <td>${item.sbryddh}</td> -->
-					<td>${item.mj}</td>
-					<td>${item.zj}</td>
+					<td>${fn:substring(item.mj, 0, fn:length(item.mj) - 2)}</td>
+					<td>${fn:substring(item.zj, 0, fn:length(item.zj) - 2)}</td>
 					<td>${item.jgcc}</td>
 					<td>${item.sbmb}</td>
 					<td><c:choose>

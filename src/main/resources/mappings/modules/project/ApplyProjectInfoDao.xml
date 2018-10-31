@@ -88,7 +88,10 @@
 				AND a.total_money >= #{totalMoney}
 			</if>
 			<if test="enterpriseName != null and enterpriseName != ''">
-				AND b.ENTERPRISE_NAME = #{enterpriseName}
+				AND b.ENTERPRISE_NAME like
+				<if test="dbName == 'oracle'">'%'||#{enterpriseName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{enterpriseName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{enterpriseName}, '%')</if>
 			</if>
 			<if test="notMatchPrj != null and notMatchPrj != ''">
 				AND i.PrjNum IS NULL

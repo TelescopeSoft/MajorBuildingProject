@@ -37,7 +37,7 @@
 		a.fetchdate AS "fetchdate",
 		a.updatetime AS "updatetime",
 		a.updateuser AS "updateuser",
-		a.updatedate AS "updatedate",
+		a.updateDate AS "updatedate",
 		a.status AS "status",
 		p.PROJECT_CODE AS "projectCode"
 	</sql>
@@ -196,8 +196,7 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE ap_ajsbb SET 	
-			uuid = #{uuid},
+		UPDATE ap_ajsbb SET
 			xmmc = #{xmmc},
 			prjnum = #{prjnum},
 			prjname = #{prjname},
@@ -233,12 +232,12 @@
 			updateuser = #{updateuser},
 			updatedate = #{updatedate},
 			status = #{status}
-		WHERE id = #{id}
+		WHERE uuid = #{uuid}
 	</update>
 	
 	<update id="delete">
 		DELETE FROM ap_ajsbb
-		WHERE id = #{id}
+		WHERE uuid = #{uuid}
 	</update>
 	
 </mapper>

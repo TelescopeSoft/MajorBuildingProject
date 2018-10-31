@@ -56,6 +56,7 @@ public class PubTenderController extends BaseController {
 
 		List<Trade> zhongbiaohouxuanren = tradeService.findByTypeAndPkid(Trade.TYPE_ZHONGBIAOHOUXUANREN,pkid);
 
+		model.addAttribute("pkid", pkid);
 		model.addAttribute("tenderList", tenderList);
 		model.addAttribute("zigeyushen", zigeyushen);
 		model.addAttribute("zhaobiaogonggao", zhaobiaogonggao);
