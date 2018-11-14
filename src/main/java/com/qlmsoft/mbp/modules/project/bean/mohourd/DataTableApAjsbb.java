@@ -1,3 +1,7 @@
+
+/**
+ * Copyright &copy; 2017-2018 千里目软件 All rights reserved.
+ */
 package com.qlmsoft.mbp.modules.project.bean.mohourd;
 
 import com.qlmsoft.mbp.modules.project.entity.ProjectFinish;

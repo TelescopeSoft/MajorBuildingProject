@@ -1,3 +1,6 @@
+/**
+ * Copyright &copy; 2017-2018 千里目软件 All rights reserved.
+ */
 package com.qlmsoft.mbp.modules.synch;
 
 import org.slf4j.Logger;

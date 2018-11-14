@@ -1,4 +1,7 @@
 
+/**
+ * Copyright &copy; 2017-2018 千里目软件 All rights reserved.
+ */
 package com.qlmsoft.mbp.modules.project.entity;
 
 import org.hibernate.validator.constraints.Length;

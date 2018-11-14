@@ -112,6 +112,7 @@
 					#{pt}
 				</foreach>
 			</if>
+			OR a.project_code = '2018-320250-27-03-511881'
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
