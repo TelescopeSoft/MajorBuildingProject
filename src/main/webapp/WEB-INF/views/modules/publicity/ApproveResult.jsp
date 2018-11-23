@@ -197,6 +197,7 @@
             'lengthChange': false,
             'searching'   : false,
             'ordering'    : true,
+            "scrollX": true,
             'info'        : true,
             'autoWidth'   : true,
             "ajax": '${ctx}/publicity/approveresult/list?prjCode=${approveresult.prjCode}&prjName=${approveresult.prjName}&approveItemLabel=${approveresult.approveItemLabel}&approveDept=${approveresult.approveDept}&startDate=<fmt:formatDate value="${approveresult.startDate}" pattern="yyyy-MM-dd"/>&endDate=<fmt:formatDate value="${approveresult.endDate}" pattern="yyyy-MM-dd"/>',

@@ -189,6 +189,7 @@
             'searching'   : false,
             'ordering'    : true,
             'info'        : true,
+            "scrollX": true,
             'autoWidth'   : false,
             "ajax"     : {
                             "url": "${ctx}/publicity/approveresult2/list",

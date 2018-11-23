@@ -155,6 +155,7 @@
             'lengthChange': false,
             'searching'   : false,
             'ordering'    : false,
+            "scrollX": true,
             'info'        : false,
             'autoWidth'   : false,
             "ajax": '${ctx}/publicity/safty/list',

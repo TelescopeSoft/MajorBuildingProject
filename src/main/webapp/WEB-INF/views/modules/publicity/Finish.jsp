@@ -151,6 +151,7 @@
             'paging'      : true,
             'lengthChange': true,
             'searching'   : false,
+            "scrollX": true,
             'ordering'    : false,
             'info'        : true,
             'autoWidth'   : false,

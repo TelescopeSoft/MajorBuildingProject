@@ -155,6 +155,7 @@
             'lengthChange': true,
             'searching'   : false,
             'ordering'    : false,
+            "scrollX": true,
             'info'        : true,
             'autoWidth'   : false,
             "ajax": '${ctx}/publicity/construction/list',

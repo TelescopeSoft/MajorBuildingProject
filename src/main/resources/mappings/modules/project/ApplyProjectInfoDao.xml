@@ -66,7 +66,8 @@
 		FROM wxbinghu.dbo.stz_region_apply_project_info a
 		<include refid="applyProjectInfoJoins"/>
 		<where>
-			a.PROJECT_CODE IN (
+			(
+			(a.PROJECT_CODE IN (
 			SELECT PROJECT_CODE
 			FROM wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO
 			WHERE CURRENT_STATE IN (
@@ -74,24 +75,9 @@
 			,'A0502'
 			,'A0503'
 			)
-			) AND (p.major_flag IS NULL OR p.major_flag = 'Y')
-			<if test="projectCode != null and projectCode != ''">
-				AND a.project_code = #{projectCode}
-			</if>
-			<if test="projectName != null and projectName != ''">
-				AND a.project_name like
-				<if test="dbName == 'oracle'">'%'||#{projectName}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{projectName}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{projectName}, '%')</if>
-			</if>
+			)
 			<if test="totalMoney != null and totalMoney != ''">
 				AND a.total_money >= #{totalMoney}
-			</if>
-			<if test="enterpriseName != null and enterpriseName != ''">
-				AND b.ENTERPRISE_NAME like
-				<if test="dbName == 'oracle'">'%'||#{enterpriseName}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{enterpriseName}+'%'</if>
-				<if test="dbName == 'mysql'">CONCAT('%', #{enterpriseName}, '%')</if>
 			</if>
 			<if test="notMatchPrj != null and notMatchPrj != ''">
 				AND i.PrjNum IS NULL
@@ -112,7 +98,35 @@
 					#{pt}
 				</foreach>
 			</if>
-			OR a.project_code = '2018-320250-27-03-511881'
+			)
+			<if test="majorFlag != null and majorFlag != ''">
+				OR (p.major_flag IS NOT NULL AND p.major_flag = 'Y')
+			</if>
+			)
+
+			<if test="projectCode != null and projectCode != ''">
+				AND a.project_code = #{projectCode}
+			</if>
+			<if test="projectName != null and projectName != ''">
+				AND a.project_name like
+				<if test="dbName == 'oracle'">'%'||#{projectName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{projectName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{projectName}, '%')</if>
+			</if>
+
+			<if test="enterpriseName != null and enterpriseName != ''">
+				AND b.ENTERPRISE_NAME like
+				<if test="dbName == 'oracle'">'%'||#{enterpriseName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{enterpriseName}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{enterpriseName}, '%')</if>
+			</if>
+			<if test="addressDetail != null and addressDetail != ''">
+				AND a.ADDRESS_DETAIL like
+				<if test="dbName == 'oracle'">'%'||#{addressDetail}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{addressDetail}+'%'</if>
+				<if test="dbName == 'mysql'">CONCAT('%', #{addressDetail}, '%')</if>
+			</if>
+			<!--OR a.project_code = '2018-320250-27-03-511881'-->
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

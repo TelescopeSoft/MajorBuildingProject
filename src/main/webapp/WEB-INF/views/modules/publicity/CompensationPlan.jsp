@@ -146,6 +146,7 @@
             'searching'   : false,
             'ordering'    : false,
             'info'        : true,
+            "scrollX": true,
             'autoWidth'   : true,
             "ajax": '${ctx}/publicity/compensationplan/list',
 	        "columns": [

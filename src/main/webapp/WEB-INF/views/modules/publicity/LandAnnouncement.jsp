@@ -142,6 +142,7 @@
             'lengthChange': false,
             'searching'   : false,
             'ordering'    : false,
+            "scrollX": true,
             'info'        : true,
             'autoWidth'   : true,
             "ajax": '${ctx}/publicity/landannouncement/list',

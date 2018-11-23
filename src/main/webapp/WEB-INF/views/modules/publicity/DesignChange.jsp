@@ -133,6 +133,7 @@
             'lengthChange': false,
             'searching'   : false,
             'ordering'    : true,
+            "scrollX": true,
             'info'        : true,
             'autoWidth'   : true,
             "ajax": '${ctx}/publicity/designchange/list',

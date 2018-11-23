@@ -79,16 +79,24 @@ var _hmt = _hmt || [];
                                 <div class="row form-group">
 
                                     <div class="col-xs-4">
-                                        <input name="projectCode"  type="text" class="form-control" placeholder="项目代码">
+                                        <input name="projectCode"  type="text" class="form-control" placeholder="项目代码" value="${projectinfo.projectCode}">
                                     </div>
                                     <div class="col-xs-4">
-                                          <input name="projectName" type="text" class="form-control" placeholder="项目名称">
+                                          <input name="projectName" type="text" class="form-control" placeholder="项目名称" value="${projectinfo.projectName}">
                                       </div>
-                                    <div class="col-xs-3">
-                                        <input name="enterpriseName"  type="text" class="form-control" placeholder="法人单位">
+                                    <div class="col-xs-4">
+                                        <input name="enterpriseName"  type="text" class="form-control" placeholder="法人单位" value="${projectinfo.enterpriseName}">
                                     </div>
-                                    <div class="col-xs-1">
-                                        <button type="submit" class="btn btn-primary">查询</button>
+
+                                </div>
+                                <div class="row form-group">
+
+                                    <div class="col-xs-4">
+                                        <input name="addressDetail"  type="text" class="form-control" placeholder="项目地址" value="${projectinfo.addressDetail}">
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <button type="submit" class="form-control btn btn-primary">查询</button>
                                     </div>
                                 </div>
                             </div>
@@ -169,13 +177,15 @@ var _hmt = _hmt || [];
             'searching'   : false,
             'ordering'    : false,
             'info'        : true,
+            "scrollX": true,
             'autoWidth'   : true,
             "ajax"     : {
                 "url": "${pageContext.request.contextPath}/publicity/project/list",
                 "data": {
                         "projectCode": "${projectinfo.projectCode}",
                         "projectName": "${projectinfo.projectName}",
-                        "enterpriseName": "${projectinfo.enterpriseName}"
+                        "enterpriseName": "${projectinfo.enterpriseName}",
+                        "addressDetail": "${projectinfo.addressDetail}"
                     }
             },
            "columns": [

@@ -149,6 +149,7 @@
             'lengthChange': true,
             'searching'   : false,
             'ordering'    : false,
+            "scrollX": true,
             'info'        : true,
             'autoWidth'   : true,
             "ajax": '${ctx}/publicity/expropriationinfo/list',

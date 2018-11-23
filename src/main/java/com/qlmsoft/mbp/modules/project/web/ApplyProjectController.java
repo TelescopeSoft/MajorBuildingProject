@@ -68,8 +68,7 @@ public class ApplyProjectController extends BaseController {
 		}else {
 			projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
 		}
-
-
+		projectInfo.setMajorFlag("Y");
 		projectInfo.setApplyDateStart("2017-08-01");
 		projectInfo.setApplyDateEnd(DateUtils.formatDate(new Date(),"yyyy-MM-dd"));
 		//projectInfo.setProjectNature("0");
