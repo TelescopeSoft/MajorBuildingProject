@@ -75,6 +75,22 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="box">
+                                <div class="box-header">
+									<div class="approvetitle">监督机构联系方式</div>
+								</div>
+								<div class="box-body">
+                                    <table class="table table-bordered ">
+                                        <tr >
+                                            <td class="bg-info">机构名称:</td>
+                                            <td >无锡市滨湖区建设管理安全监督站</td>
+                                            <td class="bg-info">地址:</td>
+                                            <td >无锡市滨湖区鸿桥路879号</td>
+                                            <td class="bg-info">联系电话:</td>
+                                            <td >0510-85865219</td>
+                                        </tr>
+
+                                    </table>
+								</div>
 								<div class="box-header">
 									<div class="approvetitle">安全监督公示</div>
 								</div>

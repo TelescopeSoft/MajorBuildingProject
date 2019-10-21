@@ -45,9 +45,11 @@ public class ExpropriationCrawler {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
-    public static final String QUERY_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/queryXxgkList4Page.do";
+//    public static final String QUERY_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/queryXxgkList4Page.do";
+    public static final String QUERY_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/queryXxgkList4Page.do";
 
-    public static final String QUERY_DETAIL_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/turnToDetail.do?lcid={0}&unitCode=320211";
+//    public static final String QUERY_DETAIL_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/turnToDetail.do?lcid={0}&unitCode=320211";
+    public static final String QUERY_DETAIL_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/turnToDetail.do?lcid={0}&unitCode=320211";
 
     @Autowired
     ExpropriationService service;
@@ -71,7 +73,7 @@ public class ExpropriationCrawler {
         params.add(new BasicNameValuePair("xzqhdm", "320211"));
         params.add(new BasicNameValuePair("keyWord", "1"));
         params.add(new BasicNameValuePair("pageIndex", "1"));
-        params.add(new BasicNameValuePair("pageSize", "50"));
+        params.add(new BasicNameValuePair("pageSize", "200"));
 
         httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
         Set<String> lcids = new HashSet<String>();
@@ -98,7 +100,7 @@ public class ExpropriationCrawler {
 
                 for(String lcid: lcids){
                     ExpropriationDetail d = getDetail(lcid);
-                    Thread.sleep(30*1000l);
+                    Thread.sleep(30*1000L);
                     detailService.checkDuplicatedAndSave(d);
 
                 }

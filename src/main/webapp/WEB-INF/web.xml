@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>公务用车管理系统</display-name>
+	<display-name>重大建设项目公示系统</display-name>
 
 	<!-- Context ConfigLocation -->
 	<context-param>
@@ -45,6 +45,15 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>xssEscapeServletFilter</filter-name>
+		<filter-class>com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>xssEscapeServletFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
