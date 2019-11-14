@@ -3,6 +3,7 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -175,6 +176,11 @@ public class PubAdminPenalty extends DataEntity<PubAdminPenalty> {
 
 	public void setPrjNum(String prjNum) {
 		this.prjNum = prjNum;
+	}
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this);
 	}
 
 }

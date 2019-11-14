@@ -5,6 +5,10 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta http-equiv="Cache" content="no-cache">
 <title>滨湖区重大建设项目信息公开平台</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta

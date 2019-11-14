@@ -85,7 +85,7 @@
 											<tr>
 												<th width="20%">行政相对人名称</th>
 												<th width="15%">决定书文号</th>
-												<th width="40%">处罚名称</th>
+												<th width="40%">违法行为类型</th>
 												<th width="10%">处罚决定日期</th>
 												<th width="15%">处罚机关</th>
 											</tr>

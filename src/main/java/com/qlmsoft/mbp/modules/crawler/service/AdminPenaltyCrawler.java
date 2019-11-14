@@ -35,7 +35,7 @@ public class AdminPenaltyCrawler {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
-    public static final String QUERY_URL = "http://58.215.18.240/webshow/list.json";
+    public static final String QUERY_URL = "http://58.215.18.240/webshow19/list.json";
 
 
     @Autowired
@@ -58,7 +58,7 @@ public class AdminPenaltyCrawler {
 
         // 设置Post参数
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("id", "2"));
+        params.add(new BasicNameValuePair("id", "4"));
         params.add(new BasicNameValuePair("name", ""));
         params.add(new BasicNameValuePair("deptCode", "014032097"));
         params.add(new BasicNameValuePair("secCode", "320211"));
@@ -82,9 +82,7 @@ public class AdminPenaltyCrawler {
                 if (rows.size() > 0) {
                     for (java.util.Iterator iter = rows.iterator(); iter.hasNext(); ) {
                         JSONObject item = (JSONObject) iter.next();
-
                         PubAdminPenalty pe = transferToEntity(item);
-
                         service.checkDuplicatedAndSave(pe);
 
                     }
@@ -119,7 +117,7 @@ public class AdminPenaltyCrawler {
         if (json != null) {
             try {
                 result.setLetterOfDecision(json.getString("CF_WSH"));
-                result.setName(json.getString("CF_CFMC"));
+                result.setName(json.getString("CF_WFXW"));
                 result.setPunishCategory(json.getString("CF_CFLB1"));
                 result.setPunishReason(json.getString("CF_SY"));
                 result.setPunishBasis(json.getString("CF_YJ"));
@@ -129,16 +127,24 @@ public class AdminPenaltyCrawler {
                 //result.setPunishResult(json.getString("CFJC"));
                 //result.setPunishResult(json.getString("CF_JG"));
 
+                Long punishmentDecisionDate = json.getLong("CF_JDRQ");
+                if(punishmentDecisionDate != null){
+                    result.setPunishmentDecisionDate(new Date(punishmentDecisionDate));
+                }
 
-                result.setPunishmentDecisionDate(new Date(json.getLong("CF_JDRQ")));
                 //result.setPunishDeptLabel(json.getString("XXTGBM"));
-                result.setPunishDeptLabel(json.getString("CF_XZJG"));
+//                result.setPunishDeptLabel(json.getString("CF_XZJG"));
+                result.setPunishDeptLabel(json.getString("CF_CFJG"));
                 result.setDisplayFlag("0");
 
-                result.setPublicDeadline(new Date(json.getLong("CF_GSJZQ")));
+                Long publicDeadline = json.getLong("ADD_TIME");
+                if(publicDeadline != null){
+                    result.setPublicDeadline(new Date(json.getLong("ADD_TIME")));
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
-                logger.error(e.getMessage());
+                logger.error(e.getMessage() ,e );
             }
 
 

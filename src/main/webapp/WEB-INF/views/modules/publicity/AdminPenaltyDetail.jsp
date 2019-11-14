@@ -131,7 +131,7 @@
                                     				<td width="70%"></td>
                                     			</tr>-->
                                                 <tr>
-                                    				<td class="bg-info" width="30%">公示截止期</td>
+                                    				<td class="bg-info" width="30%">公示日期</td>
                                     				<td width="70%"><fmt:formatDate value="${bean.publicDeadline}" pattern="yyyy-MM-dd"/></td>
                                     			</tr>
                                     		</table>

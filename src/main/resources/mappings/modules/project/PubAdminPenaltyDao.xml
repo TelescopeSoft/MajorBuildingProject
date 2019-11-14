@@ -39,7 +39,7 @@
 
 	<select id="getByCondition" resultType="PubAdminPenalty">
 		SELECT
-		<include refid="pubAdminPenaltyColumns"/>
+		TOP 1 <include refid="pubAdminPenaltyColumns"/>
 		FROM pub_admin_penalty a
 		<include refid="pubAdminPenaltyJoins"/>
 		<where>

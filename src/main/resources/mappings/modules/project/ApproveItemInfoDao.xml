@@ -36,7 +36,7 @@
 	
 	<sql id="approveItemInfoJoins">
 	  	LEFT JOIN wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO b ON a.PROJECT_CODE = b.PROJECT_CODE
-			AND b.CURRENT_STATE IN ('A0501','A0502','A0503')
+			-- AND b.CURRENT_STATE IN ('A0501','A0502','A0503')
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_BASE_INFO c ON b.ITEM_CODE = c.ITEM_CODE
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_DEPT_INFO d ON d.DEPT_CODE = c.DEPT_CODE
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_CODE_INFO e ON e.code = b.CURRENT_STATE AND e.code_type = 'current_state'
