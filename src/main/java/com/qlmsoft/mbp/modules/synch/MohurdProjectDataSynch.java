@@ -31,8 +31,8 @@ public class MohurdProjectDataSynch {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
-    public static final String MOHURD_SERVICE = "http://http://58.215.18.222/:8889/WxjzgcjczyPage/DataExchange.asmx";
-    public static final String NAMESPACE = "http://http://58.215.18.222/:8889/WxjzgcjczyPage/";
+    public static final String MOHURD_SERVICE = "http://58.215.18.222:8889/WxjzgcjczyPage/DataExchange.asmx";
+    public static final String NAMESPACE = "http://58.215.18.222:8889/WxjzgcjczyPage/";
     public static final String NAMESPACE_TAG = "wxj";
     public static final String METHOD = "ReadTBDataForCounty";
 

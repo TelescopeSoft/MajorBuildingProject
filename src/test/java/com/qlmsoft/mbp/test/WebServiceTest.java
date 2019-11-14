@@ -23,17 +23,18 @@ public class WebServiceTest {
     }
     private static void axis2WebService() {
         try {
-            String soapBindingAddress = "http://218.90.162.110:8889/WxjzgcjczyPage/DataExchange.asmx";
+            String soapBindingAddress = "http://58.215.18.222:8889/WxjzgcjczyPage/DataExchange.asmx";
             ServiceClient sender = new ServiceClient();
             EndpointReference endpointReference = new EndpointReference(soapBindingAddress);
             Options options = new Options();
-            options.setAction("http://218.90.162.110:8889/WxjzgcjczyPage/ReadTBDataForCounty");
+            options.setAction("http://58.215.18.222:8889/WxjzgcjczyPage/ReadTBDataForCounty");
             options.setTo(endpointReference);
             options.setProperty(HTTPConstants.CHUNKED, "false");
+
             sender.setOptions(options);
             OMFactory fac = OMAbstractFactory.getOMFactory();
 
-            OMNamespace omNs = fac.createOMNamespace("http://218.90.162.110:8889/WxjzgcjczyPage/",  "wxj");
+            OMNamespace omNs = fac.createOMNamespace("http://58.215.18.222:8889/WxjzgcjczyPage/",  "wxj");
             OMElement method = fac.createOMElement("ReadTBDataForCounty", omNs);
             // 对应参数的节点
             String[] strs = new String[] { "tableName","user","password","beginDate","endDate" };
