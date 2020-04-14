@@ -19,9 +19,9 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String BEFORE_APPROVE = "批前";
-	public static final String IN_APPROVE = "批中";
-	public static final String AFTER_APPROVE = "批后";
+	public static final String BEFORE_APPROVE = "前期准备";
+	public static final String IN_APPROVE = "审查报批";
+	public static final String AFTER_APPROVE = "组织实施";
 
 	private String lcid;		// lcid 父类
 	private String infoType;		// 信息类型
@@ -35,7 +35,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	private String filePath;		// file_path
 	private String displayFlag;		// display_flag
 	private int sort;
-	
+
 	public ExpropriationDetailInfo() {
 		super();
 	}
@@ -60,7 +60,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setInfoType(String infoType) {
 		this.infoType = infoType;
 	}
-	
+
 	@Length(min=0, max=100, message="信息内容长度必须介于 0 和 100 之间")
 	public String getContent() {
 		return content;
@@ -69,7 +69,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	@Length(min=0, max=100, message="标题长度必须介于 0 和 100 之间")
 	public String getTitle() {
 		return title;
@@ -78,7 +78,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	@Length(min=0, max=100, message="发布单位长度必须介于 0 和 100 之间")
 	public String getPublicUnit() {
 		return publicUnit;
@@ -87,7 +87,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setPublicUnit(String publicUnit) {
 		this.publicUnit = publicUnit;
 	}
-	
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getPublicDate() {
 		return publicDate;
@@ -96,7 +96,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setPublicDate(Date publicDate) {
 		this.publicDate = publicDate;
 	}
-	
+
 	@Length(min=0, max=100, message="file_name长度必须介于 0 和 100 之间")
 	public String getFileName() {
 		return fileName;
@@ -105,7 +105,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
+
 	@Length(min=0, max=100, message="file_preffix长度必须介于 0 和 100 之间")
 	public String getFilePreffix() {
 		return filePreffix;
@@ -114,7 +114,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setFilePreffix(String filePreffix) {
 		this.filePreffix = filePreffix;
 	}
-	
+
 	@Length(min=0, max=255, message="file_url长度必须介于 0 和 255 之间")
 	public String getFileUrl() {
 		return fileUrl;
@@ -123,7 +123,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
 	}
-	
+
 	@Length(min=0, max=255, message="file_path长度必须介于 0 和 255 之间")
 	public String getFilePath() {
 		return filePath;
@@ -132,7 +132,7 @@ public class ExpropriationDetailInfo extends MyDataEntity<ExpropriationDetailInf
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	
+
 	@Length(min=0, max=1, message="display_flag长度必须介于 0 和 1 之间")
 	public String getDisplayFlag() {
 		return displayFlag;

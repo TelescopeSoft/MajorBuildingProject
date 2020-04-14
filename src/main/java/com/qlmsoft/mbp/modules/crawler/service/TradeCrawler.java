@@ -43,7 +43,7 @@ import java.util.List;
 public class TradeCrawler {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
-    public static final String DOMAIN = "http://binhu.wuxi.gov.cn";
+    public static final String DOMAIN = "http://www.wxbh.gov.cn/";
     public static final String QUERY_URL = DOMAIN + "/intertidwebapp/govChanInfo/getBhDocuments";
 
     @Autowired
@@ -73,7 +73,8 @@ public class TradeCrawler {
         params.add(new BasicNameValuePair("ChannelType", "2"));
         params.add(new BasicNameValuePair("KeyWord", ""));
         params.add(new BasicNameValuePair("KeyWordType", ""));
-        params.add(new BasicNameValuePair("chanId", "26197"));
+        params.add(new BasicNameValuePair("chanId", "34130"));
+        params.add(new BasicNameValuePair("order", "writetime"));
 
         httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
 
@@ -139,7 +140,8 @@ public class TradeCrawler {
         params.add(new BasicNameValuePair("ChannelType", "2"));
         params.add(new BasicNameValuePair("KeyWord", ""));
         params.add(new BasicNameValuePair("KeyWordType", ""));
-        params.add(new BasicNameValuePair("chanId", "26197"));
+        params.add(new BasicNameValuePair("chanId", "34130"));
+        params.add(new BasicNameValuePair("order", "writetime"));
 
         httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
 
@@ -201,7 +203,7 @@ public class TradeCrawler {
                         trade.setTenderType("招标公告（资格后审）");
                         // do none
                     }else {
-                        Elements trs = doc.select("div#Zoom div table tr");
+                        Elements trs = doc.select("div#Zoom table tr");
                         if(trs != null && !trs.isEmpty()){
                             //中标候选人公示，无锡市工程建设项目预中标候选人公示
                             Element typeTr = trs.get(0);
@@ -215,8 +217,6 @@ public class TradeCrawler {
                                 trade.setTenderInnerNum(innerNumLabel.substring(innerNumLabel.indexOf("：")+1).trim());
                                 logger.info("------tenderinnernum:" + trade.getTenderInnerNum());
                             }
-
-
                         }else {
                             trs = doc.select("div#Zoom table tr");
                             //招标公告
@@ -240,15 +240,23 @@ public class TradeCrawler {
                                     }else {
                                         Element tendInnerNumTr = trs.get(4);
                                         if(tendInnerNumTr != null){
-                                            String innerNumLabel= tendInnerNumTr.select("td p").first().text();
-                                            trade.setTenderInnerNum(innerNumLabel);
-                                            logger.info("------tenderinnernum:" + trade.getTenderInnerNum());
+                                            Elements pEl = tendInnerNumTr.select("td p");
+                                            if(pEl != null && !pEl.isEmpty()){
+                                                String innerNumLabel= pEl.first().text();
+                                                trade.setTenderInnerNum(innerNumLabel);
+                                                logger.info("------tenderinnernum:" + trade.getTenderInnerNum());
+                                            }
                                         }
                                     }
                                 }
 
                             }
                         }
+
+                        if(!StringUtils.isEmpty(trade.getTenderInnerNum()) && trade.getTenderInnerNum().indexOf("WX") < 0){
+                            trade.setTenderInnerNum("");
+                        }
+
                     }
 
                 }

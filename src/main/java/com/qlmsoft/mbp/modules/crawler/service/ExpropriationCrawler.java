@@ -49,7 +49,7 @@ public class ExpropriationCrawler {
     public static final String QUERY_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/queryXxgkList4Page.do";
 
 //    public static final String QUERY_DETAIL_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/turnToDetail.do?lcid={0}&unitCode=320211";
-    public static final String QUERY_DETAIL_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/turnToDetail.do?lcid={0}&unitCode=320211";
+    public static final String QUERY_DETAIL_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/turnToMoreDetail.do?lcid={0}&unitCode=320211&flag=4";
 
     @Autowired
     ExpropriationService service;
@@ -180,7 +180,7 @@ public class ExpropriationCrawler {
      */
     private void abstractData(ExpropriationDetail data, Document doc)
             throws ParseException {
-        Elements tables = doc.select("div#adjustPageStyle table");
+        Elements tables = doc.select("body table");
         int currentSize = 0;
 
         //征地信息
@@ -222,19 +222,22 @@ public class ExpropriationCrawler {
                     e.printStackTrace();
                 }
                 info.setContent(tds.get(1).html());
+                //info.setInfoType(tds.get(1).html());
                 info.setTitle(tds.get(2).html());
+                info.setPublicUnit(tds.get(3).html());
 
-                String viewJs = tds.get(3).selectFirst("a").attr("onclick");
-                // TODO: 2018/7/25 添加文件链接
-                info.setFileUrl(viewJs);
-                //info.setFileUrl(RegUtils.abstractStringByPattern(viewJs, RegUtils.EXPROPRIATION_INFO_VIEW_PATTERN));
-                info.setPublicUnit(tds.get(4).html());
                 try{
-                    info.setPublicDate(DateUtils.parseDate(tds.get(5).html(), YYYY_MM_DD));
+                    info.setPublicDate(DateUtils.parseDate(tds.get(4).html(), YYYY_MM_DD));
                 }catch (Exception e){
                     logger.error(e.getMessage());
                     e.printStackTrace();
                 }
+
+                String viewJs = tds.get(5).selectFirst("a").attr("onclick");
+                // TODO: 2018/7/25 添加文件链接
+                info.setFileUrl(viewJs);
+                //info.setFileUrl(RegUtils.abstractStringByPattern(viewJs, RegUtils.EXPROPRIATION_INFO_VIEW_PATTERN));
+
 
                 data.getExpropriationDetailInfoList().add(info);
 
