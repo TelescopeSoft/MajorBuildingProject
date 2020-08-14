@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qlmsoft.mbp.modules.project.dao.ProjectBuilderLicenceDao">
-    
+
 	<sql id="projectBuilderLicenceColumns">
 		a.pkid AS "pkid",
 		a.builderlicencename AS "builderlicencename",
@@ -45,14 +45,14 @@
 		a.xzsp_sgxk AS "xzspSgxk",
 		p.PROJECT_CODE AS "projectCode"
 	</sql>
-	
+
 	<sql id="projectBuilderLicenceJoins">
 		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPLY_PROJECT_INFO p ON p.PROJECT_CODE = b.PROJECT_CODE
 	</sql>
-    
+
 	<select id="get" resultType="ProjectBuilderLicence">
-		SELECT 
+		SELECT
 			<include refid="projectBuilderLicenceColumns"/>
 		FROM tbbuilderlicencemanage a
 		<include refid="projectBuilderLicenceJoins"/>
@@ -77,9 +77,17 @@
 			</if>
 		</where>
 	</select>
-	
+
+	<select id="getByPkid" resultType="ProjectBuilderLicence">
+		SELECT TOP 1 *
+		FROM tbbuilderlicencemanage a
+		<where>
+			a.PKID = #{pkid}
+		</where>
+	</select>
+
 	<select id="findList" resultType="ProjectBuilderLicence">
-		SELECT 
+		SELECT
 			<include refid="projectBuilderLicenceColumns"/>
 		FROM tbbuilderlicencemanage a
 		<include refid="projectBuilderLicenceJoins"/>
@@ -98,7 +106,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findListByProjectPkid" resultType="ProjectFinish">
 		SELECT <include refid="projectBuilderLicenceColumns"/>
 		FROM dbo.TBProjectFinishManage a
@@ -108,15 +116,15 @@
 		</where>
 		ORDER BY a.CreateDate DESC
 	</select>
-	
+
 	<select id="findAllList" resultType="ProjectBuilderLicence">
-		SELECT 
+		SELECT
 			<include refid="projectBuilderLicenceColumns"/>
 		FROM tbbuilderlicencemanage a
 		<include refid="projectBuilderLicenceJoins"/>
 		<where>
-			b.CountyNum = '320211'  
-		</where>		
+			b.CountyNum = '320211'
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -126,7 +134,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO tbbuilderlicencemanage(
 			pkid,
@@ -212,9 +220,9 @@
 			#{xzspSgxk}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE tbbuilderlicencemanage SET 	
+		UPDATE tbbuilderlicencemanage SET
 			pkid = #{pkid},
 			builderlicencename = #{builderlicencename},
 			builderlicencenum = #{builderlicencenum},
@@ -257,10 +265,10 @@
 			xzsp_sgxk = #{xzspSgxk}
 		WHERE pkid = #{id}
 	</update>
-	
+
 	<update id="delete">
 		DELETE FROM tbbuilderlicencemanage
 		WHERE pkid = #{id}
 	</update>
-	
+
 </mapper>

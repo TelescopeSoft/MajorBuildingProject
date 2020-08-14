@@ -46,7 +46,7 @@ public class ApplyProjectInfoController extends BaseController {
 
 	@Autowired
 	private ApplyProjectInfoService applyProjectInfoService;
-	
+
 	@ModelAttribute
 	public ApplyProjectInfo get(@RequestParam(required=false) String id) {
 		ApplyProjectInfo entity = null;
@@ -58,11 +58,11 @@ public class ApplyProjectInfoController extends BaseController {
 		}
 		return entity;
 	}
-	
+
 	@RequiresPermissions("project:applyProjectInfo:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(ApplyProjectInfo applyProjectInfo, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<ApplyProjectInfo> page = applyProjectInfoService.findPage(new Page<ApplyProjectInfo>(request, response), applyProjectInfo); 
+		Page<ApplyProjectInfo> page = applyProjectInfoService.findPage(new Page<ApplyProjectInfo>(request, response), applyProjectInfo);
 		model.addAttribute("page", page);
 		return "modules/project/applyProjectInfoList";
 	}
@@ -84,7 +84,7 @@ public class ApplyProjectInfoController extends BaseController {
 		addMessage(redirectAttributes, "保存发改申报项目基本信息成功");
 		return "redirect:"+Global.getAdminPath()+"/project/applyProjectInfo/?repage";
 	}
-	
+
 	@RequiresPermissions("project:applyProjectInfo:edit")
 	@RequestMapping(value = "delete")
 	public String delete(ApplyProjectInfo applyProjectInfo, RedirectAttributes redirectAttributes) {
@@ -101,6 +101,21 @@ public class ApplyProjectInfoController extends BaseController {
 
 		applyProjectInfoService.toggleMajor(applyProjectInfo);
 		if("Y".equals(applyProjectInfo.getMajorFlag())){
+			addMessage(redirectAttributes, "设置成功");
+		}else {
+			addMessage(redirectAttributes, "取消成功");
+		}
+
+		return "redirect:"+Global.getAdminPath()+"/project/applyProjectInfo/?repage";
+	}
+
+	@RequiresPermissions("project:applyProjectInfo:edit")
+	@RequestMapping(value = "toggleDisplay")
+	public String toggleDisplay(ApplyProjectInfo applyProjectInfo, RedirectAttributes redirectAttributes) {
+		logger.debug(applyProjectInfo.toString());
+
+		applyProjectInfoService.toggleDisplay(applyProjectInfo);
+		if("Y".equals(applyProjectInfo.getDisplayFlag())){
 			addMessage(redirectAttributes, "设置成功");
 		}else {
 			addMessage(redirectAttributes, "取消成功");

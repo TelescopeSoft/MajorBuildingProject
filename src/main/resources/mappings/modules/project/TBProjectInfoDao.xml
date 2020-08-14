@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qlmsoft.mbp.modules.project.dao.TBProjectInfoDao">
-    
+
 	<sql id="tBProjectInfoColumns">
 		a.pkid AS "pkid",
 		a.prjnum AS "prjnum",
@@ -50,13 +50,13 @@
 		a.prjapprovalnum AS "prjapprovalnum",
 		a.PROJECT_CODE AS "prjCode"
 	</sql>
-	
+
 	<sql id="tBProjectInfoJoins">
 		INNER JOIN dbo.TBProjectAdditionalInfo i ON i.prjnum = a.PrjNum
 	</sql>
-    
+
 	<select id="get" resultType="ProjectInfo">
-		SELECT 
+		SELECT
 			<include refid="tBProjectInfoColumns"/>
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
@@ -106,34 +106,34 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<select id="findList" resultType="ProjectInfo">
-		SELECT 
+		SELECT
 			<include refid="tBProjectInfoColumns"/>
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
 		<where>
 			UpdateFlag != 'D' AND CountyNum = '320211'
 			<if test="prjname != null and prjname != ''">
-				AND a.PrjName like 
+				AND a.PrjName like
 					<if test="dbName == 'oracle'">'%'||#{prjname}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{prjname}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjname}, '%')</if>
 			</if>
 			<if test="prjnum != null and prjnum != ''">
-				AND a.PrjNum like 
+				AND a.PrjNum like
 					<if test="dbName == 'oracle'">'%'||#{prjnum}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{prjnum}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjnum}, '%')</if>
 			</if>
 			<if test="buildcorpname != null and buildcorpname != ''">
-				AND a.BuildCorpName like 
+				AND a.BuildCorpName like
 					<if test="dbName == 'oracle'">'%'||#{buildcorpname}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{buildcorpname}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{buildcorpname}, '%')</if>
 			</if>
 			<if test="prjapprovalnum != null and prjapprovalnum != ''">
-				AND a.PrjApprovalNum like 
+				AND a.PrjApprovalNum like
 					<if test="dbName == 'oracle'">'%'||#{prjapprovalnum}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{prjapprovalnum}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjapprovalnum}, '%')</if>
@@ -162,34 +162,34 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findAllList" resultType="ProjectInfo">
-		SELECT 
+		SELECT
 			<include refid="tBProjectInfoColumns"/>
 		FROM tbprojectinfo a
 		<include refid="tBProjectInfoJoins"/>
 		<where>
 			UpdateFlag != 'D' AND CountyNum = '320211' AND AllInvest >= 5000
 			<if test="prjname != null and prjname != ''">
-				AND a.PrjName like 
+				AND a.PrjName like
 					<if test="dbName == 'oracle'">'%'||#{prjname}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{prjname}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjname}, '%')</if>
 			</if>
 			<if test="prjnum != null and prjnum != ''">
-				AND a.PrjNum like 
+				AND a.PrjNum like
 					<if test="dbName == 'oracle'">'%'||#{prjnum}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{prjnum}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjnum}, '%')</if>
 			</if>
 			<if test="buildcorpname != null and buildcorpname != ''">
-				AND a.BuildCorpName like 
+				AND a.BuildCorpName like
 					<if test="dbName == 'oracle'">'%'||#{buildcorpname}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{buildcorpname}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{buildcorpname}, '%')</if>
 			</if>
 			<if test="prjapprovalnum != null and prjapprovalnum != ''">
-				AND a.PrjApprovalNum like 
+				AND a.PrjApprovalNum like
 					<if test="dbName == 'oracle'">'%'||#{prjapprovalnum}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{prjapprovalnum}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{prjapprovalnum}, '%')</if>
@@ -206,7 +206,7 @@
 			<if test="allinvest != null and allinvest != ''">
 				AND a.allinvest >= #{allinvest}
 			</if>
-		</where>		
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -280,7 +280,8 @@
 			jd,
 			wd,
 			issgbz,
-			updateuser
+			updateuser,
+			PROJECT_CODE
 		) VALUES (
 			#{pkid},
 			#{prjnum},
@@ -314,10 +315,11 @@
 			#{jd},
 			#{wd},
 			#{issgbz},
-			#{updateuser}
+			#{updateuser},
+			#{prjCode}
 		)
 	</insert>
-	
+
 	<update id="update">
 		UPDATE tbprojectinfo SET
 			PROJECT_CODE = #{prjCode},
@@ -349,9 +351,9 @@
 			updateuser = #{updateuser}
 		WHERE pkid = #{pkid}
 	</update>
-	
+
 	<update id="updateMajorFlag">
-		UPDATE tbprojectinfo SET 	
+		UPDATE tbprojectinfo SET
 			MajorFlag = #{majorFlag},
 			xgrqsj = #{xgrqsj},
 			updateuser = #{updateuser}
@@ -372,10 +374,10 @@
 		updateuser = #{updateuser}
 		WHERE PrjNum = #{prjnum}
 	</update>
-	
+
 	<update id="delete">
 		UPDATE tbprojectinfo SET UpdateFlag = 'D'
 		WHERE pkid = #{pkid}
 	</update>
-	
+
 </mapper>

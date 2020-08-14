@@ -3,6 +3,7 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.qlmsoft.mbp.common.utils.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
@@ -87,6 +88,8 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
     private String notMatchPrj;
 
     private String majorFlag;
+
+    private String displayFlag;
 
     private String applyDateStart;
     private String applyDateEnd;
@@ -595,6 +598,15 @@ public class ApplyProjectInfo extends DataEntity<ApplyProjectInfo> {
 
     public void setMajorFlag(String majorFlag) {
         this.majorFlag = majorFlag;
+    }
+
+    @JsonIgnore
+    public String getDisplayFlag() {
+        return displayFlag;
+    }
+
+    public void setDisplayFlag(String displayFlag) {
+        this.displayFlag = displayFlag;
     }
 
     public String getApplyDateStart() {

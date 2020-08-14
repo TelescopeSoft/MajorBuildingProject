@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * 项目表Controller
- * 
+ *
  * @author huangzhengyu
  * @version 2018-07-10
  */
@@ -68,6 +68,7 @@ public class ApplyProjectController extends BaseController {
 		}else {
 			projectInfo.setTotalMoney(new BigDecimal(config.getCvalue()));
 		}
+		projectInfo.setDisplayFlag("Y");
 		projectInfo.setMajorFlag("Y");
 		projectInfo.setApplyDateStart("2017-08-01");
 		projectInfo.setApplyDateEnd(DateUtils.formatDate(new Date(),"yyyy-MM-dd"));

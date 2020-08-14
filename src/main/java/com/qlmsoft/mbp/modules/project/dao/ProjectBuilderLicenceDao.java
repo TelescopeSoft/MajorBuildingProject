@@ -19,4 +19,7 @@ public interface ProjectBuilderLicenceDao extends CrudDao<ProjectBuilderLicence>
 	List<ProjectBuilderLicence> findListByProjectPkid(String pkid);
 
     ProjectBuilderLicence getByCondition(ProjectBuilderLicence bean);
+
+    ProjectBuilderLicence getByPkid(ProjectBuilderLicence bean);
+
 }

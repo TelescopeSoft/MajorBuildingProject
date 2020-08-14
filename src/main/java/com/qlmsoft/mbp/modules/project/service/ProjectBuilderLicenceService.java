@@ -16,7 +16,7 @@ import com.qlmsoft.mbp.modules.project.dao.ProjectBuilderLicenceDao;
 
 /**
  * 施工许可信息Service
- * 
+ *
  * @author huangzhengyu
  * @version 2018-07-15
  */
@@ -58,7 +58,7 @@ public class ProjectBuilderLicenceService extends
 	public void checkDuplicatedAndSave(ProjectBuilderLicence bean) {
 
 		//logger.info("checkDuplicatedAndSave : " + bean.getPkid() + "," + bean.getPrjnum() + "," + bean.getBuilderlicencenum());
-		ProjectBuilderLicence existed = this.dao.getByCondition(bean);
+		ProjectBuilderLicence existed = this.dao.getByPkid(bean);
 		if (existed == null) {
 			super.save(bean);
 		}

@@ -18,7 +18,7 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
 
 /**
  * 质监申报Entity
- * 
+ *
  * @author huangzhengyu
  * @version 2018-07-14
  */
@@ -388,5 +388,7 @@ public class ApZjsbb extends ProjectDataEntity<ApZjsbb> {
 	public void setJsxzLabel(String jsxzLabel) {
 		this.jsxzLabel = jsxzLabel;
 	}
+
+
 
 }

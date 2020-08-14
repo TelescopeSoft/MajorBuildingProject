@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.prjtrace.dao.ProjectStatusDao">
+    
+	<sql id="projectStatusColumns">
+		a.id AS "id",
+		a.code AS "code",
+		a.name AS "name",
+		a.year AS "year",
+		a.gmt_create AS "gmtCreate",
+		a.gmt_modified AS "gmtModified",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="projectStatusJoins">
+	</sql>
+    
+	<select id="get" resultType="ProjectStatus">
+		SELECT 
+			<include refid="projectStatusColumns"/>
+		FROM project_status a
+		<include refid="projectStatusJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProjectStatus">
+		SELECT 
+			<include refid="projectStatusColumns"/>
+		FROM project_status a
+		<include refid="projectStatusJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="year != null and year != ''">
+				AND a.year = #{year}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY year desc, code asc
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ProjectStatus">
+		SELECT 
+			<include refid="projectStatusColumns"/>
+		FROM project_status a
+		<include refid="projectStatusJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO project_status(
+			code,
+			name,
+			year,
+			gmt_create,
+			gmt_modified,
+			del_flag
+		) VALUES (
+			#{code},
+			#{name},
+			#{year},
+			#{gmtCreate},
+			#{gmtModified},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE project_status SET 	
+			name = #{name},
+			year = #{year},
+			code = #{code},
+			gmt_create = #{gmtCreate},
+			gmt_modified = #{gmtModified}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE project_status SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

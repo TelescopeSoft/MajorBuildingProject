@@ -79,6 +79,7 @@
 				<th>地点</th>
 				<th>申报时间</th>
 				<th>住建项目编码</th>
+				<th>是否重大项目</th>
 				<th>是否公示</th>
 				<shiro:hasPermission name="project:applyProjectInfo:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
@@ -117,6 +118,16 @@
 						<a href="${ctx}/project/applyProjectInfo/toggleMajor?projectCode=${applyProjectInfo.projectCode}&majorFlag=Y" onclick="return confirmx('确认要设置 ${projectInfo.prjname} 为重大建设项目吗？', this.href)">设为重大项目</a>
 						</c:otherwise>
 						</c:choose>
+				</td>
+				<td><c:choose>
+					<c:when test="${not empty applyProjectInfo.displayFlag and applyProjectInfo.displayFlag eq 'N'}">
+						否 <br>
+						<a href="${ctx}/project/applyProjectInfo/toggleDisplay?projectCode=${applyProjectInfo.projectCode}&displayFlag=Y" onclick="return confirmx('确认要公示${projectInfo.prjname} 吗？', this.href)">设为公示</a>
+					</c:when>
+					<c:otherwise>是<br>
+						<a href="${ctx}/project/applyProjectInfo/toggleDisplay?projectCode=${applyProjectInfo.projectCode}&displayFlag=N" onclick="return confirmx('确认要取消公示 ${projectInfo.prjname} 项目吗？', this.href)">取消公示</a>
+					</c:otherwise>
+				</c:choose>
 				</td>
 				<shiro:hasPermission name="project:applyProjectInfo:edit"><td>
     				<a href="${ctx}/project/applyProjectInfo/form?id=${applyProjectInfo.id}">详情</a>

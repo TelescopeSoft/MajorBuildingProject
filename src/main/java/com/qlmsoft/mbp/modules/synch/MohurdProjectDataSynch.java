@@ -93,14 +93,15 @@ public class MohurdProjectDataSynch {
             DataTableProjectInfo dataTable = (DataTableProjectInfo) XmlBuilder.xmlStrToObject(DataTableProjectInfo.class, decodeStr);
             if(dataTable != null && dataTable.getRows() != null){
                 for(ProjectInfo pi : dataTable.getRows()){
-                    logger.info("ProjectInfo-----" + pi.getPkid() + "," + pi.getPrjnum());
-                    try{
-                        service.checkDuplicatedAndSave(pi);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        logger.error(e.getMessage());
+                    //logger.info("ProjectInfo-----" + pi.getPkid() + "," + pi.getPrjnum() + ":" + pi.getPkid().startsWith("yht"));
+                    if(!pi.getPkid().startsWith("yht")) {
+                        try{
+                            service.checkDuplicatedAndSave(pi);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                            logger.error(e.getMessage());
+                        }
                     }
-
                 }
             }
 

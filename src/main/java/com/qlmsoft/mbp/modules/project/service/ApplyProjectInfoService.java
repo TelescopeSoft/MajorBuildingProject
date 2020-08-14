@@ -48,11 +48,11 @@ public class ApplyProjectInfoService extends CrudService<ApplyProjectInfoDao, Ap
 	public List<ApplyProjectInfo> findList(ApplyProjectInfo applyProjectInfo) {
 		return super.findList(applyProjectInfo);
 	}
-	
+
 	public Page<ApplyProjectInfo> findPage(Page<ApplyProjectInfo> page, ApplyProjectInfo applyProjectInfo) {
 		return super.findPage(page, applyProjectInfo);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void save(ApplyProjectInfo applyProjectInfo) {
 //		super.save(applyProjectInfo);
@@ -75,13 +75,25 @@ public class ApplyProjectInfoService extends CrudService<ApplyProjectInfoDao, Ap
 		if(exist == null){
 			this.dao.insertMajorFlag(projectInfo);
 		}else {
-			this.dao.updateMajorFlag(projectInfo);
+			exist.setMajorFlag(projectInfo.getMajorFlag());
+			this.dao.updateMajorFlag(exist);
 		}
 	}
-	
+
+	@Transactional(readOnly = false)
+	public void toggleDisplay(ApplyProjectInfo projectInfo) {
+		ApplyProjectInfo exist = this.dao.getMajorFlag(projectInfo.getProjectCode());
+		if(exist == null){
+			this.dao.insertMajorFlag(projectInfo);
+		}else {
+			exist.setDisplayFlag(projectInfo.getDisplayFlag());
+			this.dao.updateMajorFlag(exist);
+		}
+	}
+
 	@Transactional(readOnly = false)
 	public void delete(ApplyProjectInfo applyProjectInfo) {
 		super.delete(applyProjectInfo);
 	}
-	
+
 }

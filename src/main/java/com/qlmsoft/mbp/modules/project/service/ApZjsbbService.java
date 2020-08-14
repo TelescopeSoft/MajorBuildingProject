@@ -32,24 +32,24 @@ public class ApZjsbbService extends CrudService<ApZjsbbDao, ApZjsbb> {
 	public ApZjsbb get(String id) {
 		return super.get(id);
 	}
-	
+
 	public List<ApZjsbb> findList(ApZjsbb apZjsbb) {
 		return super.findList(apZjsbb);
 	}
-	
+
 	public List<ApZjsbb> findListByProjectPkid(String pkid) {
 		return this.dao.findListByProjectPkid(pkid);
 	}
-	
+
 	public Page<ApZjsbb> findPage(Page<ApZjsbb> page, ApZjsbb apZjsbb) {
 		return super.findPage(page, apZjsbb);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void save(ApZjsbb apZjsbb) {
 		super.save(apZjsbb);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void delete(ApZjsbb apZjsbb) {
 		super.delete(apZjsbb);
@@ -60,7 +60,7 @@ public class ApZjsbbService extends CrudService<ApZjsbbDao, ApZjsbb> {
 
 		ApZjsbb existed = this.dao.getByCondition(ajsbb);
 		if (existed == null) {
-			logger.info("new uuid " + ajsbb.getUuid());
+			logger.info("new uuid " + ajsbb.getUuid() + ": " + ajsbb.toString());
 			super.save(ajsbb);
 		} else {
 			logger.info("update uuid " + ajsbb.getUuid());

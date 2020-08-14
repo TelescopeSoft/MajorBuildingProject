@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.prjtrace.dao.ProjectItemDao">
+    
+	<sql id="projectItemColumns">
+		a.id AS "id",
+		a.parent_id AS "parent.id",
+		b.name AS "parent.name",
+		a.parent_ids,
+		a.prj_code AS "prjCode",
+		a.prj_type AS "prjType.id",
+		t.name AS "prjType.name",
+		a.name AS "name",
+		a.ofyear AS "ofyear",
+		a.sort AS "sort",
+		a.level AS "level",
+		a.gmt_create AS "gmtCreate",
+		a.gmt_modified AS "gmtModified",
+		a.create_by AS "createBy.id",
+		a.update_by AS "updateBy.id",
+		a.del_flag AS "delFlag",
+		a.prj_status AS "prjStatus.id",
+		s.name AS "prjStatus.name",
+		a.goal AS "goal"
+	</sql>
+	
+	<sql id="projectItemJoins">
+		LEFT JOIN project_type t ON t.id = a.prj_type
+		LEFT JOIN project_status s ON s.id = a.prj_status
+		LEFT JOIN [MajorProjectLib].[dbo].[project_item] b on a.parent_id = b.id
+	</sql>
+    
+	<select id="get" resultType="ProjectItem">
+		SELECT 
+			<include refid="projectItemColumns"/>
+		FROM project_item a
+		<include refid="projectItemJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProjectItem">
+		SELECT 
+			<include refid="projectItemColumns"/>
+		FROM project_item a
+		<include refid="projectItemJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="ofyear != null and ofyear != ''">
+				AND a.ofyear = #{ofyear}
+			</if>
+			<if test="level != null and level != ''">
+				AND a.level = #{level}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ProjectItem">
+		SELECT 
+			<include refid="projectItemColumns"/>
+		FROM project_item a
+		<include refid="projectItemJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO project_item(
+			parent_id,
+			parent_ids,
+			prj_code,
+			prj_type,
+			name,
+			ofyear,
+			sort,
+			level,
+			gmt_create,
+			gmt_modified,
+			create_by,
+			update_by,
+			del_flag,
+			prj_status,
+			goal
+		) VALUES (
+			#{parent.id},
+			#{parentIds},
+			#{prjCode},
+			#{prjType.id},
+			#{name},
+			#{ofyear},
+			#{sort},
+			#{level},
+			#{gmtCreate},
+			#{gmtModified},
+			#{createBy.id},
+			#{updateBy.id},
+			#{delFlag},
+			#{prjStatus.id},
+			#{goal}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE project_item SET
+			parent_id = #{parent.id},
+			parent_ids = #{parentIds},
+			prj_code = #{prjCode},
+			prj_type = #{prjType.id},
+			name = #{name},
+			ofyear = #{ofyear},
+			sort = #{sort},
+			level = #{level},
+			gmt_create = #{gmtCreate},
+			gmt_modified = #{gmtModified},
+			update_by = #{updateBy.id},
+			prj_status = #{prjStatus.id},
+			goal = #{goal}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateParentIds">
+		UPDATE project_item SET
+		parent_id = #{parent.id},
+		parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE project_item SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

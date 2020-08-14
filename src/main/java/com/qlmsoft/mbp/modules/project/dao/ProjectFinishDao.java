@@ -19,4 +19,5 @@ public interface ProjectFinishDao extends CrudDao<ProjectFinish> {
 	List<ProjectFinish> findListByProjectPkid(String pkid);
 
     ProjectFinish getByCondition(ProjectFinish bean);
+    ProjectFinish getByPkid(ProjectFinish bean);
 }

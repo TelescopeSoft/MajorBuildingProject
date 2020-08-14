@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qlmsoft.mbp.modules.project.dao.ContractRecordDao">
-    
+
 	<sql id="contractRecordColumns">
 		a.pkid AS "pkid",
 		a.recordname AS "recordname",
@@ -34,16 +34,24 @@
 		a.tag AS "tag",
 		c.CodeInfo AS contracttypeLabel
 	</sql>
-	
+
 	<sql id="contractRecordJoins">
 	</sql>
-    
+
 	<select id="get" resultType="ContractRecord">
-		SELECT 
+		SELECT
 			<include refid="contractRecordColumns"/>
 		FROM tbcontractrecordmanage a
 		<include refid="contractRecordJoins"/>
 		WHERE a.id = #{id} AND a.UpdateFlag != 'D'
+	</select>
+
+	<select id="getByPkid" resultType="ContractRecord">
+		SELECT TOP 1
+		<include refid="contractRecordColumns"/>
+		FROM tbcontractrecordmanage a
+		LEFT JOIN MajorProjectLib.dbo.tbContractTypeDic c ON c.Code = a.ContractTypeNum
+		WHERE a.PKID = #{pkid}
 	</select>
 
 	<select id="getByCondition" resultType="ContractRecord">
@@ -61,9 +69,9 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<select id="findList" resultType="ContractRecord">
-		SELECT 
+		SELECT
 			<include refid="contractRecordColumns"/>
 		FROM tbcontractrecordmanage a
 		<include refid="contractRecordJoins"/>
@@ -92,15 +100,15 @@
 		</where>
 		ORDER BY a.ContractDate DESC
 	</select>
-	
+
 	<select id="findAllList" resultType="ContractRecord">
-		SELECT 
+		SELECT
 			<include refid="contractRecordColumns"/>
 		FROM tbcontractrecordmanage a
 		<include refid="contractRecordJoins"/>
 		<where>
 			a.UpdateFlag != 'D'
-		</where>		
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -109,7 +117,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO tbcontractrecordmanage(
 			pkid,
@@ -173,10 +181,9 @@
 			#{tag}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE tbcontractrecordmanage SET 	
-			pkid = #{pkid},
+		UPDATE tbcontractrecordmanage SET
 			recordname = #{recordname},
 			recordnum = #{recordnum},
 			recordinnernum = #{recordinnernum},
@@ -205,12 +212,12 @@
 			returnresult = #{returnresult},
 			updateuser = #{updateuser},
 			tag = #{tag}
-		WHERE id = #{id}
+		WHERE pkid = #{pkid}
 	</update>
-	
+
 	<update id="delete">
 		DELETE FROM tbcontractrecordmanage
 		WHERE id = #{id}
 	</update>
-	
+
 </mapper>

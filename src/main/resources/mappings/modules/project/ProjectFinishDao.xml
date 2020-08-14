@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qlmsoft.mbp.modules.project.dao.ProjectFinishDao">
-    
+
 	<sql id="projectFinishColumns">
 		a.pkid AS "pkid",
 		a.prjfinishname AS "prjfinishname",
@@ -31,15 +31,15 @@
 		c.CodeInfo AS "prjstructuretypenumLabel",
 		p.PROJECT_CODE AS "projectCode"
 	</sql>
-	
+
 	<sql id="projectFinishJoins">
 		INNER JOIN dbo.TBProjectInfo b ON a.PrjNum = b.PrjNum
 		LEFT JOIN dbo.tbPrjStructureTypeDic c ON a.PrjStructureTypeNum = c.Code
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPLY_PROJECT_INFO p ON p.PROJECT_CODE = b.PROJECT_CODE
 	</sql>
-    
+
 	<select id="get" resultType="ProjectFinish">
-		SELECT 
+		SELECT
 			<include refid="projectFinishColumns"/>
 		FROM tbprojectfinishmanage a
 		<include refid="projectFinishJoins"/>
@@ -61,9 +61,16 @@
 			</if>
 		</where>
 	</select>
-	
+	<select id="getByPkid" resultType="ProjectFinish">
+		SELECT TOP 1 *
+		FROM tbprojectfinishmanage a
+		<where>
+			a.PKID = #{pkid}
+		</where>
+	</select>
+
 	<select id="findList" resultType="ProjectFinish">
-		SELECT 
+		SELECT
 			<include refid="projectFinishColumns"/>
 		FROM tbprojectfinishmanage a
 		<include refid="projectFinishJoins"/>
@@ -81,7 +88,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findListByProjectPkid" resultType="ProjectFinish">
 		SELECT <include refid="projectFinishColumns"/>
 		FROM dbo.TBProjectFinishManage a
@@ -91,15 +98,15 @@
 		</where>
 		ORDER BY a.createDate DESC
 	</select>
-	
+
 	<select id="findAllList" resultType="ProjectFinish">
-		SELECT 
+		SELECT
 			<include refid="projectFinishColumns"/>
 		FROM tbprojectfinishmanage a
 		<include refid="projectFinishJoins"/>
 		<where>
-			b.CountyNum = '320211'  
-		</where>		
+			b.CountyNum = '320211'
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -108,7 +115,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO tbprojectfinishmanage(
 			pkid,
@@ -164,10 +171,9 @@
 			#{tag}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE tbprojectfinishmanage SET 	
-			pkid = #{pkid},
+		UPDATE tbprojectfinishmanage SET
 			prjfinishname = #{prjfinishname},
 			prjfinishnum = #{prjfinishnum},
 			prjfinishinnernum = #{prjfinishinnernum},
@@ -192,12 +198,12 @@
 			returnresult = #{returnresult},
 			updateuser = #{updateuser},
 			tag = #{tag}
-		WHERE id = #{id}
+		WHERE pkid = #{pkid}
 	</update>
-	
+
 	<update id="delete">
 		DELETE FROM tbprojectfinishmanage
 		WHERE id = #{id}
 	</update>
-	
+
 </mapper>

@@ -19,5 +19,5 @@ public interface ContractRecordDao extends CrudDao<ContractRecord> {
 	List<ContractRecord> findListByProjectPkid(String pkid);
 
 	ContractRecord getByCondition(ContractRecord bean);
-
+	ContractRecord getByPkid(ContractRecord bean);
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.prjtrace.dao.ProjectTypeDao">
+    
+	<sql id="projectTypeColumns">
+		a.id AS "id",
+		a.code AS "code",
+		a.name AS "name",
+		a.sort AS "sort",
+		a.gmt_create AS "gmtCreate",
+		a.gmt_modified AS "gmtModified",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="projectTypeJoins">
+	</sql>
+    
+	<select id="get" resultType="ProjectType">
+		SELECT 
+			<include refid="projectTypeColumns"/>
+		FROM project_type a
+		<include refid="projectTypeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ProjectType">
+		SELECT 
+			<include refid="projectTypeColumns"/>
+		FROM project_type a
+		<include refid="projectTypeJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ProjectType">
+		SELECT 
+			<include refid="projectTypeColumns"/>
+		FROM project_type a
+		<include refid="projectTypeJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO project_type(
+			code,
+			name,
+			sort,
+			gmt_create,
+			gmt_modified,
+			del_flag
+		) VALUES (
+			#{code},
+			#{name},
+			#{sort},
+			#{gmtCreate},
+			#{gmtModified},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE project_type SET 	
+			name = #{name},
+			sort = #{sort},
+			gmt_modified = #{gmtModified}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE project_type SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

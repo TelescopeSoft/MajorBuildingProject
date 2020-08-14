@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApplyProjectInfoDao">
-    
+
 	<sql id="applyProjectInfoColumns">
 	a.[ID] AS id
 	,a.[PROJECT_CODE] AS projectCode
@@ -28,11 +28,12 @@
 	,c2.name AS "projectTypeLabel"
     ,c.name AS "projectNatureLabel"
     ,a.catalog_name AS "catalogName"
-    ,i.PrjNum AS "prjNum",
-    p.major_flag AS "majorFlag"
+    ,i.PrjNum AS "prjNum"
+    ,p.major_flag AS "majorFlag"
+    ,p.display_flag AS "displayFlag"
     ,p.SCALE_CONTENT AS "scaleContentPub"
 	</sql>
-	
+
 	<sql id="applyProjectInfoJoins">
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_PROJECT_LEREP_INFO b ON a.PROJECT_CODE = b.PROJECT_CODE
 			AND b.VALIDITY_FLAG = 1
@@ -43,9 +44,9 @@
 		LEFT JOIN MajorProjectLib.dbo.TBProjectInfo i ON a.PROJECT_CODE = i.PROJECT_CODE
 		LEFT JOIN MajorProjectLib.dbo.pub_project p ON a.PROJECT_CODE = p.prj_code
 	</sql>
-    
+
 	<select id="get" resultType="ApplyProjectInfo">
-		SELECT 
+		SELECT
 			<include refid="applyProjectInfoColumns"/>
 		FROM wxbinghu.dbo.stz_region_apply_project_info a
 		<include refid="applyProjectInfoJoins"/>
@@ -59,15 +60,15 @@
 		<include refid="applyProjectInfoJoins"/>
 		WHERE a.PROJECT_CODE = #{projectCode}
 	</select>
-	
+
 	<select id="findList" resultType="ApplyProjectInfo">
-		SELECT 
+		SELECT
 			<include refid="applyProjectInfoColumns"/>
 		FROM wxbinghu.dbo.stz_region_apply_project_info a
 		<include refid="applyProjectInfoJoins"/>
 		<where>
 			(
-			(a.PROJECT_CODE IN (
+			( a.PROJECT_CODE IN (
 			SELECT PROJECT_CODE
 			FROM wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO
 			WHERE CURRENT_STATE IN (
@@ -103,6 +104,9 @@
 				OR (p.major_flag IS NOT NULL AND p.major_flag = 'Y')
 			</if>
 			)
+			<if test="displayFlag != null and displayFlag != ''">
+				AND (p.display_flag IS NULL OR p.display_flag != 'N')
+			</if>
 
 			<if test="projectCode != null and projectCode != ''">
 				AND a.project_code = #{projectCode}
@@ -158,15 +162,15 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<select id="findAllList" resultType="ApplyProjectInfo">
-		SELECT 
+		SELECT
 			<include refid="applyProjectInfoColumns"/>
 		FROM wxbinghu.dbo.stz_region_apply_project_info a
 		<include refid="applyProjectInfoJoins"/>
 		<where>
-			
-		</where>		
+
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -176,7 +180,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO wxbinghu.dbo.stz_region_apply_project_info(
 			project_code,
@@ -266,13 +270,13 @@
 			#{chinaTotalMoney}
 		)
 	</insert>
-	
+
 	<update id="update">
 		UPDATE wxbinghu.dbo.stz_region_apply_project_info SET
 			scale_content = #{scaleContent}
 		WHERE PROJECT_CODE = #{projectCode}
 	</update>
-	
+
 	<update id="delete">
 		DELETE FROM wxbinghu.dbo.stz_region_apply_project_info
 		WHERE id = #{id}
@@ -282,28 +286,31 @@
 		INSERT INTO [MajorProjectLib].[dbo].[pub_project](
 		prj_code,
 		major_flag,
+		display_flag,
 		SCALE_CONTENT
 		) VALUES (
 		#{projectCode},
 		#{majorFlag},
+		#{displayFlag},
 		#{scaleContentPub}
 		)
 	</insert>
 
 	<update id="updateMajorFlag">
 		UPDATE [MajorProjectLib].[dbo].[pub_project] SET
-		major_flag = #{majorFlag},SCALE_CONTENT=#{scaleContentPub}
+		major_flag = #{majorFlag},display_flag = #{displayFlag},SCALE_CONTENT=#{scaleContentPub}
 		WHERE prj_code = #{projectCode}
 	</update>
 
 	<select id="getMajorFlag" resultType="ApplyProjectInfo">
 		SELECT prj_code AS "projectCode",
 		major_flag AS "majorFlag",
+		display_flag AS "displayFlag",
 		SCALE_CONTENT AS "scaleContentPub"
 		FROM [MajorProjectLib].[dbo].[pub_project]  a
 		<where>
 			a.prj_code = #{projectCode}
 		</where>
 	</select>
-	
+
 </mapper>

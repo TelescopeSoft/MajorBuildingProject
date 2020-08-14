@@ -3,8 +3,10 @@
  */
 package com.qlmsoft.mbp.modules.project.service;
 
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,33 +27,37 @@ public class ProjectFinishService extends CrudService<ProjectFinishDao, ProjectF
 	public ProjectFinish get(String id) {
 		return super.get(id);
 	}
-	
+
 	public List<ProjectFinish> findList(ProjectFinish projectFinish) {
 		return super.findList(projectFinish);
 	}
-	
+
 	public List<ProjectFinish> findListByProjectPkid(String pkid) {
 		return this.dao.findListByProjectPkid(pkid);
 	}
-	
+
 	public Page<ProjectFinish> findPage(Page<ProjectFinish> page, ProjectFinish projectFinish) {
 		return super.findPage(page, projectFinish);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void save(ProjectFinish projectFinish) {
 		super.save(projectFinish);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void delete(ProjectFinish projectFinish) {
 		super.delete(projectFinish);
 	}
 
     public void checkDuplicatedAndSave(ProjectFinish bean) {
-		ProjectFinish existed = this.dao.getByCondition(bean);
+		ProjectFinish existed = this.dao.getByPkid(bean);
 		if (existed == null) {
 			super.save(bean);
+		} else {
+			BeanUtils.copyProperties(bean, existed, "pkid");
+			existed.setXgrqsj(new Date());
+			this.dao.update(existed);
 		}
     }
 }
