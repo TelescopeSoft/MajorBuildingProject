@@ -152,15 +152,6 @@
 			<div class="navbar-inner">
 				<div class="brand"><span id="productName">${fns:getConfig('productName')}</span></div>
 				<ul id="userControl" class="nav pull-right">
-					<li><a href="${pageContext.request.contextPath}${fns:getFrontPath()}/index-${fnc:getCurrentSiteId()}.html" target="_blank" title="访问网站主页"><i class="icon-home"></i></a></li>
-					<li id="themeSwitch" class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="主题切换"><i class="icon-th-large"></i></a>
-						<ul class="dropdown-menu">
-							<c:forEach items="${fns:getDictList('theme')}" var="dict"><li><a href="#" onclick="location='${pageContext.request.contextPath}/theme/${dict.value}?url='+location.href">${dict.label}</a></li></c:forEach>
-							<li><a href="javascript:cookie('tabmode','${tabmode eq '1' ? '0' : '1'}');location=location.href">${tabmode eq '1' ? '关闭' : '开启'}页签模式</a></li>
-						</ul>
-						<!--[if lte IE 6]><script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->
-					</li>
 					<li id="userInfo" class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="个人信息">您好, ${fns:getUser().name}&nbsp;<span id="notifyNum" class="label label-info hide"></span></a>
 						<ul class="dropdown-menu">
@@ -214,7 +205,7 @@
 	    </div>
 	    <div class="container-fluid">
 			<div id="content" class="row-fluid">
-				<div id="left"><%-- 
+				<div id="left"><%--
 					<iframe id="menuFrame" name="menuFrame" src="" style="overflow:visible;" scrolling="yes" frameborder="no" width="100%" height="650"></iframe> --%>
 				</div>
 				<div id="openClose" class="close">&nbsp;</div>
@@ -227,7 +218,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript"> 
+	<script type="text/javascript">
 		var leftWidth = 160; // 左侧窗口大小
 		var tabTitleHeight = 33; // 页签的高度
 		var htmlObj = $("html"), mainObj = $("#main");
@@ -239,7 +230,7 @@
 			htmlObj.css({"overflow-x":strs[1] < minWidth ? "auto" : "hidden", "overflow-y":strs[0] < minHeight ? "auto" : "hidden"});
 			mainObj.css("width",strs[1] < minWidth ? minWidth - 10 : "auto");
 			frameObj.height((strs[0] < minHeight ? minHeight : strs[0]) - headerObj.height() - footerObj.height() - (strs[1] < minWidth ? 42 : 28));
-			$("#openClose").height($("#openClose").height() - 5);// <c:if test="${tabmode eq '1'}"> 
+			$("#openClose").height($("#openClose").height() - 5);// <c:if test="${tabmode eq '1'}">
 			$(".jericho_tab iframe").height($("#right").height() - tabTitleHeight); // </c:if>
 			wSizeWidth();
 		}
@@ -250,7 +241,7 @@
 			}else{
 				$("#right").width("100%");
 			}
-		}// <c:if test="${tabmode eq '1'}"> 
+		}// <c:if test="${tabmode eq '1'}">
 		function openCloseClickCallBack(b){
 			$.fn.jerichoTab.resize();
 		} // </c:if>

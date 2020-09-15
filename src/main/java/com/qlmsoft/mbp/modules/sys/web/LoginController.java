@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qlmsoft.mbp.common.utils.*;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.util.WebUtils;
@@ -22,10 +23,6 @@ import com.google.common.collect.Maps;
 import com.qlmsoft.mbp.common.config.Global;
 import com.qlmsoft.mbp.common.security.shiro.session.SessionDAO;
 import com.qlmsoft.mbp.common.servlet.ValidateCodeServlet;
-import com.qlmsoft.mbp.common.utils.CacheUtils;
-import com.qlmsoft.mbp.common.utils.CookieUtils;
-import com.qlmsoft.mbp.common.utils.IdGen;
-import com.qlmsoft.mbp.common.utils.StringUtils;
 import com.qlmsoft.mbp.common.web.BaseController;
 import com.qlmsoft.mbp.modules.sys.security.FormAuthenticationFilter;
 import com.qlmsoft.mbp.modules.sys.security.SystemAuthorizingRealm.Principal;
@@ -38,10 +35,10 @@ import com.qlmsoft.mbp.modules.sys.utils.UserUtils;
  */
 @Controller
 public class LoginController extends BaseController{
-	
+
 	@Autowired
 	private SessionDAO sessionDAO;
-	
+
 	/**
 	 * 管理登录
 	 */
@@ -54,16 +51,16 @@ public class LoginController extends BaseController{
 //		if (tabmode == null){
 //			CookieUtils.setCookie(response, "tabmode", "1");
 //		}
-		
+		CookieUtils.setCookie(response, "theme", "cerulean");
 		if (logger.isDebugEnabled()){
 			logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
 		}
-		
+
 		// 如果已登录，再次访问主页，则退出原账号。
 		if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
 			CookieUtils.setCookie(response, "LOGINED", "false");
 		}
-		
+
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null && !principal.isMobileLogin()){
 			return "redirect:" + adminPath;
@@ -83,7 +80,7 @@ public class LoginController extends BaseController{
 	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.POST)
 	public String loginFail(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Principal principal = UserUtils.getPrincipal();
-		
+
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null){
 			return "redirect:" + adminPath;
@@ -94,7 +91,7 @@ public class LoginController extends BaseController{
 		boolean mobile = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);
 		String exception = (String)request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 		String message = (String)request.getAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM);
-		
+
 		if (StringUtils.isBlank(message) || StringUtils.equals(message, "null")){
 			message = "用户或密码错误, 请重试.";
 		}
@@ -104,25 +101,25 @@ public class LoginController extends BaseController{
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_MOBILE_PARAM, mobile);
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, exception);
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM, message);
-		
+
 		if (logger.isDebugEnabled()){
-			logger.debug("login fail, active session size: {}, message: {}, exception: {}", 
+			logger.debug("login fail, active session size: {}, message: {}, exception: {}",
 					sessionDAO.getActiveSessions(false).size(), message, exception);
 		}
-		
+
 		// 非授权异常，登录失败，验证码加1。
 		if (!UnauthorizedException.class.getName().equals(exception)){
 			model.addAttribute("isValidateCodeLogin", isValidateCodeLogin(username, true, false));
 		}
-		
+
 		// 验证失败清空验证码
 		request.getSession().setAttribute(ValidateCodeServlet.VALIDATE_CODE, IdGen.uuid());
-		
+
 		// 如果是手机登录，则返回JSON字符串
 		if (mobile){
 	        return renderString(response, model);
 		}
-		
+
 		return "modules/sys/sysLogin";
 	}
 
@@ -136,11 +133,11 @@ public class LoginController extends BaseController{
 
 		// 登录成功后，验证码计算器清零
 		isValidateCodeLogin(principal.getLoginName(), false, true);
-		
+
 		if (logger.isDebugEnabled()){
 			logger.debug("show index, active session size: {}", sessionDAO.getActiveSessions(false).size());
 		}
-		
+
 		// 如果已登录，再次访问主页，则退出原账号。
 		if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
 			String logined = CookieUtils.getCookie(request, "LOGINED");
@@ -151,7 +148,7 @@ public class LoginController extends BaseController{
 				return "redirect:" + adminPath + "/login";
 			}
 		}
-		
+
 		// 如果是手机登录，则返回JSON字符串
 		if (principal.isMobileLogin()){
 			if (request.getParameter("login") != null){
@@ -162,7 +159,7 @@ public class LoginController extends BaseController{
 			}
 			return "redirect:" + adminPath + "/login";
 		}
-		
+
 //		// 登录成功后，获取上次登录的当前站点ID
 //		UserUtils.putCache("siteId", StringUtils.toLong(CookieUtils.getCookie(request, "siteId")));
 
@@ -182,20 +179,33 @@ public class LoginController extends BaseController{
 //		System.out.println("==========================b");
 		return "modules/sys/sysIndex";
 	}
-	
+
 	/**
 	 * 获取主题方案
 	 */
 	@RequestMapping(value = "/theme/{theme}")
 	public String getThemeInCookie(@PathVariable String theme, HttpServletRequest request, HttpServletResponse response){
+
 		if (StringUtils.isNotBlank(theme)){
 			CookieUtils.setCookie(response, "theme", theme);
 		}else{
 			theme = CookieUtils.getCookie(request, "theme");
 		}
-		return "redirect:"+request.getParameter("url");
+		String url = request.getParameter("url");
+		if ("null".equals(theme) || StringUtils.isEmpty(theme) || StringUtils.isEmpty(url)){
+			return "";
+		}else {
+			String oUrl = request.getRequestURL().toString();
+
+			boolean verify = DomainUtils.matchDomainByUrl(url, oUrl);
+			if(verify){
+				return "redirect:"+request.getParameter("url");
+			}else {
+				return "";
+			}
+		}
 	}
-	
+
 	/**
 	 * 是否是验证码登录
 	 * @param useruame 用户名
