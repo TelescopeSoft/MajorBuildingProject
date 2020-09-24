@@ -40,9 +40,7 @@
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 
-  <header class=" topbox">
-      <div class="toptitile">滨湖区重大建设项目信息公开平台</div>
-  </header>
+    <%@ include file="/WEB-INF/views/modules/publicity/header.jsp"%>
 
     <header class="main-header">
     <nav class="navbar navbar-static-top">
@@ -86,19 +84,19 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="basic">
-             
+
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="approve">
-                                    
+
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="tender">
-                                    
+
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="contract">
-                                   
+
                                 </div>
                                 <div class="tab-pane" id="safty">
                                 </div>
@@ -109,7 +107,7 @@
                                 </div>
                                 <!-- /.tab-pane -->
 
-                                <div class="tab-pane" id="finish">      
+                                <div class="tab-pane" id="finish">
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -134,10 +132,10 @@
     <!-- /.container -->
   </div>
   <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
-			<!-- /.container -->
-		</footer>
+<footer>
+    <%@ include file="/WEB-INF/views/modules/publicity/footer.jsp"%>
+    <!-- /.container -->
+</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -186,13 +184,13 @@
 	    "id" : "finish",
 	    "url" : "${ctx}/publicity/projectdetailfinish?pkid=${projectinfo.projectCode}"
 	} ];
-	
+
 	function tabsHandler(event) {
 	    var data = event.data;
 	    showTabs(data.id,data.url);
 	    return false; //阻止默认a标签响应
 	}
-	
+
 	function showTabs(tabsId,url) {
 	    $("a[href='#"+tabsId+"']").tab('show');
 	    var $tabContent = $('#'+tabsId);
@@ -201,7 +199,7 @@
 	        //console.info(tabsId + ' load done!');
 	    }
 	}
-	
+
     $(function () {
     	$(tabsData).each(function(){
     	    //console.info(this.id + "--->" + this.url);
@@ -210,7 +208,7 @@
     	        url : this.url
     	    },tabsHandler);
     	});
-    	
+
     	showTabs(tabsData[0].id,tabsData[0].url);
     })
 </script>

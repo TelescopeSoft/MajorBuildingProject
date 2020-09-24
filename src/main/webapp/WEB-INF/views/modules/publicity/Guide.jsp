@@ -45,11 +45,9 @@
 <body class="hold-transition skin-blue layout-top-nav">
 	<div class="wrapper">
 
-		<header class="topbox">
-			<div class="toptitile">滨湖区重大建设项目信息公开平台</div>
-		</header>
+		<%@ include file="/WEB-INF/views/modules/publicity/header.jsp"%>
 		<%@ include file="/WEB-INF/views/modules/publicity/menu.jsp"%>
-		
+
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
 			<div class="container">
@@ -112,8 +110,8 @@
 			<!-- /.container -->
 		</div>
 		<!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
+		<footer>
+			<%@ include file="/WEB-INF/views/modules/publicity/footer.jsp"%>
 			<!-- /.container -->
 		</footer>
 	</div>
@@ -129,7 +127,7 @@
 
 	<script type="text/javascript">
 //函数说明：合并指定表格（表格id为_w_table_id）指定列（列数为_w_table_colnum）的相同文本的相邻单元格
-//参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data 
+//参数说明：_w_table_id 为需要进行合并单元格的表格的id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_colnum 为需要合并单元格的所在列。为数字，从最左边第一列为1开始算起。
 function _w_table_rowspan(_w_table_id,_w_table_colnum){
     _w_table_firsttd = "";
@@ -151,10 +149,10 @@ function _w_table_rowspan(_w_table_id,_w_table_colnum){
                 _w_table_SpanNum = 1;
             }
         }
-    }); 
+    });
 }
 //函数说明：合并指定表格（表格id为_w_table_id）指定行（行数为_w_table_rownum）的相同文本的相邻单元格
-//参数说明：_w_table_id 为需要进行合并单元格的表格id。如在HTMl中指定表格 id="data" ，此参数应为 #data 
+//参数说明：_w_table_id 为需要进行合并单元格的表格id。如在HTMl中指定表格 id="data" ，此参数应为 #data
 //参数说明：_w_table_rownum 为需要合并单元格的所在行。其参数形式请参考jQuery中nth-child的参数。
 //          如果为数字，则从最左边第一行为1开始算起。
 //          "even" 表示偶数行
@@ -189,7 +187,7 @@ function _w_table_colspan(_w_table_id,_w_table_rownum,_w_table_maxcolnum){
         });
     });
 }
-$(document).ready(function(){  
+$(document).ready(function(){
 
   _w_table_rowspan("#guideTable",1);
  });

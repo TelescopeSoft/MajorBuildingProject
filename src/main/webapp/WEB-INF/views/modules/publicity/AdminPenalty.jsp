@@ -54,9 +54,7 @@
 <body class="hold-transition skin-blue layout-top-nav">
 	<div class="wrapper">
 
-		<header class=" topbox">
-			<div class="toptitile">滨湖区重大建设项目信息公开平台</div>
-		</header>
+		<%@ include file="/WEB-INF/views/modules/publicity/header.jsp"%>
 		<%@ include file="/WEB-INF/views/modules/publicity/menu.jsp"%>
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
@@ -106,8 +104,8 @@
 			<!-- /.container -->
 		</div>
 		<!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
+		<footer>
+			<%@ include file="/WEB-INF/views/modules/publicity/footer.jsp"%>
 			<!-- /.container -->
 		</footer>
 	</div>
@@ -135,10 +133,10 @@
 	<script src="${ctxStatic}/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="${ctxStatic}/dist/js/demo.js"></script>
-	
+
 	<!-- moment js -->
 	<script src="${ctxStatic}/bower_components/moment/moment.min.js"></script>
- 
+
 	<script>
     $(function () {
 
@@ -156,7 +154,7 @@
 	            { "data": "letterOfDecision" },
 	            { "data": "name" },
 	            { "data": function(obj){ var day = moment(obj.punishmentDecisionDate);return day.format("YYYY-MM-DD")} },
-	            { "data": "punishDeptLabel" } 
+	            { "data": "punishDeptLabel" }
 	        ],
             "columnDefs": [{
              	            "render": function(data, type, row, meta ) {

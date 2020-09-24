@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="${ctxStatic}/dist/css/skins/_all-skins.css">
 
   <link rel="stylesheet" href="${ctxStatic}/dist/css/mbp.css">
-    
+
   <!-- Select2 -->
   <link rel="stylesheet" href="${ctxStatic}/bower_components/select2/dist/css/select2.min.css">
   <!-- bootstrap datepicker -->
@@ -45,9 +45,7 @@
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 
-  <header class=" topbox">
-      <div class="toptitile">滨湖区重大建设项目信息公开平台</div>
-  </header>
+    <%@ include file="/WEB-INF/views/modules/publicity/header.jsp"%>
 	<%@ include file="/WEB-INF/views/modules/publicity/menu.jsp"%>
   <!-- Full Width Column -->
   <div class="content-wrapper">
@@ -68,7 +66,7 @@
                         <div class="box-header">
                             <div class="approvetitle">重大设计变更公示</div>
                         </div>
- 
+
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table id="designChangeTable" class="table table-bordered table-striped">
@@ -99,10 +97,10 @@
     <!-- /.container -->
   </div>
   <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
-			<!-- /.container -->
-		</footer>
+    <footer>
+        <%@ include file="/WEB-INF/views/modules/publicity/footer.jsp"%>
+        <!-- /.container -->
+    </footer>
 </div>
 <!-- ./wrapper -->
 

@@ -48,10 +48,7 @@ var _hmt = _hmt || [];
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
-
-  <header class=" topbox">
-      <div class="toptitile">滨湖区重大建设项目信息公开平台</div>
-  </header>
+    <%@ include file="/WEB-INF/views/modules/publicity/header.jsp"%>
   <%@ include file="/WEB-INF/views/modules/publicity/menu.jsp"%>
   <!-- Full Width Column -->
   <div class="content-wrapper">
@@ -138,8 +135,8 @@ var _hmt = _hmt || [];
     <!-- /.container -->
   </div>
   <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
+        <footer>
+            <%@ include file="/WEB-INF/views/modules/publicity/footer.jsp"%>
 			<!-- /.container -->
 		</footer>
 </div>
@@ -170,7 +167,7 @@ var _hmt = _hmt || [];
 <script src="${ctxStatic}/bower_components/moment/moment.min.js"></script>
 <script>
     $(function () {
-    	
+
         $('#projectList').DataTable({
             'paging'      : true,
             'lengthChange': true,

@@ -40,11 +40,9 @@
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 
-  <header class=" topbox">
-      <div class="toptitile">滨湖区重大建设项目信息公开平台</div>
-  </header>
+    <%@ include file="/WEB-INF/views/modules/publicity/header.jsp"%>
 	<%@ include file="/WEB-INF/views/modules/publicity/menu.jsp"%>
-  <!-- 
+  <!--
     <div class="main-header">
     <nav class="navbar navbar-static-top">
         <div class="container">
@@ -54,7 +52,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
             </div>
- 
+
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="${ctx}/publicity/project">重大项目</a></li>
@@ -74,8 +72,8 @@
                     </li>
                     <li><a href="Complete.html">竣工信息</a></li>
                 </ul>
-            </div> 
-        </div> 
+            </div>
+        </div>
     </nav>
     </div> -->
   <!-- Full Width Column -->
@@ -138,7 +136,7 @@
                                     <!--<th>项目地址</th>-->
                                 </tr>
                                 </thead>
-                                <!-- 
+                                <!--
                                 <tbody>
                                 <tr>
                                     <td>1</td>
@@ -153,7 +151,7 @@
                                     <td> 锡滨发改许[2017]9号</td>
                                     <td><a href="ProjectDetail.html">3202111706060101</a></td>
                                     <td>无锡山水慧谷城镇建设发展有限公司</td>
-                                </tr> 
+                                </tr>
                                 </tbody>-->
 
                             </table>
@@ -172,10 +170,10 @@
     <!-- /.container -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-              <%@ include file="/WEB-INF/views/modules/publicity/foot.jsp"%>
-  			<!-- /.container -->
-  		</footer>
+    <footer>
+        <%@ include file="/WEB-INF/views/modules/publicity/footer.jsp"%>
+        <!-- /.container -->
+    </footer>
 </div>
 <!-- ./wrapper -->
 
@@ -199,7 +197,7 @@
 <script src="${ctxStatic}/dist/js/demo.js"></script>
 <script>
     $(function () {
-    	
+
         $('#projectList').DataTable({
             'paging'      : true,
             'lengthChange': false,
