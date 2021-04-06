@@ -23,12 +23,14 @@
 	<task:scheduled-tasks>
 
 		<task:scheduled ref="expropriationCrawlerTask" method="execute" cron="0 35 1 * * ?" />
-		<task:scheduled ref="adminPenaltyCrawlerTask" method="execute" cron="0 35 2 * * ?" />
+		<task:scheduled ref="adminPenaltyCrawlerTask" method="execute" cron="0 03 16 * * ?" />
 		<task:scheduled ref="tradeCrawlerTask" method="execute" cron="0 0 22 * * ?" />
 		<!-- 不再再项目名称或发改批好匹配，统一按项目代码关联 -->
 		<!--<task:scheduled ref="approveResultCrawlerTask" method="execute" cron="0 15 23 * * ?" />-->
 		<!--<task:scheduled ref="projectMatchTask" method="execute" cron="0 0 0/6 * * ?" />-->
 		<task:scheduled ref="mohurdProjectTask" method="execute" cron="0 0 3 * * ?" />
+
+		<!-- <task:scheduled ref="pubDataSynchTask" method="execute" cron="0 01 21 * * ?" />-->
 
 	</task:scheduled-tasks>
 

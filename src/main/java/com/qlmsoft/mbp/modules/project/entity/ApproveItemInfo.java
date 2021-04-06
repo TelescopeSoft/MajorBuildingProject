@@ -3,8 +3,11 @@
  */
 package com.qlmsoft.mbp.modules.project.entity;
 
+import com.google.common.collect.Lists;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +19,7 @@ import com.qlmsoft.mbp.common.persistence.DataEntity;
  * @version 2018-08-09
  */
 public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
-	
+
 	private static final long serialVersionUID = 1L;
 	private String approvalItemid;		// 审批事项ID
 	private String projectCode;		// 项目代码
@@ -42,7 +45,9 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 
 	private Date startDate;
 	private Date endDate;
-	
+
+	private List<String> projectCodeList = Lists.newArrayList();
+
 	public ApproveItemInfo() {
 		super();
 	}
@@ -59,7 +64,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setApprovalItemid(String approvalItemid) {
 		this.approvalItemid = approvalItemid;
 	}
-	
+
 	@Length(min=1, max=32, message="项目代码长度必须介于 1 和 32 之间")
 	public String getProjectCode() {
 		return projectCode;
@@ -68,7 +73,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setProjectCode(String projectCode) {
 		this.projectCode = projectCode;
 	}
-	
+
 	@Length(min=0, max=50, message="审批事项编码长度必须介于 0 和 50 之间")
 	public String getItemCode() {
 		return itemCode;
@@ -77,7 +82,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setItemCode(String itemCode) {
 		this.itemCode = itemCode;
 	}
-	
+
 	@Length(min=0, max=6, message="当前办理状态长度必须介于 0 和 6 之间")
 	public String getCurrentState() {
 		return currentState;
@@ -86,7 +91,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setCurrentState(String currentState) {
 		this.currentState = currentState;
 	}
-	
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getDealTime() {
 		return dealTime;
@@ -95,7 +100,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setDealTime(Date dealTime) {
 		this.dealTime = dealTime;
 	}
-	
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getPlanFinishDate() {
 		return planFinishDate;
@@ -104,7 +109,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setPlanFinishDate(Date planFinishDate) {
 		this.planFinishDate = planFinishDate;
 	}
-	
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@NotNull(message="exchange_time不能为空")
 	public Date getExchangeTime() {
@@ -114,7 +119,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setExchangeTime(Date exchangeTime) {
 		this.exchangeTime = exchangeTime;
 	}
-	
+
 	@Length(min=1, max=2, message="validity_flag长度必须介于 1 和 2 之间")
 	public String getValidityFlag() {
 		return validityFlag;
@@ -123,7 +128,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setValidityFlag(String validityFlag) {
 		this.validityFlag = validityFlag;
 	}
-	
+
 	@Length(min=0, max=6, message="node_code长度必须介于 0 和 6 之间")
 	public String getNodeCode() {
 		return nodeCode;
@@ -132,7 +137,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setNodeCode(String nodeCode) {
 		this.nodeCode = nodeCode;
 	}
-	
+
 	@Length(min=0, max=2, message="rel_item_flag长度必须介于 0 和 2 之间")
 	public String getRelItemFlag() {
 		return relItemFlag;
@@ -141,7 +146,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setRelItemFlag(String relItemFlag) {
 		this.relItemFlag = relItemFlag;
 	}
-	
+
 	@Length(min=0, max=50, message="dept_code长度必须介于 0 和 50 之间")
 	public String getDeptCode() {
 		return deptCode;
@@ -150,7 +155,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setDeptCode(String deptCode) {
 		this.deptCode = deptCode;
 	}
-	
+
 	@Length(min=0, max=16, message="division_code长度必须介于 0 和 16 之间")
 	public String getDivisionCode() {
 		return divisionCode;
@@ -159,7 +164,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setDivisionCode(String divisionCode) {
 		this.divisionCode = divisionCode;
 	}
-	
+
 	@Length(min=0, max=50, message="central_approval_itemid长度必须介于 0 和 50 之间")
 	public String getCentralApprovalItemid() {
 		return centralApprovalItemid;
@@ -168,7 +173,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setCentralApprovalItemid(String centralApprovalItemid) {
 		this.centralApprovalItemid = centralApprovalItemid;
 	}
-	
+
 	@Length(min=0, max=50, message="rel_central_item_code长度必须介于 0 和 50 之间")
 	public String getRelCentralItemCode() {
 		return relCentralItemCode;
@@ -177,7 +182,7 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 	public void setRelCentralItemCode(String relCentralItemCode) {
 		this.relCentralItemCode = relCentralItemCode;
 	}
-	
+
 	@Length(min=0, max=50, message="rel_dept_code长度必须介于 0 和 50 之间")
 	public String getRelDeptCode() {
 		return relDeptCode;
@@ -241,5 +246,13 @@ public class ApproveItemInfo extends DataEntity<ApproveItemInfo> {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public List<String> getProjectCodeList() {
+		return projectCodeList;
+	}
+
+	public void setProjectCodeList(List<String> projectCodeList) {
+		this.projectCodeList = projectCodeList;
 	}
 }

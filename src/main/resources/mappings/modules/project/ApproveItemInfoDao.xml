@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qlmsoft.mbp.modules.project.dao.ApproveItemInfoDao">
-    
+
 	<sql id="approveItemInfoColumns">
 		a.approval_itemid AS "approvalItemid",
 		a.project_code AS "projectCode",
@@ -33,24 +33,24 @@
 		c.DEPT_CODE AS "deptCode",
 		ISNULL(d.DEPT_NAME,'') AS "deptName"
 	</sql>
-	
+
 	<sql id="approveItemInfoJoins">
 	  	LEFT JOIN wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_INFO b ON a.PROJECT_CODE = b.PROJECT_CODE
-			-- AND b.CURRENT_STATE IN ('A0501','A0502','A0503')
+			AND b.CURRENT_STATE IN ('A0501','A0502','A0503')
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_APPROVE_ITEM_BASE_INFO c ON b.ITEM_CODE = c.ITEM_CODE
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_DEPT_INFO d ON d.DEPT_CODE = c.DEPT_CODE
 		LEFT JOIN wxbinghu.dbo.STZ_REGION_CODE_INFO e ON e.code = b.CURRENT_STATE AND e.code_type = 'current_state'
 	</sql>
-    
+
 	<select id="get" resultType="ApproveItemInfo">
-		SELECT 
+		SELECT
 			<include refid="approveItemInfoColumns"/>
 		FROM wxbinghu.dbo.stz_region_approve_item_info a
 		WHERE a.id = #{id}
 	</select>
-	
+
 	<select id="findList" resultType="ApproveItemInfo">
-		SELECT 
+		SELECT
 			<include refid="approveInfoColumns"/>
 		FROM [wxbinghu].[dbo].[STZ_REGION_APPLY_PROJECT_INFO] a
 		<include refid="approveItemInfoJoins"/>
@@ -103,15 +103,15 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findAllList" resultType="ApproveItemInfo">
-		SELECT 
+		SELECT
 			<include refid="approveItemInfoColumns"/>
 		FROM wxbinghu.dbo.stz_region_approve_item_info a
 		<include refid="approveItemInfoJoins"/>
 		<where>
-			
-		</where>		
+
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -120,7 +120,31 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
+	<select id="findPublicData" resultType="ApproveItemInfo">
+		SELECT
+		<include refid="approveInfoColumns"/>
+		FROM [wxbinghu].[dbo].[STZ_REGION_APPLY_PROJECT_INFO] a
+		<include refid="approveItemInfoJoins"/>
+		<where>
+			1 = 1
+			<if test="projectCodeList != null and projectCodeList.size() > 0">
+				AND a.project_code in
+				<foreach collection="projectCodeList" item="code" index="index"
+						 open="(" close=")" separator=",">
+					#{code}
+				</foreach>
+			</if>
+			<if test="startDate != null and startDate != ''">
+				AND convert(VARCHAR(10), b.deal_time, 120) &gt;= convert(VARCHAR(10), #{startDate}, 120)
+			</if>
+			<if test="endDate != null and endDate != ''">
+				AND convert(VARCHAR(10), b.deal_time, 120) &lt;= convert(VARCHAR(10), #{endDate}, 120)
+			</if>
+		</where>
+		ORDER BY b.DEAL_TIME DESC
+	</select>
+
 	<insert id="insert">
 		INSERT INTO wxbinghu.dbo.stz_region_approve_item_info(
 			approval_itemid,
@@ -158,7 +182,7 @@
 			#{relDeptCode}
 		)
 	</insert>
-	
+
 	<update id="update">
 		UPDATE wxbinghu.dbo.stz_region_approve_item_info SET
 			approval_itemid = #{approvalItemid},
@@ -178,10 +202,10 @@
 			rel_dept_code = #{relDeptCode}
 		WHERE id = #{id}
 	</update>
-	
+
 	<update id="delete">
 		DELETE FROM wxbinghu.dbo.stz_region_approve_item_info
 		WHERE id = #{id}
 	</update>
-	
+
 </mapper>

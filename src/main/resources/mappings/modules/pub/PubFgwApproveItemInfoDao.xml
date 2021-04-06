@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.pub.dao.PubFgwApproveItemInfoDao">
+    
+	<sql id="pubFgwApproveItemInfoColumns">
+		a.id AS "id",
+		a.project_code AS "projectCode",
+		a.project_name AS "projectName",
+		a.item_code AS "itemCode",
+		a.item_name AS "itemName",
+		a.dept_code AS "deptCode",
+		a.dept_name AS "deptName",
+		a.current_state AS "currentState",
+		a.current_state_label AS "currentStateLabel",
+		a.deal_time AS "dealTime",
+		a.approval_num AS "approvalNum"
+	</sql>
+	
+	<sql id="pubFgwApproveItemInfoJoins">
+	</sql>
+    
+	<select id="get" resultType="PubFgwApproveItemInfo">
+		SELECT 
+			<include refid="pubFgwApproveItemInfoColumns"/>
+		FROM pub_fgw_approve_item_info a
+		<include refid="pubFgwApproveItemInfoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="PubFgwApproveItemInfo">
+		SELECT 
+			<include refid="pubFgwApproveItemInfoColumns"/>
+		FROM pub_fgw_approve_item_info a
+		<include refid="pubFgwApproveItemInfoJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="PubFgwApproveItemInfo">
+		SELECT 
+			<include refid="pubFgwApproveItemInfoColumns"/>
+		FROM pub_fgw_approve_item_info a
+		<include refid="pubFgwApproveItemInfoJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO pub_fgw_approve_item_info(
+			id,
+			project_code,
+			project_name,
+			item_code,
+			item_name,
+			dept_code,
+			dept_name,
+			current_state,
+			current_state_label,
+			deal_time,
+			approval_num
+		) VALUES (
+			#{id},
+			#{projectCode},
+			#{projectName},
+			#{itemCode},
+			#{itemName},
+			#{deptCode},
+			#{deptName},
+			#{currentState},
+			#{currentStateLabel},
+			#{dealTime},
+			#{approvalNum}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE pub_fgw_approve_item_info SET 	
+			project_code = #{projectCode},
+			project_name = #{projectName},
+			item_code = #{itemCode},
+			item_name = #{itemName},
+			dept_code = #{deptCode},
+			dept_name = #{deptName},
+			current_state = #{currentState},
+			current_state_label = #{currentStateLabel},
+			deal_time = #{dealTime},
+			approval_num = #{approvalNum}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM pub_fgw_approve_item_info
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

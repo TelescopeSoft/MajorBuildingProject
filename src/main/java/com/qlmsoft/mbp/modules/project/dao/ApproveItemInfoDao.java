@@ -7,6 +7,8 @@ import com.qlmsoft.mbp.common.persistence.CrudDao;
 import com.qlmsoft.mbp.common.persistence.annotation.MyBatisDao;
 import com.qlmsoft.mbp.modules.project.entity.ApproveItemInfo;
 
+import java.util.List;
+
 /**
  * 发改批准结果信息DAO接口
  * @author huangzhengyu
@@ -14,5 +16,7 @@ import com.qlmsoft.mbp.modules.project.entity.ApproveItemInfo;
  */
 @MyBatisDao
 public interface ApproveItemInfoDao extends CrudDao<ApproveItemInfo> {
-	
+
+    List<ApproveItemInfo> findPublicData(ApproveItemInfo entity);
+
 }

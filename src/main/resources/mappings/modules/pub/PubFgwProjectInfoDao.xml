@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qlmsoft.mbp.modules.pub.dao.PubFgwProjectInfoDao">
+
+	<sql id="pubFgwProjectInfoColumns">
+		a.project_code AS "projectCode",
+		a.project_name AS "projectName",
+		a.project_type AS "projectType",
+		a.project_type_lable AS "projectTypeLable",
+		a.catalog_name AS "catalogName",
+		a.enterprise_name AS "enterpriseName",
+		a.lerep_certtype AS "lerepCerttype",
+		a.lerep_certno AS "lerepCertno",
+		a.project_nature AS "projectNature",
+		a.project_nature_label AS "projectNatureLabel",
+		a.total_money AS "totalMoney",
+		a.ydmj AS "ydmj",
+		a.zjly AS "zjly",
+		a.start_year AS "startYear",
+		a.end_year AS "endYear",
+		a.address_detail AS "addressDetail",
+		a.scale_content AS "scaleContent"
+	</sql>
+
+	<sql id="pubFgwProjectInfoJoins">
+	</sql>
+
+	<select id="get" resultType="PubFgwProjectInfo">
+		SELECT
+			<include refid="pubFgwProjectInfoColumns"/>
+		FROM pub_fgw_project_info a
+		<include refid="pubFgwProjectInfoJoins"/>
+		WHERE a.project_code = #{projectCode}
+	</select>
+
+	<select id="findList" resultType="PubFgwProjectInfo">
+		SELECT
+			<include refid="pubFgwProjectInfoColumns"/>
+		FROM pub_fgw_project_info a
+		<include refid="pubFgwProjectInfoJoins"/>
+		<where>
+
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="findAllList" resultType="PubFgwProjectInfo">
+		SELECT
+			<include refid="pubFgwProjectInfoColumns"/>
+		FROM pub_fgw_project_info a
+		<include refid="pubFgwProjectInfoJoins"/>
+		<where>
+
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert">
+		INSERT INTO pub_fgw_project_info(
+			project_code,
+			project_name,
+			project_type,
+			project_type_lable,
+			catalog_name,
+			enterprise_name,
+			lerep_certtype,
+			lerep_certno,
+			project_nature,
+			project_nature_label,
+			total_money,
+			ydmj,
+			zjly,
+			start_year,
+			end_year,
+			address_detail,
+			scale_content
+		) VALUES (
+			#{projectCode},
+			#{projectName},
+			#{projectType},
+			#{projectTypeLable},
+			#{catalogName},
+			#{enterpriseName},
+			#{lerepCerttype},
+			#{lerepCertno},
+			#{projectNature},
+			#{projectNatureLabel},
+			#{totalMoney},
+			#{ydmj},
+			#{zjly},
+			#{startYear},
+			#{endYear},
+			#{addressDetail},
+			#{scaleContent}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE pub_fgw_project_info SET
+			project_code = #{projectCode},
+			project_name = #{projectName},
+			project_type = #{projectType},
+			project_type_lable = #{projectTypeLable},
+			catalog_name = #{catalogName},
+			enterprise_name = #{enterpriseName},
+			lerep_certtype = #{lerepCerttype},
+			lerep_certno = #{lerepCertno},
+			project_nature = #{projectNature},
+			project_nature_label = #{projectNatureLabel},
+			total_money = #{totalMoney},
+			ydmj = #{ydmj},
+			zjly = #{zjly},
+			start_year = #{startYear},
+			end_year = #{endYear},
+			address_detail = #{addressDetail},
+			scale_content = #{scaleContent}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		DELETE FROM pub_fgw_project_info
+		WHERE id = #{id}
+	</update>
+
+</mapper>

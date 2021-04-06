@@ -45,11 +45,14 @@ public class ExpropriationCrawler {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
-//    public static final String QUERY_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/queryXxgkList4Page.do";
-    public static final String QUERY_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/queryXxgkList4Page.do";
+    //    public static final String QUERY_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/queryXxgkList4Page.do";
+//    public static final String QUERY_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/queryXxgkList4Page.do";
+    public static final String QUERY_URL = "http://222.190.131.9:2280/zd/xxgkController/zdxxcxIndex.do";
 
-//    public static final String QUERY_DETAIL_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/turnToDetail.do?lcid={0}&unitCode=320211";
-    public static final String QUERY_DETAIL_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/turnToMoreDetail.do?lcid={0}&unitCode=320211&flag=4";
+
+    //    public static final String QUERY_DETAIL_URL = "http://z.jsmlr.gov.cn/jstdgk/xxgkController/turnToDetail.do?lcid={0}&unitCode=320211";
+//    public static final String QUERY_DETAIL_URL = "http://zrzy.jiangsu.gov.cn/zd/xxgkController/turnToMoreDetail.do?lcid={0}&unitCode=320211&flag=4";
+    public static final String QUERY_DETAIL_URL = "http://222.190.131.9:2280/zd/xxgkController/turnToMoreDetail.do?lcid={0}&unitCode=320211&flag=4";
 
     @Autowired
     ExpropriationService service;
@@ -85,12 +88,11 @@ public class ExpropriationCrawler {
                     "UTF-8");
 
             if (html != null) {
-
                 ExpropriationData data = JSON.parseObject(html, ExpropriationData.class);
 
-                if(data != null && "0".equals(data.getCode())
-                        && data.getData() != null && data.getData().getRows() != null){
-                    for(ExpropriationBean bean : data.getData().getRows()  ){
+                if (data != null && "0".equals(data.getCode())
+                        && data.getData() != null && !data.getData().isEmpty()) {
+                    for (ExpropriationBean bean : data.getData()) {
                         lcids.add(bean.getLcid());
                         Expropriation ex = transferToEntity(bean);
                         service.checkDuplicatedAndSave(ex);
@@ -98,9 +100,9 @@ public class ExpropriationCrawler {
                     }
                 }
 
-                for(String lcid: lcids){
+                for (String lcid : lcids) {
                     ExpropriationDetail d = getDetail(lcid);
-                    Thread.sleep(30*1000L);
+                    Thread.sleep(30 * 1000L);
                     detailService.checkDuplicatedAndSave(d);
 
                 }
@@ -110,13 +112,13 @@ public class ExpropriationCrawler {
             result = false;
             logger.error(e.getMessage());
             e.printStackTrace();
-        } catch (InterruptedException e){
+        } catch (InterruptedException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
-        }finally {
+        } finally {
             if (httpResponse != null) {
                 try {
                     httpResponse.close();
@@ -131,15 +133,15 @@ public class ExpropriationCrawler {
     }
 
 
-        public ExpropriationDetail getDetail(String lcid)  {
+    public ExpropriationDetail getDetail(String lcid) {
         RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build();
         CloseableHttpClient closeHttpClient = HttpClients.custom().setDefaultRequestConfig(globalConfig).build();
 
-        logger.debug("getDetail : " + lcid);
+        logger.info("getDetail : " + lcid);
         ExpropriationDetail result = new ExpropriationDetail();
         result.setLcid(lcid);
         CloseableHttpResponse httpResponse = null;
-        String url = QUERY_DETAIL_URL.replace("{0}",lcid);
+        String url = QUERY_DETAIL_URL.replace("{0}", lcid);
         logger.debug("url : " + url);
         HttpGet httpReq = new HttpGet(url);
 
@@ -174,6 +176,7 @@ public class ExpropriationCrawler {
 
     /**
      * 提取数据方法
+     *
      * @param data
      * @param doc
      * @throws ParseException
@@ -187,37 +190,37 @@ public class ExpropriationCrawler {
         Elements expropriationInfoTrs = tables.get(0).select("tr");
         data.setPrjName(expropriationInfoTrs.get(0).select("td").get(1).html());
         String approveDate = expropriationInfoTrs.get(1).select("td").get(1).html();
-        data.setApproveDate(DateUtils.parseDate(approveDate,"yyyy-MM-dd"));
+        data.setApproveDate(DateUtils.parseDate(approveDate, "yyyy-MM-dd"));
         data.setApproveNum(expropriationInfoTrs.get(2).select("td").get(1).html());
         data.setAddress(expropriationInfoTrs.get(3).select("td").get(1).html());
 
         //批前
         Elements beforeApproveTrs = tables.get(2).select("tr");
-        abstractExpropriationInfo(data, beforeApproveTrs ,ExpropriationDetailInfo.BEFORE_APPROVE);
+        abstractExpropriationInfo(data, beforeApproveTrs, ExpropriationDetailInfo.BEFORE_APPROVE);
 
         //批中
         Elements inApproveTrs = tables.get(4).select("tr");
-        abstractExpropriationInfo(data, inApproveTrs ,ExpropriationDetailInfo.IN_APPROVE);
+        abstractExpropriationInfo(data, inApproveTrs, ExpropriationDetailInfo.IN_APPROVE);
 
         //批后
         Elements afterApproveTrs = tables.get(6).select("tr");
-        abstractExpropriationInfo(data, afterApproveTrs ,ExpropriationDetailInfo.AFTER_APPROVE);
+        abstractExpropriationInfo(data, afterApproveTrs, ExpropriationDetailInfo.AFTER_APPROVE);
 
     }
 
-    private void abstractExpropriationInfo(ExpropriationDetail data, Elements beforeApproveTrs,String infoType) {
-        for(Element tr : beforeApproveTrs){
-            if(!tr.hasClass("titbg")){
+    private void abstractExpropriationInfo(ExpropriationDetail data, Elements beforeApproveTrs, String infoType) {
+        for (Element tr : beforeApproveTrs) {
+            if (!tr.hasClass("titbg")) {
                 Elements tds = tr.select("td");
-                if(tds.size() < 6 || "暂无相关信息".equals(tds.get(0).html())){
+                if (tds.size() < 6 || "暂无相关信息".equals(tds.get(0).html())) {
                     continue;
                 }
                 ExpropriationDetailInfo info = new ExpropriationDetailInfo();
                 info.setLcid(data.getLcid());
                 info.setInfoType(infoType);
-                try{
+                try {
                     info.setSort(Integer.parseInt(tds.get(0).html()));
-                }catch (Exception e){
+                } catch (Exception e) {
                     logger.error(e.getMessage());
                     e.printStackTrace();
                 }
@@ -226,9 +229,9 @@ public class ExpropriationCrawler {
                 info.setTitle(tds.get(2).html());
                 info.setPublicUnit(tds.get(3).html());
 
-                try{
+                try {
                     info.setPublicDate(DateUtils.parseDate(tds.get(4).html(), YYYY_MM_DD));
-                }catch (Exception e){
+                } catch (Exception e) {
                     logger.error(e.getMessage());
                     e.printStackTrace();
                 }
@@ -247,7 +250,7 @@ public class ExpropriationCrawler {
 
     private Expropriation transferToEntity(ExpropriationBean bean) {
         Expropriation result = new Expropriation();
-        if(bean != null){
+        if (bean != null) {
             result.setPrjName(bean.getXmmc());
             result.setApproveNum(bean.getPfwh());
             result.setAddress(bean.getXmwzmc());
@@ -255,7 +258,7 @@ public class ExpropriationCrawler {
             result.setVillage(bean.getGgssc());
             result.setLcid(bean.getLcid());
             try {
-                result.setApproveDate(DateUtils.parseDate(bean.getPzsj(),"yyyy-MM-dd"));
+                result.setApproveDate(DateUtils.parseDate(bean.getPzsj(), "yyyy-MM-dd"));
             } catch (ParseException e) {
                 logger.error(e.getMessage());
                 e.printStackTrace();
@@ -263,7 +266,6 @@ public class ExpropriationCrawler {
         }
         return result;
     }
-
 
 
 }
