@@ -1,7 +1,7 @@
 
 var areaCode1 = '320211'
 var ieFlag=  $.support.leadingWhitespace;//定义判断IE8的变量
-var domainurl='http://zrzy.jiangsu.gov.cn/zd'
+var domainurl='http://222.190.131.9:2280/zd'
 
 //批前
 function checkView(that,pk,fileid1,pubType){
@@ -19,9 +19,12 @@ function checkView(that,pk,fileid1,pubType){
 }
 
 //批复文件详情页面
-function checkReplyFile(id){
+function checkReplyFile(id,title){
 	//$("#myReplyFile").attr('href','http://www.jsmlr.gov.cn/gtxxgk/nrglIndex.action?type=2&messageID='+id);
-	window.open("http://zrzy.jiangsu.gov.cn/gtxxgk/nrglIndex.action?type=2&messageID="+id);
+	//window.open("http://zrzy.jiangsu.gov.cn/gtxxgk/nrglIndex.action?type=2&messageID="+id);
+	var url='http://zrzy.jiangsu.gov.cn/gtxxgk/nrgl/nrglIndexNew.action?type=2&messageID='+id+'&title='+title
+	url=url.replace(/\(/g,"（").replace(/\)/g,"）")
+	window.open(url);
 }
 
 //批中
