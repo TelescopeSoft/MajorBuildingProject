@@ -63,7 +63,18 @@ var _hmt = _hmt || [];
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
+            <div class="row" style="margin-bottom: 2px;">
+                <div class="col-xs-12">
+                    <div class="box" style="font-size: 18px;margin-bottom: 0px;border: 3px solid #dd4b39">
+                        各位用户：<br/>
+                        <span style="margin-left: 30px;">为进一步加强网站/信息系统安全性，提升安全防护水平，我委现授权第三方技术公司对滨湖区重大建设项目公开平台进行安全扫描，时间为2021年4月13日至2021年4月20日。
+                此次安全扫描将尽量避开业务高峰期。如对您的使用造成不便，敬请谅解。</span><br/>
+                        <div style="text-align: right;">2021年4月13日</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row"　style="margin-top: 2px">
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
